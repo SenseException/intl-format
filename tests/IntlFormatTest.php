@@ -2,6 +2,7 @@
 
 namespace Budgegeria\IntlFormat\Tests;
 
+use Budgegeria\IntlFormat\Formatter\FormatterInterface;
 use Budgegeria\IntlFormat\IntlFormat;
 
 class IntlFormatTest extends \PHPUnit_Framework_TestCase
@@ -12,10 +13,29 @@ class IntlFormatTest extends \PHPUnit_Framework_TestCase
         $message2 = '%';
         $message3 = 'count: %%d';
 
-        $formatter = new IntlFormat([]);
+        $intlFormat = new IntlFormat([]);
 
-        $this->assertSame($message1, $formatter->format($message1));
-        $this->assertSame($message2, $formatter->format($message2));
-        $this->assertSame($message3, $formatter->format($message3));
+        $this->assertSame($message1, $intlFormat->format($message1, 0));
+        $this->assertSame($message2, $intlFormat->format($message2, 0));
+        $this->assertSame($message3, $intlFormat->format($message3, 0));
+    }
+
+    public function testFormat()
+    {
+        $message = 'Hello %world, how are you';
+
+        $formatter = $this->getMock(FormatterInterface::class);
+        $formatter->expects($this->once())
+            ->method('has')
+            ->with('world')
+            ->willReturn(true);
+        $formatter->expects($this->once())
+            ->method('formatValue')
+            ->with('world', 'island')
+            ->willReturn('island');
+
+        $intlFormat = new IntlFormat([$formatter]);
+
+        $this->assertSame('Hello island, how are you', $intlFormat->format($message, 'island'));
     }
 }

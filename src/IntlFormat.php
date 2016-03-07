@@ -2,38 +2,47 @@
 
 namespace Budgegeria\IntlFormat;
 
+use Budgegeria\IntlFormat\Formatter\FormatterInterface;
+
 class IntlFormat
 {
     /**
-     * @var string
+     * @var FormatterInterface[]
      */
-    private $pattern = '/(%[%a-z0-9_\$]+)/i';
+    private $formatters = [];
 
     /**
-     * @var array
+     * @param FormatterInterface[] $formatters
      */
-    private $formatter = [];
-
-    /**
-     * @param array $formatter
-     */
-    public function __construct(array $formatter)
+    public function __construct(array $formatters)
     {
-        $this->formatter = $formatter;
+        foreach ($formatters as $formatter) {
+            $this->addFormatter($formatter);
+        }
     }
 
     /**
-     * @param string $message
+     * Formats the given message.
+     *
+     * Formats the message by the given formatters.
+     *
+     * @param string $message Message string containing type specifier for the values
+     * @param mixed $values multiple values used for the message's type specifier
      * @return string
      */
-    public function format($message)
+    public function format($message, ...$values)
     {
-        $parsedMessage = preg_split($this->pattern, $message, -1, PREG_SPLIT_NO_EMPTY|PREG_SPLIT_DELIM_CAPTURE);
+        $parsedMessage = preg_split('/(%[%a-z0-9_\$]+)/i', $message, -1, PREG_SPLIT_NO_EMPTY|PREG_SPLIT_DELIM_CAPTURE);
+        $typeSpecifiers = preg_grep('/(%[a-z0-9_\$]+)/i', $parsedMessage);
 
-        $formatValues = [];
-        foreach ($parsedMessage as &$part) {
-            if ($this->isKey($part) && $this->has($part)) {
+        if (count($typeSpecifiers) !== count($values)) {
+            // TODO Add Exception
+        }
 
+        foreach ($typeSpecifiers as $key => $typeSpecifier) {
+            $value = array_shift($values);
+            if ($this->isTypeSpecifier($typeSpecifier) && null !== $formatter = $this->findFormatter(trim($typeSpecifier, '%'))) {
+                $parsedMessage[$key] = $formatter->formatValue(trim($typeSpecifier, '%'), $value);
             }
         }
         $message = implode('', $parsedMessage);
@@ -42,20 +51,34 @@ class IntlFormat
     }
 
     /**
-     * @param string $key
-     * @return bool
+     * @param FormatterInterface $formatter
      */
-    private function has($key)
+    public function addFormatter(FormatterInterface $formatter)
     {
-        return false;
+        $this->formatters[] = $formatter;
+    }
+
+    /**
+     * @param string $typeSpecifier
+     * @return FormatterInterface|null
+     */
+    private function findFormatter($typeSpecifier)
+    {
+        foreach ($this->formatters as $formatter) {
+            if ($formatter->has($typeSpecifier)) {
+                return $formatter;
+            }
+        }
+
+        return null;
     }
 
     /**
      * @param string $key
      * @return bool
      */
-    private function isKey($key)
+    private function isTypeSpecifier($key)
     {
-        return strlen($key) > 1 && $key[0] === '%' && $key[1] === '%';
+        return strlen($key) > 1 && $key[0] === '%' && $key[1] !== '%';
     }
 }
