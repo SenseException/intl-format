@@ -46,7 +46,7 @@ class IntlFormat
 
         foreach ($typeSpecifiers as $key => $typeSpecifier) {
             $value = array_shift($values);
-            if ($this->isTypeSpecifier($typeSpecifier) && null !== $formatter = $this->findFormatter(trim($typeSpecifier, '%'))) {
+            if (null !== $formatter = $this->findFormatter(trim($typeSpecifier, '%'))) {
                 $parsedMessage[$key] = $formatter->formatValue(trim($typeSpecifier, '%'), $value);
             }
         }
@@ -76,14 +76,5 @@ class IntlFormat
         }
 
         return null;
-    }
-
-    /**
-     * @param string $key
-     * @return bool
-     */
-    private function isTypeSpecifier($key)
-    {
-        return strlen($key) > 1 && $key[0] === '%' && $key[1] !== '%';
     }
 }
