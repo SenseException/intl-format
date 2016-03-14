@@ -3,6 +3,7 @@
 namespace Budgegeria\IntlFormat;
 
 use Budgegeria\IntlFormat\Formatter\FormatterInterface;
+use RuntimeException;
 
 class IntlFormat
 {
@@ -36,7 +37,11 @@ class IntlFormat
         $typeSpecifiers = preg_grep('/(%[a-z0-9_\$]+)/i', $parsedMessage);
 
         if (count($typeSpecifiers) !== count($values)) {
-            // TODO Add Exception
+            throw new RuntimeException(sprintf(
+                'Value count of "%d" doesn\'t match type specifier count of "%d"',
+                count($values),
+                count($typeSpecifiers)
+            ));
         }
 
         foreach ($typeSpecifiers as $key => $typeSpecifier) {

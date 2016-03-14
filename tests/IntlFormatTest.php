@@ -7,10 +7,13 @@ use Budgegeria\IntlFormat\IntlFormat;
 
 class IntlFormatTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @group test
+     */
     public function testFormatUnknown()
     {
         $message1 = 'Hello   %world';
-        $message2 = '%';
+        $message2 = '%s';
         $message3 = 'count: %%d';
 
         $intlFormat = new IntlFormat([]);
@@ -37,5 +40,16 @@ class IntlFormatTest extends \PHPUnit_Framework_TestCase
         $intlFormat = new IntlFormat([$formatter]);
 
         $this->assertSame('Hello island, how are you', $intlFormat->format($message, 'island'));
+    }
+
+    /**
+     * @expectedException \RuntimeException
+     */
+    public function testInvalidValueTypeSpecifierCount()
+    {
+        $message = 'Hello %world, Today is %date';
+
+        $intlFormat = new IntlFormat([]);
+        $intlFormat->format($message, 'island');
     }
 }
