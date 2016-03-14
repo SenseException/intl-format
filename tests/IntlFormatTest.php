@@ -7,9 +7,6 @@ use Budgegeria\IntlFormat\IntlFormat;
 
 class IntlFormatTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @group test
-     */
     public function testFormatUnknown()
     {
         $message1 = 'Hello   %world';
@@ -40,6 +37,27 @@ class IntlFormatTest extends \PHPUnit_Framework_TestCase
         $intlFormat = new IntlFormat([$formatter]);
 
         $this->assertSame('Hello island, how are you', $intlFormat->format($message, 'island'));
+    }
+
+    public function testMissingTypeSpecifier()
+    {
+        $message = 'Hello %world, Today is %date';
+
+        $formatter = $this->getMock(FormatterInterface::class);
+        $formatter->expects($this->atLeastOnce())
+            ->method('has')
+            ->willReturnMap([
+                ['world', true],
+                ['date', false]
+            ]);
+        $formatter->expects($this->once())
+            ->method('formatValue')
+            ->with('world', 'island')
+            ->willReturn('island');
+
+        $intlFormat = new IntlFormat([$formatter]);
+
+        $this->assertSame('Hello island, Today is %date', $intlFormat->format($message, 'island', new \DateTime()));
     }
 
     /**
