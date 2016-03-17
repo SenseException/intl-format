@@ -61,7 +61,29 @@ class IntlFormatTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \RuntimeException
+     * Type Specifier argument swapping isn't supported yet, but is still added to typeSpecifier for later feature
+     */
+    public function testWrongTypeSpecifier()
+    {
+        $message = 'Hello %1$world, Today is sunday';
+
+        $formatter = $this->getMock(FormatterInterface::class);
+        $formatter->expects($this->atLeastOnce())
+            ->method('has')
+            ->with('1$world')
+            ->willReturn(false);
+        $formatter->expects($this->never())
+            ->method('formatValue')
+            ->with('world', 'island')
+            ->willReturn('island');
+
+        $intlFormat = new IntlFormat([$formatter]);
+
+        $this->assertSame($message, $intlFormat->format($message, 'island'));
+    }
+
+    /**
+     * @expectedException \LogicException
      */
     public function testInvalidValueTypeSpecifierCount()
     {

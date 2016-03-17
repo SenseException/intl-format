@@ -3,7 +3,7 @@
 namespace Budgegeria\IntlFormat;
 
 use Budgegeria\IntlFormat\Formatter\FormatterInterface;
-use RuntimeException;
+use LogicException;
 
 class IntlFormat
 {
@@ -33,11 +33,11 @@ class IntlFormat
      */
     public function format($message, ...$values)
     {
-        $parsedMessage = preg_split('/(%[%a-z0-9_\$]+)/i', $message, -1, PREG_SPLIT_NO_EMPTY|PREG_SPLIT_DELIM_CAPTURE);
-        $typeSpecifiers = preg_grep('/(%[a-z0-9_\$]+)/i', $parsedMessage);
+        $parsedMessage = preg_split('/(%[%]*(?:[\d]+\$)*[a-z0-9_]+)/i', $message, -1, PREG_SPLIT_NO_EMPTY|PREG_SPLIT_DELIM_CAPTURE);
+        $typeSpecifiers = preg_grep('/(%(?:[\d]+\$)*[a-z0-9_]+)/i', $parsedMessage);
 
         if (count($typeSpecifiers) !== count($values)) {
-            throw new RuntimeException(sprintf(
+            throw new LogicException(sprintf(
                 'Value count of "%d" doesn\'t match type specifier count of "%d"',
                 count($values),
                 count($typeSpecifiers)
@@ -46,8 +46,8 @@ class IntlFormat
 
         foreach ($typeSpecifiers as $key => $typeSpecifier) {
             $value = array_shift($values);
-            if (null !== $formatter = $this->findFormatter(trim($typeSpecifier, '%'))) {
-                $parsedMessage[$key] = $formatter->formatValue(trim($typeSpecifier, '%'), $value);
+            if (null !== $formatter = $this->findFormatter(ltrim($typeSpecifier, '%'))) {
+                $parsedMessage[$key] = $formatter->formatValue(ltrim($typeSpecifier, '%'), $value);
             }
         }
         $message = implode('', $parsedMessage);
