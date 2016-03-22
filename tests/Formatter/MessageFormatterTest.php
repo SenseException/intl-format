@@ -61,6 +61,23 @@ class MessageFormatterTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('ein­tausend', $messageFormatter->formatValue('spellout', 1000));
     }
 
+    /**
+     * @dataProvider provideOrdinal
+     */
+    public function testFormatValueOrdinal($expected, $number)
+    {
+        $messageFormatter = new MessageFormatter('en_US');
+
+        $this->assertSame($expected, $messageFormatter->formatValue('ordinal', $number));
+    }
+
+    public function testFormatValueDuration()
+    {
+        $messageFormatter = new MessageFormatter('en_US');
+
+        $this->assertSame('1:01', $messageFormatter->formatValue('duration', 61));
+    }
+
     public function provideTypeSpecifier()
     {
         return [
@@ -117,6 +134,16 @@ class MessageFormatterTest extends \PHPUnit_Framework_TestCase
             'time_long_timestamp' => ['01:20:50 GMT', 'time_long', $date->getTimestamp()], // MessageFormat behaviour
             'time_full' => ['01:20:50 GMT', 'time_full', $date], // MessageFormat behaviour
             'time_full_timestamp' => ['01:20:50 GMT', 'time_full', $date->getTimestamp()], // MessageFormat behaviour
+        ];
+    }
+
+    public function provideOrdinal()
+    {
+        return [
+            'first' => ['1st', 1],
+            'second' => ['2nd', 2],
+            'third' => ['3rd', 3],
+            'fourth' => ['4th', 4],
         ];
     }
 }
