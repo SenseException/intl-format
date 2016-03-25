@@ -34,7 +34,10 @@ class IntlFormat
     public function format($message, ...$values)
     {
         $parsedMessage = preg_split('/(%[%]*(?:[\d]+\$)*[a-z0-9_]+)/i', $message, -1, PREG_SPLIT_NO_EMPTY|PREG_SPLIT_DELIM_CAPTURE);
-        $typeSpecifiers = preg_grep('/(%(?:[\d]+\$)*[a-z0-9_]+)/i', $parsedMessage);
+        $typeSpecifiers = preg_grep('/(^%(?:[\d]+\$)*[a-z0-9_]+)/i', $parsedMessage);
+
+        // Change escaped % to regular %
+        $parsedMessage = preg_replace('/^%%/', '%', $parsedMessage);
 
         if (count($typeSpecifiers) !== count($values)) {
             throw new LogicException(sprintf(
@@ -44,6 +47,7 @@ class IntlFormat
             ));
         }
 
+        // TODO Add ArgumentSwapper and type specifier normalizer
         foreach ($typeSpecifiers as $key => $typeSpecifier) {
             $value = array_shift($values);
             if (null !== $formatter = $this->findFormatter(ltrim($typeSpecifier, '%'))) {

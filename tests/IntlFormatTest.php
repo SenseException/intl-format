@@ -11,7 +11,7 @@ class IntlFormatTest extends \PHPUnit_Framework_TestCase
     {
         $message1 = 'Hello   %world';
         $message2 = '%s';
-        $message3 = 'count: %%d';
+        $message3 = 'count: %d';
 
         $intlFormat = new IntlFormat([]);
 
@@ -37,6 +37,28 @@ class IntlFormatTest extends \PHPUnit_Framework_TestCase
         $intlFormat = new IntlFormat([$formatter]);
 
         $this->assertSame('Hello island, how are you', $intlFormat->format($message, 'island'));
+    }
+
+    /**
+     * @group test
+     */
+    public function testEscapedFormat()
+    {
+        $message = 'Hello %world, how %%are you';
+
+        $formatter = $this->getMock(FormatterInterface::class);
+        $formatter->expects($this->once())
+            ->method('has')
+            ->with('world')
+            ->willReturn(true);
+        $formatter->expects($this->once())
+            ->method('formatValue')
+            ->with('world', 'island')
+            ->willReturn('island');
+
+        $intlFormat = new IntlFormat([$formatter]);
+
+        $this->assertSame('Hello island, how %are you', $intlFormat->format($message, 'island'));
     }
 
     public function testMissingTypeSpecifier()
@@ -88,6 +110,17 @@ class IntlFormatTest extends \PHPUnit_Framework_TestCase
     public function testInvalidValueTypeSpecifierCount()
     {
         $message = 'Hello %world, Today is %date';
+
+        $intlFormat = new IntlFormat([]);
+        $intlFormat->format($message, 'island');
+    }
+
+    /**
+     * @expectedException \LogicException
+     */
+    public function testEscapedInvalidTypeSpecifierCount()
+    {
+        $message = 'Hello %%world';
 
         $intlFormat = new IntlFormat([]);
         $intlFormat->format($message, 'island');
