@@ -33,7 +33,7 @@ class IntlFormat
      */
     public function format($message, ...$values)
     {
-        $parsedMessage = preg_split('/(%[%]*(?:[\d]+\$)*[a-z0-9_]+)/i', $message, -1, PREG_SPLIT_NO_EMPTY|PREG_SPLIT_DELIM_CAPTURE);
+        $parsedMessage = preg_split('/(%[%]*(?:[\d]+\$)*[a-z0-9_]*)/i', $message, -1, PREG_SPLIT_NO_EMPTY|PREG_SPLIT_DELIM_CAPTURE);
         $typeSpecifiers = preg_grep('/(^%(?:[\d]+\$)*[a-z0-9_]+)/i', $parsedMessage);
 
         // Change escaped % to regular %

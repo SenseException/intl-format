@@ -40,12 +40,10 @@ class IntlFormatTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group test
+     * @dataProvider provideEscapedMessages
      */
-    public function testEscapedFormat()
+    public function testEscapedFormat($message, $expected)
     {
-        $message = 'Hello %world, how %%are you';
-
         $formatter = $this->getMock(FormatterInterface::class);
         $formatter->expects($this->once())
             ->method('has')
@@ -58,7 +56,7 @@ class IntlFormatTest extends \PHPUnit_Framework_TestCase
 
         $intlFormat = new IntlFormat([$formatter]);
 
-        $this->assertSame('Hello island, how %are you', $intlFormat->format($message, 'island'));
+        $this->assertSame($expected, $intlFormat->format($message, 'island'));
     }
 
     public function testMissingTypeSpecifier()
@@ -124,5 +122,16 @@ class IntlFormatTest extends \PHPUnit_Framework_TestCase
 
         $intlFormat = new IntlFormat([]);
         $intlFormat->format($message, 'island');
+    }
+
+    /**
+     * @return array
+     */
+    public function provideEscapedMessages()
+    {
+        return [
+            ['Hello %world, how %%are you', 'Hello island, how %are you'],
+            ['Hello %world, how %% are you', 'Hello island, how % are you'],
+        ];
     }
 }
