@@ -39,6 +39,8 @@ class IntlFormat
         // Change escaped % to regular %
         $parsedMessage = preg_replace('/^%%/', '%', $parsedMessage);
 
+        $values = $this->swapArguments($typeSpecifiers, $values);
+
         if (count($typeSpecifiers) !== count($values)) {
             throw new LogicException(sprintf(
                 'Value count of "%d" doesn\'t match type specifier count of "%d"',
@@ -47,11 +49,11 @@ class IntlFormat
             ));
         }
 
-        // TODO Add ArgumentSwapper and type specifier normalizer
         foreach ($typeSpecifiers as $key => $typeSpecifier) {
             $value = array_shift($values);
-            if (null !== $formatter = $this->findFormatter(ltrim($typeSpecifier, '%'))) {
-                $parsedMessage[$key] = $formatter->formatValue(ltrim($typeSpecifier, '%'), $value);
+            $typeSpecifier = $this->normalize($typeSpecifier);
+            if (null !== $formatter = $this->findFormatter($typeSpecifier)) {
+                $parsedMessage[$key] = $formatter->formatValue($typeSpecifier, $value);
             }
         }
         $message = implode('', $parsedMessage);
@@ -80,5 +82,34 @@ class IntlFormat
         }
 
         return null;
+    }
+
+    private function normalize($typeSpecifier)
+    {
+        return preg_replace('/^%([0-9]\$)*/', '', $typeSpecifier);
+    }
+
+    /**
+     * @param string[] $typeSpecifiers
+     * @param array $values
+     * @return array
+     */
+    private function swapArguments(array $typeSpecifiers, array $values)
+    {
+        $swappedValues = [];
+
+        foreach ($typeSpecifiers as $typeSpecifier) {
+            $matches = [];
+            // TODO disallow 0
+            if (1 === preg_match('/^%([0-9]+)\$/', $typeSpecifier, $matches)) {
+                $index = $matches[1] - 1;
+                $swappedValues[] = $values[$index];
+            } else {
+                $swappedValues[] = current($values);
+            }
+            next($values);
+        }
+
+        return $swappedValues;
     }
 }

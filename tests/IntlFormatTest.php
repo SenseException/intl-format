@@ -59,6 +59,26 @@ class IntlFormatTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expected, $intlFormat->format($message, 'island'));
     }
 
+    public function testArgumentSwappingFormat()
+    {
+        $message = '%swap %swap %1$swap';
+
+        $formatter = $this->getMock(FormatterInterface::class);
+        $formatter->expects($this->atLeastOnce())
+            ->method('has')
+            ->with('swap')
+            ->willReturn(true);
+        $formatter->expects($this->atLeastOnce())
+            ->method('formatValue')
+            ->with('swap', \PHPUnit_Framework_Assert::anything())
+            ->willReturnOnConsecutiveCalls('value1', 'value2', 'value1');
+
+        $intlFormat = new IntlFormat([$formatter]);
+
+        $expected = 'value1 value2 value1';
+        $this->assertSame($expected, $intlFormat->format($message, 'value1', 'value2'));
+    }
+
     public function testMissingTypeSpecifier()
     {
         $message = 'Hello %world, Today is %date';
@@ -78,28 +98,6 @@ class IntlFormatTest extends \PHPUnit_Framework_TestCase
         $intlFormat = new IntlFormat([$formatter]);
 
         $this->assertSame('Hello island, Today is %date', $intlFormat->format($message, 'island', new \DateTime()));
-    }
-
-    /**
-     * Type Specifier argument swapping isn't supported yet, but is still added to typeSpecifier for later feature
-     */
-    public function testWrongTypeSpecifier()
-    {
-        $message = 'Hello %1$world, Today is sunday';
-
-        $formatter = $this->getMock(FormatterInterface::class);
-        $formatter->expects($this->atLeastOnce())
-            ->method('has')
-            ->with('1$world')
-            ->willReturn(false);
-        $formatter->expects($this->never())
-            ->method('formatValue')
-            ->with('world', 'island')
-            ->willReturn('island');
-
-        $intlFormat = new IntlFormat([$formatter]);
-
-        $this->assertSame($message, $intlFormat->format($message, 'island'));
     }
 
     /**
