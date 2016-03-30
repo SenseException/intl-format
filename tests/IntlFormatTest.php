@@ -7,19 +7,9 @@ use Budgegeria\IntlFormat\IntlFormat;
 
 class IntlFormatTest extends \PHPUnit_Framework_TestCase
 {
-    public function testFormatUnknown()
-    {
-        $message1 = 'Hello   %world';
-        $message2 = '%s';
-        $message3 = 'count: %d';
-
-        $intlFormat = new IntlFormat([]);
-
-        $this->assertSame($message1, $intlFormat->format($message1, 0));
-        $this->assertSame($message2, $intlFormat->format($message2, 0));
-        $this->assertSame($message3, $intlFormat->format($message3, 0));
-    }
-
+    /**
+     * Basic format test
+     */
     public function testFormat()
     {
         $message = 'Hello %world, how are you';
@@ -40,6 +30,8 @@ class IntlFormatTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * A test for %-escaped messages.
+     *
      * @dataProvider provideEscapedMessages
      */
     public function testEscapedFormat($message, $expected)
@@ -59,6 +51,9 @@ class IntlFormatTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expected, $intlFormat->format($message, 'island'));
     }
 
+    /**
+     * A test for argument swapping.
+     */
     public function testArgumentSwappingFormat()
     {
         $message = '%swap %swap %1$swap';
@@ -79,6 +74,9 @@ class IntlFormatTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expected, $intlFormat->format($message, 'value1', 'value2'));
     }
 
+    /**
+     * %date is an unknown type specifier in this test.
+     */
     public function testMissingTypeSpecifier()
     {
         $message = 'Hello %world, Today is %date';
@@ -101,6 +99,8 @@ class IntlFormatTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * More type specifier than values.
+     *
      * @expectedException \LogicException
      */
     public function testInvalidValueTypeSpecifierCount()
@@ -112,6 +112,8 @@ class IntlFormatTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Less type specifier than values.
+     *
      * @expectedException \LogicException
      */
     public function testEscapedInvalidTypeSpecifierCount()
@@ -120,6 +122,21 @@ class IntlFormatTest extends \PHPUnit_Framework_TestCase
 
         $intlFormat = new IntlFormat([]);
         $intlFormat->format($message, 'island');
+    }
+
+    /**
+     * There aren't enough values for %5$world.
+     *
+     * @expectedException \LogicException
+     */
+    public function testWrongTypeSpecifierIndex()
+    {
+        $message = 'Hello %5$world, Today is %date';
+
+        $formatter = $this->getMock(FormatterInterface::class);
+        $intlFormat = new IntlFormat([$formatter]);
+
+        $this->assertSame('Hello island, Today is %date', $intlFormat->format($message, 'island', new \DateTime()));
     }
 
     /**

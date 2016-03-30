@@ -41,14 +41,6 @@ class IntlFormat
 
         $values = $this->swapArguments($typeSpecifiers, $values);
 
-        if (count($typeSpecifiers) !== count($values)) {
-            throw new LogicException(sprintf(
-                'Value count of "%d" doesn\'t match type specifier count of "%d"',
-                count($values),
-                count($typeSpecifiers)
-            ));
-        }
-
         foreach ($typeSpecifiers as $key => $typeSpecifier) {
             $value = array_shift($values);
             $typeSpecifier = $this->normalize($typeSpecifier);
@@ -97,17 +89,34 @@ class IntlFormat
     private function swapArguments(array $typeSpecifiers, array $values)
     {
         $swappedValues = [];
+        $typeSpecifiers = array_values($typeSpecifiers);
 
-        foreach ($typeSpecifiers as $typeSpecifier) {
+        foreach ($typeSpecifiers as $key => $typeSpecifier) {
             $matches = [];
             // TODO disallow 0
             if (1 === preg_match('/^%([0-9]+)\$/', $typeSpecifier, $matches)) {
                 $index = $matches[1] - 1;
-                $swappedValues[] = $values[$index];
             } else {
-                $swappedValues[] = current($values);
+                $index = $key;
             }
-            next($values);
+
+            if (!array_key_exists($index, $values)) {
+                throw new LogicException(sprintf('The type specifier "%s" doesn\'t match with the given values.', $typeSpecifier));
+            }
+
+            $swappedValues[] = $values[$index];
+        }
+
+        if (0 === count($swappedValues)) {
+            throw new LogicException('No type specifier are in the message text.');
+        }
+
+        if (count($typeSpecifiers) !== count($swappedValues)) {
+            throw new LogicException(sprintf(
+                'Value count of "%d" doesn\'t match type specifier count of "%d"',
+                count($swappedValues),
+                count($typeSpecifiers)
+            ));
         }
 
         return $swappedValues;
