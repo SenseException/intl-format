@@ -136,7 +136,22 @@ class IntlFormatTest extends \PHPUnit_Framework_TestCase
         $formatter = $this->getMock(FormatterInterface::class);
         $intlFormat = new IntlFormat([$formatter]);
 
-        $this->assertSame('Hello island, Today is %date', $intlFormat->format($message, 'island', new \DateTime()));
+        $intlFormat->format($message, 'island', new \DateTime());
+    }
+
+    /**
+     * %0$world is an invalid type specifier
+     *
+     * @expectedException \Budgegeria\IntlFormat\Exception\InvalidTypeSpecifierException
+     */
+    public function testInvalidTypeSpecifier()
+    {
+        $message = 'Hello %0$world, Today is %date';
+
+        $formatter = $this->getMock(FormatterInterface::class);
+        $intlFormat = new IntlFormat([$formatter]);
+
+        $intlFormat->format($message, 'island', new \DateTime());
     }
 
     /**
