@@ -3,7 +3,7 @@
 namespace Budgegeria\IntlFormat;
 
 use Budgegeria\IntlFormat\Formatter\FormatterInterface;
-use LogicException;
+use Budgegeria\IntlFormat\Exception\InvalidTypeSpecifierException;
 
 class IntlFormat
 {
@@ -85,6 +85,7 @@ class IntlFormat
      * @param string[] $typeSpecifiers
      * @param array $values
      * @return array
+     * @throws InvalidTypeSpecifierException
      */
     private function swapArguments(array $typeSpecifiers, array $values)
     {
@@ -93,30 +94,29 @@ class IntlFormat
 
         foreach ($typeSpecifiers as $key => $typeSpecifier) {
             $matches = [];
-            // TODO disallow 0
             if (1 === preg_match('/^%([0-9]+)\$/', $typeSpecifier, $matches)) {
+                if (0 === $matches[1]) {
+                    throw InvalidTypeSpecifierException::invalidTypeSpecifier($typeSpecifier);
+                }
+
                 $index = $matches[1] - 1;
             } else {
                 $index = $key;
             }
 
             if (!array_key_exists($index, $values)) {
-                throw new LogicException(sprintf('The type specifier "%s" doesn\'t match with the given values.', $typeSpecifier));
+                throw InvalidTypeSpecifierException::unmatchedTypeSpecifier($typeSpecifier);
             }
 
             $swappedValues[] = $values[$index];
         }
 
         if (0 === count($swappedValues)) {
-            throw new LogicException('No type specifier are in the message text.');
+            throw InvalidTypeSpecifierException::noTypeSpecifier();
         }
 
         if (count($typeSpecifiers) !== count($swappedValues)) {
-            throw new LogicException(sprintf(
-                'Value count of "%d" doesn\'t match type specifier count of "%d"',
-                count($swappedValues),
-                count($typeSpecifiers)
-            ));
+            throw InvalidTypeSpecifierException::invalidTypeSpecifierCount(count($swappedValues), count($typeSpecifiers));
         }
 
         return $swappedValues;

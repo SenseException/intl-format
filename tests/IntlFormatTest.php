@@ -101,7 +101,7 @@ class IntlFormatTest extends \PHPUnit_Framework_TestCase
     /**
      * More type specifier than values.
      *
-     * @expectedException \LogicException
+     * @expectedException \Budgegeria\IntlFormat\Exception\InvalidTypeSpecifierException
      */
     public function testInvalidValueTypeSpecifierCount()
     {
@@ -114,7 +114,7 @@ class IntlFormatTest extends \PHPUnit_Framework_TestCase
     /**
      * Less type specifier than values.
      *
-     * @expectedException \LogicException
+     * @expectedException \Budgegeria\IntlFormat\Exception\InvalidTypeSpecifierException
      */
     public function testEscapedInvalidTypeSpecifierCount()
     {
@@ -127,7 +127,7 @@ class IntlFormatTest extends \PHPUnit_Framework_TestCase
     /**
      * There aren't enough values for %5$world.
      *
-     * @expectedException \LogicException
+     * @expectedException \Budgegeria\IntlFormat\Exception\InvalidTypeSpecifierException
      */
     public function testWrongTypeSpecifierIndex()
     {
