@@ -33,7 +33,7 @@ class IntlFormat
      */
     public function format($message, ...$values)
     {
-        $parsedMessage = preg_split('/(%[%]*(?:[\d]+\$)*[a-z0-9_]*)/i', $message, -1, PREG_SPLIT_NO_EMPTY|PREG_SPLIT_DELIM_CAPTURE);
+        $parsedMessage = preg_split('/(%[%]*(?:[\d]+\$)*[a-z0-9_]*)/i', $message, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
         $typeSpecifiers = preg_grep('/(^%(?:[\d]+\$)*[a-z0-9_]+)/i', $parsedMessage);
 
         // Change escaped % to regular %
@@ -76,6 +76,10 @@ class IntlFormat
         return null;
     }
 
+    /**
+     * @param string $typeSpecifier
+     * @return string
+     */
     private function normalize($typeSpecifier)
     {
         return preg_replace('/^%([0-9]\$)*/', '', $typeSpecifier);
@@ -95,7 +99,7 @@ class IntlFormat
         foreach ($typeSpecifiers as $key => $typeSpecifier) {
             $matches = [];
             if (1 === preg_match('/^%([0-9]+)\$/', $typeSpecifier, $matches)) {
-                if (0 === $matches[1]) {
+                if ('0' === $matches[1]) {
                     throw InvalidTypeSpecifierException::invalidTypeSpecifier($typeSpecifier);
                 }
 
