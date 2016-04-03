@@ -47,7 +47,7 @@ class MessageFormatter implements FormatterInterface
 
     /**
      * @param string $locale
-     * @param array $messageFormats
+     * @param string[] $messageFormats
      * @param Callable $valueTypeCheck
      */
     public function __construct($locale, array $messageFormats, Callable $valueTypeCheck)

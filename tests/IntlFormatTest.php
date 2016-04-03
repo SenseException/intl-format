@@ -12,7 +12,7 @@ class IntlFormatTest extends \PHPUnit_Framework_TestCase
      */
     public function testFormat()
     {
-        $message = 'Hello %world, how are you';
+        $message = 'Hello "%world", how are you';
 
         $formatter = $this->getMock(FormatterInterface::class);
         $formatter->expects($this->once())
@@ -26,7 +26,7 @@ class IntlFormatTest extends \PHPUnit_Framework_TestCase
 
         $intlFormat = new IntlFormat([$formatter]);
 
-        $this->assertSame('Hello island, how are you', $intlFormat->format($message, 'island'));
+        $this->assertSame('Hello "island", how are you', $intlFormat->format($message, 'island'));
     }
 
     /**
@@ -72,6 +72,29 @@ class IntlFormatTest extends \PHPUnit_Framework_TestCase
 
         $expected = 'value1 value2 value1';
         $this->assertSame($expected, $intlFormat->format($message, 'value1', 'value2'));
+    }
+
+    /**
+     * A test for argument swapping.
+     */
+    public function testArgumentSwappingOrder()
+    {
+        $message = '%3$swap %2$swap %1$swap';
+
+        $formatter = $this->getMock(FormatterInterface::class);
+        $formatter->expects($this->atLeastOnce())
+            ->method('has')
+            ->with('swap')
+            ->willReturn(true);
+        $formatter->expects($this->atLeastOnce())
+            ->method('formatValue')
+            ->with('swap', \PHPUnit_Framework_Assert::anything())
+            ->willReturnOnConsecutiveCalls('value3', 'value2', 'value1');
+
+        $intlFormat = new IntlFormat([$formatter]);
+
+        $expected = 'value3 value2 value1';
+        $this->assertSame($expected, $intlFormat->format($message, 'value1', 'value2', 'value3'));
     }
 
     /**
