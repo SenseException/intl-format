@@ -2,6 +2,8 @@
 
 namespace Budgegeria\IntlFormat\Formatter;
 
+use Budgegeria\IntlFormat\Exception\InvalidValueException;
+
 interface FormatterInterface
 {
     /**
@@ -13,6 +15,7 @@ interface FormatterInterface
      * @param string $typeSpecifier
      * @param mixed $value
      * @return string
+     * @throws InvalidValueException
      */
     public function formatValue($typeSpecifier, $value);
 

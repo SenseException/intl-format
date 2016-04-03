@@ -12,24 +12,36 @@ class MessageFormatterTest extends \PHPUnit_Framework_TestCase
      */
     public function testHas($typeSpecifier)
     {
-        $messageFormatter = new MessageFormatter('de');
+        $typeSpecifiers = array_merge(
+            MessageFormatter::TYPE_SPECIFIER_MESSAGE_NUMBER,
+            MessageFormatter::TYPE_SPECIFIER_MESSAGE_DATETIME
+        );
+
+        $messageFormatter = new MessageFormatter('de_DE', $typeSpecifiers, function () {});
 
         $this->assertTrue($messageFormatter->has($typeSpecifier));
     }
 
     public function testHasIsFalse()
     {
-        $messageFormatter = new MessageFormatter('de_DE');
+        $typeSpecifiers = array_merge(
+            MessageFormatter::TYPE_SPECIFIER_MESSAGE_NUMBER,
+            MessageFormatter::TYPE_SPECIFIER_MESSAGE_DATETIME
+        );
+
+        $messageFormatter = new MessageFormatter('de_DE', $typeSpecifiers, function () {});
 
         $this->assertFalse($messageFormatter->has('int'));
     }
 
     public function testFormatValueNumber()
     {
-        $messageFormatter = new MessageFormatter('de_DE');
+        $messageFormatter = MessageFormatter::createNumberValueFormatter('de_DE');
 
         $this->assertSame('1.000,1', $messageFormatter->formatValue('number', 1000.1));
         $this->assertSame('1.000', $messageFormatter->formatValue('integer', 1000.1));
+        $this->assertSame('1.001', $messageFormatter->formatValue('integer', 1001));
+        $this->assertSame('1.001', $messageFormatter->formatValue('integer', '1001'));
         $this->assertSame('100%', preg_replace('/[^0-9%]/', '', $messageFormatter->formatValue('percent', 1)));
         $this->assertSame('1.000,10€', preg_replace('/[^0-9,\.€]/', '', $messageFormatter->formatValue('currency', 1000.1)));
     }
@@ -39,7 +51,7 @@ class MessageFormatterTest extends \PHPUnit_Framework_TestCase
      */
     public function testFormatValueDate($expected, $typeSpecifier, $value)
     {
-        $messageFormatter = new MessageFormatter('de_DE');
+        $messageFormatter = MessageFormatter::createDateValueFormatter('de_DE');
 
         $this->assertSame($expected, $messageFormatter->formatValue($typeSpecifier, $value));
     }
@@ -49,16 +61,17 @@ class MessageFormatterTest extends \PHPUnit_Framework_TestCase
      */
     public function testFormatValueTime($expected, $typeSpecifier, $value)
     {
-        $messageFormatter = new MessageFormatter('de_DE');
+        $messageFormatter = $messageFormatter = MessageFormatter::createDateValueFormatter('de_DE');
 
         $this->assertSame($expected, $messageFormatter->formatValue($typeSpecifier, $value));
     }
 
     public function testFormatValueSpellout()
     {
-        $messageFormatter = new MessageFormatter('de_DE');
+        $messageFormatter = MessageFormatter::createNumberValueFormatter('de_DE');
 
         $this->assertSame('ein­tausend', $messageFormatter->formatValue('spellout', 1000));
+        $this->assertSame('ein­tausend Komma eins', $messageFormatter->formatValue('spellout', 1000.1));
     }
 
     /**
@@ -66,18 +79,43 @@ class MessageFormatterTest extends \PHPUnit_Framework_TestCase
      */
     public function testFormatValueOrdinal($expected, $number)
     {
-        $messageFormatter = new MessageFormatter('en_US');
+        $messageFormatter = MessageFormatter::createNumberValueFormatter('en_US');
 
         $this->assertSame($expected, $messageFormatter->formatValue('ordinal', $number));
     }
 
     public function testFormatValueDuration()
     {
-        $messageFormatter = new MessageFormatter('en_US');
+        $messageFormatter = MessageFormatter::createNumberValueFormatter('en_US');
 
         $this->assertSame('1:01', $messageFormatter->formatValue('duration', 61));
     }
 
+    /**
+     * @expectedException \Budgegeria\IntlFormat\Exception\InvalidValueException
+     * @dataProvider provideInvalidNumberValues
+     */
+    public function testFormatValueNumberTypeCheck($value)
+    {
+        $messageFormatter = MessageFormatter::createNumberValueFormatter('en_US');
+
+        $messageFormatter->formatValue('integer', $value);
+    }
+
+    /**
+     * @expectedException \Budgegeria\IntlFormat\Exception\InvalidValueException
+     * @dataProvider provideInvalidDateValues
+     */
+    public function testFormatValueDateTypeCheck($value)
+    {
+        $messageFormatter = MessageFormatter::createDateValueFormatter('en_US');
+
+        $messageFormatter->formatValue('date', $value);
+    }
+
+    /**
+     * @return array
+     */
     public function provideTypeSpecifier()
     {
         return [
@@ -101,6 +139,9 @@ class MessageFormatterTest extends \PHPUnit_Framework_TestCase
         ];
     }
 
+    /**
+     * @return array
+     */
     public function provideDate()
     {
         $date = new \DateTime('2016-03-01');
@@ -119,6 +160,9 @@ class MessageFormatterTest extends \PHPUnit_Framework_TestCase
         ];
     }
 
+    /**
+     * @return array
+     */
     public function provideTime()
     {
         $date = new \DateTime('2016-03-01 02:20:50', new \DateTimeZone('Europe/Berlin'));
@@ -137,6 +181,9 @@ class MessageFormatterTest extends \PHPUnit_Framework_TestCase
         ];
     }
 
+    /**
+     * @return array
+     */
     public function provideOrdinal()
     {
         return [
@@ -145,5 +192,32 @@ class MessageFormatterTest extends \PHPUnit_Framework_TestCase
             'third' => ['3rd', 3],
             'fourth' => ['4th', 4],
         ];
+    }
+
+    /**
+     * @return array
+     */
+    public function provideInvalidNumberValues()
+    {
+        return [
+            'string' => ['foo'],
+            'object' => [new \ArrayObject()],
+            'bool' => [true],
+            'array' => [[1,2,3]],
+            'null' => [null],
+            'closure' => [function () {}],
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function provideInvalidDateValues()
+    {
+        $invalidDateValues = [
+            'float' => [100.1],
+        ];
+
+        return array_merge($invalidDateValues, $this->provideInvalidNumberValues());
     }
 }

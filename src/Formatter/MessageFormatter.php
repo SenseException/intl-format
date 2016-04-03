@@ -2,18 +2,22 @@
 
 namespace Budgegeria\IntlFormat\Formatter;
 
+use Budgegeria\IntlFormat\Exception\InvalidValueException;
 use MessageFormatter as Message;
 
 class MessageFormatter implements FormatterInterface
 {
-    /**
-     * @var array
-     */
-    private $messageFormats = [
+    const TYPE_SPECIFIER_MESSAGE_NUMBER = [
         'number' => '{0,number}',
         'integer' => '{0,number,integer}',
         'currency' => '{0,number,currency}',
         'percent' => '{0,number,percent}',
+        'spellout' => '{0,spellout}',
+        'ordinal' => '{0,ordinal}',
+        'duration' => '{0,duration}',
+    ];
+
+    const TYPE_SPECIFIER_MESSAGE_DATETIME = [
         'date' => '{0,date}',
         'date_short' => '{0,date,short}',
         'date_medium' => '{0,date,medium}',
@@ -24,9 +28,6 @@ class MessageFormatter implements FormatterInterface
         'time_medium' => '{0,time,medium}',
         'time_long' => '{0,time,long}',
         'time_full' => '{0,time,full}',
-        'spellout' => '{0,spellout}',
-        'ordinal' => '{0,ordinal}',
-        'duration' => '{0,duration}',
     ];
 
     /**
@@ -35,11 +36,25 @@ class MessageFormatter implements FormatterInterface
     private $locale;
 
     /**
-     * @param string $locale
+     * @var array
      */
-    public function __construct($locale)
+    private $messageFormats = [];
+
+    /**
+     * @var Callable
+     */
+    private $valueTypeCheck;
+
+    /**
+     * @param string $locale
+     * @param array $messageFormats
+     * @param Callable $valueTypeCheck
+     */
+    public function __construct($locale, array $messageFormats, Callable $valueTypeCheck)
     {
         $this->locale = (string) $locale;
+        $this->messageFormats = $messageFormats;
+        $this->valueTypeCheck = $valueTypeCheck;
     }
 
     /**
@@ -47,6 +62,9 @@ class MessageFormatter implements FormatterInterface
      */
     public function formatValue($typeSpecifier, $value)
     {
+        $valueTypeCheck = $this->valueTypeCheck;
+        $valueTypeCheck($value);
+
         return Message::formatMessage($this->locale, $this->messageFormats[(string) $typeSpecifier], [$value]);
     }
 
@@ -56,5 +74,35 @@ class MessageFormatter implements FormatterInterface
     public function has($typeSpecifier)
     {
         return array_key_exists((string) $typeSpecifier, $this->messageFormats);
+    }
+
+    /**
+     * @param string $locale
+     * @return MessageFormatter
+     */
+    public static function createNumberValueFormatter($locale)
+    {
+        $valueTypeCheck = function ($value) {
+            if (!is_numeric($value)) {
+                throw InvalidValueException::invalidValueType($value, ['integer', 'double']);
+            }
+        };
+
+        return new self($locale, self::TYPE_SPECIFIER_MESSAGE_NUMBER, $valueTypeCheck);
+    }
+
+    /**
+     * @param string $locale
+     * @return MessageFormatter
+     */
+    public static function createDateValueFormatter($locale)
+    {
+        $valueTypeCheck = function ($value) {
+            if (!is_int($value) && !($value instanceof \DateTime)) {
+                throw InvalidValueException::invalidValueType($value, ['integer', 'DateTime']);
+            }
+        };
+
+        return new self($locale, self::TYPE_SPECIFIER_MESSAGE_DATETIME, $valueTypeCheck);
     }
 }
