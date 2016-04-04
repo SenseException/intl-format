@@ -3,6 +3,8 @@
 namespace Budgegeria\IntlFormat\Tests\Formatter;
 
 use Budgegeria\IntlFormat\Formatter\MessageFormatter;
+use DateTime;
+use IntlCalendar;
 
 class MessageFormatterTest extends \PHPUnit_Framework_TestCase
 {
@@ -12,24 +14,14 @@ class MessageFormatterTest extends \PHPUnit_Framework_TestCase
      */
     public function testHas($typeSpecifier)
     {
-        $typeSpecifiers = array_merge(
-            MessageFormatter::TYPE_SPECIFIER_MESSAGE_NUMBER,
-            MessageFormatter::TYPE_SPECIFIER_MESSAGE_DATETIME
-        );
-
-        $messageFormatter = new MessageFormatter('de_DE', $typeSpecifiers, function () {});
+        $messageFormatter = new MessageFormatter('de_DE', $this->getTypeSpecifier(), function () {});
 
         $this->assertTrue($messageFormatter->has($typeSpecifier));
     }
 
     public function testHasIsFalse()
     {
-        $typeSpecifiers = array_merge(
-            MessageFormatter::TYPE_SPECIFIER_MESSAGE_NUMBER,
-            MessageFormatter::TYPE_SPECIFIER_MESSAGE_DATETIME
-        );
-
-        $messageFormatter = new MessageFormatter('de_DE', $typeSpecifiers, function () {});
+        $messageFormatter = new MessageFormatter('de_DE', $this->getTypeSpecifier(), function () {});
 
         $this->assertFalse($messageFormatter->has('int'));
     }
@@ -116,6 +108,32 @@ class MessageFormatterTest extends \PHPUnit_Framework_TestCase
     /**
      * @return array
      */
+    private function getTypeSpecifier()
+    {
+        return [
+            'number' => 'number',
+            'integer' => 'integer',
+            'currency' => 'currency',
+            'percent' => 'percent',
+            'date' => 'date',
+            'date_short' => 'date_short',
+            'date_medium' => 'date_medium',
+            'date_long' => 'date_long',
+            'date_full' => 'date_full',
+            'time' => 'time',
+            'time_short' => 'time_short',
+            'time_medium' => 'time_medium',
+            'time_long' => 'time_long',
+            'time_full' => 'time_full',
+            'spellout' => 'spellout',
+            'ordinal' => 'ordinal',
+            'duration' => 'duration',
+        ];
+    }
+
+    /**
+     * @return array
+     */
     public function provideTypeSpecifier()
     {
         return [
@@ -145,17 +163,23 @@ class MessageFormatterTest extends \PHPUnit_Framework_TestCase
     public function provideDate()
     {
         $date = new \DateTime('2016-03-01');
+        $calendar = IntlCalendar::fromDateTime($date);
 
         return [
             'date' => ['01.03.2016', 'date', $date],
+            'date_calendar' => ['01.03.2016', 'date', $calendar],
             'date_timestamp' => ['01.03.2016', 'date', $date->getTimestamp()],
             'date_short' => ['01.03.16', 'date_short', $date],
+            'date_short_calendar' => ['01.03.16', 'date_short', $calendar],
             'date_short_timestamp' => ['01.03.16', 'date_short', $date->getTimestamp()],
             'date_medium' => ['01.03.2016', 'date_medium', $date],
+            'date_medium_calendar' => ['01.03.2016', 'date_medium', $calendar],
             'date_medium_timestamp' => ['01.03.2016', 'date_medium', $date->getTimestamp()],
             'date_long' => ['1. März 2016', 'date_long', $date],
+            'date_long_calendar' => ['1. März 2016', 'date_long', $calendar],
             'date_long_timestamp' => ['1. März 2016', 'date_long', $date->getTimestamp()],
             'date_full' => ['Dienstag, 1. März 2016', 'date_full', $date],
+            'date_full_calendar' => ['Dienstag, 1. März 2016', 'date_full', $calendar],
             'date_full_timestamp' => ['Dienstag, 1. März 2016', 'date_full', $date->getTimestamp()],
         ];
     }
@@ -165,19 +189,25 @@ class MessageFormatterTest extends \PHPUnit_Framework_TestCase
      */
     public function provideTime()
     {
-        $date = new \DateTime('2016-03-01 02:20:50', new \DateTimeZone('Europe/Berlin'));
+        $date = new DateTime('2016-03-01 02:20:50', new \DateTimeZone('Europe/Berlin'));
+        $calendar = IntlCalendar::fromDateTime($date);
 
         return [
             'time' => ['01:20:50', 'time', $date],
+            'time_calendar' => ['01:20:50', 'time', $calendar],
             'time_timestamp' => ['01:20:50', 'time', $date->getTimestamp()],
             'time_short' => ['01:20', 'time_short', $date],
+            'time_short_calendar' => ['01:20', 'time_short', $calendar],
             'time_short_timestamp' => ['01:20', 'time_short', $date->getTimestamp()],
             'time_medium' => ['01:20:50', 'time_medium', $date],
+            'time_medium_calendar' => ['01:20:50', 'time_medium', $calendar],
             'time_medium_timestamp' => ['01:20:50', 'time_medium', $date->getTimestamp()],
-            'time_long' => ['01:20:50 GMT', 'time_long', $date], // MessageFormat behaviour
-            'time_long_timestamp' => ['01:20:50 GMT', 'time_long', $date->getTimestamp()], // MessageFormat behaviour
-            'time_full' => ['01:20:50 GMT', 'time_full', $date], // MessageFormat behaviour
-            'time_full_timestamp' => ['01:20:50 GMT', 'time_full', $date->getTimestamp()], // MessageFormat behaviour
+            'time_long' => ['01:20:50 GMT', 'time_long', $date],
+            'time_long_calendar' => ['01:20:50 GMT', 'time_long', $calendar],
+            'time_long_timestamp' => ['01:20:50 GMT', 'time_long', $date->getTimestamp()],
+            'time_full' => ['01:20:50 GMT', 'time_full', $date],
+            'time_full_calendar' => ['01:20:50 GMT', 'time_full', $calendar],
+            'time_full_timestamp' => ['01:20:50 GMT', 'time_full', $date->getTimestamp()],
         ];
     }
 
