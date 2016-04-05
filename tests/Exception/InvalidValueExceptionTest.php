@@ -23,4 +23,13 @@ class InvalidValueExceptionTest extends \PHPUnit_Framework_TestCase
     {
         throw InvalidValueException::invalidLocale('foo');
     }
+
+    /**
+     * @expectedException \Budgegeria\IntlFormat\Exception\InvalidValueException
+     * @expectedExceptionMessage "[object]" is not a valid locale.
+     */
+    public function testInvalidLocaleObject()
+    {
+        throw InvalidValueException::invalidLocale(new \ArrayObject());
+    }
 }
