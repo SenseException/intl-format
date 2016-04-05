@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: claudio
- * Date: 03.04.16
- * Time: 22:51
- */
 
 namespace Budgegeria\IntlFormat\Tests\Formatter;
 
