@@ -17,4 +17,13 @@ class InvalidValueException extends IntlFormatException
             implode(', ', $allowedTypes)
         ));
     }
+
+    /**
+     * @param string $locale
+     * @return InvalidValueException
+     */
+    public static function invalidLocale($locale)
+    {
+        return new self(sprintf('"%s" is not a valid locale.', (string) $locale));
+    }
 }
