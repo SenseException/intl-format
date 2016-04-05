@@ -64,23 +64,35 @@ class TimeZoneFormatterTest extends \PHPUnit_Framework_TestCase
      */
     public function provideTimeZones()
     {
-        $timezone = new DateTimeZone('Europe/Berlin');
-        $datetime = new DateTime();
-        $datetime->setTimezone($timezone);
+        $datetime = $this->createDateTime('2016-05-01', 'US/Arizona');
+        $timezone = $datetime->getTimezone();
         $intlTimezone = IntlTimeZone::fromDateTimeZone($timezone);
 
         return [
-            'timeseries_id_ts' => ['Europe/Berlin', 'timeseries_id', $timezone],
-            'timeseries_id_dt' => ['Europe/Berlin', 'timeseries_id', $datetime],
-            'timeseries_id_its' => ['Europe/Berlin', 'timeseries_id', $intlTimezone],
+            'timeseries_id_ts' => ['US/Arizona', 'timeseries_id', $timezone],
+            'timeseries_id_dt' => ['US/Arizona', 'timeseries_id', $datetime],
+            'timeseries_id_its' => ['US/Arizona', 'timeseries_id', $intlTimezone],
 
-            'timeseries_name_ts' => ['Central European Standard Time', 'timeseries_name', $timezone],
-            'timeseries_name_dt' => ['Central European Standard Time', 'timeseries_name', $datetime],
-            'timeseries_name_its' => ['Central European Standard Time', 'timeseries_name', $intlTimezone],
+            'timeseries_name_ts' => ['Mountain Standard Time', 'timeseries_name', $timezone],
+            'timeseries_name_dt' => ['Mountain Standard Time', 'timeseries_name', $datetime],
+            'timeseries_name_its' => ['Mountain Standard Time', 'timeseries_name', $intlTimezone],
 
-            'timeseries_gmt_diff_ts' => ['GMT+1', 'timeseries_gmt_diff', $timezone],
-            'timeseries_gmt_diff_dt' => ['GMT+1', 'timeseries_gmt_diff', $datetime],
-            'timeseries_gmt_diff_its' => ['GMT+1', 'timeseries_gmt_diff', $intlTimezone],
+            'timeseries_gmt_diff_ts' => ['MST', 'timeseries_gmt_diff', $timezone],
+            'timeseries_gmt_diff_dt' => ['MST', 'timeseries_gmt_diff', $datetime],
+            'timeseries_gmt_diff_its' => ['MST', 'timeseries_gmt_diff', $intlTimezone],
+
+            'timeseries_name_dt_dl' => ['Central European Summer Time', 'timeseries_name', $this->createDateTime('2016-05-01', 'Europe/Berlin')],
+            'timeseries_name_dt_nodl' => ['Central European Standard Time', 'timeseries_name', $this->createDateTime('2016-01-01', 'Europe/Berlin')],
         ];
+    }
+
+    /**
+     * @param string $date
+     * @param string $timezone
+     * @return DateTime
+     */
+    private function createDateTime($date, $timezone)
+    {
+        return new DateTime((string) $date, new DateTimeZone((string) $timezone));
     }
 }

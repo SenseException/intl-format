@@ -2,6 +2,7 @@
 
 namespace Budgegeria\IntlFormat\Formatter;
 
+use IntlCalendar;
 use IntlTimeZone;
 use DateTime;
 use DateTimeZone;
@@ -20,6 +21,7 @@ class TimeZoneFormatter implements FormatterInterface
 
     /**
      * @param string $locale
+     * @throws InvalidValueException
      */
     public function __construct($locale)
     {
@@ -31,7 +33,10 @@ class TimeZoneFormatter implements FormatterInterface
      */
     public function formatValue($typeSpecifier, $value)
     {
+        $intlCalendar = $this->createIntlCalendar();
+
         if ($value instanceof DateTime) {
+            $intlCalendar->setTime($value->getTimestamp() * 1000);
             $value = $value->getTimezone();
         }
 
@@ -43,11 +48,13 @@ class TimeZoneFormatter implements FormatterInterface
             throw InvalidValueException::invalidValueType($value, [DateTime::class, DateTimeZone::class, IntlTimeZone::class]);
         }
 
-        // todo Get daylight time if possible. Check IntlCalendar
+        $intlCalendar->setTimeZone($value);
+        $inDaylight = $intlCalendar->inDaylightTime();
+
         $timeZoneMetaData = [
             self::TYPE_SPECIFIER_ID => $value->getID(),
-            self::TYPE_SPECIFIER_LONG_NAME => $value->getDisplayName(null, IntlTimeZone::DISPLAY_LONG, $this->locale),
-            self::TYPE_SPECIFIER_SHORT_NAME => $value->getDisplayName(null, IntlTimeZone::DISPLAY_SHORT, $this->locale),
+            self::TYPE_SPECIFIER_LONG_NAME => $value->getDisplayName($inDaylight, IntlTimeZone::DISPLAY_LONG, $this->locale),
+            self::TYPE_SPECIFIER_SHORT_NAME => $value->getDisplayName($inDaylight, IntlTimeZone::DISPLAY_SHORT, $this->locale),
         ];
 
         return $timeZoneMetaData[$typeSpecifier];
@@ -65,5 +72,19 @@ class TimeZoneFormatter implements FormatterInterface
         ];
 
         return in_array($typeSpecifier, $typeSpecifiers, true);
+    }
+
+    /**
+     * @return IntlCalendar
+     * @throws InvalidValueException
+     */
+    private function createIntlCalendar()
+    {
+        $intlCalendar = IntlCalendar::createInstance(null, $this->locale);
+        if (null === $intlCalendar) {
+            throw InvalidValueException::invalidLocale($this->locale);
+        }
+
+        return $intlCalendar;
     }
 }
