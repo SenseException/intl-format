@@ -75,8 +75,8 @@ class TimeZoneFormatterTest extends \PHPUnit_Framework_TestCase
             'timeseries_gmt_diff_dt' => ['MST', 'timeseries_gmt_diff', $datetime],
             'timeseries_gmt_diff_its' => ['MST', 'timeseries_gmt_diff', $intlTimezone],
 
-            'timeseries_name_dt_dl' => ['Central European Summer Time', 'timeseries_name', $this->createDateTime('2016-05-01', 'Europe/Berlin')],
-            'timeseries_name_dt_nodl' => ['Central European Standard Time', 'timeseries_name', $this->createDateTime('2016-01-01', 'Europe/Berlin')],
+            'timeseries_name_dt_dl' => ['GMT+2', 'timeseries_gmt_diff', $this->createDateTime('2016-05-01', 'Europe/Berlin')],
+            'timeseries_name_dt_nodl' => ['GMT+1', 'timeseries_gmt_diff', $this->createDateTime('2016-01-01', 'Europe/Berlin')],
         ];
     }
 
