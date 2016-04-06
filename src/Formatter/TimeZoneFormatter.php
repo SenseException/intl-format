@@ -12,7 +12,7 @@ class TimeZoneFormatter implements FormatterInterface
 {
     const TYPE_SPECIFIER_ID = 'timeseries_id';
     const TYPE_SPECIFIER_LONG_NAME = 'timeseries_name';
-    const TYPE_SPECIFIER_SHORT_NAME = 'timeseries_gmt_diff';
+    const TYPE_SPECIFIER_SHORT_NAME = 'timeseries_short';
 
     /**
      * @var string

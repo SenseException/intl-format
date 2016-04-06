@@ -49,7 +49,7 @@ class TimeZoneFormatterTest extends \PHPUnit_Framework_TestCase
         return [
             'timeseries_id' => ['timeseries_id'],
             'timeseries_name' => ['timeseries_name'],
-            'timeseries_gmt_diff' => ['timeseries_gmt_diff'],
+            'timeseries_short' => ['timeseries_short'],
         ];
     }
 
@@ -71,12 +71,9 @@ class TimeZoneFormatterTest extends \PHPUnit_Framework_TestCase
             'timeseries_name_dt' => ['Mountain Standard Time', 'timeseries_name', $datetime],
             'timeseries_name_its' => ['Mountain Standard Time', 'timeseries_name', $intlTimezone],
 
-            'timeseries_gmt_diff_ts' => ['MST', 'timeseries_gmt_diff', $timezone],
-            'timeseries_gmt_diff_dt' => ['MST', 'timeseries_gmt_diff', $datetime],
-            'timeseries_gmt_diff_its' => ['MST', 'timeseries_gmt_diff', $intlTimezone],
-
-            'timeseries_name_dt_dl' => ['GMT+2', 'timeseries_gmt_diff', $this->createDateTime('2016-05-01', 'Europe/Berlin')],
-            'timeseries_name_dt_nodl' => ['GMT+1', 'timeseries_gmt_diff', $this->createDateTime('2016-01-01', 'Europe/Berlin')],
+            'timeseries_short_ts' => ['MST', 'timeseries_short', $timezone],
+            'timeseries_short_dt' => ['MST', 'timeseries_short', $datetime],
+            'timeseries_short_its' => ['MST', 'timeseries_short', $intlTimezone],
         ];
     }
 
