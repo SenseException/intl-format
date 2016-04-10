@@ -20,6 +20,13 @@ class TimeZoneFormatterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($formatter->has($typeSpecifier));
     }
 
+    public function testHasIsFalse()
+    {
+        $messageFormatter = new TimeZoneFormatter('de_DE');
+
+        $this->assertFalse($messageFormatter->has('int'));
+    }
+
     /**
      * @dataProvider provideTimeZones
      */
