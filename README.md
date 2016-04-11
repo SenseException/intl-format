@@ -90,8 +90,6 @@ Here are some lists of predefined type specifiers and their formats, that are al
 | spellout         | float, integer                       |
 | ordinal          | integer                              |
 
-Examples:
-
 ```php
 $intlFormat = (new Budgegeria\IntlFormat\Factory())->createIntlFormat('en_US');
 
