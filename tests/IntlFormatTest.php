@@ -14,7 +14,7 @@ class IntlFormatTest extends \PHPUnit_Framework_TestCase
     {
         $message = 'Hello "%world", how are you';
 
-        $formatter = $this->createMock(FormatterInterface::class);
+        $formatter = $this->getMock(FormatterInterface::class);
         $formatter->expects($this->once())
             ->method('has')
             ->with('world')
@@ -36,7 +36,7 @@ class IntlFormatTest extends \PHPUnit_Framework_TestCase
      */
     public function testEscapedFormat($message, $expected)
     {
-        $formatter = $this->createMock(FormatterInterface::class);
+        $formatter = $this->getMock(FormatterInterface::class);
         $formatter->expects($this->once())
             ->method('has')
             ->with('world')
@@ -58,7 +58,7 @@ class IntlFormatTest extends \PHPUnit_Framework_TestCase
     {
         $message = '%swap %swap %1$swap';
 
-        $formatter = $this->createMock(FormatterInterface::class);
+        $formatter = $this->getMock(FormatterInterface::class);
         $formatter->expects($this->atLeastOnce())
             ->method('has')
             ->with('swap')
@@ -81,7 +81,7 @@ class IntlFormatTest extends \PHPUnit_Framework_TestCase
     {
         $message = '%3$swap %2$swap %1$swap';
 
-        $formatter = $this->createMock(FormatterInterface::class);
+        $formatter = $this->getMock(FormatterInterface::class);
         $formatter->expects($this->atLeastOnce())
             ->method('has')
             ->with('swap')
@@ -104,7 +104,7 @@ class IntlFormatTest extends \PHPUnit_Framework_TestCase
     {
         $message = 'Hello %world, Today is %date';
 
-        $formatter = $this->createMock(FormatterInterface::class);
+        $formatter = $this->getMock(FormatterInterface::class);
         $formatter->expects($this->atLeastOnce())
             ->method('has')
             ->willReturnMap([
@@ -156,7 +156,7 @@ class IntlFormatTest extends \PHPUnit_Framework_TestCase
     {
         $message = 'Hello %5$world, Today is %date';
 
-        $formatter = $this->createMock(FormatterInterface::class);
+        $formatter = $this->getMock(FormatterInterface::class);
         $intlFormat = new IntlFormat([$formatter]);
 
         $intlFormat->format($message, 'island', new \DateTime());
@@ -171,7 +171,7 @@ class IntlFormatTest extends \PHPUnit_Framework_TestCase
     {
         $message = 'Hello %0$world, Today is %date';
 
-        $formatter = $this->createMock(FormatterInterface::class);
+        $formatter = $this->getMock(FormatterInterface::class);
         $intlFormat = new IntlFormat([$formatter]);
 
         $intlFormat->format($message, 'island', new \DateTime());
