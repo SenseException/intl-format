@@ -4,7 +4,7 @@ namespace Budgegeria\IntlFormat\Formatter;
 
 use IntlCalendar;
 use IntlTimeZone;
-use DateTime;
+use DateTimeInterface;
 use DateTimeZone;
 use Budgegeria\IntlFormat\Exception\InvalidValueException;
 
@@ -35,7 +35,7 @@ class TimeZoneFormatter implements FormatterInterface
     {
         $intlCalendar = $this->createIntlCalendar();
 
-        if ($value instanceof DateTime) {
+        if ($value instanceof DateTimeInterface) {
             $intlCalendar->setTime($value->getTimestamp() * 1000);
             $value = $value->getTimezone();
         }
@@ -45,7 +45,7 @@ class TimeZoneFormatter implements FormatterInterface
         }
 
         if (!($value instanceof IntlTimeZone)) {
-            throw InvalidValueException::invalidValueType($value, [DateTime::class, DateTimeZone::class, IntlTimeZone::class]);
+            throw InvalidValueException::invalidValueType($value, [DateTimeInterface::class, DateTimeZone::class, IntlTimeZone::class]);
         }
 
         $intlCalendar->setTimeZone($value);
