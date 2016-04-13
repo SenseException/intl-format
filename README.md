@@ -52,8 +52,8 @@ $intlFormat = (new Budgegeria\IntlFormat\Factory())->createIntlFormat('en_US');
 $date = new DateTime();
 $number = 1002.25;
 
-echo $intlFormat->format('At %time_short the values was %number', $date, $number);
-// "At 5:30 AM the values was 1,002.25"
+echo $intlFormat->format('At %time_short the value was %number', $date, $number);
+// "At 5:30 AM the value was 1,002.25"
 ```
 
 Intl-Format also supports argument swapping:
@@ -64,8 +64,8 @@ $intlFormat = (new Budgegeria\IntlFormat\Factory())->createIntlFormat('en_US');
 $date = new DateTime();
 $number = 1002.25;
 
-echo $intlFormat->format('At %2$time_short the values was %1$number', $number, $date);
-// "At 5:30 AM the values was 1,002.25"
+echo $intlFormat->format('At %2$time_short the value was %1$number', $number, $date);
+// "At 5:30 AM the value was 1,002.25"
 ```
 
 In case something's not right with the value for the given type specifier, a
