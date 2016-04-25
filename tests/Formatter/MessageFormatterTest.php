@@ -105,6 +105,18 @@ class MessageFormatterTest extends \PHPUnit_Framework_TestCase
         $messageFormatter->formatValue('date', $value);
     }
 
+    public function testFormatValueDateParts()
+    {
+        $messageFormatter = MessageFormatter::createDateValueFormatter('de_DE');
+        $date = new DateTime('2016-04-01');
+
+        $this->assertSame('2016', $messageFormatter->formatValue('date_year', $date));
+        $this->assertSame('4', $messageFormatter->formatValue('date_month', $date));
+        $this->assertSame('April', $messageFormatter->formatValue('date_month_name', $date));
+        $this->assertSame('1', $messageFormatter->formatValue('date_day', $date));
+        $this->assertSame('Freitag', $messageFormatter->formatValue('date_weekday', $date));
+    }
+
     /**
      * @return array
      */
@@ -116,6 +128,11 @@ class MessageFormatterTest extends \PHPUnit_Framework_TestCase
             'currency' => 'currency',
             'percent' => 'percent',
             'date' => 'date',
+            'date_day' => 'date_day',
+            'date_month' => 'date_month',
+            'date_year' => 'date_year',
+            'date_month_name' => 'date_month_name',
+            'date_weekday' => 'date_weekday',
             'date_short' => 'date_short',
             'date_medium' => 'date_medium',
             'date_long' => 'date_long',
@@ -142,6 +159,11 @@ class MessageFormatterTest extends \PHPUnit_Framework_TestCase
             'currency' => ['currency'],
             'percent' => ['percent'],
             'date' => ['date'],
+            'date_day' => ['date_day'],
+            'date_month' => ['date_month'],
+            'date_year' => ['date_year'],
+            'date_month_name' => ['date_month_name'],
+            'date_weekday' => ['date_weekday'],
             'date_short' => ['date_short'],
             'date_medium' => ['date_medium'],
             'date_long' => ['date_long'],

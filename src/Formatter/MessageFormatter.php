@@ -109,6 +109,11 @@ class MessageFormatter implements FormatterInterface
             'time_medium' => '{0,time,medium}',
             'time_long' => '{0,time,long}',
             'time_full' => '{0,time,full}',
+            'date_year' => '{0,date,y}',
+            'date_month' => '{0,date,M}',
+            'date_month_name' => '{0,date,MMMM}',
+            'date_day' => '{0,date,d}',
+            'date_weekday' => '{0,date,EEEE}',
         ];
 
         return new self($locale, $dateTypeSpecifier, $valueTypeCheck);
