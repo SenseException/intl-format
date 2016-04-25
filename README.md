@@ -152,11 +152,11 @@ echo $intlFormat->format('%time_long', new DateTime());
 In some countries / locales there are time changes to daylight saving time (summer) and standard time (winter).
 If an instance of DateTimeZone or IntlTimeZone is given, the formatter assumes the timezone is of the current server time.
 
-| type specifier   | allowed value types                  |
-|------------------|--------------------------------------|
-| timeseries_id    | DateTime, DateTimeZone, IntlTimeZone |
-| timeseries_name  | DateTime, DateTimeZone, IntlTimeZone |
-| timeseries_short | DateTime, DateTimeZone, IntlTimeZone |
+| type specifier   | allowed value types                           |
+|------------------|-----------------------------------------------|
+| timeseries_id    | DateTimeInterface, DateTimeZone, IntlTimeZone |
+| timeseries_name  | DateTimeInterface, DateTimeZone, IntlTimeZone |
+| timeseries_short | DateTimeInterface, DateTimeZone, IntlTimeZone |
 
 ```php
 $intlFormat = (new Budgegeria\IntlFormat\Factory())->createIntlFormat('en_US');
