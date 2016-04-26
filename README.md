@@ -117,6 +117,11 @@ echo $intlFormat->format('%currency', 1.1);
 | date_medium                  | integer, DateTime, IntlCalendar      |
 | date_long                    | integer, DateTime, IntlCalendar      |
 | date_full                    | integer, DateTime, IntlCalendar      |
+| date_weekday                 | integer, DateTime, IntlCalendar      |
+| date_month_name              | integer, DateTime, IntlCalendar      |
+| date_year                    | integer, DateTime, IntlCalendar      |
+| date_month                   | integer, DateTime, IntlCalendar      |
+| date_day                     | integer, DateTime, IntlCalendar      |
 | time (alias for time_medium) | integer, DateTime, IntlCalendar      |
 | time_medium                  | integer, DateTime, IntlCalendar      |
 | time_long                    | integer, DateTime, IntlCalendar      |
