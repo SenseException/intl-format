@@ -4,7 +4,7 @@
   "minimum-stability": "dev",
   "type": "library",
   "license": "MIT",
-  "keywords": ["intl", "i18n", "formatter"],
+  "keywords": ["intl", "i18n", "formatter", "icu", "i18n", "internationalization"],
   "authors": [
     {
       "name": "Claudio Zizza",
