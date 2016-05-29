@@ -5,7 +5,7 @@ namespace Budgegeria\IntlFormat\Tests;
 use Budgegeria\IntlFormat\Formatter\FormatterInterface;
 use Budgegeria\IntlFormat\IntlFormat;
 
-class IntlFormatTest extends \PHPUnit_Framework_TestCase
+class IntlFormatIntegrationTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Basic format test
