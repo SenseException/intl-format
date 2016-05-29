@@ -4,6 +4,8 @@ namespace Budgegeria\IntlFormat;
 
 use Budgegeria\IntlFormat\Formatter\FormatterInterface;
 use Budgegeria\IntlFormat\Exception\InvalidTypeSpecifierException;
+use Budgegeria\IntlFormat\MessageParser\MessageParserInterface;
+use Budgegeria\IntlFormat\MessageParser\SprintfParser;
 
 class IntlFormat
 {
@@ -13,10 +15,17 @@ class IntlFormat
     private $formatters = [];
 
     /**
-     * @param FormatterInterface[] $formatters
+     * @var MessageParserInterface
      */
-    public function __construct(array $formatters)
+    private $messageParser;
+
+    /**
+     * @param FormatterInterface[] $formatters
+     * @param MessageParserInterface $messageParser
+     */
+    public function __construct(array $formatters, MessageParserInterface $messageParser = null)
     {
+        $this->messageParser = null === $messageParser ? new SprintfParser() : $messageParser;
         foreach ($formatters as $formatter) {
             $this->addFormatter($formatter);
         }
@@ -29,21 +38,26 @@ class IntlFormat
      *
      * @param string $message Message string containing type specifier for the values
      * @param mixed $values multiple values used for the message's type specifier
+     * @throws InvalidTypeSpecifierException
      * @return string
      */
     public function format($message, ...$values)
     {
-        $parsedMessage = preg_split('/(%[%]*(?:[\d]+\$)*[a-z0-9_]*)/i', $message, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
-        $typeSpecifiers = preg_grep('/(^%(?:[\d]+\$)*[a-z0-9_]+)/i', $parsedMessage);
+        $messageMetaData = $this->messageParser->parseMessage($message, $values);
+        $typeSpecifiers = $messageMetaData->typeSpecifiers;
+        $values = $messageMetaData->values;
+        $parsedMessage = $messageMetaData->parsedMessage;
 
-        // Change escaped % to regular %
-        $parsedMessage = preg_replace('/^%%/', '%', $parsedMessage);
+        if (0 === count($values)) {
+            throw InvalidTypeSpecifierException::noTypeSpecifier();
+        }
 
-        $values = $this->swapArguments($typeSpecifiers, $values);
+        if (count($typeSpecifiers) !== count($values)) {
+            throw InvalidTypeSpecifierException::invalidTypeSpecifierCount(count($values), count($typeSpecifiers));
+        }
 
         foreach ($typeSpecifiers as $key => $typeSpecifier) {
             $value = array_shift($values);
-            $typeSpecifier = $this->normalize($typeSpecifier);
             if (null !== $formatter = $this->findFormatter($typeSpecifier)) {
                 $parsedMessage[$key] = $formatter->formatValue($typeSpecifier, $value);
             }
@@ -74,55 +88,5 @@ class IntlFormat
         }
 
         return null;
-    }
-
-    /**
-     * @param string $typeSpecifier
-     * @return string
-     */
-    private function normalize($typeSpecifier)
-    {
-        return preg_replace('/^%([0-9]\$)*/', '', $typeSpecifier);
-    }
-
-    /**
-     * @param string[] $typeSpecifiers
-     * @param array $values
-     * @return array
-     * @throws InvalidTypeSpecifierException
-     */
-    private function swapArguments(array $typeSpecifiers, array $values)
-    {
-        $swappedValues = [];
-        $typeSpecifiers = array_values($typeSpecifiers);
-
-        foreach ($typeSpecifiers as $key => $typeSpecifier) {
-            $matches = [];
-            if (1 === preg_match('/^%([0-9]+)\$/', $typeSpecifier, $matches)) {
-                if ('0' === $matches[1]) {
-                    throw InvalidTypeSpecifierException::invalidTypeSpecifier($typeSpecifier);
-                }
-
-                $index = $matches[1] - 1;
-            } else {
-                $index = $key;
-            }
-
-            if (!array_key_exists($index, $values)) {
-                throw InvalidTypeSpecifierException::unmatchedTypeSpecifier($typeSpecifier);
-            }
-
-            $swappedValues[] = $values[$index];
-        }
-
-        if (0 === count($swappedValues)) {
-            throw InvalidTypeSpecifierException::noTypeSpecifier();
-        }
-
-        if (count($typeSpecifiers) !== count($swappedValues)) {
-            throw InvalidTypeSpecifierException::invalidTypeSpecifierCount(count($swappedValues), count($typeSpecifiers));
-        }
-
-        return $swappedValues;
     }
 }
