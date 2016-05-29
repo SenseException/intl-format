@@ -68,6 +68,21 @@ class SprintfParserTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Basic format test
+     */
+    public function testParseEscapedMessage()
+    {
+        $message = 'Hello "%world", how are you %%person %%';
+
+        $parser = new SprintfParser();
+        $parsed = $parser->parseMessage($message, ['island']);
+
+        $this->assertSame([1 => 'world'], $parsed->typeSpecifiers, 'Wrong type specifier');
+        $this->assertSame(['island'], $parsed->values, 'Wrong values');
+        $this->assertSame(['Hello "', '%world', '", how are you ', '%person', ' ', '%'], $parsed->parsedMessage, 'Wrong parsed message');
+    }
+
+    /**
      * There aren't enough values for %5$world.
      *
      * @expectedException \Budgegeria\IntlFormat\Exception\InvalidTypeSpecifierException
