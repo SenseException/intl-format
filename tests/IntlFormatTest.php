@@ -4,6 +4,8 @@ namespace Budgegeria\IntlFormat\Tests;
 
 use Budgegeria\IntlFormat\Formatter\FormatterInterface;
 use Budgegeria\IntlFormat\IntlFormat;
+use Budgegeria\IntlFormat\MessageParser\MessageMetaData;
+use Budgegeria\IntlFormat\MessageParser\MessageParserInterface;
 
 class IntlFormatTest extends \PHPUnit_Framework_TestCase
 {
@@ -12,7 +14,7 @@ class IntlFormatTest extends \PHPUnit_Framework_TestCase
      */
     public function testFormat()
     {
-        $message = 'Hello "%world", how are you';
+        $message = 'Hello "{{world}}", how are you';
 
         $formatter = $this->getMock(FormatterInterface::class);
         $formatter->expects($this->once())
@@ -24,77 +26,20 @@ class IntlFormatTest extends \PHPUnit_Framework_TestCase
             ->with('world', 'island')
             ->willReturn('island');
 
-        $intlFormat = new IntlFormat([$formatter]);
+        $parsed = new MessageMetaData();
+        $parsed->typeSpecifiers = [1 => 'world'];
+        $parsed->values = ['island'];
+        $parsed->parsedMessage = ['Hello "', '{{world}}', '", how are you'];
+
+        $parser = $this->getMock(MessageParserInterface::class);
+        $parser->expects($this->once())
+            ->method('parseMessage')
+            ->with($message, ['island'])
+            ->willReturn($parsed);
+
+        $intlFormat = new IntlFormat([$formatter], $parser);
 
         $this->assertSame('Hello "island", how are you', $intlFormat->format($message, 'island'));
-    }
-
-    /**
-     * A test for %-escaped messages.
-     *
-     * @dataProvider provideEscapedMessages
-     */
-    public function testEscapedFormat($message, $expected)
-    {
-        $formatter = $this->getMock(FormatterInterface::class);
-        $formatter->expects($this->once())
-            ->method('has')
-            ->with('world')
-            ->willReturn(true);
-        $formatter->expects($this->once())
-            ->method('formatValue')
-            ->with('world', 'island')
-            ->willReturn('island');
-
-        $intlFormat = new IntlFormat([$formatter]);
-
-        $this->assertSame($expected, $intlFormat->format($message, 'island'));
-    }
-
-    /**
-     * A test for argument swapping.
-     */
-    public function testArgumentSwappingFormat()
-    {
-        $message = '%swap %swap %1$swap';
-
-        $formatter = $this->getMock(FormatterInterface::class);
-        $formatter->expects($this->atLeastOnce())
-            ->method('has')
-            ->with('swap')
-            ->willReturn(true);
-        $formatter->expects($this->atLeastOnce())
-            ->method('formatValue')
-            ->with('swap', \PHPUnit_Framework_Assert::anything())
-            ->willReturnOnConsecutiveCalls('value1', 'value2', 'value1');
-
-        $intlFormat = new IntlFormat([$formatter]);
-
-        $expected = 'value1 value2 value1';
-        $this->assertSame($expected, $intlFormat->format($message, 'value1', 'value2'));
-    }
-
-    /**
-     * A test for argument swapping.
-     */
-    public function testArgumentSwappingOrder()
-    {
-        $message = '%3$swap %2$swap %1$swap';
-
-        $formatter = $this->getMock(FormatterInterface::class);
-        $formatter->expects($this->atLeastOnce())
-            ->method('has')
-            ->with('swap')
-            ->willReturn(true);
-        $formatter->expects($this->atLeastOnce())
-            ->method('formatValue')
-            ->with('swap', \PHPUnit_Framework_Assert::anything())
-            ->willReturnOnConsecutiveCalls('value3', 'value2', 'value1');
-
-        $intlFormat = new IntlFormat([$formatter]);
-
-        $expected = 'value3 value2 value1';
-        $this->assertSame($expected, $intlFormat->format($message, 'value1', 'value2', 'value3'));
     }
 
     /**
@@ -102,7 +47,7 @@ class IntlFormatTest extends \PHPUnit_Framework_TestCase
      */
     public function testMissingTypeSpecifier()
     {
-        $message = 'Hello %world, Today is %date';
+        $message = 'Hello {{world}}, Today is {{date}}';
 
         $formatter = $this->getMock(FormatterInterface::class);
         $formatter->expects($this->atLeastOnce())
@@ -116,9 +61,22 @@ class IntlFormatTest extends \PHPUnit_Framework_TestCase
             ->with('world', 'island')
             ->willReturn('island');
 
-        $intlFormat = new IntlFormat([$formatter]);
+        $dateTime = new \DateTime();
 
-        $this->assertSame('Hello island, Today is %date', $intlFormat->format($message, 'island', new \DateTime()));
+        $parsed = new MessageMetaData();
+        $parsed->typeSpecifiers = [1 => 'world', 3 => 'date'];
+        $parsed->values = ['island', $dateTime];
+        $parsed->parsedMessage = ['Hello ', '{{world}}', ', Today is ', '{{date}}'];
+
+        $parser = $this->getMock(MessageParserInterface::class);
+        $parser->expects($this->once())
+            ->method('parseMessage')
+            ->with($message, ['island', $dateTime])
+            ->willReturn($parsed);
+
+        $intlFormat = new IntlFormat([$formatter], $parser);
+
+        $this->assertSame('Hello island, Today is {{date}}', $intlFormat->format($message, 'island', $dateTime));
     }
 
     /**
@@ -128,9 +86,20 @@ class IntlFormatTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidValueTypeSpecifierCount()
     {
-        $message = 'Hello %world, Today is %date';
+        $message = 'Hello {{world}}, Today is {{date}}';
 
-        $intlFormat = new IntlFormat([]);
+        $parsed = new MessageMetaData();
+        $parsed->typeSpecifiers = [1 => 'world', 3 => 'date'];
+        $parsed->values = ['island'];
+        $parsed->parsedMessage = ['Hello ', '{{world}}', ', Today is ', '{{date}}'];
+
+        $parser = $this->getMock(MessageParserInterface::class);
+        $parser->expects($this->once())
+            ->method('parseMessage')
+            ->with($message, ['island'])
+            ->willReturn($parsed);
+
+        $intlFormat = new IntlFormat([], $parser);
         $intlFormat->format($message, 'island');
     }
 
@@ -143,48 +112,18 @@ class IntlFormatTest extends \PHPUnit_Framework_TestCase
     {
         $message = 'Hello %%world';
 
-        $intlFormat = new IntlFormat([]);
+        $parsed = new MessageMetaData();
+        $parsed->typeSpecifiers = [];
+        $parsed->values = ['island'];
+        $parsed->parsedMessage = ['Hello ', '%world'];
+
+        $parser = $this->getMock(MessageParserInterface::class);
+        $parser->expects($this->once())
+            ->method('parseMessage')
+            ->with($message, ['island'])
+            ->willReturn($parsed);
+
+        $intlFormat = new IntlFormat([], $parser);
         $intlFormat->format($message, 'island');
-    }
-
-    /**
-     * There aren't enough values for %5$world.
-     *
-     * @expectedException \Budgegeria\IntlFormat\Exception\InvalidTypeSpecifierException
-     */
-    public function testWrongTypeSpecifierIndex()
-    {
-        $message = 'Hello %5$world, Today is %date';
-
-        $formatter = $this->getMock(FormatterInterface::class);
-        $intlFormat = new IntlFormat([$formatter]);
-
-        $intlFormat->format($message, 'island', new \DateTime());
-    }
-
-    /**
-     * %0$world is an invalid type specifier
-     *
-     * @expectedException \Budgegeria\IntlFormat\Exception\InvalidTypeSpecifierException
-     */
-    public function testInvalidTypeSpecifier()
-    {
-        $message = 'Hello %0$world, Today is %date';
-
-        $formatter = $this->getMock(FormatterInterface::class);
-        $intlFormat = new IntlFormat([$formatter]);
-
-        $intlFormat->format($message, 'island', new \DateTime());
-    }
-
-    /**
-     * @return array
-     */
-    public function provideEscapedMessages()
-    {
-        return [
-            ['Hello %world, how %%are you', 'Hello island, how %are you'],
-            ['Hello %world, how %% are you', 'Hello island, how % are you'],
-        ];
     }
 }
