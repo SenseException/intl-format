@@ -2,12 +2,6 @@
 
 namespace Budgegeria\IntlFormat\Formatter;
 
-use IntlCalendar;
-use IntlTimeZone;
-use DateTimeInterface;
-use DateTimeZone;
-use Budgegeria\IntlFormat\Exception\InvalidValueException;
-
 class SprintfFormatter implements FormatterInterface
 {
     /**
@@ -23,6 +17,6 @@ class SprintfFormatter implements FormatterInterface
      */
     public function has($typeSpecifier)
     {
-        return (bool) preg_match('/[\+\-]?(\'?.)?\-?\d*(?:\.?\d*)[%bcdeEfFgGosuxX]/', $typeSpecifier);
+        return (bool) preg_match('/[\+\-]?(\'?.)?(?:\-\-)?\d*(?:\.?\d*)[%bcdeEfFgGosuxX]/', $typeSpecifier);
     }
 }
