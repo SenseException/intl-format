@@ -4,7 +4,7 @@
   "minimum-stability": "dev",
   "type": "library",
   "license": "MIT",
-  "keywords": ["intl", "i18n", "formatter", "icu", "i18n", "internationalization"],
+  "keywords": ["intl", "i18n", "formatter", "icu", "i18n", "internationalization", "messages", "sprintf"],
   "authors": [
     {
       "name": "Claudio Zizza",
@@ -14,6 +14,9 @@
   "require": {
     "php": "^5.6|^7.0",
     "ext-intl": "*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "5.2.*"
   },
   "autoload": {
     "psr-4": {
@@ -26,7 +29,5 @@
       "Budgegeria\\IntlFormat\\Tests\\": "tests/"
     }
   },
-  "require-dev": {
-    "phpunit/phpunit": "5.2.*"
-  }
+  "prefer-stable": true
 }
