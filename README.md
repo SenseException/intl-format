@@ -209,5 +209,5 @@ or throw a `Budgegeria\IntlFormat\Exception\InvalidValueException`.
 
 ### Overwriting
 
-There is currently no overwriting of existing type specifiers specified, but this is not a given behaviour of Intl-Format
-and may change in one of the future releases. Be sure that you're using unique type specifier names for your formatter.
+You can override a type specifier by adding a formatter containing an already existing type specifier to the IntlFormat
+instance. It doesn't override a whole Formatter instance, only individual type specifier.

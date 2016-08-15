@@ -62,9 +62,8 @@ class IntlFormat
                 $parsedMessage[$key] = $formatter->formatValue($typeSpecifier, $value);
             }
         }
-        $message = implode('', $parsedMessage);
 
-        return $message;
+        return implode('', $parsedMessage);
     }
 
     /**
@@ -81,7 +80,8 @@ class IntlFormat
      */
     private function findFormatter($typeSpecifier)
     {
-        foreach ($this->formatters as $formatter) {
+        $formatters = array_reverse($this->formatters);
+        foreach ($formatters as $formatter) {
             if ($formatter->has($typeSpecifier)) {
                 return $formatter;
             }

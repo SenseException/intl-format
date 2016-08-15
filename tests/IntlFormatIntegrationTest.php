@@ -177,6 +177,28 @@ class IntlFormatIntegrationTest extends \PHPUnit_Framework_TestCase
         $intlFormat->format($message, 'island', new \DateTime());
     }
 
+    public function testAddFormatOverride()
+    {
+        $message = 'Hello "%world", how are you';
+
+        $formatter1 = $this->getMock(FormatterInterface::class);
+        $formatter1->method('has')
+            ->willReturn(true);
+        $formatter1->method('formatValue')
+            ->willReturn('island');
+        $formatter2 = $this->getMock(FormatterInterface::class);
+        $formatter2->method('has')
+            ->willReturn(true);
+        $formatter2->method('formatValue')
+            ->willReturn('city');
+
+        $intlFormat = new IntlFormat([]);
+        $intlFormat->addFormatter($formatter1);
+        $intlFormat->addFormatter($formatter2);
+
+        $this->assertSame('Hello "city", how are you', $intlFormat->format($message, 'city'));
+    }
+
     /**
      * @return array
      */
