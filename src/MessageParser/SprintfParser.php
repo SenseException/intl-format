@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: claudio
- * Date: 29.05.16
- * Time: 19:37
- */
 
 namespace Budgegeria\IntlFormat\MessageParser;
-
 
 use Budgegeria\IntlFormat\Exception\InvalidTypeSpecifierException;
 
@@ -15,7 +8,7 @@ class SprintfParser implements MessageParserInterface
 {
     /**
      * @param string $message
-     * @throws \Budgegeria\IntlFormat\Exception\InvalidTypeSpecifierException
+     * @throws InvalidTypeSpecifierException
      * @return MessageMetaData
      */
     public function parseMessage($message, array $values)
