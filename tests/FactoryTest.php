@@ -28,5 +28,6 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('I got 1,002.25 as average value', $intlFormat->format('I got %number as average value', 1002.25));
         $this->assertSame('I is 5:30 AM on my clock.', $intlFormat->format('I is %time_short on my clock.', $date));
         $this->assertSame('The timezone id is US/Arizona.', $intlFormat->format('The timezone id is %timeseries_id.', $date));
+        $this->assertSame('I am from Italy.', $intlFormat->format('I am from %region.', 'it_IT'));
     }
 }
