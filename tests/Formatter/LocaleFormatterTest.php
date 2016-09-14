@@ -2,6 +2,7 @@
 
 namespace Budgegeria\IntlFormat\Tests\Formatter;
 
+use Budgegeria\IntlFormat\Exception\InvalidValueException;
 use Budgegeria\IntlFormat\Formatter\LocaleFormatter;
 
 class LocaleFormatterTest extends \PHPUnit_Framework_TestCase
@@ -42,6 +43,17 @@ class LocaleFormatterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider provideTypeSpecifier
+     */
+    public function testFormatValueException($typeSpecifier)
+    {
+        $this->expectException(InvalidValueException::class);
+        $localeFormatter = new LocaleFormatter('de_DE');
+
+        $localeFormatter->formatValue($typeSpecifier, 'foobarbaz');
+    }
+
+    /**
      * @return array
      */
     public function provideLanguages()
@@ -69,6 +81,17 @@ class LocaleFormatterTest extends \PHPUnit_Framework_TestCase
             ['Vereinigtes Königreich', 'en_GB'],
             ['Schweiz', 'de_CH'],
             ['Schweiz', 'it_CH'],
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function provideTypeSpecifier()
+    {
+        return [
+            ['region'],
+            ['language'],
         ];
     }
 }

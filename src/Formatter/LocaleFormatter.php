@@ -2,6 +2,7 @@
 
 namespace Budgegeria\IntlFormat\Formatter;
 
+use Budgegeria\IntlFormat\Exception\InvalidValueException;
 use Locale;
 
 class LocaleFormatter implements FormatterInterface
@@ -24,10 +25,22 @@ class LocaleFormatter implements FormatterInterface
         $this->locale = (string) $locale;
         $this->formatFunctions = [
             'language' => function($value) use ($locale) {
-                return Locale::getDisplayLanguage($value, $locale);
+                $language = Locale::getDisplayLanguage($value, $locale);
+
+                if ($value === $language) {
+                    throw InvalidValueException::invalidLocale($value);
+                }
+
+                return $language;
             },
             'region' => function($value) use ($locale) {
-                return Locale::getDisplayRegion($value, $locale);
+                $region = Locale::getDisplayRegion($value, $locale);
+
+                if ('' === $region) {
+                    throw InvalidValueException::invalidLocale($value);
+                }
+
+                return $region;
             },
         ];
     }
@@ -37,7 +50,7 @@ class LocaleFormatter implements FormatterInterface
      */
     public function formatValue($typeSpecifier, $value)
     {
-        return $this->formatFunctions[$typeSpecifier]($value);
+        return $this->formatFunctions[$typeSpecifier]($value);;
     }
 
     /**
