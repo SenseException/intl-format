@@ -50,7 +50,7 @@ class LocaleFormatter implements FormatterInterface
      */
     public function formatValue($typeSpecifier, $value)
     {
-        return $this->formatFunctions[$typeSpecifier]($value);;
+        return $this->formatFunctions[$typeSpecifier]($value);
     }
 
     /**
