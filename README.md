@@ -190,6 +190,14 @@ echo $intlFormat->format('Do you speak %language?', 'de_DE');
 // "Do you speak German?"
 ```
 
+## Additional formatters
+
+These formatters are optional and can be loaded after IntlFormat was created.
+
+| formatter        | description                                   |
+|------------------|-----------------------------------------------|
+| SprintfFormatter | Provides the known sprintf type specifier     |
+
 ## Create your custom formatter
 
 You can extend this library with your own type specifiers and formats by using the Formatter interface
