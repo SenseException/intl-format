@@ -16,7 +16,7 @@ class IntlFormatTest extends \PHPUnit_Framework_TestCase
     {
         $message = 'Hello "{{world}}", how are you';
 
-        $formatter = $this->getMock(FormatterInterface::class);
+        $formatter = $this->createMock(FormatterInterface::class);
         $formatter->expects($this->once())
             ->method('has')
             ->with('world')
@@ -31,7 +31,7 @@ class IntlFormatTest extends \PHPUnit_Framework_TestCase
         $parsed->values = ['island'];
         $parsed->parsedMessage = ['Hello "', '{{world}}', '", how are you'];
 
-        $parser = $this->getMock(MessageParserInterface::class);
+        $parser = $this->createMock(MessageParserInterface::class);
         $parser->expects($this->once())
             ->method('parseMessage')
             ->with($message, ['island'])
@@ -49,7 +49,7 @@ class IntlFormatTest extends \PHPUnit_Framework_TestCase
     {
         $message = 'Hello {{world}}, Today is {{date}}';
 
-        $formatter = $this->getMock(FormatterInterface::class);
+        $formatter = $this->createMock(FormatterInterface::class);
         $formatter->expects($this->atLeastOnce())
             ->method('has')
             ->willReturnMap([
@@ -68,7 +68,7 @@ class IntlFormatTest extends \PHPUnit_Framework_TestCase
         $parsed->values = ['island', $dateTime];
         $parsed->parsedMessage = ['Hello ', '{{world}}', ', Today is ', '{{date}}'];
 
-        $parser = $this->getMock(MessageParserInterface::class);
+        $parser = $this->createMock(MessageParserInterface::class);
         $parser->expects($this->once())
             ->method('parseMessage')
             ->with($message, ['island', $dateTime])
@@ -93,7 +93,7 @@ class IntlFormatTest extends \PHPUnit_Framework_TestCase
         $parsed->values = ['island'];
         $parsed->parsedMessage = ['Hello ', '{{world}}', ', Today is ', '{{date}}'];
 
-        $parser = $this->getMock(MessageParserInterface::class);
+        $parser = $this->createMock(MessageParserInterface::class);
         $parser->expects($this->once())
             ->method('parseMessage')
             ->with($message, ['island'])
@@ -117,7 +117,7 @@ class IntlFormatTest extends \PHPUnit_Framework_TestCase
         $parsed->values = ['island'];
         $parsed->parsedMessage = ['Hello ', '%world'];
 
-        $parser = $this->getMock(MessageParserInterface::class);
+        $parser = $this->createMock(MessageParserInterface::class);
         $parser->expects($this->once())
             ->method('parseMessage')
             ->with($message, ['island'])
