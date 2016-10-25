@@ -40,7 +40,7 @@ class MessageFormatter implements FormatterInterface
     /**
      * @inheritDoc
      */
-    public function formatValue($typeSpecifier, $value)
+    public function formatValue($typeSpecifier, $value) : string
     {
         $valueTypeCheck = $this->valueTypeCheck;
         $valueTypeCheck($value);
@@ -56,7 +56,7 @@ class MessageFormatter implements FormatterInterface
     /**
      * @inheritDoc
      */
-    public function has($typeSpecifier)
+    public function has($typeSpecifier) : bool
     {
         return array_key_exists((string) $typeSpecifier, $this->messageFormats);
     }

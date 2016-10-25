@@ -31,7 +31,7 @@ class TimeZoneFormatter implements FormatterInterface
     /**
      * @inheritdoc
      */
-    public function formatValue($typeSpecifier, $value)
+    public function formatValue($typeSpecifier, $value) : string
     {
         $intlCalendar = $this->createIntlCalendar();
 
@@ -63,7 +63,7 @@ class TimeZoneFormatter implements FormatterInterface
     /**
      * @inheritdoc
      */
-    public function has($typeSpecifier)
+    public function has($typeSpecifier) : bool
     {
         $typeSpecifiers = [
             self::TYPE_SPECIFIER_ID,

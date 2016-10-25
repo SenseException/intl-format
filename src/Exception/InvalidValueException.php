@@ -9,7 +9,7 @@ class InvalidValueException extends IntlFormatException
      * @param array $allowedTypes
      * @return InvalidValueException
      */
-    public static function invalidValueType($value, array $allowedTypes)
+    public static function invalidValueType($value, array $allowedTypes) : self
     {
         return new self(sprintf(
             'Invalid type "%s" of value. Allowed types: "%s".',
@@ -22,7 +22,7 @@ class InvalidValueException extends IntlFormatException
      * @param string $locale
      * @return InvalidValueException
      */
-    public static function invalidLocale($locale)
+    public static function invalidLocale($locale) : self
     {
         if (is_object($locale)) {
             $locale = '[object]';

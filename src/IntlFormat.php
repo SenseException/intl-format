@@ -41,7 +41,7 @@ class IntlFormat
      * @throws InvalidTypeSpecifierException
      * @return string
      */
-    public function format($message, ...$values)
+    public function format($message, ...$values) : string
     {
         $messageMetaData = $this->messageParser->parseMessage($message, $values);
         $typeSpecifiers = $messageMetaData->typeSpecifiers;
