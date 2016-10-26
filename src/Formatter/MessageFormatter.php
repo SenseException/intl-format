@@ -33,7 +33,7 @@ class MessageFormatter implements FormatterInterface
      */
     public function __construct(string $locale, array $messageFormats, Closure $valueTypeCheck)
     {
-        $this->locale = (string) $locale;
+        $this->locale = $locale;
         $this->messageFormats = $messageFormats;
         $this->valueTypeCheck = $valueTypeCheck;
     }
@@ -51,7 +51,7 @@ class MessageFormatter implements FormatterInterface
             $value = $value->toDateTime();
         }
 
-        return Message::formatMessage($this->locale, $this->messageFormats[(string) $typeSpecifier], [$value]);
+        return Message::formatMessage($this->locale, $this->messageFormats[$typeSpecifier], [$value]);
     }
 
     /**
@@ -59,7 +59,7 @@ class MessageFormatter implements FormatterInterface
      */
     public function has(string $typeSpecifier) : bool
     {
-        return array_key_exists((string) $typeSpecifier, $this->messageFormats);
+        return array_key_exists($typeSpecifier, $this->messageFormats);
     }
 
     /**

@@ -22,7 +22,6 @@ class TimeZoneFormatter implements FormatterInterface
 
     /**
      * @param string $locale
-     * @throws InvalidValueException
      */
     public function __construct(string $locale)
     {
@@ -77,15 +76,9 @@ class TimeZoneFormatter implements FormatterInterface
 
     /**
      * @return IntlCalendar
-     * @throws InvalidValueException
      */
     private function createIntlCalendar()
     {
-        $intlCalendar = IntlCalendar::createInstance(null, $this->locale);
-        if (null === $intlCalendar) {
-            throw InvalidValueException::invalidLocale($this->locale);
-        }
-
-        return $intlCalendar;
+        return IntlCalendar::createInstance(null, $this->locale);
     }
 }
