@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Budgegeria\IntlFormat\Formatter;
 
@@ -23,15 +24,15 @@ class TimeZoneFormatter implements FormatterInterface
      * @param string $locale
      * @throws InvalidValueException
      */
-    public function __construct($locale)
+    public function __construct(string $locale)
     {
-        $this->locale = (string) $locale;
+        $this->locale = $locale;
     }
 
     /**
      * @inheritdoc
      */
-    public function formatValue($typeSpecifier, $value) : string
+    public function formatValue(string $typeSpecifier, $value) : string
     {
         $intlCalendar = $this->createIntlCalendar();
 
@@ -63,7 +64,7 @@ class TimeZoneFormatter implements FormatterInterface
     /**
      * @inheritdoc
      */
-    public function has($typeSpecifier) : bool
+    public function has(string $typeSpecifier) : bool
     {
         $typeSpecifiers = [
             self::TYPE_SPECIFIER_ID,

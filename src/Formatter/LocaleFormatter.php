@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Budgegeria\IntlFormat\Formatter;
 
@@ -20,7 +21,7 @@ class LocaleFormatter implements FormatterInterface
     /**
      * @param string $locale
      */
-    public function __construct($locale)
+    public function __construct(string $locale)
     {
         $this->locale = (string) $locale;
         $this->formatFunctions = [
@@ -48,7 +49,7 @@ class LocaleFormatter implements FormatterInterface
     /**
      * @inheritDoc
      */
-    public function formatValue($typeSpecifier, $value) : string
+    public function formatValue(string $typeSpecifier, $value) : string
     {
         return $this->formatFunctions[$typeSpecifier]($value);
     }
@@ -56,7 +57,7 @@ class LocaleFormatter implements FormatterInterface
     /**
      * @inheritDoc
      */
-    public function has($typeSpecifier) : bool
+    public function has(string $typeSpecifier) : bool
     {
         return array_key_exists((string) $typeSpecifier, $this->formatFunctions);
     }

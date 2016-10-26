@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Budgegeria\IntlFormat\Formatter;
 
@@ -30,7 +31,7 @@ class MessageFormatter implements FormatterInterface
      * @param string[] $messageFormats
      * @param Closure $valueTypeCheck
      */
-    public function __construct($locale, array $messageFormats, Closure $valueTypeCheck)
+    public function __construct(string $locale, array $messageFormats, Closure $valueTypeCheck)
     {
         $this->locale = (string) $locale;
         $this->messageFormats = $messageFormats;
@@ -40,7 +41,7 @@ class MessageFormatter implements FormatterInterface
     /**
      * @inheritDoc
      */
-    public function formatValue($typeSpecifier, $value) : string
+    public function formatValue(string $typeSpecifier, $value) : string
     {
         $valueTypeCheck = $this->valueTypeCheck;
         $valueTypeCheck($value);
@@ -56,7 +57,7 @@ class MessageFormatter implements FormatterInterface
     /**
      * @inheritDoc
      */
-    public function has($typeSpecifier) : bool
+    public function has(string $typeSpecifier) : bool
     {
         return array_key_exists((string) $typeSpecifier, $this->messageFormats);
     }
@@ -65,7 +66,7 @@ class MessageFormatter implements FormatterInterface
      * @param string $locale
      * @return MessageFormatter
      */
-    public static function createNumberValueFormatter($locale)
+    public static function createNumberValueFormatter(string $locale)
     {
         $valueTypeCheck = function($value) {
             if (!is_numeric($value)) {
@@ -90,7 +91,7 @@ class MessageFormatter implements FormatterInterface
      * @param string $locale
      * @return MessageFormatter
      */
-    public static function createDateValueFormatter($locale)
+    public static function createDateValueFormatter(string $locale)
     {
         $valueTypeCheck = function($value) {
             if (!is_int($value) && !($value instanceof DateTime) && !($value instanceof IntlCalendar)) {

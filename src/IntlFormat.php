@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Budgegeria\IntlFormat;
 
@@ -41,7 +42,7 @@ class IntlFormat
      * @throws InvalidTypeSpecifierException
      * @return string
      */
-    public function format($message, ...$values) : string
+    public function format(string $message, ...$values) : string
     {
         $messageMetaData = $this->messageParser->parseMessage($message, $values);
         $typeSpecifiers = $messageMetaData->typeSpecifiers;
@@ -78,7 +79,7 @@ class IntlFormat
      * @param string $typeSpecifier
      * @return FormatterInterface|null
      */
-    private function findFormatter($typeSpecifier)
+    private function findFormatter(string $typeSpecifier)
     {
         $formatters = array_reverse($this->formatters);
         foreach ($formatters as $formatter) {

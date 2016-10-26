@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Budgegeria\IntlFormat\Exception;
 
@@ -8,7 +9,7 @@ class InvalidTypeSpecifierException extends IntlFormatException
      * @param $typeSpecifier
      * @return InvalidTypeSpecifierException
      */
-    public static function unmatchedTypeSpecifier($typeSpecifier) : self
+    public static function unmatchedTypeSpecifier(string $typeSpecifier) : self
     {
         return new self(sprintf('The type specifier "%s" doesn\'t match with the given values.', (string) $typeSpecifier));
     }
@@ -24,7 +25,7 @@ class InvalidTypeSpecifierException extends IntlFormatException
     /**
      * @return InvalidTypeSpecifierException
      */
-    public static function invalidTypeSpecifier($typeSpecifier) : self
+    public static function invalidTypeSpecifier(string $typeSpecifier) : self
     {
         return new self(sprintf('"%s" is not a valid type specifier.', (string) $typeSpecifier));
     }
@@ -34,7 +35,7 @@ class InvalidTypeSpecifierException extends IntlFormatException
      * @param int $typeSpecifiersCount
      * @return InvalidTypeSpecifierException
      */
-    public static function invalidTypeSpecifierCount($valuesCount, $typeSpecifiersCount) : self
+    public static function invalidTypeSpecifierCount(int $valuesCount, int $typeSpecifiersCount) : self
     {
         return new self(sprintf(
             'Value count of "%d" doesn\'t match type specifier count of "%d"',

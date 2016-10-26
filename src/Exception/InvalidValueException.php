@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Budgegeria\IntlFormat\Exception;
 
@@ -22,12 +23,8 @@ class InvalidValueException extends IntlFormatException
      * @param string $locale
      * @return InvalidValueException
      */
-    public static function invalidLocale($locale) : self
+    public static function invalidLocale(string $locale) : self
     {
-        if (is_object($locale)) {
-            $locale = '[object]';
-        }
-
-        return new self(sprintf('"%s" is not a valid locale.', (string) $locale));
+        return new self(sprintf('"%s" is not a valid locale.', $locale));
     }
 }

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Budgegeria\IntlFormat\MessageParser;
 
@@ -8,10 +9,11 @@ class SprintfParser implements MessageParserInterface
 {
     /**
      * @param string $message
-     * @throws InvalidTypeSpecifierException
+     * @param array $values
+     * @throws \Budgegeria\IntlFormat\Exception\InvalidTypeSpecifierException
      * @return MessageMetaData
      */
-    public function parseMessage($message, array $values)
+    public function parseMessage(string $message, array $values) : MessageMetaData
     {
         $parsedMessage = preg_split('/(%[%]*(?:[\d]+\$)*[a-z0-9_]*)/i', $message, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
         $typeSpecifiers = preg_grep('/(^%(?:[\d]+\$)*[a-z0-9_]+)/i', $parsedMessage);
@@ -38,7 +40,7 @@ class SprintfParser implements MessageParserInterface
      * @return array
      * @throws InvalidTypeSpecifierException
      */
-    private function swapArguments(array $typeSpecifiers, array $values)
+    private function swapArguments(array $typeSpecifiers, array $values) : array
     {
         $swappedValues = [];
         $typeSpecifiers = array_values($typeSpecifiers);

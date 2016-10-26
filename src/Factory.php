@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Budgegeria\IntlFormat;
 
@@ -12,7 +13,7 @@ class Factory
      * @param string $locale
      * @return IntlFormat
      */
-    public function createIntlFormat($locale) : IntlFormat
+    public function createIntlFormat(string $locale) : IntlFormat
     {
         $formatter = [
             MessageFormatter::createDateValueFormatter($locale),
