@@ -4,6 +4,7 @@ A wrapper library for PHP to format Intl messages like sprintf
 [![Build Status](https://travis-ci.org/SenseException/intl-format.svg?branch=master)](https://travis-ci.org/SenseException/intl-format)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/SenseException/intl-format/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/SenseException/intl-format/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/SenseException/intl-format/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/SenseException/intl-format/?branch=master)
+[![Dependency Status](https://www.versioneye.com/user/projects/5821ab50afb6141c557106ea/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/5821ab50afb6141c557106ea)
 
 ### Why using this library?
 
