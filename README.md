@@ -210,12 +210,12 @@ use Budgegeria\IntlFormat\Formatter\FormatterInterface;
 
 class MyFormatter implements FormatterInterface
 {
-    public function has($typeSpecifier)
+    public function has(string $typeSpecifier) : bool
     {
         return 'my_type_specifier' === $typeSpecifier;
     }
     
-    public function formatValue($typeSpecifier, $value)
+    public function formatValue(string $typeSpecifier, $value) : string
     {
         return $value . 'Bar';
     }
