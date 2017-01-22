@@ -196,9 +196,10 @@ echo $intlFormat->format('Do you speak %language?', 'de_DE');
 
 These formatters are optional and can be loaded after IntlFormat was created.
 
-| formatter        | description                                   |
-|------------------|-----------------------------------------------|
-| SprintfFormatter | Provides the known sprintf type specifier     |
+| formatter          | description                                            |
+|--------------------|--------------------------------------------------------|
+| SprintfFormatter   | Provides the known sprintf type specifier              |
+| ExceptionFormatter | Allows to format messages, code and more of Throwables |
 
 ## Create your custom formatter
 
