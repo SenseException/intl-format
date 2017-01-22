@@ -14,7 +14,7 @@ class LocaleFormatter implements FormatterInterface
     private $locale;
 
     /**
-     * @var array
+     * @var \Closure[]
      */
     private $formatFunctions;
 
