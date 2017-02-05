@@ -4,8 +4,9 @@ namespace Budgegeria\IntlFormat\Tests;
 
 use Budgegeria\IntlFormat\Formatter\SprintfFormatter;
 use Budgegeria\IntlFormat\IntlFormat;
+use PHPUnit\Framework\TestCase;
 
-class ImplementationTest extends \PHPUnit_Framework_TestCase
+class ImplementationTest extends TestCase
 {
     /**
      * @dataProvider formattingWorksProvider

@@ -4,8 +4,9 @@ namespace Budgegeria\IntlFormat\Tests\Formatter;
 
 use Budgegeria\IntlFormat\Exception\InvalidValueException;
 use Budgegeria\IntlFormat\Formatter\LocaleFormatter;
+use PHPUnit\Framework\TestCase;
 
-class LocaleFormatterTest extends \PHPUnit_Framework_TestCase
+class LocaleFormatterTest extends TestCase
 {
     public function testHas()
     {

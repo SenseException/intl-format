@@ -4,8 +4,10 @@ namespace Budgegeria\IntlFormat\Tests;
 
 use Budgegeria\IntlFormat\Formatter\FormatterInterface;
 use Budgegeria\IntlFormat\IntlFormat;
+use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\TestCase;
 
-class IntlFormatIntegrationTest extends \PHPUnit_Framework_TestCase
+class IntlFormatIntegrationTest extends TestCase
 {
     /**
      * Basic format test
@@ -65,7 +67,7 @@ class IntlFormatIntegrationTest extends \PHPUnit_Framework_TestCase
             ->willReturn(true);
         $formatter->expects($this->atLeastOnce())
             ->method('formatValue')
-            ->with('swap', \PHPUnit_Framework_Assert::anything())
+            ->with('swap', Assert::anything())
             ->willReturnOnConsecutiveCalls('value1', 'value2', 'value1');
 
         $intlFormat = new IntlFormat([$formatter]);
@@ -88,7 +90,7 @@ class IntlFormatIntegrationTest extends \PHPUnit_Framework_TestCase
             ->willReturn(true);
         $formatter->expects($this->atLeastOnce())
             ->method('formatValue')
-            ->with('swap', \PHPUnit_Framework_Assert::anything())
+            ->with('swap', Assert::anything())
             ->willReturnOnConsecutiveCalls('value3', 'value2', 'value1');
 
         $intlFormat = new IntlFormat([$formatter]);

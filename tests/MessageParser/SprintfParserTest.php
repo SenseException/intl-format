@@ -3,8 +3,9 @@
 namespace Budgegeria\IntlFormat\Tests\MessageParser;
 
 use Budgegeria\IntlFormat\MessageParser\SprintfParser;
+use PHPUnit\Framework\TestCase;
 
-class SprintfParserTest extends \PHPUnit_Framework_TestCase
+class SprintfParserTest extends TestCase
 {
     /**
      * A test for argument swapping.

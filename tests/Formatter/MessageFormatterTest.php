@@ -5,8 +5,9 @@ namespace Budgegeria\IntlFormat\Tests\Formatter;
 use Budgegeria\IntlFormat\Formatter\MessageFormatter;
 use DateTime;
 use IntlCalendar;
+use PHPUnit\Framework\TestCase;
 
-class MessageFormatterTest extends \PHPUnit_Framework_TestCase
+class MessageFormatterTest extends TestCase
 {
     /**
      * @param string $typeSpecifier

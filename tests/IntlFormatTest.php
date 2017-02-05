@@ -6,8 +6,9 @@ use Budgegeria\IntlFormat\Formatter\FormatterInterface;
 use Budgegeria\IntlFormat\IntlFormat;
 use Budgegeria\IntlFormat\MessageParser\MessageMetaData;
 use Budgegeria\IntlFormat\MessageParser\MessageParserInterface;
+use PHPUnit\Framework\TestCase;
 
-class IntlFormatTest extends \PHPUnit_Framework_TestCase
+class IntlFormatTest extends TestCase
 {
     /**
      * Basic format test

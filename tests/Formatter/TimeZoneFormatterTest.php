@@ -6,8 +6,9 @@ use Budgegeria\IntlFormat\Formatter\TimeZoneFormatter;
 use DateTime;
 use DateTimeZone;
 use IntlTimeZone;
+use PHPUnit\Framework\TestCase;
 
-class TimeZoneFormatterTest extends \PHPUnit_Framework_TestCase
+class TimeZoneFormatterTest extends TestCase
 {
     /**
      * @param string $typeSpecifier

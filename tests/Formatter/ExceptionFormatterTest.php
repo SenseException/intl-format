@@ -3,8 +3,9 @@
 namespace Budgegeria\IntlFormat\Tests\Formatter;
 
 use Budgegeria\IntlFormat\Formatter\ExceptionFormatter;
+use PHPUnit\Framework\TestCase;
 
-class ExceptionFormatterTest extends \PHPUnit_Framework_TestCase
+class ExceptionFormatterTest extends TestCase
 {
     /**
      * @var ExceptionFormatter

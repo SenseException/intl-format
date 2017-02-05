@@ -6,8 +6,9 @@ use Budgegeria\IntlFormat\Factory;
 use Budgegeria\IntlFormat\IntlFormat;
 use DateTime;
 use DateTimeZone;
+use PHPUnit\Framework\TestCase;
 
-class FactoryTest extends \PHPUnit_Framework_TestCase
+class FactoryTest extends TestCase
 {
     public function testCreateIntlFormat()
     {

@@ -3,8 +3,9 @@
 namespace Budgegeria\IntlFormat\Tests\Formatter;
 
 use Budgegeria\IntlFormat\Formatter\SprintfFormatter;
+use PHPUnit\Framework\TestCase;
 
-class SprintfFormatterTest extends \PHPUnit_Framework_TestCase
+class SprintfFormatterTest extends TestCase
 {
     /**
      * @param string $typeSpecifier

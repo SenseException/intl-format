@@ -3,8 +3,9 @@
 namespace Budgegeria\IntlFormat\Tests\Exception;
 
 use Budgegeria\IntlFormat\Exception\InvalidTypeSpecifierException;
+use PHPUnit\Framework\TestCase;
 
-class InvalidTypeSpecifierExceptionTest extends \PHPUnit_Framework_TestCase
+class InvalidTypeSpecifierExceptionTest extends TestCase
 {
     /**
      * @expectedException \Budgegeria\IntlFormat\Exception\InvalidTypeSpecifierException

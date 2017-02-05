@@ -3,8 +3,9 @@
 namespace Budgegeria\IntlFormat\Tests\Exception;
 
 use Budgegeria\IntlFormat\Exception\InvalidValueException;
+use PHPUnit\Framework\TestCase;
 
-class InvalidValueExceptionTest extends \PHPUnit_Framework_TestCase
+class InvalidValueExceptionTest extends TestCase
 {
     /**
      * @expectedException \Budgegeria\IntlFormat\Exception\InvalidValueException
