@@ -2,6 +2,7 @@
 
 namespace Budgegeria\IntlFormat\Tests\Exception;
 
+use Budgegeria\IntlFormat\Exception\IntlFormatException;
 use Budgegeria\IntlFormat\Exception\InvalidTypeSpecifierException;
 use PHPUnit\Framework\TestCase;
 
@@ -41,5 +42,10 @@ class InvalidTypeSpecifierExceptionTest extends TestCase
     public function testInvalidTypeSpecifierCount()
     {
         throw InvalidTypeSpecifierException::invalidTypeSpecifierCount(1, 2);
+    }
+
+    public function testParentClass()
+    {
+        $this->assertInstanceOf(IntlFormatException::class, new InvalidTypeSpecifierException());
     }
 }

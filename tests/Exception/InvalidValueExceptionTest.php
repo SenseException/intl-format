@@ -2,6 +2,7 @@
 
 namespace Budgegeria\IntlFormat\Tests\Exception;
 
+use Budgegeria\IntlFormat\Exception\IntlFormatException;
 use Budgegeria\IntlFormat\Exception\InvalidValueException;
 use PHPUnit\Framework\TestCase;
 
@@ -23,5 +24,10 @@ class InvalidValueExceptionTest extends TestCase
     public function testInvalidLocale()
     {
         throw InvalidValueException::invalidLocale('foo');
+    }
+
+    public function testParentClass()
+    {
+        $this->assertInstanceOf(IntlFormatException::class, new InvalidValueException());
     }
 }
