@@ -40,6 +40,7 @@ class TimeZoneFormatterTest extends TestCase
 
     /**
      * @expectedException \Budgegeria\IntlFormat\Exception\InvalidValueException
+     * @expectedExceptionCode 10
      * @dataProvider provideTypeSpecifier
      */
     public function testFormatValueInvalidValue($typeSpecifier)

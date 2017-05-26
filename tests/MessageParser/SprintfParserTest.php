@@ -43,6 +43,7 @@ class SprintfParserTest extends TestCase
      * %0$world is an invalid type specifier
      *
      * @expectedException \Budgegeria\IntlFormat\Exception\InvalidTypeSpecifierException
+     * @expectedExceptionCode 30
      */
     public function testInvalidTypeSpecifier()
     {
@@ -87,6 +88,7 @@ class SprintfParserTest extends TestCase
      * There aren't enough values for %5$world.
      *
      * @expectedException \Budgegeria\IntlFormat\Exception\InvalidTypeSpecifierException
+     * @expectedExceptionCode 10
      */
     public function testWrongTypeSpecifierIndex()
     {

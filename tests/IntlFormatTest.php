@@ -84,6 +84,7 @@ class IntlFormatTest extends TestCase
      * More type specifier than values.
      *
      * @expectedException \Budgegeria\IntlFormat\Exception\InvalidTypeSpecifierException
+     * @expectedExceptionCode 40
      */
     public function testInvalidValueTypeSpecifierCount()
     {
@@ -108,6 +109,7 @@ class IntlFormatTest extends TestCase
      * Less type specifier than values.
      *
      * @expectedException \Budgegeria\IntlFormat\Exception\InvalidTypeSpecifierException
+     * @expectedExceptionCode 40
      */
     public function testEscapedInvalidTypeSpecifierCount()
     {

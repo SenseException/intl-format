@@ -86,6 +86,7 @@ class MessageFormatterTest extends TestCase
 
     /**
      * @expectedException \Budgegeria\IntlFormat\Exception\InvalidValueException
+     * @expectedExceptionCode 10
      * @dataProvider provideInvalidNumberValues
      */
     public function testFormatValueNumberTypeCheck($value)
@@ -97,6 +98,7 @@ class MessageFormatterTest extends TestCase
 
     /**
      * @expectedException \Budgegeria\IntlFormat\Exception\InvalidValueException
+     * @expectedExceptionCode 10
      * @dataProvider provideInvalidDateValues
      */
     public function testFormatValueDateTypeCheck($value)

@@ -16,7 +16,7 @@ class InvalidValueException extends IntlFormatException
             'Invalid type "%s" of value. Allowed types: "%s".',
             gettype($value),
             implode(', ', $allowedTypes)
-        ));
+        ), 10);
     }
 
     /**
@@ -25,6 +25,6 @@ class InvalidValueException extends IntlFormatException
      */
     public static function invalidLocale(string $locale) : self
     {
-        return new self(sprintf('"%s" is not a valid locale.', $locale));
+        return new self(sprintf('"%s" is not a valid locale.', $locale), 20);
     }
 }

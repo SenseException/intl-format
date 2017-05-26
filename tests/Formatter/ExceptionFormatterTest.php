@@ -48,6 +48,7 @@ class ExceptionFormatterTest extends TestCase
 
     /**
      * @expectedException \Budgegeria\IntlFormat\Exception\InvalidValueException
+     * @expectedExceptionCode 10
      */
     public function testFormatValueInvalidValue()
     {
