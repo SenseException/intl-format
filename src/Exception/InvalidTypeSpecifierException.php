@@ -11,7 +11,7 @@ class InvalidTypeSpecifierException extends IntlFormatException
      */
     public static function unmatchedTypeSpecifier(string $typeSpecifier) : self
     {
-        return new self(sprintf('The type specifier "%s" doesn\'t match with the given values.', (string) $typeSpecifier), 10);
+        return new self(sprintf('The type specifier "%s" doesn\'t match with the given values.', $typeSpecifier), 10);
     }
 
     /**
@@ -27,7 +27,7 @@ class InvalidTypeSpecifierException extends IntlFormatException
      */
     public static function invalidTypeSpecifier(string $typeSpecifier) : self
     {
-        return new self(sprintf('"%s" is not a valid type specifier.', (string) $typeSpecifier), 30);
+        return new self(sprintf('"%s" is not a valid type specifier.', $typeSpecifier), 30);
     }
 
     /**
@@ -39,8 +39,8 @@ class InvalidTypeSpecifierException extends IntlFormatException
     {
         return new self(sprintf(
             'Value count of "%d" doesn\'t match type specifier count of "%d"',
-            (int) $valuesCount,
-            (int) $typeSpecifiersCount
+            $valuesCount,
+            $typeSpecifiersCount
         ), 40);
     }
 }

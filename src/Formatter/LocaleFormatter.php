@@ -59,6 +59,6 @@ class LocaleFormatter implements FormatterInterface
      */
     public function has(string $typeSpecifier) : bool
     {
-        return array_key_exists((string) $typeSpecifier, $this->formatFunctions);
+        return array_key_exists($typeSpecifier, $this->formatFunctions);
     }
 }
