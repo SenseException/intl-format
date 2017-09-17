@@ -19,7 +19,7 @@ class ImplementationTest extends TestCase
 
         $intlFormat = new IntlFormat($formatter);
 
-        $this->assertSame($expected, $intlFormat->format($message, ...$args));
+        self::assertSame($expected, $intlFormat->format($message, ...$args));
     }
 
     public function formattingWorksProvider()

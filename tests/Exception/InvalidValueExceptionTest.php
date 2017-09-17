@@ -28,6 +28,6 @@ class InvalidValueExceptionTest extends TestCase
 
     public function testParentClass()
     {
-        $this->assertInstanceOf(IntlFormatException::class, new InvalidValueException());
+        self::assertInstanceOf(IntlFormatException::class, new InvalidValueException());
     }
 }

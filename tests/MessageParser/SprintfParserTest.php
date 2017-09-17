@@ -19,9 +19,9 @@ class SprintfParserTest extends TestCase
 
         $parsed = $parser->parseMessage($message, ['value1', 'value2']);
 
-        $this->assertSame([0 => 'swap', 2 => 'swap', 4 => 'swap'], $parsed->typeSpecifiers, 'wrong type specifier');
-        $this->assertSame(['value1', 'value2', 'value1'], $parsed->values, 'Wrong values');
-        $this->assertSame(['%swap', ' ', '%swap', ' ', '%1$swap'], $parsed->parsedMessage, 'Wrong parsed message');
+        self::assertSame([0 => 'swap', 2 => 'swap', 4 => 'swap'], $parsed->typeSpecifiers, 'wrong type specifier');
+        self::assertSame(['value1', 'value2', 'value1'], $parsed->values, 'Wrong values');
+        self::assertSame(['%swap', ' ', '%swap', ' ', '%1$swap'], $parsed->parsedMessage, 'Wrong parsed message');
     }
 
     /**
@@ -35,9 +35,9 @@ class SprintfParserTest extends TestCase
 
         $parsed = $parser->parseMessage($message, ['value1', 'value2', 'value3']);
 
-        $this->assertSame([0 => 'swap', 2 => 'swap', 4 => 'swap'], $parsed->typeSpecifiers, 'wrong type specifier');
-        $this->assertSame(['value3', 'value2', 'value1'], $parsed->values, 'Wrong values');
-        $this->assertSame(['%3$swap', ' ', '%2$swap', ' ', '%1$swap'], $parsed->parsedMessage, 'Wrong parsed message');
+        self::assertSame([0 => 'swap', 2 => 'swap', 4 => 'swap'], $parsed->typeSpecifiers, 'wrong type specifier');
+        self::assertSame(['value3', 'value2', 'value1'], $parsed->values, 'Wrong values');
+        self::assertSame(['%3$swap', ' ', '%2$swap', ' ', '%1$swap'], $parsed->parsedMessage, 'Wrong parsed message');
     }
 
     /**
@@ -65,9 +65,9 @@ class SprintfParserTest extends TestCase
         $parser = new SprintfParser();
         $parsed = $parser->parseMessage($message, ['island']);
 
-        $this->assertSame([1 => 'world'], $parsed->typeSpecifiers, 'Wrong type specifier');
-        $this->assertSame(['island'], $parsed->values, 'Wrong values');
-        $this->assertSame(['Hello "', '%world', '", how are you'], $parsed->parsedMessage, 'Wrong parsed message');
+        self::assertSame([1 => 'world'], $parsed->typeSpecifiers, 'Wrong type specifier');
+        self::assertSame(['island'], $parsed->values, 'Wrong values');
+        self::assertSame(['Hello "', '%world', '", how are you'], $parsed->parsedMessage, 'Wrong parsed message');
     }
 
     /**
@@ -80,9 +80,9 @@ class SprintfParserTest extends TestCase
         $parser = new SprintfParser();
         $parsed = $parser->parseMessage($message, ['island']);
 
-        $this->assertSame([1 => 'world'], $parsed->typeSpecifiers, 'Wrong type specifier');
-        $this->assertSame(['island'], $parsed->values, 'Wrong values');
-        $this->assertSame(['Hello "', '%world', '", how are you ', '%person', ' ', '%'], $parsed->parsedMessage, 'Wrong parsed message');
+        self::assertSame([1 => 'world'], $parsed->typeSpecifiers, 'Wrong type specifier');
+        self::assertSame(['island'], $parsed->values, 'Wrong values');
+        self::assertSame(['Hello "', '%world', '", how are you ', '%person', ' ', '%'], $parsed->parsedMessage, 'Wrong parsed message');
     }
 
     /**

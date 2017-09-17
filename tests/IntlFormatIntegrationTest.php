@@ -29,7 +29,7 @@ class IntlFormatIntegrationTest extends TestCase
 
         $intlFormat = new IntlFormat([$formatter]);
 
-        $this->assertSame('Hello "island", how are you', $intlFormat->format($message, 'island'));
+        self::assertSame('Hello "island", how are you', $intlFormat->format($message, 'island'));
     }
 
     /**
@@ -51,7 +51,7 @@ class IntlFormatIntegrationTest extends TestCase
 
         $intlFormat = new IntlFormat([$formatter]);
 
-        $this->assertSame($expected, $intlFormat->format($message, 'island'));
+        self::assertSame($expected, $intlFormat->format($message, 'island'));
     }
 
     /**
@@ -74,7 +74,7 @@ class IntlFormatIntegrationTest extends TestCase
         $intlFormat = new IntlFormat([$formatter]);
 
         $expected = 'value1 value2 value1';
-        $this->assertSame($expected, $intlFormat->format($message, 'value1', 'value2'));
+        self::assertSame($expected, $intlFormat->format($message, 'value1', 'value2'));
     }
 
     /**
@@ -97,7 +97,7 @@ class IntlFormatIntegrationTest extends TestCase
         $intlFormat = new IntlFormat([$formatter]);
 
         $expected = 'value3 value2 value1';
-        $this->assertSame($expected, $intlFormat->format($message, 'value1', 'value2', 'value3'));
+        self::assertSame($expected, $intlFormat->format($message, 'value1', 'value2', 'value3'));
     }
 
     /**
@@ -121,7 +121,7 @@ class IntlFormatIntegrationTest extends TestCase
 
         $intlFormat = new IntlFormat([$formatter]);
 
-        $this->assertSame('Hello island, Today is %date', $intlFormat->format($message, 'island', new \DateTime()));
+        self::assertSame('Hello island, Today is %date', $intlFormat->format($message, 'island', new \DateTime()));
     }
 
     /**
@@ -203,7 +203,7 @@ class IntlFormatIntegrationTest extends TestCase
         $intlFormat->addFormatter($formatter1);
         $intlFormat->addFormatter($formatter2);
 
-        $this->assertSame('Hello "city", how are you', $intlFormat->format($message, 'city'));
+        self::assertSame('Hello "city", how are you', $intlFormat->format($message, 'city'));
     }
 
     /**

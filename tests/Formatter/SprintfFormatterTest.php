@@ -15,7 +15,7 @@ class SprintfFormatterTest extends TestCase
     {
         $formatter = new SprintfFormatter();
 
-        $this->assertTrue($formatter->has($typeSpecifier));
+        self::assertTrue($formatter->has($typeSpecifier));
     }
 
     /** @dataProvider provideTypeSpecifier */
@@ -23,14 +23,14 @@ class SprintfFormatterTest extends TestCase
     {
         $formatter = new SprintfFormatter();
 
-        $this->assertEquals($expected, $formatter->formatValue($typeSpecifier, $value));
+        self::assertEquals($expected, $formatter->formatValue($typeSpecifier, $value));
     }
 
     public function testHasIsFalse()
     {
         $formatter = new SprintfFormatter();
 
-        $this->assertFalse($formatter->has('int'));
+        self::assertFalse($formatter->has('int'));
     }
 
     /**

@@ -18,26 +18,26 @@ class MessageFormatterTest extends TestCase
     {
         $messageFormatter = new MessageFormatter('de_DE', $this->getTypeSpecifier(), function () {});
 
-        $this->assertTrue($messageFormatter->has($typeSpecifier));
+        self::assertTrue($messageFormatter->has($typeSpecifier));
     }
 
     public function testHasIsFalse()
     {
         $messageFormatter = new MessageFormatter('de_DE', $this->getTypeSpecifier(), function () {});
 
-        $this->assertFalse($messageFormatter->has('int'));
+        self::assertFalse($messageFormatter->has('int'));
     }
 
     public function testFormatValueNumber()
     {
         $messageFormatter = MessageFormatter::createNumberValueFormatter('de_DE');
 
-        $this->assertSame('1.000,1', $messageFormatter->formatValue('number', 1000.1));
-        $this->assertSame('1.000', $messageFormatter->formatValue('integer', 1000.1));
-        $this->assertSame('1.001', $messageFormatter->formatValue('integer', 1001));
-        $this->assertSame('1.001', $messageFormatter->formatValue('integer', '1001'));
-        $this->assertSame('100%', preg_replace('/[^0-9%]/', '', $messageFormatter->formatValue('percent', 1)));
-        $this->assertSame('1.000,10€', preg_replace('/[^0-9,\.€]/', '', $messageFormatter->formatValue('currency', 1000.1)));
+        self::assertSame('1.000,1', $messageFormatter->formatValue('number', 1000.1));
+        self::assertSame('1.000', $messageFormatter->formatValue('integer', 1000.1));
+        self::assertSame('1.001', $messageFormatter->formatValue('integer', 1001));
+        self::assertSame('1.001', $messageFormatter->formatValue('integer', '1001'));
+        self::assertSame('100%', preg_replace('/[^0-9%]/', '', $messageFormatter->formatValue('percent', 1)));
+        self::assertSame('1.000,10€', preg_replace('/[^0-9,\.€]/', '', $messageFormatter->formatValue('currency', 1000.1)));
     }
 
     /**
@@ -47,7 +47,7 @@ class MessageFormatterTest extends TestCase
     {
         $messageFormatter = MessageFormatter::createDateValueFormatter('de_DE');
 
-        $this->assertSame($expected, $messageFormatter->formatValue($typeSpecifier, $value));
+        self::assertSame($expected, $messageFormatter->formatValue($typeSpecifier, $value));
     }
 
     /**
@@ -57,15 +57,15 @@ class MessageFormatterTest extends TestCase
     {
         $messageFormatter = $messageFormatter = MessageFormatter::createDateValueFormatter('de_DE');
 
-        $this->assertSame($expected, $messageFormatter->formatValue($typeSpecifier, $value));
+        self::assertSame($expected, $messageFormatter->formatValue($typeSpecifier, $value));
     }
 
     public function testFormatValueSpellout()
     {
         $messageFormatter = MessageFormatter::createNumberValueFormatter('de_DE');
 
-        $this->assertSame('ein­tausend', $messageFormatter->formatValue('spellout', 1000));
-        $this->assertSame('ein­tausend Komma eins', $messageFormatter->formatValue('spellout', 1000.1));
+        self::assertSame('ein­tausend', $messageFormatter->formatValue('spellout', 1000));
+        self::assertSame('ein­tausend Komma eins', $messageFormatter->formatValue('spellout', 1000.1));
     }
 
     /**
@@ -75,14 +75,14 @@ class MessageFormatterTest extends TestCase
     {
         $messageFormatter = MessageFormatter::createNumberValueFormatter('en_US');
 
-        $this->assertSame($expected, $messageFormatter->formatValue('ordinal', $number));
+        self::assertSame($expected, $messageFormatter->formatValue('ordinal', $number));
     }
 
     public function testFormatValueDuration()
     {
         $messageFormatter = MessageFormatter::createNumberValueFormatter('en_US');
 
-        $this->assertSame('1:01', $messageFormatter->formatValue('duration', 61));
+        self::assertSame('1:01', $messageFormatter->formatValue('duration', 61));
     }
 
     /**
@@ -116,11 +116,11 @@ class MessageFormatterTest extends TestCase
         $messageFormatter = MessageFormatter::createDateValueFormatter('de_DE');
         $date = new DateTime('2016-04-01');
 
-        $this->assertSame('2016', $messageFormatter->formatValue('date_year', $date));
-        $this->assertSame('4', $messageFormatter->formatValue('date_month', $date));
-        $this->assertSame('April', $messageFormatter->formatValue('date_month_name', $date));
-        $this->assertSame('1', $messageFormatter->formatValue('date_day', $date));
-        $this->assertSame('Freitag', $messageFormatter->formatValue('date_weekday', $date));
+        self::assertSame('2016', $messageFormatter->formatValue('date_year', $date));
+        self::assertSame('4', $messageFormatter->formatValue('date_month', $date));
+        self::assertSame('April', $messageFormatter->formatValue('date_month_name', $date));
+        self::assertSame('1', $messageFormatter->formatValue('date_day', $date));
+        self::assertSame('Freitag', $messageFormatter->formatValue('date_weekday', $date));
     }
 
     /**

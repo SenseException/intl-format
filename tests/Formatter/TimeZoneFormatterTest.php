@@ -19,14 +19,14 @@ class TimeZoneFormatterTest extends TestCase
     {
         $formatter = new TimeZoneFormatter('en_US');
 
-        $this->assertTrue($formatter->has($typeSpecifier));
+        self::assertTrue($formatter->has($typeSpecifier));
     }
 
     public function testHasIsFalse()
     {
         $messageFormatter = new TimeZoneFormatter('de_DE');
 
-        $this->assertFalse($messageFormatter->has('int'));
+        self::assertFalse($messageFormatter->has('int'));
     }
 
     /**
@@ -36,7 +36,7 @@ class TimeZoneFormatterTest extends TestCase
     {
         $formatter = new TimeZoneFormatter('en_US');
 
-        $this->assertSame($expected, $formatter->formatValue($typeSpecifier, $value));
+        self::assertSame($expected, $formatter->formatValue($typeSpecifier, $value));
     }
 
     /**

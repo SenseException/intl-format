@@ -46,6 +46,6 @@ class InvalidTypeSpecifierExceptionTest extends TestCase
 
     public function testParentClass()
     {
-        $this->assertInstanceOf(IntlFormatException::class, new InvalidTypeSpecifierException());
+        self::assertInstanceOf(IntlFormatException::class, new InvalidTypeSpecifierException());
     }
 }

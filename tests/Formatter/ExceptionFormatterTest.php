@@ -27,12 +27,12 @@ class ExceptionFormatterTest extends TestCase
      */
     public function testHas(string $typeSpecifier)
     {
-        $this->assertTrue($this->formatter->has($typeSpecifier));
+        self::assertTrue($this->formatter->has($typeSpecifier));
     }
 
     public function testHasIsFalse()
     {
-        $this->assertFalse($this->formatter->has('foo'));
+        self::assertFalse($this->formatter->has('foo'));
     }
 
     /**
@@ -44,7 +44,7 @@ class ExceptionFormatterTest extends TestCase
      */
     public function testFormatValue(string $typeSpecifier, \Throwable $value, $expected)
     {
-        $this->assertSame($expected, $this->formatter->formatValue($typeSpecifier, $value));
+        self::assertSame($expected, $this->formatter->formatValue($typeSpecifier, $value));
     }
 
     public function testFormatValueInvalidValue()

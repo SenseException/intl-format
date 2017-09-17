@@ -12,15 +12,15 @@ class LocaleFormatterTest extends TestCase
     {
         $localeFormatter = new LocaleFormatter('de_DE');
 
-        $this->assertTrue($localeFormatter->has('language'));
-        $this->assertTrue($localeFormatter->has('region'));
+        self::assertTrue($localeFormatter->has('language'));
+        self::assertTrue($localeFormatter->has('region'));
     }
 
     public function testHasIsFalse()
     {
         $localeFormatter = new LocaleFormatter('de_DE');
 
-        $this->assertFalse($localeFormatter->has('foo'));
+        self::assertFalse($localeFormatter->has('foo'));
     }
 
     /**
@@ -30,7 +30,7 @@ class LocaleFormatterTest extends TestCase
     {
         $localeFormatter = new LocaleFormatter('de_DE');
 
-        $this->assertSame($expected, $localeFormatter->formatValue('language', $locale));
+        self::assertSame($expected, $localeFormatter->formatValue('language', $locale));
     }
 
     /**
@@ -40,7 +40,7 @@ class LocaleFormatterTest extends TestCase
     {
         $localeFormatter = new LocaleFormatter('de_DE');
 
-        $this->assertSame($expected, $localeFormatter->formatValue('region', $locale));
+        self::assertSame($expected, $localeFormatter->formatValue('region', $locale));
     }
 
     /**

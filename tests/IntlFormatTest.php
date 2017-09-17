@@ -41,7 +41,7 @@ class IntlFormatTest extends TestCase
 
         $intlFormat = new IntlFormat([$formatter], $parser);
 
-        $this->assertSame('Hello "island", how are you', $intlFormat->format($message, 'island'));
+        self::assertSame('Hello "island", how are you', $intlFormat->format($message, 'island'));
     }
 
     /**
@@ -78,7 +78,7 @@ class IntlFormatTest extends TestCase
 
         $intlFormat = new IntlFormat([$formatter], $parser);
 
-        $this->assertSame('Hello island, Today is {{date}}', $intlFormat->format($message, 'island', $dateTime));
+        self::assertSame('Hello island, Today is {{date}}', $intlFormat->format($message, 'island', $dateTime));
     }
 
     /**
