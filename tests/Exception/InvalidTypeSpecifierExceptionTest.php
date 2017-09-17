@@ -8,43 +8,39 @@ use PHPUnit\Framework\TestCase;
 
 class InvalidTypeSpecifierExceptionTest extends TestCase
 {
-    /**
-     * @expectedException \Budgegeria\IntlFormat\Exception\InvalidTypeSpecifierException
-     * @expectedExceptionMessage The type specifier "%test" doesn't match with the given values.
-     * @expectedExceptionCode 10
-     */
     public function testUnmatchedTypeSpecifier()
     {
+        self::expectException(InvalidTypeSpecifierException::class);
+        self::expectExceptionCode(10);
+        self::expectExceptionMessage('The type specifier "%test" doesn\'t match with the given values.');
+
         throw InvalidTypeSpecifierException::unmatchedTypeSpecifier('%test');
     }
 
-    /**
-     * @expectedException \Budgegeria\IntlFormat\Exception\InvalidTypeSpecifierException
-     * @expectedExceptionMessage No type specifier are in the message text.
-     * @expectedExceptionCode 20
-     */
     public function testNoTypeSpecifier()
     {
+        self::expectException(InvalidTypeSpecifierException::class);
+        self::expectExceptionCode(20);
+        self::expectExceptionMessage('No type specifier are in the message text.');
+
         throw InvalidTypeSpecifierException::noTypeSpecifier();
     }
 
-    /**
-     * @expectedException \Budgegeria\IntlFormat\Exception\InvalidTypeSpecifierException
-     * @expectedExceptionMessage "%0$test" is not a valid type specifier.
-     * @expectedExceptionCode 30
-     */
     public function testInvalidTypeSpecifier()
     {
+        self::expectException(InvalidTypeSpecifierException::class);
+        self::expectExceptionCode(30);
+        self::expectExceptionMessage('"%0$test" is not a valid type specifier.');
+
         throw InvalidTypeSpecifierException::invalidTypeSpecifier('%0$test');
     }
 
-    /**
-     * @expectedException \Budgegeria\IntlFormat\Exception\InvalidTypeSpecifierException
-     * @expectedExceptionMessage Value count of "1" doesn't match type specifier count of "2"
-     * @expectedExceptionCode 40
-     */
     public function testInvalidTypeSpecifierCount()
     {
+        self::expectException(InvalidTypeSpecifierException::class);
+        self::expectExceptionCode(40);
+        self::expectExceptionMessage('Value count of "1" doesn\'t match type specifier count of "2"');
+
         throw InvalidTypeSpecifierException::invalidTypeSpecifierCount(1, 2);
     }
 

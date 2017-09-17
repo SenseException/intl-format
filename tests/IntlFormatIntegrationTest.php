@@ -2,6 +2,7 @@
 
 namespace Budgegeria\IntlFormat\Tests;
 
+use Budgegeria\IntlFormat\Exception\InvalidTypeSpecifierException;
 use Budgegeria\IntlFormat\Formatter\FormatterInterface;
 use Budgegeria\IntlFormat\IntlFormat;
 use PHPUnit\Framework\Assert;
@@ -125,12 +126,12 @@ class IntlFormatIntegrationTest extends TestCase
 
     /**
      * More type specifier than values.
-     *
-     * @expectedException \Budgegeria\IntlFormat\Exception\InvalidTypeSpecifierException
-     * @expectedExceptionCode 10
      */
     public function testInvalidValueTypeSpecifierCount()
     {
+        self::expectException(InvalidTypeSpecifierException::class);
+        self::expectExceptionCode(10);
+
         $message = 'Hello %world, Today is %date';
 
         $intlFormat = new IntlFormat([]);
@@ -139,12 +140,12 @@ class IntlFormatIntegrationTest extends TestCase
 
     /**
      * Less type specifier than values.
-     *
-     * @expectedException \Budgegeria\IntlFormat\Exception\InvalidTypeSpecifierException
-     * @expectedExceptionCode 20
      */
     public function testEscapedInvalidTypeSpecifierCount()
     {
+        self::expectException(InvalidTypeSpecifierException::class);
+        self::expectExceptionCode(20);
+
         $message = 'Hello %%world';
 
         $intlFormat = new IntlFormat([]);
@@ -153,12 +154,12 @@ class IntlFormatIntegrationTest extends TestCase
 
     /**
      * There aren't enough values for %5$world.
-     *
-     * @expectedException \Budgegeria\IntlFormat\Exception\InvalidTypeSpecifierException
-     * @expectedExceptionCode 10
      */
     public function testWrongTypeSpecifierIndex()
     {
+        self::expectException(InvalidTypeSpecifierException::class);
+        self::expectExceptionCode(10);
+
         $message = 'Hello %5$world, Today is %date';
 
         $formatter = $this->createMock(FormatterInterface::class);
@@ -169,12 +170,12 @@ class IntlFormatIntegrationTest extends TestCase
 
     /**
      * %0$world is an invalid type specifier
-     *
-     * @expectedException \Budgegeria\IntlFormat\Exception\InvalidTypeSpecifierException
-     * @expectedExceptionCode 30
      */
     public function testInvalidTypeSpecifier()
     {
+        self::expectException(InvalidTypeSpecifierException::class);
+        self::expectExceptionCode(30);
+
         $message = 'Hello %0$world, Today is %date';
 
         $formatter = $this->createMock(FormatterInterface::class);

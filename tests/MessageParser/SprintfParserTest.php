@@ -2,6 +2,7 @@
 
 namespace Budgegeria\IntlFormat\Tests\MessageParser;
 
+use Budgegeria\IntlFormat\Exception\InvalidTypeSpecifierException;
 use Budgegeria\IntlFormat\MessageParser\SprintfParser;
 use PHPUnit\Framework\TestCase;
 
@@ -41,12 +42,12 @@ class SprintfParserTest extends TestCase
 
     /**
      * %0$world is an invalid type specifier
-     *
-     * @expectedException \Budgegeria\IntlFormat\Exception\InvalidTypeSpecifierException
-     * @expectedExceptionCode 30
      */
     public function testInvalidTypeSpecifier()
     {
+        self::expectException(InvalidTypeSpecifierException::class);
+        self::expectExceptionCode(30);
+
         $message = 'Hello %0$world, Today is %date';
 
         $parser = new SprintfParser();
@@ -86,12 +87,12 @@ class SprintfParserTest extends TestCase
 
     /**
      * There aren't enough values for %5$world.
-     *
-     * @expectedException \Budgegeria\IntlFormat\Exception\InvalidTypeSpecifierException
-     * @expectedExceptionCode 10
      */
     public function testWrongTypeSpecifierIndex()
     {
+        self::expectException(InvalidTypeSpecifierException::class);
+        self::expectExceptionCode(10);
+
         $message = 'Hello %5$world, Today is %date';
 
         $parser = new SprintfParser();

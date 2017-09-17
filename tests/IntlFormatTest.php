@@ -2,6 +2,7 @@
 
 namespace Budgegeria\IntlFormat\Tests;
 
+use Budgegeria\IntlFormat\Exception\InvalidTypeSpecifierException;
 use Budgegeria\IntlFormat\Formatter\FormatterInterface;
 use Budgegeria\IntlFormat\IntlFormat;
 use Budgegeria\IntlFormat\MessageParser\MessageMetaData;
@@ -82,12 +83,12 @@ class IntlFormatTest extends TestCase
 
     /**
      * More type specifier than values.
-     *
-     * @expectedException \Budgegeria\IntlFormat\Exception\InvalidTypeSpecifierException
-     * @expectedExceptionCode 40
      */
     public function testInvalidValueTypeSpecifierCount()
     {
+        self::expectException(InvalidTypeSpecifierException::class);
+        self::expectExceptionCode(40);
+
         $message = 'Hello {{world}}, Today is {{date}}';
 
         $parsed = new MessageMetaData();
@@ -107,12 +108,12 @@ class IntlFormatTest extends TestCase
 
     /**
      * Less type specifier than values.
-     *
-     * @expectedException \Budgegeria\IntlFormat\Exception\InvalidTypeSpecifierException
-     * @expectedExceptionCode 40
      */
     public function testEscapedInvalidTypeSpecifierCount()
     {
+        self::expectException(InvalidTypeSpecifierException::class);
+        self::expectExceptionCode(40);
+
         $message = 'Hello %%world';
 
         $parsed = new MessageMetaData();

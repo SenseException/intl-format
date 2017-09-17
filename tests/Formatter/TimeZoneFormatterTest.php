@@ -2,6 +2,7 @@
 
 namespace Budgegeria\IntlFormat\Tests\Formatter;
 
+use Budgegeria\IntlFormat\Exception\InvalidValueException;
 use Budgegeria\IntlFormat\Formatter\TimeZoneFormatter;
 use DateTime;
 use DateTimeZone;
@@ -39,12 +40,13 @@ class TimeZoneFormatterTest extends TestCase
     }
 
     /**
-     * @expectedException \Budgegeria\IntlFormat\Exception\InvalidValueException
-     * @expectedExceptionCode 10
      * @dataProvider provideTypeSpecifier
      */
     public function testFormatValueInvalidValue($typeSpecifier)
     {
+        self::expectException(InvalidValueException::class);
+        self::expectExceptionCode(10);
+
         $formatter = new TimeZoneFormatter('en_US');
 
         $formatter->formatValue($typeSpecifier, 'foo');

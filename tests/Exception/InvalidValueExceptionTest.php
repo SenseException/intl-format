@@ -8,23 +8,21 @@ use PHPUnit\Framework\TestCase;
 
 class InvalidValueExceptionTest extends TestCase
 {
-    /**
-     * @expectedException \Budgegeria\IntlFormat\Exception\InvalidValueException
-     * @expectedExceptionMessage Invalid type "string" of value. Allowed types: "integer, double".
-     * @expectedExceptionCode 10
-     */
     public function testInvalidValueType()
     {
+        self::expectException(InvalidValueException::class);
+        self::expectExceptionCode(10);
+        self::expectExceptionMessage('Invalid type "string" of value. Allowed types: "integer, double".');
+
         throw InvalidValueException::invalidValueType('foo', ['integer', 'double']);
     }
 
-    /**
-     * @expectedException \Budgegeria\IntlFormat\Exception\InvalidValueException
-     * @expectedExceptionMessage "foo" is not a valid locale.
-     * @expectedExceptionCode 20
-     */
     public function testInvalidLocale()
     {
+        self::expectException(InvalidValueException::class);
+        self::expectExceptionCode(20);
+        self::expectExceptionMessage('"foo" is not a valid locale.');
+
         throw InvalidValueException::invalidLocale('foo');
     }
 

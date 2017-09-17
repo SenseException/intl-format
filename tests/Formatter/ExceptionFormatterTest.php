@@ -2,6 +2,7 @@
 
 namespace Budgegeria\IntlFormat\Tests\Formatter;
 
+use Budgegeria\IntlFormat\Exception\InvalidValueException;
 use Budgegeria\IntlFormat\Formatter\ExceptionFormatter;
 use PHPUnit\Framework\TestCase;
 
@@ -46,12 +47,11 @@ class ExceptionFormatterTest extends TestCase
         $this->assertSame($expected, $this->formatter->formatValue($typeSpecifier, $value));
     }
 
-    /**
-     * @expectedException \Budgegeria\IntlFormat\Exception\InvalidValueException
-     * @expectedExceptionCode 10
-     */
     public function testFormatValueInvalidValue()
     {
+        self::expectException(InvalidValueException::class);
+        self::expectExceptionCode(10);
+
         $this->formatter->formatValue('emessage', 1);
     }
 

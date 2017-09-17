@@ -2,6 +2,7 @@
 
 namespace Budgegeria\IntlFormat\Tests\Formatter;
 
+use Budgegeria\IntlFormat\Exception\InvalidValueException;
 use Budgegeria\IntlFormat\Formatter\MessageFormatter;
 use DateTime;
 use IntlCalendar;
@@ -85,24 +86,26 @@ class MessageFormatterTest extends TestCase
     }
 
     /**
-     * @expectedException \Budgegeria\IntlFormat\Exception\InvalidValueException
-     * @expectedExceptionCode 10
      * @dataProvider provideInvalidNumberValues
      */
     public function testFormatValueNumberTypeCheck($value)
     {
+        self::expectException(InvalidValueException::class);
+        self::expectExceptionCode(10);
+
         $messageFormatter = MessageFormatter::createNumberValueFormatter('en_US');
 
         $messageFormatter->formatValue('integer', $value);
     }
 
     /**
-     * @expectedException \Budgegeria\IntlFormat\Exception\InvalidValueException
-     * @expectedExceptionCode 10
      * @dataProvider provideInvalidDateValues
      */
     public function testFormatValueDateTypeCheck($value)
     {
+        self::expectException(InvalidValueException::class);
+        self::expectExceptionCode(10);
+
         $messageFormatter = MessageFormatter::createDateValueFormatter('en_US');
 
         $messageFormatter->formatValue('date', $value);
