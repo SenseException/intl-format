@@ -46,11 +46,6 @@ class MessageFormatter implements FormatterInterface
         $valueTypeCheck = $this->valueTypeCheck;
         $valueTypeCheck($value);
 
-        // MessageFormatter supports IntlCalendar, but HHVM does a strange date format.
-        if ($value instanceof IntlCalendar) {
-            $value = $value->toDateTime();
-        }
-
         return Message::formatMessage($this->locale, $this->messageFormats[$typeSpecifier], [$value]);
     }
 

@@ -55,7 +55,7 @@ class MessageFormatterTest extends TestCase
      */
     public function testFormatValueTime($expected, $typeSpecifier, $value)
     {
-        $messageFormatter = $messageFormatter = MessageFormatter::createDateValueFormatter('de_DE');
+        $messageFormatter = MessageFormatter::createDateValueFormatter('de_DE');
 
         self::assertSame($expected, $messageFormatter->formatValue($typeSpecifier, $value));
     }
