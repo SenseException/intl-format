@@ -26,12 +26,7 @@ class SprintfParser implements MessageParserInterface
         // Remove % and value position from type specifiers after argument swapping
         $typeSpecifiers = preg_replace('/^%([0-9]\$)*/', '', $typeSpecifiers);
 
-        $metaData = new MessageMetaData();
-        $metaData->parsedMessage = $parsedMessage;
-        $metaData->typeSpecifiers = $typeSpecifiers;
-        $metaData->values = $values;
-
-        return $metaData;
+        return new MessageMetaData($parsedMessage, $typeSpecifiers, $values);
     }
 
     /**

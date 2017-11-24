@@ -28,10 +28,11 @@ class IntlFormatTest extends TestCase
             ->with('world', 'island')
             ->willReturn('island');
 
-        $parsed = new MessageMetaData();
-        $parsed->typeSpecifiers = [1 => 'world'];
-        $parsed->values = ['island'];
-        $parsed->parsedMessage = ['Hello "', '{{world}}', '", how are you'];
+        $parsed = new MessageMetaData(
+            ['Hello "', '{{world}}', '", how are you'],
+            [1 => 'world'],
+            ['island']
+        );
 
         $parser = $this->createMock(MessageParserInterface::class);
         $parser->expects($this->once())
@@ -65,10 +66,11 @@ class IntlFormatTest extends TestCase
 
         $dateTime = new \DateTime();
 
-        $parsed = new MessageMetaData();
-        $parsed->typeSpecifiers = [1 => 'world', 3 => 'date'];
-        $parsed->values = ['island', $dateTime];
-        $parsed->parsedMessage = ['Hello ', '{{world}}', ', Today is ', '{{date}}'];
+        $parsed = new MessageMetaData(
+            ['Hello ', '{{world}}', ', Today is ', '{{date}}'],
+            [1 => 'world', 3 => 'date'],
+            ['island', $dateTime]
+        );
 
         $parser = $this->createMock(MessageParserInterface::class);
         $parser->expects($this->once())
@@ -91,10 +93,11 @@ class IntlFormatTest extends TestCase
 
         $message = 'Hello {{world}}, Today is {{date}}';
 
-        $parsed = new MessageMetaData();
-        $parsed->typeSpecifiers = [1 => 'world', 3 => 'date'];
-        $parsed->values = ['island'];
-        $parsed->parsedMessage = ['Hello ', '{{world}}', ', Today is ', '{{date}}'];
+        $parsed = new MessageMetaData(
+            ['Hello ', '{{world}}', ', Today is ', '{{date}}'],
+            [1 => 'world', 3 => 'date'],
+            ['island']
+        );
 
         $parser = $this->createMock(MessageParserInterface::class);
         $parser->expects($this->once())
@@ -116,10 +119,11 @@ class IntlFormatTest extends TestCase
 
         $message = 'Hello %%world';
 
-        $parsed = new MessageMetaData();
-        $parsed->typeSpecifiers = [];
-        $parsed->values = ['island'];
-        $parsed->parsedMessage = ['Hello ', '%world'];
+        $parsed = new MessageMetaData(
+            ['Hello ', '%world'],
+            [],
+            ['island']
+        );
 
         $parser = $this->createMock(MessageParserInterface::class);
         $parser->expects($this->once())

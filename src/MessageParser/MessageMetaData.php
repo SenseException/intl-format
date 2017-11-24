@@ -39,4 +39,16 @@ class MessageMetaData
      * @var array
      */
     public $values = [];
+
+    /**
+     * @param array $parsedMessage
+     * @param array $typeSpecifiers
+     * @param array $values
+     */
+    public function __construct(array $parsedMessage, array $typeSpecifiers, array $values)
+    {
+        $this->parsedMessage = $parsedMessage;
+        $this->typeSpecifiers = $typeSpecifiers;
+        $this->values = $values;
+    }
 }
