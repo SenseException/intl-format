@@ -1,10 +1,9 @@
 # Intl-Format
-A wrapper library for PHP to format Intl messages like sprintf
+A wrapper library for PHP to format and internationalize values in messages like sprintf
 
 [![Build Status](https://travis-ci.org/SenseException/intl-format.svg?branch=master)](https://travis-ci.org/SenseException/intl-format)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/SenseException/intl-format/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/SenseException/intl-format/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/SenseException/intl-format/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/SenseException/intl-format/?branch=master)
-[![Dependency Status](https://www.versioneye.com/user/projects/5821ab50afb6141c557106ea/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/5821ab50afb6141c557106ea)
 
 ### Why using this library?
 
@@ -97,6 +96,8 @@ $intlFormat = (new Budgegeria\IntlFormat\Factory())->createIntlFormat('en_US');
 
 echo $intlFormat->format('%number', 1002.25);
 // "1,002.25"
+echo $intlFormat->format('%.4number', 1002.25);
+// "1,002.2500"
 echo $intlFormat->format('%integer', 1002.25);
 // "1,002"
 echo $intlFormat->format('%percent', 1);
@@ -108,6 +109,8 @@ echo $intlFormat->format('%ordinal', 1);
 echo $intlFormat->format('%currency', 1.1);
 // "$1.10"
 ```
+
+The type specifier `number` also allows fraction digits similar to sprintf by adding a dot with an amount of digits.
 
 ### Date and time
 
