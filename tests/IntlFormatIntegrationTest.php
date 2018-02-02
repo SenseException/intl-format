@@ -129,8 +129,8 @@ class IntlFormatIntegrationTest extends TestCase
      */
     public function testInvalidValueTypeSpecifierCount()
     {
-        self::expectException(InvalidTypeSpecifierException::class);
-        self::expectExceptionCode(10);
+        $this->expectException(InvalidTypeSpecifierException::class);
+        $this->expectExceptionCode(10);
 
         $message = 'Hello %world, Today is %date';
 
@@ -143,8 +143,8 @@ class IntlFormatIntegrationTest extends TestCase
      */
     public function testEscapedInvalidTypeSpecifierCount()
     {
-        self::expectException(InvalidTypeSpecifierException::class);
-        self::expectExceptionCode(20);
+        $this->expectException(InvalidTypeSpecifierException::class);
+        $this->expectExceptionCode(20);
 
         $message = 'Hello %%world';
 
@@ -157,8 +157,8 @@ class IntlFormatIntegrationTest extends TestCase
      */
     public function testWrongTypeSpecifierIndex()
     {
-        self::expectException(InvalidTypeSpecifierException::class);
-        self::expectExceptionCode(10);
+        $this->expectException(InvalidTypeSpecifierException::class);
+        $this->expectExceptionCode(10);
 
         $message = 'Hello %5$world, Today is %date';
 
@@ -173,8 +173,8 @@ class IntlFormatIntegrationTest extends TestCase
      */
     public function testInvalidTypeSpecifier()
     {
-        self::expectException(InvalidTypeSpecifierException::class);
-        self::expectExceptionCode(30);
+        $this->expectException(InvalidTypeSpecifierException::class);
+        $this->expectExceptionCode(30);
 
         $message = 'Hello %0$world, Today is %date';
 

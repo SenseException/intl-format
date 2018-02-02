@@ -10,36 +10,36 @@ class InvalidTypeSpecifierExceptionTest extends TestCase
 {
     public function testUnmatchedTypeSpecifier()
     {
-        self::expectException(InvalidTypeSpecifierException::class);
-        self::expectExceptionCode(10);
-        self::expectExceptionMessage('The type specifier "%test" doesn\'t match with the given values.');
+        $this->expectException(InvalidTypeSpecifierException::class);
+        $this->expectExceptionCode(10);
+        $this->expectExceptionMessage('The type specifier "%test" doesn\'t match with the given values.');
 
         throw InvalidTypeSpecifierException::unmatchedTypeSpecifier('%test');
     }
 
     public function testNoTypeSpecifier()
     {
-        self::expectException(InvalidTypeSpecifierException::class);
-        self::expectExceptionCode(20);
-        self::expectExceptionMessage('No type specifier are in the message text.');
+        $this->expectException(InvalidTypeSpecifierException::class);
+        $this->expectExceptionCode(20);
+        $this->expectExceptionMessage('No type specifier are in the message text.');
 
         throw InvalidTypeSpecifierException::noTypeSpecifier();
     }
 
     public function testInvalidTypeSpecifier()
     {
-        self::expectException(InvalidTypeSpecifierException::class);
-        self::expectExceptionCode(30);
-        self::expectExceptionMessage('"%0$test" is not a valid type specifier.');
+        $this->expectException(InvalidTypeSpecifierException::class);
+        $this->expectExceptionCode(30);
+        $this->expectExceptionMessage('"%0$test" is not a valid type specifier.');
 
         throw InvalidTypeSpecifierException::invalidTypeSpecifier('%0$test');
     }
 
     public function testInvalidTypeSpecifierCount()
     {
-        self::expectException(InvalidTypeSpecifierException::class);
-        self::expectExceptionCode(40);
-        self::expectExceptionMessage('Value count of "1" doesn\'t match type specifier count of "2"');
+        $this->expectException(InvalidTypeSpecifierException::class);
+        $this->expectExceptionCode(40);
+        $this->expectExceptionMessage('Value count of "1" doesn\'t match type specifier count of "2"');
 
         throw InvalidTypeSpecifierException::invalidTypeSpecifierCount(1, 2);
     }

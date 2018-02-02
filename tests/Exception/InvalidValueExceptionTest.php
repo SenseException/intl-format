@@ -10,18 +10,18 @@ class InvalidValueExceptionTest extends TestCase
 {
     public function testInvalidValueType()
     {
-        self::expectException(InvalidValueException::class);
-        self::expectExceptionCode(10);
-        self::expectExceptionMessage('Invalid type "string" of value. Allowed types: "integer, double".');
+        $this->expectException(InvalidValueException::class);
+        $this->expectExceptionCode(10);
+        $this->expectExceptionMessage('Invalid type "string" of value. Allowed types: "integer, double".');
 
         throw InvalidValueException::invalidValueType('foo', ['integer', 'double']);
     }
 
     public function testInvalidLocale()
     {
-        self::expectException(InvalidValueException::class);
-        self::expectExceptionCode(20);
-        self::expectExceptionMessage('"foo" is not a valid locale.');
+        $this->expectException(InvalidValueException::class);
+        $this->expectExceptionCode(20);
+        $this->expectExceptionMessage('"foo" is not a valid locale.');
 
         throw InvalidValueException::invalidLocale('foo');
     }

@@ -44,8 +44,8 @@ class TimeZoneFormatterTest extends TestCase
      */
     public function testFormatValueInvalidValue($typeSpecifier)
     {
-        self::expectException(InvalidValueException::class);
-        self::expectExceptionCode(10);
+        $this->expectException(InvalidValueException::class);
+        $this->expectExceptionCode(10);
 
         $formatter = new TimeZoneFormatter('en_US');
 

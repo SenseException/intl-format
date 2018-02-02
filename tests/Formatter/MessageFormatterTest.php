@@ -90,8 +90,8 @@ class MessageFormatterTest extends TestCase
      */
     public function testFormatValueNumberTypeCheck($value)
     {
-        self::expectException(InvalidValueException::class);
-        self::expectExceptionCode(10);
+        $this->expectException(InvalidValueException::class);
+        $this->expectExceptionCode(10);
 
         $messageFormatter = MessageFormatter::createNumberValueFormatter('en_US');
 
@@ -103,8 +103,8 @@ class MessageFormatterTest extends TestCase
      */
     public function testFormatValueDateTypeCheck($value)
     {
-        self::expectException(InvalidValueException::class);
-        self::expectExceptionCode(10);
+        $this->expectException(InvalidValueException::class);
+        $this->expectExceptionCode(10);
 
         $messageFormatter = MessageFormatter::createDateValueFormatter('en_US');
 

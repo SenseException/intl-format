@@ -49,8 +49,8 @@ class ExceptionFormatterTest extends TestCase
 
     public function testFormatValueInvalidValue()
     {
-        self::expectException(InvalidValueException::class);
-        self::expectExceptionCode(10);
+        $this->expectException(InvalidValueException::class);
+        $this->expectExceptionCode(10);
 
         $this->formatter->formatValue('emessage', 1);
     }
