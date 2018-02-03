@@ -16,6 +16,9 @@ filter:
 coding_style:
     php: true
 build:
+    environment:
+        php:
+            version: 7.1
     tests:
         override:
             -
@@ -31,4 +34,4 @@ build:
                     - php-scrutinizer-run
             environment:
                 php:
-                    version: 7.0.20
+                    version: 7.1
