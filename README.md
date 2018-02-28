@@ -23,6 +23,11 @@ echo $intlFormat->format('Today\'s number is %number', 1000.3);
 
 It is also easy extensible with your own custom formats.
 
+## Does it affect [GDPR](https://www.eugdpr.org/) somehow?
+
+Intl-Format itself uses the given data (e.g. timezone, locale) only for formatting purposes with the help of the
+PHP Intl extension.
+
 ## Installation
 
 You can install this with [Composer](https://getcomposer.org/).
