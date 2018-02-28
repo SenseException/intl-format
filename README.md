@@ -1,9 +1,12 @@
 # Intl-Format
 A wrapper library for PHP to format and internationalize values in messages like sprintf
 
+[![Latest Stable Version](https://poser.pugx.org/senseexception/intl-format/v/stable)](https://packagist.org/packages/senseexception/intl-format)
+[![PHP from Packagist](https://img.shields.io/packagist/php-v/senseexception/intl-format.svg)](https://packagist.org/packages/senseexception/intl-format)
 [![Build Status](https://travis-ci.org/SenseException/intl-format.svg?branch=master)](https://travis-ci.org/SenseException/intl-format)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/SenseException/intl-format/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/SenseException/intl-format/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/SenseException/intl-format/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/SenseException/intl-format/?branch=master)
+[![License](https://poser.pugx.org/senseexception/intl-format/license)](https://packagist.org/packages/senseexception/intl-format)
 
 ### Why using this library?
 
