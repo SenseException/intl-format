@@ -90,6 +90,9 @@ class TimeZoneFormatterTest extends TestCase
             'timeseries_short_dt' => ['MST', 'timeseries_short', $datetime],
             'timeseries_short_dti' => ['MST', 'timeseries_short', $datetimeImmutable],
             'timeseries_short_its' => ['MST', 'timeseries_short', $intlTimezone],
+
+            'timeseries_name_dst_start' => ['Central European Summer Time', 'timeseries_name', new DateTime('2016-03-27 02:00:00', new DateTimeZone('Europe/Berlin'))],
+            'timeseries_name_dst_end' => ['Central European Summer Time', 'timeseries_name', new DateTime('2016-10-30 01:59:59', new DateTimeZone('Europe/Berlin'))],
         ];
     }
 }
