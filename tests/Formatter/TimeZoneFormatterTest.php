@@ -5,6 +5,7 @@ namespace Budgegeria\IntlFormat\Tests\Formatter;
 use Budgegeria\IntlFormat\Exception\InvalidValueException;
 use Budgegeria\IntlFormat\Formatter\TimeZoneFormatter;
 use DateTime;
+use DateTimeImmutable;
 use DateTimeZone;
 use IntlTimeZone;
 use PHPUnit\Framework\TestCase;
@@ -69,32 +70,26 @@ class TimeZoneFormatterTest extends TestCase
      */
     public function provideTimeZones()
     {
-        $datetime = $this->createDateTime('2016-05-01', 'US/Arizona');
+        $datetime = new DateTime('2016-08-01', new DateTimeZone('US/Arizona'));
+        $datetimeImmutable = new DateTimeImmutable('2016-05-01', new DateTimeZone('US/Arizona'));
         $timezone = $datetime->getTimezone();
         $intlTimezone = IntlTimeZone::fromDateTimeZone($timezone);
 
         return [
             'timeseries_id_ts' => ['US/Arizona', 'timeseries_id', $timezone],
             'timeseries_id_dt' => ['US/Arizona', 'timeseries_id', $datetime],
+            'timeseries_id_dti' => ['US/Arizona', 'timeseries_id', $datetimeImmutable],
             'timeseries_id_its' => ['US/Arizona', 'timeseries_id', $intlTimezone],
 
             'timeseries_name_ts' => ['Mountain Standard Time', 'timeseries_name', $timezone],
             'timeseries_name_dt' => ['Mountain Standard Time', 'timeseries_name', $datetime],
+            'timeseries_name_dti' => ['Mountain Standard Time', 'timeseries_name', $datetimeImmutable],
             'timeseries_name_its' => ['Mountain Standard Time', 'timeseries_name', $intlTimezone],
 
             'timeseries_short_ts' => ['MST', 'timeseries_short', $timezone],
             'timeseries_short_dt' => ['MST', 'timeseries_short', $datetime],
+            'timeseries_short_dti' => ['MST', 'timeseries_short', $datetimeImmutable],
             'timeseries_short_its' => ['MST', 'timeseries_short', $intlTimezone],
         ];
-    }
-
-    /**
-     * @param string $date
-     * @param string $timezone
-     * @return DateTime
-     */
-    private function createDateTime($date, $timezone)
-    {
-        return new DateTime((string) $date, new DateTimeZone((string) $timezone));
     }
 }

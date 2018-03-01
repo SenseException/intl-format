@@ -5,7 +5,7 @@ namespace Budgegeria\IntlFormat\Formatter;
 
 use Budgegeria\IntlFormat\Exception\InvalidValueException;
 use Closure;
-use DateTime;
+use DateTimeInterface;
 use IntlCalendar;
 use MessageFormatter as Message;
 
@@ -89,8 +89,8 @@ class MessageFormatter implements FormatterInterface
     public static function createDateValueFormatter(string $locale)
     {
         $valueTypeCheck = function($value) {
-            if (!is_int($value) && !($value instanceof DateTime) && !($value instanceof IntlCalendar)) {
-                throw InvalidValueException::invalidValueType($value, ['integer', DateTime::class, IntlCalendar::class]);
+            if (!is_int($value) && !($value instanceof DateTimeInterface) && !($value instanceof IntlCalendar)) {
+                throw InvalidValueException::invalidValueType($value, ['integer', DateTimeInterface::class, IntlCalendar::class]);
             }
         };
 

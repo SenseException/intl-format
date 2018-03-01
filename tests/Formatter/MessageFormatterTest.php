@@ -5,6 +5,7 @@ namespace Budgegeria\IntlFormat\Tests\Formatter;
 use Budgegeria\IntlFormat\Exception\InvalidValueException;
 use Budgegeria\IntlFormat\Formatter\MessageFormatter;
 use DateTime;
+use DateTimeImmutable;
 use IntlCalendar;
 use PHPUnit\Framework\TestCase;
 
@@ -37,7 +38,7 @@ class MessageFormatterTest extends TestCase
         self::assertSame('1.001', $messageFormatter->formatValue('integer', 1001));
         self::assertSame('1.001', $messageFormatter->formatValue('integer', '1001'));
         self::assertSame('100%', preg_replace('/[^0-9%]/', '', $messageFormatter->formatValue('percent', 1)));
-        self::assertSame('1.000,10€', preg_replace('/[^0-9,\.€]/', '', $messageFormatter->formatValue('currency', 1000.1)));
+        self::assertSame('1.000,10€', preg_replace('/[^0-9,\.€]/u', '', $messageFormatter->formatValue('currency', 1000.1)));
     }
 
     /**
@@ -111,18 +112,6 @@ class MessageFormatterTest extends TestCase
         $messageFormatter->formatValue('date', $value);
     }
 
-    public function testFormatValueDateParts()
-    {
-        $messageFormatter = MessageFormatter::createDateValueFormatter('de_DE');
-        $date = new DateTime('2016-04-01');
-
-        self::assertSame('2016', $messageFormatter->formatValue('date_year', $date));
-        self::assertSame('4', $messageFormatter->formatValue('date_month', $date));
-        self::assertSame('April', $messageFormatter->formatValue('date_month_name', $date));
-        self::assertSame('1', $messageFormatter->formatValue('date_day', $date));
-        self::assertSame('Freitag', $messageFormatter->formatValue('date_weekday', $date));
-    }
-
     /**
      * @return array
      */
@@ -190,25 +179,51 @@ class MessageFormatterTest extends TestCase
      */
     public function provideDate()
     {
-        $date = new \DateTime('2016-03-01');
-        $calendar = IntlCalendar::fromDateTime($date);
+        $dateTime = new DateTime('2016-03-01');
+        $dateTimeImmutable = new DateTimeImmutable('2016-03-01');
+        $calendar = IntlCalendar::fromDateTime($dateTime);
 
         return [
-            'date' => ['01.03.2016', 'date', $date],
+            'date' => ['01.03.2016', 'date', $dateTime],
+            'date_immutable' => ['01.03.2016', 'date', $dateTimeImmutable],
             'date_calendar' => ['01.03.2016', 'date', $calendar],
-            'date_timestamp' => ['01.03.2016', 'date', $date->getTimestamp()],
-            'date_short' => ['01.03.16', 'date_short', $date],
+            'date_timestamp' => ['01.03.2016', 'date', $dateTime->getTimestamp()],
+            'date_short' => ['01.03.16', 'date_short', $dateTime],
+            'date_short_immutable' => ['01.03.16', 'date_short', $dateTimeImmutable],
             'date_short_calendar' => ['01.03.16', 'date_short', $calendar],
-            'date_short_timestamp' => ['01.03.16', 'date_short', $date->getTimestamp()],
-            'date_medium' => ['01.03.2016', 'date_medium', $date],
+            'date_short_timestamp' => ['01.03.16', 'date_short', $dateTime->getTimestamp()],
+            'date_medium' => ['01.03.2016', 'date_medium', $dateTime],
+            'date_medium_immutable' => ['01.03.2016', 'date_medium', $dateTimeImmutable],
             'date_medium_calendar' => ['01.03.2016', 'date_medium', $calendar],
-            'date_medium_timestamp' => ['01.03.2016', 'date_medium', $date->getTimestamp()],
-            'date_long' => ['1. März 2016', 'date_long', $date],
+            'date_medium_timestamp' => ['01.03.2016', 'date_medium', $dateTime->getTimestamp()],
+            'date_long' => ['1. März 2016', 'date_long', $dateTime],
+            'date_long_immutable' => ['1. März 2016', 'date_long', $dateTimeImmutable],
             'date_long_calendar' => ['1. März 2016', 'date_long', $calendar],
-            'date_long_timestamp' => ['1. März 2016', 'date_long', $date->getTimestamp()],
-            'date_full' => ['Dienstag, 1. März 2016', 'date_full', $date],
+            'date_long_timestamp' => ['1. März 2016', 'date_long', $dateTime->getTimestamp()],
+            'date_full' => ['Dienstag, 1. März 2016', 'date_full', $dateTime],
+            'date_full_immutable' => ['Dienstag, 1. März 2016', 'date_full', $dateTimeImmutable],
             'date_full_calendar' => ['Dienstag, 1. März 2016', 'date_full', $calendar],
-            'date_full_timestamp' => ['Dienstag, 1. März 2016', 'date_full', $date->getTimestamp()],
+            'date_full_timestamp' => ['Dienstag, 1. März 2016', 'date_full', $dateTime->getTimestamp()],
+            'date_year' => ['2016', 'date_year', $dateTime],
+            'date_year_immutable' => ['2016', 'date_year', $dateTimeImmutable],
+            'date_year_calendar' => ['2016', 'date_year', $calendar],
+            'date_year_timestamp' => ['2016', 'date_year', $dateTime->getTimestamp()],
+            'date_month' => ['3', 'date_month', $dateTime],
+            'date_month_immutable' => ['3', 'date_month', $dateTimeImmutable],
+            'date_month_calendar' => ['3', 'date_month', $calendar],
+            'date_month_timestamp' => ['3', 'date_month', $dateTime->getTimestamp()],
+            'date_month_name' => ['März', 'date_month_name', $dateTime],
+            'date_month_name_immutable' => ['März', 'date_month_name', $dateTimeImmutable],
+            'date_month_name_calendar' => ['März', 'date_month_name', $calendar],
+            'date_month_name_timestamp' => ['März', 'date_month_name', $dateTime->getTimestamp()],
+            'date_day' => ['1', 'date_day', $dateTime],
+            'date_day_immutable' => ['1', 'date_day', $dateTimeImmutable],
+            'date_day_calendar' => ['1', 'date_day', $calendar],
+            'date_day_timestamp' => ['1', 'date_day', $dateTime->getTimestamp()],
+            'date_weekday' => ['Dienstag', 'date_weekday', $dateTime],
+            'date_weekday_immutable' => ['Dienstag', 'date_weekday', $dateTimeImmutable],
+            'date_weekday_calendar' => ['Dienstag', 'date_weekday', $calendar],
+            'date_weekday_timestamp' => ['Dienstag', 'date_weekday', $dateTime->getTimestamp()],
         ];
     }
 
@@ -217,25 +232,31 @@ class MessageFormatterTest extends TestCase
      */
     public function provideTime()
     {
-        $date = new DateTime('2016-03-01 02:20:50', new \DateTimeZone('Europe/Berlin'));
-        $calendar = IntlCalendar::fromDateTime($date);
+        $dateTime = new DateTime('2016-03-01 02:20:50', new \DateTimeZone('Europe/Berlin'));
+        $dateTimeImmutable = new DateTimeImmutable('2016-03-01 02:20:50', new \DateTimeZone('Europe/Berlin'));
+        $calendar = IntlCalendar::fromDateTime($dateTime);
 
         return [
-            'time' => ['01:20:50', 'time', $date],
+            'time' => ['01:20:50', 'time', $dateTime],
+            'time_immutable' => ['01:20:50', 'time', $dateTimeImmutable],
             'time_calendar' => ['01:20:50', 'time', $calendar],
-            'time_timestamp' => ['01:20:50', 'time', $date->getTimestamp()],
-            'time_short' => ['01:20', 'time_short', $date],
+            'time_timestamp' => ['01:20:50', 'time', $dateTime->getTimestamp()],
+            'time_short' => ['01:20', 'time_short', $dateTime],
+            'time_short_immutable' => ['01:20', 'time_short', $dateTimeImmutable],
             'time_short_calendar' => ['01:20', 'time_short', $calendar],
-            'time_short_timestamp' => ['01:20', 'time_short', $date->getTimestamp()],
-            'time_medium' => ['01:20:50', 'time_medium', $date],
+            'time_short_timestamp' => ['01:20', 'time_short', $dateTime->getTimestamp()],
+            'time_medium_immutable' => ['01:20:50', 'time_medium', $dateTimeImmutable],
+            'time_medium' => ['01:20:50', 'time_medium', $dateTime],
             'time_medium_calendar' => ['01:20:50', 'time_medium', $calendar],
-            'time_medium_timestamp' => ['01:20:50', 'time_medium', $date->getTimestamp()],
-            'time_long' => ['01:20:50 GMT', 'time_long', $date],
+            'time_medium_timestamp' => ['01:20:50', 'time_medium', $dateTime->getTimestamp()],
+            'time_long_immutable' => ['01:20:50 GMT', 'time_long', $dateTimeImmutable],
+            'time_long' => ['01:20:50 GMT', 'time_long', $dateTime],
             'time_long_calendar' => ['01:20:50 GMT', 'time_long', $calendar],
-            'time_long_timestamp' => ['01:20:50 GMT', 'time_long', $date->getTimestamp()],
-            'time_full' => ['01:20:50 GMT', 'time_full', $date],
+            'time_long_timestamp' => ['01:20:50 GMT', 'time_long', $dateTime->getTimestamp()],
+            'time_full_immutable' => ['01:20:50 GMT', 'time_full', $dateTimeImmutable],
+            'time_full' => ['01:20:50 GMT', 'time_full', $dateTime],
             'time_full_calendar' => ['01:20:50 GMT', 'time_full', $calendar],
-            'time_full_timestamp' => ['01:20:50 GMT', 'time_full', $date->getTimestamp()],
+            'time_full_timestamp' => ['01:20:50 GMT', 'time_full', $dateTime->getTimestamp()],
         ];
     }
 
