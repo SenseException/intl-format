@@ -16,7 +16,7 @@ class SprintfParser implements MessageParserInterface
     public function parseMessage(string $message, array $values) : MessageMetaData
     {
         $parsedMessage = preg_split('/(%[%]*(?:[\d]+\$)*\.?[0-9]*[a-z0-9_]*)/i', $message, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
-        $typeSpecifiers = preg_grep('/(^%(?:[\d]+\$)*\.?[0-9]*[a-z0-9_]+)/i', $parsedMessage);
+        $typeSpecifiers = preg_grep('/(^%(?:[\d]+\$)*\.?[0-9]*[a-z0-9_]+)/i', (array) $parsedMessage);
 
         // Change escaped % to regular %
         $parsedMessage = preg_replace('/^%%/', '%', $parsedMessage);
@@ -52,7 +52,7 @@ class SprintfParser implements MessageParserInterface
                 $index = $matches[1] - 1;
             }
 
-            if (!array_key_exists($index, $values)) {
+            if (!isset($values[$index])) {
                 throw InvalidTypeSpecifierException::unmatchedTypeSpecifier($typeSpecifier);
             }
 

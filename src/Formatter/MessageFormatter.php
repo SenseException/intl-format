@@ -54,7 +54,7 @@ class MessageFormatter implements FormatterInterface
      */
     public function has(string $typeSpecifier) : bool
     {
-        return array_key_exists($typeSpecifier, $this->messageFormats);
+        return isset($this->messageFormats[$typeSpecifier]);
     }
 
     /**
