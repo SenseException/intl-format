@@ -40,16 +40,13 @@ class TimeZoneFormatter implements FormatterInterface
             $value = $value->getTimezone();
         }
 
-        if ($value instanceof DateTimeZone) {
-            $value = IntlTimeZone::fromDateTimeZone($value);
-        }
-
-        if (!($value instanceof IntlTimeZone)) {
+        if (!($value instanceof IntlTimeZone) && !($value instanceof DateTimeZone)) {
             throw InvalidValueException::invalidValueType($value, [DateTimeInterface::class, DateTimeZone::class, IntlTimeZone::class]);
         }
 
         $intlCalendar->setTimeZone($value);
         $inDaylight = $intlCalendar->inDaylightTime();
+        $value = $intlCalendar->getTimeZone();
 
         $timeZoneMetaData = [
             self::TYPE_SPECIFIER_ID => $value->getID(),
@@ -77,7 +74,7 @@ class TimeZoneFormatter implements FormatterInterface
     /**
      * @return IntlCalendar
      */
-    private function createIntlCalendar()
+    private function createIntlCalendar() : IntlCalendar
     {
         return IntlCalendar::createInstance(null, $this->locale);
     }

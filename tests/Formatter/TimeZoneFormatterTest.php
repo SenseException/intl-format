@@ -50,7 +50,7 @@ class TimeZoneFormatterTest extends TestCase
 
         $formatter = new TimeZoneFormatter('en_US');
 
-        $formatter->formatValue($typeSpecifier, 'foo');
+        $formatter->formatValue($typeSpecifier, 'UTC');
     }
 
     /**
