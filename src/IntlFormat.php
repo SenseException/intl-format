@@ -70,7 +70,7 @@ class IntlFormat
     /**
      * @param FormatterInterface $formatter
      */
-    public function addFormatter(FormatterInterface $formatter)
+    public function addFormatter(FormatterInterface $formatter) : void
     {
         $this->formatters[] = $formatter;
     }
@@ -79,7 +79,7 @@ class IntlFormat
      * @param string $typeSpecifier
      * @return FormatterInterface|null
      */
-    private function findFormatter(string $typeSpecifier)
+    private function findFormatter(string $typeSpecifier) : ?FormatterInterface
     {
         $formatters = array_reverse($this->formatters);
         foreach ($formatters as $formatter) {

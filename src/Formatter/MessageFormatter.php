@@ -61,7 +61,7 @@ class MessageFormatter implements FormatterInterface
      * @param string $locale
      * @return MessageFormatter
      */
-    public static function createNumberValueFormatter(string $locale)
+    public static function createNumberValueFormatter(string $locale) : MessageFormatter
     {
         $valueTypeCheck = function($value) {
             if (!is_numeric($value)) {
@@ -86,7 +86,7 @@ class MessageFormatter implements FormatterInterface
      * @param string $locale
      * @return MessageFormatter
      */
-    public static function createDateValueFormatter(string $locale)
+    public static function createDateValueFormatter(string $locale) : MessageFormatter
     {
         $valueTypeCheck = function($value) {
             if (!is_int($value) && !($value instanceof DateTimeInterface) && !($value instanceof IntlCalendar)) {
