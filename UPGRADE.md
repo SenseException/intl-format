@@ -1,3 +1,35 @@
+# Upgrade to 1.3
+
+## [Security] Possible ReDoS vulnerability fixed
+
+A possible ReDoS vulnerability in `SprintfParser` got fixed.
+
+## [Bugfix] Argument swapping beyond 9 is now possible
+
+In previous versions it wasn't possible to use argument swapping beyond `%9$arg`.
+`%10$arg`, `%11$arg` and above are now supported.
+
+## [BC-break] `TimeZoneFormatter` constants are set to private
+
+The constants for the type specifier in `TimeZoneFormatter` aren't accessible
+from the outside of the class.
+
+## [BC-break] Add return types to methods
+
+In case `IntlFormat` got extended by a custom class and `addFormatter()` got
+overridden, the added void return type has to be added in the custom class too.
+
+Named constructor in `MessageFormatter` got return types.
+
+## Add support for DateTimeImmutable
+
+Because of some incompatibilities to the Intl-extension, DateTimeImmutable wasn't
+usable in the older versions of Intl-Format. Support was added for Intl-Format 1.3.
+
+## Set minimum PHP requirement to 7.1.5
+
+You need to update your PHP version.
+
 # Upgrade to 1.2
 
 ## Drop support for HHVM
