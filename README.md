@@ -122,23 +122,23 @@ The type specifier `number` also allows fraction digits similar to sprintf by ad
 
 ### Date and time
 
-| type specifier               | allowed value types                  |
-|------------------------------|--------------------------------------|
-| duration                     | integer                              |
-| date (alias for date_medium) | integer, DateTime, IntlCalendar      |
-| date_short                   | integer, DateTime, IntlCalendar      |
-| date_medium                  | integer, DateTime, IntlCalendar      |
-| date_long                    | integer, DateTime, IntlCalendar      |
-| date_full                    | integer, DateTime, IntlCalendar      |
-| date_weekday                 | integer, DateTime, IntlCalendar      |
-| date_month_name              | integer, DateTime, IntlCalendar      |
-| date_year                    | integer, DateTime, IntlCalendar      |
-| date_month                   | integer, DateTime, IntlCalendar      |
-| date_day                     | integer, DateTime, IntlCalendar      |
-| time (alias for time_medium) | integer, DateTime, IntlCalendar      |
-| time_medium                  | integer, DateTime, IntlCalendar      |
-| time_long                    | integer, DateTime, IntlCalendar      |
-| time_full                    | integer, DateTime, IntlCalendar      |
+| type specifier               | allowed value types                                |
+|------------------------------|----------------------------------------------------|
+| duration                     | integer                                            |
+| date (alias for date_medium) | integer, DateTime, DateTimeImmutable, IntlCalendar |
+| date_short                   | integer, DateTime, DateTimeImmutable, IntlCalendar |
+| date_medium                  | integer, DateTime, DateTimeImmutable, IntlCalendar |
+| date_long                    | integer, DateTime, DateTimeImmutable, IntlCalendar |
+| date_full                    | integer, DateTime, DateTimeImmutable, IntlCalendar |
+| date_weekday                 | integer, DateTime, DateTimeImmutable, IntlCalendar |
+| date_month_name              | integer, DateTime, DateTimeImmutable, IntlCalendar |
+| date_year                    | integer, DateTime, DateTimeImmutable, IntlCalendar |
+| date_month                   | integer, DateTime, DateTimeImmutable, IntlCalendar |
+| date_day                     | integer, DateTime, DateTimeImmutable, IntlCalendar |
+| time (alias for time_medium) | integer, DateTime, DateTimeImmutable, IntlCalendar |
+| time_medium                  | integer, DateTime, DateTimeImmutable, IntlCalendar |
+| time_long                    | integer, DateTime, DateTimeImmutable, IntlCalendar |
+| time_full                    | integer, DateTime, DateTimeImmutable, IntlCalendar |
 
 ```php
 $intlFormat = (new Budgegeria\IntlFormat\Factory())->createIntlFormat('en_US');
