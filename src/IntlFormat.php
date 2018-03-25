@@ -26,7 +26,7 @@ class IntlFormat
      */
     public function __construct(array $formatters, MessageParserInterface $messageParser = null)
     {
-        $this->messageParser = null === $messageParser ? new SprintfParser() : $messageParser;
+        $this->messageParser = $messageParser ?? new SprintfParser();
         foreach ($formatters as $formatter) {
             $this->addFormatter($formatter);
         }

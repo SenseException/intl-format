@@ -3,7 +3,6 @@ declare(strict_types = 1);
 
 namespace Budgegeria\IntlFormat\MessageParser;
 
-
 interface MessageParserInterface
 {
     /**

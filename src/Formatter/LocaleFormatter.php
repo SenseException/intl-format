@@ -9,11 +9,6 @@ use Locale;
 class LocaleFormatter implements FormatterInterface
 {
     /**
-     * @var string
-     */
-    private $locale;
-
-    /**
      * @var \Closure[]
      */
     private $formatFunctions;
@@ -23,7 +18,6 @@ class LocaleFormatter implements FormatterInterface
      */
     public function __construct(string $locale)
     {
-        $this->locale = $locale;
         $this->formatFunctions = [
             'language' => function($value) use ($locale) {
                 $language = Locale::getDisplayLanguage($value, $locale);

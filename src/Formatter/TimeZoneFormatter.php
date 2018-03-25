@@ -11,9 +11,9 @@ use Budgegeria\IntlFormat\Exception\InvalidValueException;
 
 class TimeZoneFormatter implements FormatterInterface
 {
-    const TYPE_SPECIFIER_ID = 'timeseries_id';
-    const TYPE_SPECIFIER_LONG_NAME = 'timeseries_name';
-    const TYPE_SPECIFIER_SHORT_NAME = 'timeseries_short';
+    private const TYPE_SPECIFIER_ID = 'timeseries_id';
+    private const TYPE_SPECIFIER_LONG_NAME = 'timeseries_name';
+    private const TYPE_SPECIFIER_SHORT_NAME = 'timeseries_short';
 
     /**
      * @var string
