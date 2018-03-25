@@ -15,8 +15,8 @@ class SprintfParser implements MessageParserInterface
      */
     public function parseMessage(string $message, array $values) : MessageMetaData
     {
-        $parsedMessage = preg_split('/(%[%]*(?:[\d]+\$)*\.?[0-9]*[a-z0-9_]*)/i', $message, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
-        $typeSpecifiers = preg_grep('/(^%(?:[\d]+\$)*\.?[0-9]*[a-z0-9_]+)/i', (array) $parsedMessage);
+        $parsedMessage = preg_split('/(%[%]?(?:[0-9]+\$)?\.?[0-9]*[a-z0-9_]*)/i', $message, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
+        $typeSpecifiers = preg_grep('/(^%(?:[0-9]+\$)?\.?[0-9]*[a-z0-9_]+)/i', (array) $parsedMessage);
 
         // Change escaped % to regular %
         $parsedMessage = preg_replace('/^%%/', '%', $parsedMessage);
