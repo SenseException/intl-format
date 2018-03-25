@@ -29,15 +29,19 @@ class SprintfParserTest extends TestCase
      */
     public function testArgumentSwappingOrder()
     {
-        $message = '%3$swap %2$swap %1$swap';
+        $message = '%10$swap %9$swap %8$swap %7$swap %6$swap %5$swap %4$swap %3$swap %2$swap %1$swap';
 
         $parser = new SprintfParser();
 
-        $parsed = $parser->parseMessage($message, ['value1', 'value2', 'value3']);
+        $parsed = $parser->parseMessage($message, ['value1', 'value2', 'value3', 'value4', 'value5', 'value6', 'value7', 'value8', 'value9', 'value10']);
 
-        self::assertSame([0 => 'swap', 2 => 'swap', 4 => 'swap'], $parsed->typeSpecifiers, 'wrong type specifier');
-        self::assertSame(['value3', 'value2', 'value1'], $parsed->values, 'Wrong values');
-        self::assertSame(['%3$swap', ' ', '%2$swap', ' ', '%1$swap'], $parsed->parsedMessage, 'Wrong parsed message');
+        $values = ['value10', 'value9', 'value8', 'value7', 'value6', 'value5', 'value4', 'value3', 'value2', 'value1'];
+        $typeSpecifier = [0 => 'swap', 2 => 'swap', 4 => 'swap', 6 => 'swap', 8 => 'swap', 10 => 'swap', 12 => 'swap', 14 => 'swap', 16 => 'swap', 18 => 'swap'];
+        $parsedMessage = ['%10$swap', ' ', '%9$swap', ' ', '%8$swap', ' ', '%7$swap', ' ', '%6$swap', ' ', '%5$swap', ' ', '%4$swap', ' ', '%3$swap', ' ', '%2$swap', ' ', '%1$swap'];
+
+        self::assertSame($typeSpecifier, $parsed->typeSpecifiers, 'wrong type specifier');
+        self::assertSame($values, $parsed->values, 'Wrong values');
+        self::assertSame($parsedMessage, $parsed->parsedMessage, 'Wrong parsed message');
     }
 
     /**
