@@ -6,7 +6,7 @@ namespace Budgegeria\IntlFormat\Exception;
 class InvalidTypeSpecifierException extends IntlFormatException
 {
     /**
-     * @param $typeSpecifier
+     * @param string $typeSpecifier
      * @return InvalidTypeSpecifierException
      */
     public static function unmatchedTypeSpecifier(string $typeSpecifier) : self
