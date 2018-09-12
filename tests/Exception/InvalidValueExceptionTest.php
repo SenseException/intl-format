@@ -26,6 +26,15 @@ class InvalidValueExceptionTest extends TestCase
         throw InvalidValueException::invalidLocale('foo');
     }
 
+    public function testInvalidReturnType()
+    {
+        $this->expectException(InvalidValueException::class);
+        $this->expectExceptionCode(30);
+        $this->expectExceptionMessage('Unexpected return type "integer"');
+
+        throw InvalidValueException::invalidReturnType(1);
+    }
+
     public function testParentClass()
     {
         self::assertInstanceOf(IntlFormatException::class, new InvalidValueException());

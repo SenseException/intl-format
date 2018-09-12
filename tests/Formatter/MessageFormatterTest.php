@@ -91,10 +91,10 @@ class MessageFormatterTest extends TestCase
      */
     public function testFormatValueNumberTypeCheck($value)
     {
+        $messageFormatter = MessageFormatter::createNumberValueFormatter('en_US');
+
         $this->expectException(InvalidValueException::class);
         $this->expectExceptionCode(10);
-
-        $messageFormatter = MessageFormatter::createNumberValueFormatter('en_US');
 
         $messageFormatter->formatValue('integer', $value);
     }
@@ -104,12 +104,22 @@ class MessageFormatterTest extends TestCase
      */
     public function testFormatValueDateTypeCheck($value)
     {
+        $messageFormatter = MessageFormatter::createDateValueFormatter('en_US');
+
         $this->expectException(InvalidValueException::class);
         $this->expectExceptionCode(10);
 
-        $messageFormatter = MessageFormatter::createDateValueFormatter('en_US');
-
         $messageFormatter->formatValue('date', $value);
+    }
+
+    public function testFormatValueInvalidReturnType()
+    {
+        $messageFormatter = new MessageFormatter('de_DE', ['a' => 'a'], function () {});
+
+        $this->expectException(InvalidValueException::class);
+        $this->expectExceptionCode(30);
+
+        $messageFormatter->formatValue('a', []);
     }
 
     /**

@@ -46,7 +46,12 @@ class MessageFormatter implements FormatterInterface
         $valueTypeCheck = $this->valueTypeCheck;
         $valueTypeCheck($value);
 
-        return Message::formatMessage($this->locale, $this->messageFormats[$typeSpecifier], [$value]);
+        $formattedValue = Message::formatMessage($this->locale, $this->messageFormats[$typeSpecifier], [$value]);
+        if (false === $formattedValue) {
+            throw InvalidValueException::invalidReturnType($formattedValue);
+        }
+
+        return $formattedValue;
     }
 
     /**
