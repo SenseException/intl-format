@@ -57,7 +57,7 @@ class ExceptionFormatterTest extends TestCase
     }
 
     /**
-     * @return string[]
+     * @return string[][]
      */
     public function provideTypeSpecifier()
     {

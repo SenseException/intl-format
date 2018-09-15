@@ -8,6 +8,7 @@ use Budgegeria\IntlFormat\Formatter\FormatterInterface;
 use Budgegeria\IntlFormat\IntlFormat;
 use Budgegeria\IntlFormat\MessageParser\MessageMetaData;
 use Budgegeria\IntlFormat\MessageParser\MessageParserInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class IntlFormatTest extends TestCase
@@ -19,6 +20,7 @@ class IntlFormatTest extends TestCase
     {
         $message = 'Hello "{{world}}", how are you';
 
+        /** @var FormatterInterface|MockObject $formatter */
         $formatter = $this->createMock(FormatterInterface::class);
         $formatter->expects($this->once())
             ->method('has')
@@ -35,6 +37,7 @@ class IntlFormatTest extends TestCase
             ['island']
         );
 
+        /** @var MessageParserInterface|MockObject $parser */
         $parser = $this->createMock(MessageParserInterface::class);
         $parser->expects($this->once())
             ->method('parseMessage')
@@ -53,6 +56,7 @@ class IntlFormatTest extends TestCase
     {
         $message = 'Hello {{world}}, Today is {{date}}';
 
+        /** @var FormatterInterface|MockObject $formatter */
         $formatter = $this->createMock(FormatterInterface::class);
         $formatter->expects($this->atLeastOnce())
             ->method('has')
@@ -73,6 +77,7 @@ class IntlFormatTest extends TestCase
             ['island', $dateTime]
         );
 
+        /** @var MessageParserInterface|MockObject $parser */
         $parser = $this->createMock(MessageParserInterface::class);
         $parser->expects($this->once())
             ->method('parseMessage')
@@ -100,6 +105,7 @@ class IntlFormatTest extends TestCase
             ['island']
         );
 
+        /** @var MessageParserInterface|MockObject $parser */
         $parser = $this->createMock(MessageParserInterface::class);
         $parser->expects($this->once())
             ->method('parseMessage')
@@ -126,6 +132,7 @@ class IntlFormatTest extends TestCase
             ['island']
         );
 
+        /** @var MessageParserInterface|MockObject $parser */
         $parser = $this->createMock(MessageParserInterface::class);
         $parser->expects($this->once())
             ->method('parseMessage')
