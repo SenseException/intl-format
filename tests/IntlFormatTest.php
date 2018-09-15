@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Budgegeria\IntlFormat\Tests;
 
@@ -7,6 +8,7 @@ use Budgegeria\IntlFormat\Formatter\FormatterInterface;
 use Budgegeria\IntlFormat\IntlFormat;
 use Budgegeria\IntlFormat\MessageParser\MessageMetaData;
 use Budgegeria\IntlFormat\MessageParser\MessageParserInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class IntlFormatTest extends TestCase
@@ -14,10 +16,11 @@ class IntlFormatTest extends TestCase
     /**
      * Basic format test
      */
-    public function testFormat()
+    public function testFormat() : void
     {
         $message = 'Hello "{{world}}", how are you';
 
+        /** @var FormatterInterface|MockObject $formatter */
         $formatter = $this->createMock(FormatterInterface::class);
         $formatter->expects($this->once())
             ->method('has')
@@ -34,6 +37,7 @@ class IntlFormatTest extends TestCase
             ['island']
         );
 
+        /** @var MessageParserInterface|MockObject $parser */
         $parser = $this->createMock(MessageParserInterface::class);
         $parser->expects($this->once())
             ->method('parseMessage')
@@ -48,10 +52,11 @@ class IntlFormatTest extends TestCase
     /**
      * %date is an unknown type specifier in this test.
      */
-    public function testMissingTypeSpecifier()
+    public function testMissingTypeSpecifier() : void
     {
         $message = 'Hello {{world}}, Today is {{date}}';
 
+        /** @var FormatterInterface|MockObject $formatter */
         $formatter = $this->createMock(FormatterInterface::class);
         $formatter->expects($this->atLeastOnce())
             ->method('has')
@@ -72,6 +77,7 @@ class IntlFormatTest extends TestCase
             ['island', $dateTime]
         );
 
+        /** @var MessageParserInterface|MockObject $parser */
         $parser = $this->createMock(MessageParserInterface::class);
         $parser->expects($this->once())
             ->method('parseMessage')
@@ -86,7 +92,7 @@ class IntlFormatTest extends TestCase
     /**
      * More type specifier than values.
      */
-    public function testInvalidValueTypeSpecifierCount()
+    public function testInvalidValueTypeSpecifierCount() : void
     {
         $this->expectException(InvalidTypeSpecifierException::class);
         $this->expectExceptionCode(40);
@@ -99,6 +105,7 @@ class IntlFormatTest extends TestCase
             ['island']
         );
 
+        /** @var MessageParserInterface|MockObject $parser */
         $parser = $this->createMock(MessageParserInterface::class);
         $parser->expects($this->once())
             ->method('parseMessage')
@@ -112,7 +119,7 @@ class IntlFormatTest extends TestCase
     /**
      * Less type specifier than values.
      */
-    public function testEscapedInvalidTypeSpecifierCount()
+    public function testEscapedInvalidTypeSpecifierCount() : void
     {
         $this->expectException(InvalidTypeSpecifierException::class);
         $this->expectExceptionCode(40);
@@ -125,6 +132,7 @@ class IntlFormatTest extends TestCase
             ['island']
         );
 
+        /** @var MessageParserInterface|MockObject $parser */
         $parser = $this->createMock(MessageParserInterface::class);
         $parser->expects($this->once())
             ->method('parseMessage')

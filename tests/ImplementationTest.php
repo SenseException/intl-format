@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Budgegeria\IntlFormat\Tests;
 
@@ -11,7 +12,7 @@ class ImplementationTest extends TestCase
     /**
      * @dataProvider formattingWorksProvider
      */
-    public function testFormattingWorks($expected, $message, ...$args)
+    public function testFormattingWorks($expected, $message, ...$args) : void
     {
         $formatter = [
             new SprintfFormatter(),
@@ -22,7 +23,10 @@ class ImplementationTest extends TestCase
         self::assertSame($expected, $intlFormat->format($message, ...$args));
     }
 
-    public function formattingWorksProvider()
+    /**
+     * @return mixed[][]
+     */
+    public function formattingWorksProvider() : array
     {
         return [
             ['there are 12 monkeys on the 002 trees', 'there are %d %s on the %03d trees', 12, 'monkeys', 2],

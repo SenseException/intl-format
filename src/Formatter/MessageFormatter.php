@@ -8,6 +8,8 @@ use Closure;
 use DateTimeInterface;
 use IntlCalendar;
 use MessageFormatter as Message;
+use function is_numeric;
+use function is_int;
 
 class MessageFormatter implements FormatterInterface
 {
@@ -46,7 +48,12 @@ class MessageFormatter implements FormatterInterface
         $valueTypeCheck = $this->valueTypeCheck;
         $valueTypeCheck($value);
 
-        return Message::formatMessage($this->locale, $this->messageFormats[$typeSpecifier], [$value]);
+        $formattedValue = Message::formatMessage($this->locale, $this->messageFormats[$typeSpecifier], [$value]);
+        if (false === $formattedValue) {
+            throw InvalidValueException::invalidReturnType($formattedValue);
+        }
+
+        return $formattedValue;
     }
 
     /**

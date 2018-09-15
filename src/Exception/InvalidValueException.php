@@ -3,6 +3,10 @@ declare(strict_types = 1);
 
 namespace Budgegeria\IntlFormat\Exception;
 
+use function gettype;
+use function implode;
+use function sprintf;
+
 class InvalidValueException extends IntlFormatException
 {
     /**
@@ -26,5 +30,14 @@ class InvalidValueException extends IntlFormatException
     public static function invalidLocale(string $locale) : self
     {
         return new self(sprintf('"%s" is not a valid locale.', $locale), 20);
+    }
+
+    /**
+     * @param mixed $value
+     * @return InvalidValueException
+     */
+    public static function invalidReturnType($value) : self
+    {
+        return new self(sprintf('Unexpected return type "%s"', gettype($value)), 30);
     }
 }

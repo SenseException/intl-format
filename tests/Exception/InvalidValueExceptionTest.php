@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 class InvalidValueExceptionTest extends TestCase
 {
-    public function testInvalidValueType()
+    public function testInvalidValueType() : void
     {
         $this->expectException(InvalidValueException::class);
         $this->expectExceptionCode(10);
@@ -17,7 +17,7 @@ class InvalidValueExceptionTest extends TestCase
         throw InvalidValueException::invalidValueType('foo', ['integer', 'double']);
     }
 
-    public function testInvalidLocale()
+    public function testInvalidLocale() : void
     {
         $this->expectException(InvalidValueException::class);
         $this->expectExceptionCode(20);
@@ -26,7 +26,16 @@ class InvalidValueExceptionTest extends TestCase
         throw InvalidValueException::invalidLocale('foo');
     }
 
-    public function testParentClass()
+    public function testInvalidReturnType() : void
+    {
+        $this->expectException(InvalidValueException::class);
+        $this->expectExceptionCode(30);
+        $this->expectExceptionMessage('Unexpected return type "integer"');
+
+        throw InvalidValueException::invalidReturnType(1);
+    }
+
+    public function testParentClass() : void
     {
         self::assertInstanceOf(IntlFormatException::class, new InvalidValueException());
     }

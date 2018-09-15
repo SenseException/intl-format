@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Budgegeria\IntlFormat\Tests;
 
@@ -10,14 +11,14 @@ use PHPUnit\Framework\TestCase;
 
 class FactoryTest extends TestCase
 {
-    public function testCreateIntlFormat()
+    public function testCreateIntlFormat() : void
     {
         $intlFormat = (new Factory())->createIntlFormat('de_DE');
 
         self::assertInstanceOf(IntlFormat::class, $intlFormat);
     }
 
-    public function testCreateIntlFormatIntegration()
+    public function testCreateIntlFormatIntegration() : void
     {
         $intlFormat = (new Factory())->createIntlFormat('en_US');
         $date = new DateTime();

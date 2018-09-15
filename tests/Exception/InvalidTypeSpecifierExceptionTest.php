@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 class InvalidTypeSpecifierExceptionTest extends TestCase
 {
-    public function testUnmatchedTypeSpecifier()
+    public function testUnmatchedTypeSpecifier() : void
     {
         $this->expectException(InvalidTypeSpecifierException::class);
         $this->expectExceptionCode(10);
@@ -17,7 +17,7 @@ class InvalidTypeSpecifierExceptionTest extends TestCase
         throw InvalidTypeSpecifierException::unmatchedTypeSpecifier('%test');
     }
 
-    public function testNoTypeSpecifier()
+    public function testNoTypeSpecifier() : void
     {
         $this->expectException(InvalidTypeSpecifierException::class);
         $this->expectExceptionCode(20);
@@ -26,7 +26,7 @@ class InvalidTypeSpecifierExceptionTest extends TestCase
         throw InvalidTypeSpecifierException::noTypeSpecifier();
     }
 
-    public function testInvalidTypeSpecifier()
+    public function testInvalidTypeSpecifier() : void
     {
         $this->expectException(InvalidTypeSpecifierException::class);
         $this->expectExceptionCode(30);
@@ -35,7 +35,7 @@ class InvalidTypeSpecifierExceptionTest extends TestCase
         throw InvalidTypeSpecifierException::invalidTypeSpecifier('%0$test');
     }
 
-    public function testInvalidTypeSpecifierCount()
+    public function testInvalidTypeSpecifierCount() : void
     {
         $this->expectException(InvalidTypeSpecifierException::class);
         $this->expectExceptionCode(40);
@@ -44,7 +44,7 @@ class InvalidTypeSpecifierExceptionTest extends TestCase
         throw InvalidTypeSpecifierException::invalidTypeSpecifierCount(1, 2);
     }
 
-    public function testParentClass()
+    public function testParentClass() : void
     {
         self::assertInstanceOf(IntlFormatException::class, new InvalidTypeSpecifierException());
     }

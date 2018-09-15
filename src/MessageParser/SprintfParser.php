@@ -4,19 +4,31 @@ declare(strict_types = 1);
 namespace Budgegeria\IntlFormat\MessageParser;
 
 use Budgegeria\IntlFormat\Exception\InvalidTypeSpecifierException;
+use function array_values;
+use function preg_grep;
+use function preg_match;
+use function preg_replace;
+use function preg_split;
+use const PREG_SPLIT_DELIM_CAPTURE;
+use const PREG_SPLIT_NO_EMPTY;
 
 class SprintfParser implements MessageParserInterface
 {
     /**
      * @param string $message
      * @param array $values
-     * @throws \Budgegeria\IntlFormat\Exception\InvalidTypeSpecifierException
+     * @throws InvalidTypeSpecifierException
      * @return MessageMetaData
      */
     public function parseMessage(string $message, array $values) : MessageMetaData
     {
-        $parsedMessage = preg_split('/(%[%]?(?:[0-9]+\$)?\.?[0-9]*[a-z0-9_]*)/i', $message, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
-        $typeSpecifiers = preg_grep('/(^%(?:[0-9]+\$)?\.?[0-9]*[a-z0-9_]+)/i', (array) $parsedMessage);
+        $parsedMessage = (array) preg_split(
+            '/(%[%]?(?:[0-9]+\$)?\.?[0-9]*[a-z0-9_]*)/i',
+            $message,
+            -1,
+            PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE
+        );
+        $typeSpecifiers = preg_grep('/(^%(?:[0-9]+\$)?\.?[0-9]*[a-z0-9_]+)/i', $parsedMessage);
 
         // Change escaped % to regular %
         $parsedMessage = preg_replace('/^%%/', '%', $parsedMessage);
