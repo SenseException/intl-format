@@ -39,16 +39,11 @@ class PrecisionNumberFormatter implements FormatterInterface
 
         $fractionalDigits = str_repeat('0', (int) $matches[1]);
 
-        $formattedValue = Message::formatMessage(
+        return (string) Message::formatMessage(
             $this->locale,
             sprintf('{0,number,#,##0.%s}', $fractionalDigits),
             [$value]
         );
-        if (false === $formattedValue) {
-            throw InvalidValueException::invalidReturnType($formattedValue);
-        }
-
-        return $formattedValue;
     }
 
     /**
