@@ -14,17 +14,18 @@ use PHPUnit\Framework\TestCase;
 class TimeZoneFormatterTest extends TestCase
 {
     /**
-     * @param string $typeSpecifier
      * @dataProvider provideTypeSpecifier
+     *
+     * @param string $typeSpecifier
      */
-    public function testHas($typeSpecifier)
+    public function testHas(string $typeSpecifier) : void
     {
         $formatter = new TimeZoneFormatter('en_US');
 
         self::assertTrue($formatter->has($typeSpecifier));
     }
 
-    public function testHasIsFalse()
+    public function testHasIsFalse() : void
     {
         $messageFormatter = new TimeZoneFormatter('de_DE');
 
@@ -33,8 +34,12 @@ class TimeZoneFormatterTest extends TestCase
 
     /**
      * @dataProvider provideTimeZones
+     *
+     * @param string $expected
+     * @param string $typeSpecifier
+     * @param mixed  $value
      */
-    public function testFormatValue($expected, $typeSpecifier, $value)
+    public function testFormatValue(string $expected, string $typeSpecifier, $value) : void
     {
         $formatter = new TimeZoneFormatter('en_US');
 
@@ -43,8 +48,10 @@ class TimeZoneFormatterTest extends TestCase
 
     /**
      * @dataProvider provideTypeSpecifier
+     *
+     * @param string $typeSpecifier
      */
-    public function testFormatValueInvalidValue($typeSpecifier)
+    public function testFormatValueInvalidValue(string $typeSpecifier) : void
     {
         $this->expectException(InvalidValueException::class);
         $this->expectExceptionCode(10);
@@ -55,9 +62,9 @@ class TimeZoneFormatterTest extends TestCase
     }
 
     /**
-     * @return array
+     * @return string[][]
      */
-    public function provideTypeSpecifier()
+    public function provideTypeSpecifier() : array
     {
         return [
             'timeseries_id' => ['timeseries_id'],
@@ -67,9 +74,9 @@ class TimeZoneFormatterTest extends TestCase
     }
 
     /**
-     * @return array
+     * @return mixed[][]
      */
-    public function provideTimeZones()
+    public function provideTimeZones() : array
     {
         $datetime = new DateTime('2016-08-01', new DateTimeZone('US/Arizona'));
         $datetimeImmutable = new DateTimeImmutable('2016-05-01', new DateTimeZone('US/Arizona'));

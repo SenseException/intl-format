@@ -9,25 +9,32 @@ use PHPUnit\Framework\TestCase;
 class SprintfFormatterTest extends TestCase
 {
     /**
-     * @param string $typeSpecifier
      * @dataProvider provideTypeSpecifier
+     *
+     * @param string $typeSpecifier
      */
-    public function testHas($typeSpecifier)
+    public function testHas(string $typeSpecifier) : void
     {
         $formatter = new SprintfFormatter();
 
         self::assertTrue($formatter->has($typeSpecifier));
     }
 
-    /** @dataProvider provideTypeSpecifier */
-    public function testFormat($typeSpecifier, $value, $expected)
+    /**
+     * @dataProvider provideTypeSpecifier
+     *
+     * @param string $typeSpecifier
+     * @param mixed  $value
+     * @param string $expected
+     */
+    public function testFormat(string $typeSpecifier, $value, string $expected) : void
     {
         $formatter = new SprintfFormatter();
 
         self::assertEquals($expected, $formatter->formatValue($typeSpecifier, $value));
     }
 
-    public function testHasIsFalse()
+    public function testHasIsFalse() : void
     {
         $formatter = new SprintfFormatter();
 
@@ -35,9 +42,9 @@ class SprintfFormatterTest extends TestCase
     }
 
     /**
-     * @return array
+     * @return mixed[][]
      */
-    public function provideTypeSpecifier()
+    public function provideTypeSpecifier() : array
     {
         return [
             ['b', 11, '1011'],
@@ -54,10 +61,10 @@ class SprintfFormatterTest extends TestCase
             ["+'+12.4G", 1.2, '+++++++++1.2' ],
             ["+'+24.4g", 1.2, '+++++++++++++++++++++1.2' ],
             ["+'+24.4G", 1.2, '+++++++++++++++++++++1.2' ],
-            ["o", 12, '14'],
+            ['o', 12, '14'],
             ['s', 'test', 'test'],
-            ["u", -123, '18446744073709551493'],
-            ["x", 123, '7b'],
+            ['u', -123, '18446744073709551493'],
+            ['x', 123, '7b'],
             ['X', 123, '7B'],
         ];
     }

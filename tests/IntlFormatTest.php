@@ -16,7 +16,7 @@ class IntlFormatTest extends TestCase
     /**
      * Basic format test
      */
-    public function testFormat()
+    public function testFormat() : void
     {
         $message = 'Hello "{{world}}", how are you';
 
@@ -52,7 +52,7 @@ class IntlFormatTest extends TestCase
     /**
      * %date is an unknown type specifier in this test.
      */
-    public function testMissingTypeSpecifier()
+    public function testMissingTypeSpecifier() : void
     {
         $message = 'Hello {{world}}, Today is {{date}}';
 
@@ -92,7 +92,7 @@ class IntlFormatTest extends TestCase
     /**
      * More type specifier than values.
      */
-    public function testInvalidValueTypeSpecifierCount()
+    public function testInvalidValueTypeSpecifierCount() : void
     {
         $this->expectException(InvalidTypeSpecifierException::class);
         $this->expectExceptionCode(40);
@@ -119,7 +119,7 @@ class IntlFormatTest extends TestCase
     /**
      * Less type specifier than values.
      */
-    public function testEscapedInvalidTypeSpecifierCount()
+    public function testEscapedInvalidTypeSpecifierCount() : void
     {
         $this->expectException(InvalidTypeSpecifierException::class);
         $this->expectExceptionCode(40);
