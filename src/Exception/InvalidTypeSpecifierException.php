@@ -3,6 +3,8 @@ declare(strict_types = 1);
 
 namespace Budgegeria\IntlFormat\Exception;
 
+use function sprintf;
+
 class InvalidTypeSpecifierException extends IntlFormatException
 {
     /**

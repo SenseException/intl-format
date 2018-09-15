@@ -3,6 +3,10 @@ declare(strict_types = 1);
 
 namespace Budgegeria\IntlFormat\Exception;
 
+use function gettype;
+use function implode;
+use function sprintf;
+
 class InvalidValueException extends IntlFormatException
 {
     /**

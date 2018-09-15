@@ -5,6 +5,10 @@ namespace Budgegeria\IntlFormat\Formatter;
 
 use Budgegeria\IntlFormat\Exception\InvalidValueException;
 use MessageFormatter as Message;
+use function is_numeric;
+use function preg_match;
+use function sprintf;
+use function str_repeat;
 
 class PrecisionNumberFormatter implements FormatterInterface
 {

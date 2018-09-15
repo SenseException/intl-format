@@ -7,6 +7,9 @@ use Budgegeria\IntlFormat\Formatter\FormatterInterface;
 use Budgegeria\IntlFormat\Exception\InvalidTypeSpecifierException;
 use Budgegeria\IntlFormat\MessageParser\MessageParserInterface;
 use Budgegeria\IntlFormat\MessageParser\SprintfParser;
+use function array_reverse;
+use function array_shift;
+use function count;
 
 class IntlFormat
 {

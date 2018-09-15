@@ -8,6 +8,8 @@ use Closure;
 use DateTimeInterface;
 use IntlCalendar;
 use MessageFormatter as Message;
+use function is_numeric;
+use function is_int;
 
 class MessageFormatter implements FormatterInterface
 {

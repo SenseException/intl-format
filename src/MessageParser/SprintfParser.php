@@ -4,6 +4,13 @@ declare(strict_types = 1);
 namespace Budgegeria\IntlFormat\MessageParser;
 
 use Budgegeria\IntlFormat\Exception\InvalidTypeSpecifierException;
+use function array_values;
+use function preg_grep;
+use function preg_match;
+use function preg_replace;
+use function preg_split;
+use const PREG_SPLIT_DELIM_CAPTURE;
+use const PREG_SPLIT_NO_EMPTY;
 
 class SprintfParser implements MessageParserInterface
 {

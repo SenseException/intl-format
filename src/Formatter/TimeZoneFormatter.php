@@ -3,11 +3,12 @@ declare(strict_types = 1);
 
 namespace Budgegeria\IntlFormat\Formatter;
 
-use IntlCalendar;
-use IntlTimeZone;
+use Budgegeria\IntlFormat\Exception\InvalidValueException;
 use DateTimeInterface;
 use DateTimeZone;
-use Budgegeria\IntlFormat\Exception\InvalidValueException;
+use IntlCalendar;
+use IntlTimeZone;
+use function in_array;
 
 class TimeZoneFormatter implements FormatterInterface
 {
