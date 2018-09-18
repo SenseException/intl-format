@@ -20,21 +20,6 @@
                 "*"
             ]
         },
-        "CastArray": {
-            "ignore": [
-                "Budgegeria\\IntlFormat\\MessageParser\\SprintfParser::parseMessage"
-            ]
-        },
-        "OneZeroInteger": {
-            "ignore": [
-                "Budgegeria\\IntlFormat\\MessageParser\\SprintfParser::parseMessage"
-            ]
-        },
-        "CastString": {
-            "ignore": [
-                "Budgegeria\\IntlFormat\\Formatter\\PrecisionNumberFormatter::formatValue"
-            ]
-        },
         "TrueValue": {
             "ignore": [
                 "Budgegeria\\IntlFormat\\Formatter\\TimeZoneFormatter::has"
