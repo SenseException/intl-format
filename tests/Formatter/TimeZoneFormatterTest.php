@@ -101,6 +101,7 @@ class TimeZoneFormatterTest extends TestCase
 
             'timeseries_name_dst_start' => ['Central European Summer Time', 'timeseries_name', new DateTime('2016-03-27 02:00:00', new DateTimeZone('Europe/Berlin'))],
             'timeseries_name_dst_end' => ['Central European Summer Time', 'timeseries_name', new DateTime('2016-10-30 01:59:59', new DateTimeZone('Europe/Berlin'))],
+            'timeseries_name_after_dst' => ['Central European Standard Time', 'timeseries_name', new DateTime('2016-10-30 02:59:59', new DateTimeZone('Europe/Berlin'))],
         ];
     }
 }
