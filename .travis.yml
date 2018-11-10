@@ -1,11 +1,9 @@
 language: php
 
-dist: xenial
-
 php:
   - '7.1'
   - '7.2'
-  - '7.3.0RC1'
+  - '7.3'
   - nightly
 
 before_install:
@@ -23,9 +21,4 @@ matrix:
   fast_finish: true
   allow_failures:
     - php: nightly
-    - php: '7.3.0RC1'
-
-addons:
-  apt:
-    packages:
-      - libzip4
+    - php: '7.3'
