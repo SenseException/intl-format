@@ -41,9 +41,9 @@ class MessageMetaData
     public $values = [];
 
     /**
-     * @param array $parsedMessage
-     * @param array $typeSpecifiers
-     * @param array $values
+     * @param string[] $parsedMessage
+     * @param string[] $typeSpecifiers
+     * @param mixed[] $values
      */
     public function __construct(array $parsedMessage, array $typeSpecifiers, array $values)
     {

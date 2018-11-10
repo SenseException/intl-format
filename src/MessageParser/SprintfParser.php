@@ -16,13 +16,14 @@ class SprintfParser implements MessageParserInterface
 {
     /**
      * @param string $message
-     * @param array $values
+     * @param mixed[] $values
      * @throws InvalidTypeSpecifierException
      * @return MessageMetaData
      */
     public function parseMessage(string $message, array $values) : MessageMetaData
     {
-        $parsedMessage = (array) preg_split(
+        /** @var string[] $parsedMessage */
+        $parsedMessage = preg_split(
             '/(%[%]?(?:[0-9]+\$)?\.?[0-9]*[a-z0-9_]*)/i',
             $message,
             -1,
@@ -31,11 +32,13 @@ class SprintfParser implements MessageParserInterface
         $typeSpecifiers = preg_grep('/(^%(?:[0-9]+\$)?\.?[0-9]*[a-z0-9_]+)/i', $parsedMessage);
 
         // Change escaped % to regular %
+        /** @var string[] $parsedMessage */
         $parsedMessage = preg_replace('/^%%/', '%', $parsedMessage);
 
         $values = $this->swapArguments($typeSpecifiers, $values);
 
         // Remove % and value position from type specifiers after argument swapping
+        /** @var string[] $typeSpecifiers */
         $typeSpecifiers = preg_replace('/^%([0-9]+\$)?/', '', $typeSpecifiers);
 
         return new MessageMetaData($parsedMessage, $typeSpecifiers, $values);
@@ -43,8 +46,8 @@ class SprintfParser implements MessageParserInterface
 
     /**
      * @param string[] $typeSpecifiers
-     * @param array $values
-     * @return array
+     * @param mixed[] $values
+     * @return string[]
      * @throws InvalidTypeSpecifierException
      */
     private function swapArguments(array $typeSpecifiers, array $values) : array
