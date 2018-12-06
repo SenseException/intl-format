@@ -32,5 +32,6 @@ class FactoryTest extends TestCase
         self::assertSame('I is 5:30 AM on my clock.', $intlFormat->format('I is %time_short on my clock.', $date));
         self::assertSame('The timezone id is US/Arizona.', $intlFormat->format('The timezone id is %timeseries_id.', $date));
         self::assertSame('I am from Italy.', $intlFormat->format('I am from %region.', 'it_IT'));
+        self::assertSame('It is 10%.', $intlFormat->format('It is 10%percent_symbol.', 'it_IT'));
     }
 }

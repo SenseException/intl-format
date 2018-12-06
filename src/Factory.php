@@ -6,6 +6,7 @@ namespace Budgegeria\IntlFormat;
 use Budgegeria\IntlFormat\Formatter\LocaleFormatter;
 use Budgegeria\IntlFormat\Formatter\MessageFormatter;
 use Budgegeria\IntlFormat\Formatter\PrecisionNumberFormatter;
+use Budgegeria\IntlFormat\Formatter\SymbolFormatter;
 use Budgegeria\IntlFormat\Formatter\TimeZoneFormatter;
 
 class Factory
@@ -22,6 +23,7 @@ class Factory
             new PrecisionNumberFormatter($locale),
             new TimeZoneFormatter($locale),
             new LocaleFormatter($locale),
+            new SymbolFormatter(),
         ];
 
         return new IntlFormat($formatter);
