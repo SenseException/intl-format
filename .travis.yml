@@ -15,10 +15,9 @@ install:
 script:
   - vendor/bin/phpunit
   - vendor/bin/phpstan analyse
-  - vendor/bin/infection --min-msi=95
+  - phpdbg -qrr vendor/bin/infection --min-msi=95
 
 matrix:
   fast_finish: true
   allow_failures:
     - php: nightly
-    - php: '7.3'
