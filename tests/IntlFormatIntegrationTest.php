@@ -21,11 +21,11 @@ class IntlFormatIntegrationTest extends TestCase
 
         /** @var FormatterInterface|MockObject $formatter */
         $formatter = $this->createMock(FormatterInterface::class);
-        $formatter->expects($this->once())
+        $formatter->expects(self::once())
             ->method('has')
             ->with('world')
             ->willReturn(true);
-        $formatter->expects($this->once())
+        $formatter->expects(self::once())
             ->method('formatValue')
             ->with('world', 'island')
             ->willReturn('island');
@@ -47,11 +47,11 @@ class IntlFormatIntegrationTest extends TestCase
     {
         /** @var FormatterInterface|MockObject $formatter */
         $formatter = $this->createMock(FormatterInterface::class);
-        $formatter->expects($this->once())
+        $formatter->expects(self::once())
             ->method('has')
             ->with('world')
             ->willReturn(true);
-        $formatter->expects($this->once())
+        $formatter->expects(self::once())
             ->method('formatValue')
             ->with('world', 'island')
             ->willReturn('island');
@@ -70,11 +70,11 @@ class IntlFormatIntegrationTest extends TestCase
 
         /** @var FormatterInterface|MockObject $formatter */
         $formatter = $this->createMock(FormatterInterface::class);
-        $formatter->expects($this->atLeastOnce())
+        $formatter->expects(self::atLeastOnce())
             ->method('has')
             ->with('swap')
             ->willReturn(true);
-        $formatter->expects($this->atLeastOnce())
+        $formatter->expects(self::atLeastOnce())
             ->method('formatValue')
             ->with('swap', Assert::anything())
             ->willReturnOnConsecutiveCalls('value1', 'value2', 'value1');
@@ -94,11 +94,11 @@ class IntlFormatIntegrationTest extends TestCase
 
         /** @var FormatterInterface|MockObject $formatter */
         $formatter = $this->createMock(FormatterInterface::class);
-        $formatter->expects($this->atLeastOnce())
+        $formatter->expects(self::atLeastOnce())
             ->method('has')
             ->with('swap')
             ->willReturn(true);
-        $formatter->expects($this->atLeastOnce())
+        $formatter->expects(self::atLeastOnce())
             ->method('formatValue')
             ->with('swap', Assert::anything())
             ->willReturnOnConsecutiveCalls('value3', 'value2', 'value1');
@@ -118,13 +118,13 @@ class IntlFormatIntegrationTest extends TestCase
 
         /** @var FormatterInterface|MockObject $formatter */
         $formatter = $this->createMock(FormatterInterface::class);
-        $formatter->expects($this->atLeastOnce())
+        $formatter->expects(self::atLeastOnce())
             ->method('has')
             ->willReturnMap([
                 ['world', true],
                 ['date', false]
             ]);
-        $formatter->expects($this->once())
+        $formatter->expects(self::once())
             ->method('formatValue')
             ->with('world', 'island')
             ->willReturn('island');
