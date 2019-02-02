@@ -1,3 +1,11 @@
+# Upgrade to 1.4
+
+## New Formatters added
+
+New Formatter class added:
+
+ * `Budgegeria\IntlFormat\Formatter\CurrencySymbolFormatter`
+
 # Upgrade to 1.3
 
 ## [Security] Possible ReDoS vulnerability fixed
