@@ -46,4 +46,27 @@ class CurrencySymbolFormatterTest extends TestCase
 
         $formatter->formatValue('currency_symbol', null);
     }
+
+    /**
+     * @dataProvider provideLocales
+     *
+     * @param string $locale
+     */
+    public function testFormatValueWithLocaleKeywords(string $locale) : void
+    {
+        $formatter = new CurrencySymbolFormatter($locale);
+
+        self::assertSame('£GB', $formatter->formatValue('currency_symbol', 'GBP'));
+        self::assertSame('€', $formatter->formatValue('currency_symbol', ''));
+    }
+
+    public function provideLocales() : array
+    {
+        return [
+            ['fr_FR@currency=USD;collation=phonebook'],
+            ['fr_FR@collation=phonebook;currency=USD'],
+            ['fr_FR@calendar=islamic-civil;currency=USD;collation=phonebook'],
+            ['fr_FR@currency=USD'],
+        ];
+    }
 }
