@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Budgegeria\IntlFormat\Tests\Exception;
 
 use Budgegeria\IntlFormat\Exception\IntlFormatException;
