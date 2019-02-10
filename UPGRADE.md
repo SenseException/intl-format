@@ -1,3 +1,9 @@
+# Upgrade to 1.5
+
+## Set minimum PHP requirement to 7.2
+
+You need to update your PHP version.
+
 # Upgrade to 1.4
 
 ## New Formatters added
