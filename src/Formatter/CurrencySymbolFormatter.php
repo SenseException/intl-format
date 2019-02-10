@@ -28,7 +28,7 @@ class CurrencySymbolFormatter implements FormatterInterface
      */
     public function __construct(string $locale)
     {
-        if (strpos($locale, '@') > 0) {
+        if (false !== strpos($locale, '@')) {
             $localeParts = explode('@', $locale);
             $keywords = explode(';', $localeParts[1]);
 
