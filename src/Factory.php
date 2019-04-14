@@ -9,6 +9,7 @@ use Budgegeria\IntlFormat\Formatter\LocaleFormatter;
 use Budgegeria\IntlFormat\Formatter\MessageFormatter;
 use Budgegeria\IntlFormat\Formatter\PrecisionNumberFormatter;
 use Budgegeria\IntlFormat\Formatter\TimeZoneFormatter;
+use Budgegeria\IntlFormat\MessageParser\SprintfParser;
 
 class Factory
 {
@@ -27,6 +28,6 @@ class Factory
             new CurrencySymbolFormatter($locale),
         ];
 
-        return new IntlFormat($formatter);
+        return new IntlFormat($formatter, new SprintfParser());
     }
 }

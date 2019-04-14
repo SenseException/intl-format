@@ -6,6 +6,7 @@ namespace Budgegeria\IntlFormat\Tests;
 
 use Budgegeria\IntlFormat\Formatter\SprintfFormatter;
 use Budgegeria\IntlFormat\IntlFormat;
+use Budgegeria\IntlFormat\MessageParser\SprintfParser;
 use PHPUnit\Framework\TestCase;
 
 class ImplementationTest extends TestCase
@@ -19,7 +20,7 @@ class ImplementationTest extends TestCase
             new SprintfFormatter(),
         ];
 
-        $intlFormat = new IntlFormat($formatter);
+        $intlFormat = new IntlFormat($formatter, new SprintfParser());
 
         self::assertSame($expected, $intlFormat->format($message, ...$args));
     }

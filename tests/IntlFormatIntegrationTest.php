@@ -7,6 +7,7 @@ namespace Budgegeria\IntlFormat\Tests;
 use Budgegeria\IntlFormat\Exception\InvalidTypeSpecifierException;
 use Budgegeria\IntlFormat\Formatter\FormatterInterface;
 use Budgegeria\IntlFormat\IntlFormat;
+use Budgegeria\IntlFormat\MessageParser\SprintfParser;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -31,7 +32,7 @@ class IntlFormatIntegrationTest extends TestCase
             ->with('world', 'island')
             ->willReturn('island');
 
-        $intlFormat = new IntlFormat([$formatter]);
+        $intlFormat = new IntlFormat([$formatter], new SprintfParser());
 
         self::assertSame('Hello "island", how are you', $intlFormat->format($message, 'island'));
     }
@@ -57,7 +58,7 @@ class IntlFormatIntegrationTest extends TestCase
             ->with('world', 'island')
             ->willReturn('island');
 
-        $intlFormat = new IntlFormat([$formatter]);
+        $intlFormat = new IntlFormat([$formatter], new SprintfParser());
 
         self::assertSame($expected, $intlFormat->format($message, 'island'));
     }
@@ -80,7 +81,7 @@ class IntlFormatIntegrationTest extends TestCase
             ->with('swap', Assert::anything())
             ->willReturnOnConsecutiveCalls('value1', 'value2', 'value1');
 
-        $intlFormat = new IntlFormat([$formatter]);
+        $intlFormat = new IntlFormat([$formatter], new SprintfParser());
 
         $expected = 'value1 value2 value1';
         self::assertSame($expected, $intlFormat->format($message, 'value1', 'value2'));
@@ -104,7 +105,7 @@ class IntlFormatIntegrationTest extends TestCase
             ->with('swap', Assert::anything())
             ->willReturnOnConsecutiveCalls('value3', 'value2', 'value1');
 
-        $intlFormat = new IntlFormat([$formatter]);
+        $intlFormat = new IntlFormat([$formatter], new SprintfParser());
 
         $expected = 'value3 value2 value1';
         self::assertSame($expected, $intlFormat->format($message, 'value1', 'value2', 'value3'));
@@ -130,7 +131,7 @@ class IntlFormatIntegrationTest extends TestCase
             ->with('world', 'island')
             ->willReturn('island');
 
-        $intlFormat = new IntlFormat([$formatter]);
+        $intlFormat = new IntlFormat([$formatter], new SprintfParser());
 
         self::assertSame('Hello island, Today is %date', $intlFormat->format($message, 'island', new \DateTime()));
     }
@@ -145,7 +146,7 @@ class IntlFormatIntegrationTest extends TestCase
 
         $message = 'Hello %world, Today is %date';
 
-        $intlFormat = new IntlFormat([]);
+        $intlFormat = new IntlFormat([], new SprintfParser());
         $intlFormat->format($message, 'island');
     }
 
@@ -159,7 +160,7 @@ class IntlFormatIntegrationTest extends TestCase
 
         $message = 'Hello %%world';
 
-        $intlFormat = new IntlFormat([]);
+        $intlFormat = new IntlFormat([], new SprintfParser());
         $intlFormat->format($message, 'island');
     }
 
@@ -175,7 +176,7 @@ class IntlFormatIntegrationTest extends TestCase
 
         /** @var FormatterInterface|MockObject $formatter */
         $formatter = $this->createMock(FormatterInterface::class);
-        $intlFormat = new IntlFormat([$formatter]);
+        $intlFormat = new IntlFormat([$formatter], new SprintfParser());
 
         $intlFormat->format($message, 'island', new \DateTime());
     }
@@ -192,7 +193,7 @@ class IntlFormatIntegrationTest extends TestCase
 
         /** @var FormatterInterface|MockObject $formatter */
         $formatter = $this->createMock(FormatterInterface::class);
-        $intlFormat = new IntlFormat([$formatter]);
+        $intlFormat = new IntlFormat([$formatter], new SprintfParser());
 
         $intlFormat->format($message, 'island', new \DateTime());
     }
@@ -214,7 +215,7 @@ class IntlFormatIntegrationTest extends TestCase
         $formatter2->method('formatValue')
             ->willReturn('city');
 
-        $intlFormat = new IntlFormat([]);
+        $intlFormat = new IntlFormat([], new SprintfParser());
         $intlFormat->addFormatter($formatter1);
         $intlFormat->addFormatter($formatter2);
 
