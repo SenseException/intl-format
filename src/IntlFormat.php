@@ -7,12 +7,11 @@ namespace Budgegeria\IntlFormat;
 use Budgegeria\IntlFormat\Formatter\FormatterInterface;
 use Budgegeria\IntlFormat\Exception\InvalidTypeSpecifierException;
 use Budgegeria\IntlFormat\MessageParser\MessageParserInterface;
-use Budgegeria\IntlFormat\MessageParser\SprintfParser;
 use function array_reverse;
 use function array_shift;
 use function count;
 
-class IntlFormat
+final class IntlFormat implements IntlFormatInterface
 {
     /**
      * @var FormatterInterface[]
@@ -28,23 +27,16 @@ class IntlFormat
      * @param FormatterInterface[] $formatters
      * @param MessageParserInterface $messageParser
      */
-    public function __construct(array $formatters, MessageParserInterface $messageParser = null)
+    public function __construct(iterable $formatters, MessageParserInterface $messageParser)
     {
-        $this->messageParser = $messageParser ?? new SprintfParser();
+        $this->messageParser = $messageParser;
         foreach ($formatters as $formatter) {
             $this->addFormatter($formatter);
         }
     }
 
     /**
-     * Formats the given message.
-     *
-     * Formats the message by the given formatters.
-     *
-     * @param string $message Message string containing type specifier for the values
-     * @param mixed ...$values multiple values used for the message's type specifier
-     * @throws InvalidTypeSpecifierException
-     * @return string
+     * @inheritDoc
      */
     public function format(string $message, ...$values) : string
     {
@@ -74,7 +66,7 @@ class IntlFormat
     }
 
     /**
-     * @param FormatterInterface $formatter
+     * @inheritDoc
      */
     public function addFormatter(FormatterInterface $formatter) : void
     {

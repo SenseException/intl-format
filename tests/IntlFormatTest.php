@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Budgegeria\IntlFormat\Tests;
 
+use ArrayIterator;
 use Budgegeria\IntlFormat\Exception\InvalidTypeSpecifierException;
 use Budgegeria\IntlFormat\Formatter\FormatterInterface;
 use Budgegeria\IntlFormat\IntlFormat;
@@ -46,6 +47,42 @@ class IntlFormatTest extends TestCase
             ->willReturn($parsed);
 
         $intlFormat = new IntlFormat([$formatter], $parser);
+
+        self::assertSame('Hello "island", how are you', $intlFormat->format($message, 'island'));
+    }
+
+    /**
+     * Basic format test
+     */
+    public function testFormatWithIterator() : void
+    {
+        $message = 'Hello "{{world}}", how are you';
+
+        /** @var FormatterInterface|MockObject $formatter */
+        $formatter = $this->createMock(FormatterInterface::class);
+        $formatter->expects(self::once())
+            ->method('has')
+            ->with('world')
+            ->willReturn(true);
+        $formatter->expects(self::once())
+            ->method('formatValue')
+            ->with('world', 'island')
+            ->willReturn('island');
+
+        $parsed = new MessageMetaData(
+            ['Hello "', '{{world}}', '", how are you'],
+            [1 => 'world'],
+            ['island']
+        );
+
+        /** @var MessageParserInterface|MockObject $parser */
+        $parser = $this->createMock(MessageParserInterface::class);
+        $parser->expects(self::once())
+            ->method('parseMessage')
+            ->with($message, ['island'])
+            ->willReturn($parsed);
+
+        $intlFormat = new IntlFormat(new ArrayIterator([$formatter]), $parser);
 
         self::assertSame('Hello "island", how are you', $intlFormat->format($message, 'island'));
     }
