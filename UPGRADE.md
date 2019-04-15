@@ -1,3 +1,19 @@
+# Upgrade to 2.0
+
+## [BC-break] Changes in IntlFormat constructor
+
+First argument: Previously an array of instances implementing `FormatterInterface`,
+it now can be everything `iterable`.
+
+Second argument: An instance of `MessageParserInterface` has to be explicit
+injected.
+
+## Introduce interfaces for IntlFormat / IntlFormat class became final
+
+IntlFormat is now being `final`. For testing or implementation purposes,
+use the new interfaces `Budgegeria\IntlFormat\IntlFormatInterface` and
+`Budgegeria\IntlFormat\FormatterStorageInterface`.
+
 # Upgrade to 1.5
 
 ## Set minimum PHP requirement to 7.2
