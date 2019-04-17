@@ -14,6 +14,10 @@ IntlFormat is now being `final`. For testing or implementation purposes,
 use the new interfaces `Budgegeria\IntlFormat\IntlFormatInterface` and
 `Budgegeria\IntlFormat\FormatterStorageInterface`.
 
+## Use return type IntlFormatInterface instead IntlFormat in Factory
+
+The `Factory` uses IntlFormatInterface as return type now.
+
 # Upgrade to 1.5
 
 ## Set minimum PHP requirement to 7.2
