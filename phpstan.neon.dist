@@ -3,3 +3,5 @@ parameters:
     paths:
         - "%currentWorkingDirectory%/src/"
         - "%currentWorkingDirectory%/tests/"
+includes:
+    - vendor/phpstan/phpstan-phpunit/extension.neon
