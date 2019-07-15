@@ -71,7 +71,7 @@ class MessageFormatter implements FormatterInterface
      */
     public static function createNumberValueFormatter(string $locale) : MessageFormatter
     {
-        $valueTypeCheck = function($value) {
+        $valueTypeCheck = static function($value) : void {
             if (!is_numeric($value)) {
                 throw InvalidValueException::invalidValueType($value, ['integer', 'double']);
             }
@@ -96,7 +96,7 @@ class MessageFormatter implements FormatterInterface
      */
     public static function createDateValueFormatter(string $locale) : MessageFormatter
     {
-        $valueTypeCheck = function($value) {
+        $valueTypeCheck = static function($value) : void {
             if (!is_int($value) && !($value instanceof DateTimeInterface) && !($value instanceof IntlCalendar)) {
                 throw InvalidValueException::invalidValueType($value, ['integer', DateTimeInterface::class, IntlCalendar::class]);
             }

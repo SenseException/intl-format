@@ -17,19 +17,19 @@ class ExceptionFormatter implements FormatterInterface
     public function __construct()
     {
         $this->formatFunctions = [
-            'emessage' => function(Throwable $throwable) {
+            'emessage' => static function(Throwable $throwable) : string {
                 return $throwable->getMessage();
             },
-            'ecode' => function(Throwable $throwable) {
+            'ecode' => static function(Throwable $throwable) : int {
                 return $throwable->getCode();
             },
-            'efile' => function(Throwable $throwable) {
+            'efile' => static function(Throwable $throwable) : string {
                 return $throwable->getFile();
             },
-            'eline' => function(Throwable $throwable) {
+            'eline' => static function(Throwable $throwable) : int {
                 return $throwable->getLine();
             },
-            'etrace' => function(Throwable $throwable) {
+            'etrace' => static function(Throwable $throwable) : string {
                 return $throwable->getTraceAsString();
             },
         ];

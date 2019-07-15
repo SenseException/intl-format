@@ -20,7 +20,7 @@ class LocaleFormatter implements FormatterInterface
     public function __construct(string $locale)
     {
         $this->formatFunctions = [
-            'language' => function($value) use ($locale) {
+            'language' => static function($value) use ($locale) : string {
                 $language = Locale::getDisplayLanguage($value, $locale);
 
                 if ($value === $language) {
@@ -29,7 +29,7 @@ class LocaleFormatter implements FormatterInterface
 
                 return $language;
             },
-            'region' => function($value) use ($locale) {
+            'region' => static function($value) use ($locale) : string {
                 $region = Locale::getDisplayRegion($value, $locale);
 
                 if ('' === $region) {
