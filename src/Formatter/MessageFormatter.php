@@ -118,6 +118,9 @@ class MessageFormatter implements FormatterInterface
             'date_month_name' => '{0,date,MMMM}',
             'date_day' => '{0,date,d}',
             'date_weekday' => '{0,date,EEEE}',
+            'quarter' => '{0,date,Q}',
+            'quarter_abbr' => '{0,date,QQQ}',
+            'quarter_name' => '{0,date,QQQQ}',
         ];
 
         return new self($locale, $dateTypeSpecifier, $valueTypeCheck);

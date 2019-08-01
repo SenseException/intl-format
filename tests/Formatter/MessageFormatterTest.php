@@ -252,6 +252,18 @@ class MessageFormatterTest extends TestCase
             'date_weekday_immutable' => ['Dienstag', 'date_weekday', $dateTimeImmutable],
             'date_weekday_calendar' => ['Dienstag', 'date_weekday', $calendar],
             'date_weekday_timestamp' => ['Dienstag', 'date_weekday', $dateTime->getTimestamp()],
+            'quarter' => ['1', 'quarter', $dateTime],
+            'quarter_immutable' => ['1', 'quarter', $dateTimeImmutable],
+            'quarter_calendar' => ['1', 'quarter', $calendar],
+            'quarter_timestamp' => ['1', 'quarter', $dateTime->getTimestamp()],
+            'quarter_abbr' => ['Q1', 'quarter_abbr', $dateTime],
+            'quarter_abbr_immutable' => ['Q1', 'quarter_abbr', $dateTimeImmutable],
+            'quarter_abbr_calendar' => ['Q1', 'quarter_abbr', $calendar],
+            'quarter_abbr_timestamp' => ['Q1', 'quarter_abbr', $dateTime->getTimestamp()],
+            'quarter_name' => ['1. Quartal', 'quarter_name', $dateTime],
+            'quarter_name_immutable' => ['1. Quartal', 'quarter_name', $dateTimeImmutable],
+            'quarter_name_calendar' => ['1. Quartal', 'quarter_name', $calendar],
+            'quarter_name_timestamp' => ['1. Quartal', 'quarter_name', $dateTime->getTimestamp()],
         ];
     }
 
