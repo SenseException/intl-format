@@ -1,4 +1,4 @@
-# Intl-Format
+# Intl-Format 2
 A wrapper library for PHP to format and internationalize values in messages like sprintf
 
 [![Latest Stable Version](https://poser.pugx.org/senseexception/intl-format/v/stable)](https://packagist.org/packages/senseexception/intl-format)
@@ -139,6 +139,9 @@ The type specifier `number` also allows fraction digits similar to sprintf by ad
 | time_medium                  | integer, DateTime, DateTimeImmutable, IntlCalendar |
 | time_long                    | integer, DateTime, DateTimeImmutable, IntlCalendar |
 | time_full                    | integer, DateTime, DateTimeImmutable, IntlCalendar |
+| quarter                      | integer, DateTime, DateTimeImmutable, IntlCalendar |
+| quarter_abbr                 | integer, DateTime, DateTimeImmutable, IntlCalendar |
+| quarter_name                 | integer, DateTime, DateTimeImmutable, IntlCalendar |
 
 ```php
 $intlFormat = (new Budgegeria\IntlFormat\Factory())->createIntlFormat('en_US');
@@ -156,6 +159,12 @@ echo $intlFormat->format('%date_long', new DateTime());
 // 1. März 2016
 echo $intlFormat->format('%date_full', new DateTime());
 // Dienstag, 1. März 2016
+echo $intlFormat->format('%quarter', new DateTime());
+// 1
+echo $intlFormat->format('%quarter_abbr', new DateTime());
+// Q1
+echo $intlFormat->format('%quarter_name', new DateTime());
+// 1. Quartal
 
 echo $intlFormat->format('%time_short', new DateTime());
 // 01:20
