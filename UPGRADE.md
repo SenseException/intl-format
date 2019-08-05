@@ -1,5 +1,10 @@
 # Upgrade to 2.0
 
+## New date type specifiers
+
+The type specifiers `quarter`, `quarter_abbr` and `quarter_name` got added to
+`Budgegeria\IntlFormat\Formatter\MessageFormatter`
+
 ## [BC-break] Changes in IntlFormat constructor
 
 First argument: Previously an array of instances implementing `FormatterInterface`,
