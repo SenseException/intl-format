@@ -1,4 +1,4 @@
-## Documentation
+## Basic Usage
 
 The common way to use Intl-Format is the Factory with already prepared formats for numbers, date, time and timezone values.
 There are some predefined type specifier that can be used with a prefix percent symbol, just like in sprintf.
