@@ -32,7 +32,7 @@ $intlFormat = (new Budgegeria\IntlFormat\Factory())->createIntlFormat('en_US');
 $date = new DateTime();
 $number = 1002.25;
 
-echo $intlFormat->format('At %2$time_short the value was %1$number', $number, $date);
+echo $intlFormat->format('At %2$time_short the value was %1$number', $date, $number);
 // "At 5:30 AM the value was 1,002.25"
 ```
 
