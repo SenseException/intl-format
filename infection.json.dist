@@ -24,6 +24,11 @@
             "ignore": [
                 "Budgegeria\\IntlFormat\\Formatter\\TimeZoneFormatter::has"
             ]
+        },
+        "CastString": {
+            "ignore": [
+                "*"
+            ]
         }
     }
 }
