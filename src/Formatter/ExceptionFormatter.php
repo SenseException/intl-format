@@ -20,14 +20,14 @@ class ExceptionFormatter implements FormatterInterface
             'emessage' => static function(Throwable $throwable) : string {
                 return $throwable->getMessage();
             },
-            'ecode' => static function(Throwable $throwable) : int {
-                return $throwable->getCode();
+            'ecode' => static function(Throwable $throwable) : string {
+                return (string) $throwable->getCode();
             },
             'efile' => static function(Throwable $throwable) : string {
                 return $throwable->getFile();
             },
-            'eline' => static function(Throwable $throwable) : int {
-                return $throwable->getLine();
+            'eline' => static function(Throwable $throwable) : string {
+                return (string) $throwable->getLine();
             },
             'etrace' => static function(Throwable $throwable) : string {
                 return $throwable->getTraceAsString();

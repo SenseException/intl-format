@@ -65,7 +65,7 @@ class SprintfParser implements MessageParserInterface
                     throw InvalidTypeSpecifierException::invalidTypeSpecifier($typeSpecifier);
                 }
 
-                $index = $matches[1] - 1;
+                $index = (int) $matches[1] - 1;
             }
 
             if (!isset($values[$index])) {
