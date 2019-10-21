@@ -90,6 +90,7 @@ The type specifier `number` also allows fraction digits similar to sprintf by ad
 | date_long                    | integer, DateTime, DateTimeImmutable, IntlCalendar |
 | date_full                    | integer, DateTime, DateTimeImmutable, IntlCalendar |
 | date_weekday                 | integer, DateTime, DateTimeImmutable, IntlCalendar |
+| date_weekday_abbr            | integer, DateTime, DateTimeImmutable, IntlCalendar |
 | date_month_name              | integer, DateTime, DateTimeImmutable, IntlCalendar |
 | date_year                    | integer, DateTime, DateTimeImmutable, IntlCalendar |
 | date_month                   | integer, DateTime, DateTimeImmutable, IntlCalendar |
@@ -118,6 +119,10 @@ echo $intlFormat->format('%date_long', new DateTime());
 // 1. März 2016
 echo $intlFormat->format('%date_full', new DateTime());
 // Dienstag, 1. März 2016
+echo $intlFormat->format('%date_weekday', new DateTime());
+// Dienstag
+echo $intlFormat->format('%date_weekday_abbr', new DateTime());
+// Di.
 echo $intlFormat->format('%quarter', new DateTime());
 // 1
 echo $intlFormat->format('%quarter_abbr', new DateTime());
