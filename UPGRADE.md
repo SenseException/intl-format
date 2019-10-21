@@ -2,8 +2,8 @@
 
 ## New date type specifiers
 
-The type specifiers `quarter`, `quarter_abbr` and `quarter_name` got added to
-`Budgegeria\IntlFormat\Formatter\MessageFormatter`
+The type specifiers `date_weekday_abbr`, `quarter`, `quarter_abbr` and `quarter_name`
+got added to `Budgegeria\IntlFormat\Formatter\MessageFormatter`
 
 ## [BC-break] Changes in IntlFormat constructor
 
