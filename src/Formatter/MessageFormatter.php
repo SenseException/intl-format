@@ -20,7 +20,7 @@ class MessageFormatter implements FormatterInterface
     private $locale;
 
     /**
-     * @var array
+     * @var string[]
      */
     private $messageFormats = [];
 

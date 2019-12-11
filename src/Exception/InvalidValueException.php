@@ -12,7 +12,7 @@ class InvalidValueException extends IntlFormatException
 {
     /**
      * @param mixed $value
-     * @param array $allowedTypes
+     * @param string[] $allowedTypes
      * @return InvalidValueException
      */
     public static function invalidValueType($value, array $allowedTypes) : self

@@ -28,7 +28,7 @@ class LocaleFormatterTest extends TestCase
     /**
      * @dataProvider provideLanguages
      */
-    public function testFormatValueLanguage($expected, $locale) : void
+    public function testFormatValueLanguage(string $expected, string $locale) : void
     {
         $localeFormatter = new LocaleFormatter('de_DE');
 
@@ -38,7 +38,7 @@ class LocaleFormatterTest extends TestCase
     /**
      * @dataProvider provideRegions
      */
-    public function testFormatValueRegion($expected, $locale) : void
+    public function testFormatValueRegion(string $expected, string $locale) : void
     {
         $localeFormatter = new LocaleFormatter('de_DE');
 
@@ -48,7 +48,7 @@ class LocaleFormatterTest extends TestCase
     /**
      * @dataProvider provideTypeSpecifier
      */
-    public function testFormatValueException($typeSpecifier) : void
+    public function testFormatValueException(string $typeSpecifier) : void
     {
         $this->expectException(InvalidValueException::class);
         $localeFormatter = new LocaleFormatter('de_DE');

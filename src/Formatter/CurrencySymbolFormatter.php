@@ -19,7 +19,7 @@ class CurrencySymbolFormatter implements FormatterInterface
     private $locale;
 
     /**
-     * @var array
+     * @var string[]
      */
     private $keywords = [];
 

@@ -73,7 +73,7 @@ class ExceptionFormatterTest extends TestCase
     }
 
     /**
-     * @return array
+     * @return array[]
      */
     public function provideExceptions()
     {

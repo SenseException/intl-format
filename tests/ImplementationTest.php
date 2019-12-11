@@ -13,8 +13,10 @@ class ImplementationTest extends TestCase
 {
     /**
      * @dataProvider formattingWorksProvider
+     *
+     * @param mixed[] $args
      */
-    public function testFormattingWorks($expected, $message, ...$args) : void
+    public function testFormattingWorks(string $expected, string $message, array $args) : void
     {
         $formatter = [
             new SprintfFormatter(),
@@ -31,7 +33,7 @@ class ImplementationTest extends TestCase
     public function formattingWorksProvider() : array
     {
         return [
-            ['there are 12 monkeys on the 002 trees', 'there are %d %s on the %03d trees', 12, 'monkeys', 2],
+            ['there are 12 monkeys on the 002 trees', 'there are %d %s on the %03d trees', [12, 'monkeys', 2]],
         ];
     }
 }

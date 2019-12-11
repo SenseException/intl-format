@@ -8,7 +8,7 @@ interface MessageParserInterface
 {
     /**
      * @param string $message
-     * @param array $values
+     * @param mixed[] $values
      * @throws \Budgegeria\IntlFormat\Exception\InvalidTypeSpecifierException
      * @return MessageMetaData
      */

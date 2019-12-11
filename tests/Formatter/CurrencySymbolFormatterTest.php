@@ -61,6 +61,9 @@ class CurrencySymbolFormatterTest extends TestCase
         self::assertSame('€', $formatter->formatValue('currency_symbol', ''));
     }
 
+    /**
+     * @return string[][]
+     */
     public function provideLocales() : array
     {
         return [
