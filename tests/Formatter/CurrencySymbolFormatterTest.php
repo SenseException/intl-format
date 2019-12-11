@@ -43,6 +43,7 @@ class CurrencySymbolFormatterTest extends TestCase
         $formatter = new CurrencySymbolFormatter('fr_FR');
 
         $this->expectException(InvalidValueException::class);
+        $this->expectExceptionMessageMatches('/"string"/');
         $this->expectExceptionCode(10);
 
         $formatter->formatValue('currency_symbol', null);

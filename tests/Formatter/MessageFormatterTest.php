@@ -8,6 +8,8 @@ use Budgegeria\IntlFormat\Exception\InvalidValueException;
 use Budgegeria\IntlFormat\Formatter\MessageFormatter;
 use DateTime;
 use DateTimeImmutable;
+use DateTimeInterface;
+use function sprintf;
 use IntlCalendar;
 use PHPUnit\Framework\TestCase;
 
@@ -110,6 +112,7 @@ class MessageFormatterTest extends TestCase
         $messageFormatter = MessageFormatter::createNumberValueFormatter('en_US');
 
         $this->expectException(InvalidValueException::class);
+        $this->expectExceptionMessageMatches('/"integer, double"/');
         $this->expectExceptionCode(10);
 
         $messageFormatter->formatValue('integer', $value);
@@ -125,6 +128,11 @@ class MessageFormatterTest extends TestCase
         $messageFormatter = MessageFormatter::createDateValueFormatter('en_US');
 
         $this->expectException(InvalidValueException::class);
+        $this->expectExceptionMessageMatches(sprintf(
+            '/"integer, %s, %s"/',
+            DateTimeInterface::class,
+            IntlCalendar::class
+        ));
         $this->expectExceptionCode(10);
 
         $messageFormatter->formatValue('date', $value);

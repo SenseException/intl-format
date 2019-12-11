@@ -34,6 +34,7 @@ class PrecisionNumberFormatterTest extends TestCase
     public function testFormatValueNotANumber() : void
     {
         $this->expectException(InvalidValueException::class);
+        $this->expectExceptionMessageMatches('/"integer, double"/');
         $this->expectExceptionCode(10);
 
         $messageFormatter = new PrecisionNumberFormatter('de_DE');

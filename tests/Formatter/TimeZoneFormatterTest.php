@@ -8,7 +8,9 @@ use Budgegeria\IntlFormat\Exception\InvalidValueException;
 use Budgegeria\IntlFormat\Formatter\TimeZoneFormatter;
 use DateTime;
 use DateTimeImmutable;
+use DateTimeInterface;
 use DateTimeZone;
+use function sprintf;
 use IntlTimeZone;
 use PHPUnit\Framework\TestCase;
 
@@ -55,6 +57,12 @@ class TimeZoneFormatterTest extends TestCase
     public function testFormatValueInvalidValue(string $typeSpecifier) : void
     {
         $this->expectException(InvalidValueException::class);
+        $this->expectExceptionMessageMatches(sprintf(
+            '/"%s, %s, %s"/',
+            DateTimeInterface::class,
+            DateTimeZone::class,
+            IntlTimeZone::class
+        ));
         $this->expectExceptionCode(10);
 
         $formatter = new TimeZoneFormatter('en_US');
