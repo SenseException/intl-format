@@ -148,17 +148,27 @@ If an instance of DateTimeZone or IntlTimeZone is given, the formatter assumes t
 | timeseries_id    | DateTimeInterface, DateTimeZone, IntlTimeZone |
 | timeseries_name  | DateTimeInterface, DateTimeZone, IntlTimeZone |
 | timeseries_short | DateTimeInterface, DateTimeZone, IntlTimeZone |
+| timezone_id      | DateTimeInterface, DateTimeZone, IntlTimeZone |
+| timezone_name    | DateTimeInterface, DateTimeZone, IntlTimeZone |
+| timezone_short   | DateTimeInterface, DateTimeZone, IntlTimeZone |
 
 ```php
 $intlFormat = (new Budgegeria\IntlFormat\Factory())->createIntlFormat('en_US');
 
 echo $intlFormat->format('%timeseries_id', new DateTime());
+echo $intlFormat->format('%timezone_id', new DateTime());
 // "US/Arizona"
 echo $intlFormat->format('%timeseries_name', new DateTime());
+echo $intlFormat->format('%timezone_name', new DateTime());
 // "Mountain Standard Time"
 echo $intlFormat->format('%timeseries_short', new DateTime());
+echo $intlFormat->format('%timezone_short', new DateTime());
 // "MST"
 ```
+
+| Added in 2.1 |
+|--------------|
+| timezone_id, timezone_name and timezone_short are introduced in to replace the "timeseries" type specifiers because of obvious unfit naming. Use the "timezone" type specifiers from that version on. |
 
 ### Locale
 
