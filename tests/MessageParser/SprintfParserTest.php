@@ -13,7 +13,7 @@ class SprintfParserTest extends TestCase
     /**
      * A test for argument swapping.
      */
-    public function testArgumentSwappingFormat() : void
+    public function testArgumentSwappingFormat(): void
     {
         $message = '%swap %swap %1$swap';
 
@@ -29,7 +29,7 @@ class SprintfParserTest extends TestCase
     /**
      * A test for argument swapping.
      */
-    public function testArgumentSwappingOrder() : void
+    public function testArgumentSwappingOrder(): void
     {
         $message = '%10$swap %9$swap %8$swap %7$swap %6$swap %5$swap %4$swap %3$swap %2$swap %1$swap';
 
@@ -49,7 +49,7 @@ class SprintfParserTest extends TestCase
     /**
      * %0$world is an invalid type specifier
      */
-    public function testInvalidTypeSpecifier() : void
+    public function testInvalidTypeSpecifier(): void
     {
         $this->expectException(InvalidTypeSpecifierException::class);
         $this->expectExceptionCode(30);
@@ -64,7 +64,7 @@ class SprintfParserTest extends TestCase
     /**
      * Basic format test
      */
-    public function testParseMessage() : void
+    public function testParseMessage(): void
     {
         $message = 'Hello "%world", how are you';
 
@@ -79,7 +79,7 @@ class SprintfParserTest extends TestCase
     /**
      * Basic fraction digit test
      */
-    public function testParseMessageWithFractionDigits() : void
+    public function testParseMessageWithFractionDigits(): void
     {
         $message = 'Hello "%.12world", how are you';
 
@@ -91,7 +91,7 @@ class SprintfParserTest extends TestCase
         self::assertSame(['Hello "', '%.12world', '", how are you'], $parsed->parsedMessage, 'Wrong parsed message');
     }
 
-    public function testParseMessageWithInvalidFractionDigits() : void
+    public function testParseMessageWithInvalidFractionDigits(): void
     {
         $message = 'Hello "%..12world", how are you';
 
@@ -103,7 +103,7 @@ class SprintfParserTest extends TestCase
         self::assertSame(['Hello "', '%.', '.12world", how are you'], $parsed->parsedMessage, 'Wrong parsed message');
     }
 
-    public function testParseMessageWithInterchangedFractionDigits() : void
+    public function testParseMessageWithInterchangedFractionDigits(): void
     {
         $message = 'Hello "%12.world", how are you';
 
@@ -118,7 +118,7 @@ class SprintfParserTest extends TestCase
     /**
      * A test for argument swapping with fraction digits.
      */
-    public function testArgumentSwappingOrderWithFractionDigits() : void
+    public function testArgumentSwappingOrderWithFractionDigits(): void
     {
         $message = '%3$.1swap %2$.4swap %1$.3swap';
 
@@ -134,7 +134,7 @@ class SprintfParserTest extends TestCase
     /**
      * Basic format test
      */
-    public function testParseEscapedMessage() : void
+    public function testParseEscapedMessage(): void
     {
         $message = 'Hello "%world", how are you %%person %%';
 
@@ -149,7 +149,7 @@ class SprintfParserTest extends TestCase
     /**
      * There aren't enough values for %5$world.
      */
-    public function testWrongTypeSpecifierIndex() : void
+    public function testWrongTypeSpecifierIndex(): void
     {
         $this->expectException(InvalidTypeSpecifierException::class);
         $this->expectExceptionCode(10);

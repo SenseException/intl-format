@@ -34,7 +34,7 @@ class PrecisionNumberFormatter implements FormatterInterface
     /**
      * @inheritDoc
      */
-    public function formatValue(string $typeSpecifier, $value) : string
+    public function formatValue(string $typeSpecifier, $value): string
     {
         if (!is_numeric($value)) {
             throw InvalidValueException::invalidValueType($value, ['integer', 'double']);
@@ -54,7 +54,7 @@ class PrecisionNumberFormatter implements FormatterInterface
     /**
      * @inheritDoc
      */
-    public function has(string $typeSpecifier) : bool
+    public function has(string $typeSpecifier): bool
     {
         return 1 === preg_match(self::$matchPattern, $typeSpecifier);
     }

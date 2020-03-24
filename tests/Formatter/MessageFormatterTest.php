@@ -20,21 +20,21 @@ class MessageFormatterTest extends TestCase
      *
      * @param string $typeSpecifier
      */
-    public function testHas(string $typeSpecifier) : void
+    public function testHas(string $typeSpecifier): void
     {
         $messageFormatter = new MessageFormatter('de_DE', $this->getTypeSpecifier(), function () {});
 
         self::assertTrue($messageFormatter->has($typeSpecifier));
     }
 
-    public function testHasIsFalse() : void
+    public function testHasIsFalse(): void
     {
         $messageFormatter = new MessageFormatter('de_DE', $this->getTypeSpecifier(), function () {});
 
         self::assertFalse($messageFormatter->has('int'));
     }
 
-    public function testFormatValueNumber() : void
+    public function testFormatValueNumber(): void
     {
         $messageFormatter = MessageFormatter::createNumberValueFormatter('de_DE');
 
@@ -53,7 +53,7 @@ class MessageFormatterTest extends TestCase
      * @param string $typeSpecifier
      * @param mixed  $value
      */
-    public function testFormatValueDate(string $expected, string $typeSpecifier, $value) : void
+    public function testFormatValueDate(string $expected, string $typeSpecifier, $value): void
     {
         $messageFormatter = MessageFormatter::createDateValueFormatter('de_DE');
 
@@ -67,14 +67,14 @@ class MessageFormatterTest extends TestCase
      * @param string $typeSpecifier
      * @param mixed  $value
      */
-    public function testFormatValueTime(string $expected, string $typeSpecifier, $value) : void
+    public function testFormatValueTime(string $expected, string $typeSpecifier, $value): void
     {
         $messageFormatter = MessageFormatter::createDateValueFormatter('de_DE');
 
         self::assertSame($expected, $messageFormatter->formatValue($typeSpecifier, $value));
     }
 
-    public function testFormatValueSpellout() : void
+    public function testFormatValueSpellout(): void
     {
         $messageFormatter = MessageFormatter::createNumberValueFormatter('de_DE');
 
@@ -88,14 +88,14 @@ class MessageFormatterTest extends TestCase
      * @param string $expected
      * @param int    $number
      */
-    public function testFormatValueOrdinal(string $expected, int $number) : void
+    public function testFormatValueOrdinal(string $expected, int $number): void
     {
         $messageFormatter = MessageFormatter::createNumberValueFormatter('en_US');
 
         self::assertSame($expected, $messageFormatter->formatValue('ordinal', $number));
     }
 
-    public function testFormatValueDuration() : void
+    public function testFormatValueDuration(): void
     {
         $messageFormatter = MessageFormatter::createNumberValueFormatter('en_US');
 
@@ -107,7 +107,7 @@ class MessageFormatterTest extends TestCase
      *
      * @param mixed $value
      */
-    public function testFormatValueNumberTypeCheck($value) : void
+    public function testFormatValueNumberTypeCheck($value): void
     {
         $messageFormatter = MessageFormatter::createNumberValueFormatter('en_US');
 
@@ -123,7 +123,7 @@ class MessageFormatterTest extends TestCase
      *
      * @param mixed $value
      */
-    public function testFormatValueDateTypeCheck($value) : void
+    public function testFormatValueDateTypeCheck($value): void
     {
         $messageFormatter = MessageFormatter::createDateValueFormatter('en_US');
 
@@ -138,7 +138,7 @@ class MessageFormatterTest extends TestCase
         $messageFormatter->formatValue('date', $value);
     }
 
-    public function testFormatValueInvalidReturnType() : void
+    public function testFormatValueInvalidReturnType(): void
     {
         $messageFormatter = new MessageFormatter('de_DE', ['a' => 'a'], function () {});
 
@@ -151,7 +151,7 @@ class MessageFormatterTest extends TestCase
     /**
      * @return string[]
      */
-    private function getTypeSpecifier() : array
+    private function getTypeSpecifier(): array
     {
         return [
             'number' => 'number',
@@ -182,7 +182,7 @@ class MessageFormatterTest extends TestCase
     /**
      * @return string[][]
      */
-    public function provideTypeSpecifier() : array
+    public function provideTypeSpecifier(): array
     {
         return [
             'number' => ['number'],
@@ -213,7 +213,7 @@ class MessageFormatterTest extends TestCase
     /**
      * @return mixed[][]
      */
-    public function provideDate() : array
+    public function provideDate(): array
     {
         $dateTime = new DateTime('2016-03-01');
         $dateTimeImmutable = new DateTimeImmutable('2016-03-01');
@@ -282,7 +282,7 @@ class MessageFormatterTest extends TestCase
     /**
      * @return mixed[][]
      */
-    public function provideTime() : array
+    public function provideTime(): array
     {
         $dateTime = new DateTime('2016-03-01 02:20:50', new \DateTimeZone('Europe/Berlin'));
         $dateTimeImmutable = new DateTimeImmutable('2016-03-01 02:20:50', new \DateTimeZone('Europe/Berlin'));
@@ -315,7 +315,7 @@ class MessageFormatterTest extends TestCase
     /**
      * @return string[][]|int[][]
      */
-    public function provideOrdinal() : array
+    public function provideOrdinal(): array
     {
         return [
             'first' => ['1st', 1],
@@ -328,7 +328,7 @@ class MessageFormatterTest extends TestCase
     /**
      * @return mixed[][]
      */
-    public function provideInvalidNumberValues() : array
+    public function provideInvalidNumberValues(): array
     {
         return [
             'string' => ['foo'],
@@ -343,7 +343,7 @@ class MessageFormatterTest extends TestCase
     /**
      * @return mixed[][]
      */
-    public function provideInvalidDateValues() : array
+    public function provideInvalidDateValues(): array
     {
         $invalidDateValues = [
             'float' => [100.1],

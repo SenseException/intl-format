@@ -38,7 +38,7 @@ final class IntlFormat implements IntlFormatInterface
     /**
      * @inheritDoc
      */
-    public function format(string $message, ...$values) : string
+    public function format(string $message, ...$values): string
     {
         $messageMetaData = $this->messageParser->parseMessage($message, $values);
         $typeSpecifiers = $messageMetaData->typeSpecifiers;
@@ -68,7 +68,7 @@ final class IntlFormat implements IntlFormatInterface
     /**
      * @inheritDoc
      */
-    public function addFormatter(FormatterInterface $formatter) : void
+    public function addFormatter(FormatterInterface $formatter): void
     {
         $this->formatters[] = $formatter;
     }
@@ -77,7 +77,7 @@ final class IntlFormat implements IntlFormatInterface
      * @param string $typeSpecifier
      * @return FormatterInterface|null
      */
-    private function findFormatter(string $typeSpecifier) : ?FormatterInterface
+    private function findFormatter(string $typeSpecifier): ?FormatterInterface
     {
         $formatters = array_reverse($this->formatters);
         foreach ($formatters as $formatter) {

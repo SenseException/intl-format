@@ -46,7 +46,7 @@ class CurrencySymbolFormatter implements FormatterInterface
     /**
      * @inheritdoc
      */
-    public function formatValue(string $typeSpecifier, $value) : string
+    public function formatValue(string $typeSpecifier, $value): string
     {
         if (!is_string($value)) {
             throw InvalidValueException::invalidValueType($value, ['string']);
@@ -59,7 +59,7 @@ class CurrencySymbolFormatter implements FormatterInterface
     /**
      * @inheritdoc
      */
-    public function has(string $typeSpecifier) : bool
+    public function has(string $typeSpecifier): bool
     {
         return 'currency_symbol' === $typeSpecifier;
     }
@@ -68,7 +68,7 @@ class CurrencySymbolFormatter implements FormatterInterface
      * @param string $iso4217
      * @return string
      */
-    private function getKeywords(string $iso4217) : string
+    private function getKeywords(string $iso4217): string
     {
         $keywords = $this->keywords;
         if ('' !== $iso4217) {

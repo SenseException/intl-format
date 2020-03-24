@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 class LocaleFormatterTest extends TestCase
 {
-    public function testHas() : void
+    public function testHas(): void
     {
         $localeFormatter = new LocaleFormatter('de_DE');
 
@@ -18,7 +18,7 @@ class LocaleFormatterTest extends TestCase
         self::assertTrue($localeFormatter->has('region'));
     }
 
-    public function testHasIsFalse() : void
+    public function testHasIsFalse(): void
     {
         $localeFormatter = new LocaleFormatter('de_DE');
 
@@ -28,7 +28,7 @@ class LocaleFormatterTest extends TestCase
     /**
      * @dataProvider provideLanguages
      */
-    public function testFormatValueLanguage(string $expected, string $locale) : void
+    public function testFormatValueLanguage(string $expected, string $locale): void
     {
         $localeFormatter = new LocaleFormatter('de_DE');
 
@@ -38,7 +38,7 @@ class LocaleFormatterTest extends TestCase
     /**
      * @dataProvider provideRegions
      */
-    public function testFormatValueRegion(string $expected, string $locale) : void
+    public function testFormatValueRegion(string $expected, string $locale): void
     {
         $localeFormatter = new LocaleFormatter('de_DE');
 
@@ -48,7 +48,7 @@ class LocaleFormatterTest extends TestCase
     /**
      * @dataProvider provideTypeSpecifier
      */
-    public function testFormatValueException(string $typeSpecifier) : void
+    public function testFormatValueException(string $typeSpecifier): void
     {
         $this->expectException(InvalidValueException::class);
         $localeFormatter = new LocaleFormatter('de_DE');
@@ -59,7 +59,7 @@ class LocaleFormatterTest extends TestCase
     /**
      * @return string[][]
      */
-    public function provideLanguages() : array
+    public function provideLanguages(): array
     {
         return [
             ['Italienisch', 'it_IT'],
@@ -76,7 +76,7 @@ class LocaleFormatterTest extends TestCase
     /**
      * @return string[][]
      */
-    public function provideRegions() : array
+    public function provideRegions(): array
     {
         return [
             ['Italien', 'it_IT'],
@@ -90,7 +90,7 @@ class LocaleFormatterTest extends TestCase
     /**
      * @return string[][]
      */
-    public function provideTypeSpecifier() : array
+    public function provideTypeSpecifier(): array
     {
         return [
             ['region'],

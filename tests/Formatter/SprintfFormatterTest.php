@@ -14,7 +14,7 @@ class SprintfFormatterTest extends TestCase
      *
      * @param string $typeSpecifier
      */
-    public function testHas(string $typeSpecifier) : void
+    public function testHas(string $typeSpecifier): void
     {
         $formatter = new SprintfFormatter();
 
@@ -28,14 +28,14 @@ class SprintfFormatterTest extends TestCase
      * @param mixed  $value
      * @param string $expected
      */
-    public function testFormat(string $typeSpecifier, $value, string $expected) : void
+    public function testFormat(string $typeSpecifier, $value, string $expected): void
     {
         $formatter = new SprintfFormatter();
 
         self::assertEquals($expected, $formatter->formatValue($typeSpecifier, $value));
     }
 
-    public function testHasIsFalse() : void
+    public function testHasIsFalse(): void
     {
         $formatter = new SprintfFormatter();
 
@@ -45,7 +45,7 @@ class SprintfFormatterTest extends TestCase
     /**
      * @return mixed[][]
      */
-    public function provideTypeSpecifier() : array
+    public function provideTypeSpecifier(): array
     {
         return [
             ['b', 11, '1011'],

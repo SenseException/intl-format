@@ -19,7 +19,7 @@ interface FormatterInterface
      * @return string
      * @throws InvalidValueException
      */
-    public function formatValue(string $typeSpecifier, $value) : string;
+    public function formatValue(string $typeSpecifier, $value): string;
 
     /**
      * Check if Format has the given type specifier.
@@ -31,5 +31,5 @@ interface FormatterInterface
      * @param string $typeSpecifier The type specifier without the prefix char.
      * @return bool
      */
-    public function has(string $typeSpecifier) : bool;
+    public function has(string $typeSpecifier): bool;
 }

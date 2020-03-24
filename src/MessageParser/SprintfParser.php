@@ -21,7 +21,7 @@ class SprintfParser implements MessageParserInterface
      * @throws InvalidTypeSpecifierException
      * @return MessageMetaData
      */
-    public function parseMessage(string $message, array $values) : MessageMetaData
+    public function parseMessage(string $message, array $values): MessageMetaData
     {
         /** @var string[] $parsedMessage */
         $parsedMessage = preg_split(
@@ -51,7 +51,7 @@ class SprintfParser implements MessageParserInterface
      * @return string[]
      * @throws InvalidTypeSpecifierException
      */
-    private function swapArguments(array $typeSpecifiers, array $values) : array
+    private function swapArguments(array $typeSpecifiers, array $values): array
     {
         $swappedValues = [];
         $typeSpecifiers = array_values($typeSpecifiers);

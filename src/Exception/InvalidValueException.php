@@ -15,7 +15,7 @@ class InvalidValueException extends IntlFormatException
      * @param string[] $allowedTypes
      * @return InvalidValueException
      */
-    public static function invalidValueType($value, array $allowedTypes) : self
+    public static function invalidValueType($value, array $allowedTypes): self
     {
         return new self(sprintf(
             'Invalid type "%s" of value. Allowed types: "%s".',
@@ -28,7 +28,7 @@ class InvalidValueException extends IntlFormatException
      * @param string $locale
      * @return InvalidValueException
      */
-    public static function invalidLocale(string $locale) : self
+    public static function invalidLocale(string $locale): self
     {
         return new self(sprintf('"%s" is not a valid locale.', $locale), 20);
     }
@@ -37,7 +37,7 @@ class InvalidValueException extends IntlFormatException
      * @param mixed $value
      * @return InvalidValueException
      */
-    public static function invalidReturnType($value) : self
+    public static function invalidReturnType($value): self
     {
         return new self(sprintf('Unexpected return type "%s"', gettype($value)), 30);
     }

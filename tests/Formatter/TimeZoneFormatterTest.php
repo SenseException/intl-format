@@ -21,14 +21,14 @@ class TimeZoneFormatterTest extends TestCase
      *
      * @param string $typeSpecifier
      */
-    public function testHas(string $typeSpecifier) : void
+    public function testHas(string $typeSpecifier): void
     {
         $formatter = new TimeZoneFormatter('en_US');
 
         self::assertTrue($formatter->has($typeSpecifier));
     }
 
-    public function testHasIsFalse() : void
+    public function testHasIsFalse(): void
     {
         $messageFormatter = new TimeZoneFormatter('de_DE');
 
@@ -42,7 +42,7 @@ class TimeZoneFormatterTest extends TestCase
      * @param string $typeSpecifier
      * @param mixed  $value
      */
-    public function testFormatValue(string $expected, string $typeSpecifier, $value) : void
+    public function testFormatValue(string $expected, string $typeSpecifier, $value): void
     {
         $formatter = new TimeZoneFormatter('en_US');
 
@@ -54,7 +54,7 @@ class TimeZoneFormatterTest extends TestCase
      *
      * @param string $typeSpecifier
      */
-    public function testFormatValueInvalidValue(string $typeSpecifier) : void
+    public function testFormatValueInvalidValue(string $typeSpecifier): void
     {
         $this->expectException(InvalidValueException::class);
         $this->expectExceptionMessageMatches(sprintf(
@@ -73,7 +73,7 @@ class TimeZoneFormatterTest extends TestCase
     /**
      * @return string[][]
      */
-    public function provideTypeSpecifier() : array
+    public function provideTypeSpecifier(): array
     {
         return [
             'timeseries_id' => ['timeseries_id'],
@@ -88,7 +88,7 @@ class TimeZoneFormatterTest extends TestCase
     /**
      * @return mixed[][]
      */
-    public function provideTimeZones() : array
+    public function provideTimeZones(): array
     {
         $datetime = new DateTime('2016-08-01', new DateTimeZone('US/Arizona'));
         $datetimeImmutable = new DateTimeImmutable('2016-05-01', new DateTimeZone('US/Arizona'));

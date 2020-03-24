@@ -12,14 +12,14 @@ use PHPUnit\Framework\TestCase;
 
 class FactoryTest extends TestCase
 {
-    public function testCreateIntlFormat() : void
+    public function testCreateIntlFormat(): void
     {
         $intlFormat = (new Factory())->createIntlFormat('de_DE');
 
         self::assertInstanceOf(IntlFormat::class, $intlFormat);
     }
 
-    public function testCreateIntlFormatIntegration() : void
+    public function testCreateIntlFormatIntegration(): void
     {
         $intlFormat = (new Factory())->createIntlFormat('en_US');
         $date = new DateTime();

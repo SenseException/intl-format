@@ -17,7 +17,7 @@ class Factory
      * @param string $locale
      * @return IntlFormatInterface
      */
-    public function createIntlFormat(string $locale) : IntlFormatInterface
+    public function createIntlFormat(string $locale): IntlFormatInterface
     {
         $formatter = [
             MessageFormatter::createDateValueFormatter($locale),

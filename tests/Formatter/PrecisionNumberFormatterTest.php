@@ -15,14 +15,14 @@ class PrecisionNumberFormatterTest extends TestCase
      *
      * @param string $typeSpecifier
      */
-    public function testHas(string $typeSpecifier) : void
+    public function testHas(string $typeSpecifier): void
     {
         $messageFormatter = new PrecisionNumberFormatter('de_DE');
 
         self::assertTrue($messageFormatter->has($typeSpecifier));
     }
 
-    public function testHasIsFalse() : void
+    public function testHasIsFalse(): void
     {
         $messageFormatter = new PrecisionNumberFormatter('de_DE');
 
@@ -31,7 +31,7 @@ class PrecisionNumberFormatterTest extends TestCase
         self::assertFalse($messageFormatter->has('.3numbr'));
     }
 
-    public function testFormatValueNotANumber() : void
+    public function testFormatValueNotANumber(): void
     {
         $this->expectException(InvalidValueException::class);
         $this->expectExceptionMessageMatches('/"integer, double"/');
@@ -49,7 +49,7 @@ class PrecisionNumberFormatterTest extends TestCase
      * @param float $number
      * @param string $expects
      */
-    public function testFormatValueNumber(string $typeSpecifier, float $number, string $expects) : void
+    public function testFormatValueNumber(string $typeSpecifier, float $number, string $expects): void
     {
         $messageFormatter = new PrecisionNumberFormatter('de_DE');
 
@@ -59,7 +59,7 @@ class PrecisionNumberFormatterTest extends TestCase
     /**
      * @return string[][]|float[][]
      */
-    public function provideNumber() : array
+    public function provideNumber(): array
     {
         return [
             'comma' => ['.2number', 1.2, '1,20'],
@@ -72,7 +72,7 @@ class PrecisionNumberFormatterTest extends TestCase
     /**
      * @return string[][]
      */
-    public function provideTypeSpecifier() : array
+    public function provideTypeSpecifier(): array
     {
         return [
             ['.2number'],

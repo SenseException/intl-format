@@ -44,7 +44,7 @@ class MessageFormatter implements FormatterInterface
     /**
      * @inheritDoc
      */
-    public function formatValue(string $typeSpecifier, $value) : string
+    public function formatValue(string $typeSpecifier, $value): string
     {
         $valueTypeCheck = $this->valueTypeCheck;
         $valueTypeCheck($value);
@@ -60,7 +60,7 @@ class MessageFormatter implements FormatterInterface
     /**
      * @inheritDoc
      */
-    public function has(string $typeSpecifier) : bool
+    public function has(string $typeSpecifier): bool
     {
         return isset($this->messageFormats[$typeSpecifier]);
     }
@@ -69,9 +69,9 @@ class MessageFormatter implements FormatterInterface
      * @param string $locale
      * @return MessageFormatter
      */
-    public static function createNumberValueFormatter(string $locale) : MessageFormatter
+    public static function createNumberValueFormatter(string $locale): MessageFormatter
     {
-        $valueTypeCheck = static function($value) : void {
+        $valueTypeCheck = static function($value): void {
             if (!is_numeric($value)) {
                 throw InvalidValueException::invalidValueType($value, ['integer', 'double']);
             }
@@ -94,9 +94,9 @@ class MessageFormatter implements FormatterInterface
      * @param string $locale
      * @return MessageFormatter
      */
-    public static function createDateValueFormatter(string $locale) : MessageFormatter
+    public static function createDateValueFormatter(string $locale): MessageFormatter
     {
-        $valueTypeCheck = static function($value) : void {
+        $valueTypeCheck = static function($value): void {
             if (!is_int($value) && !($value instanceof DateTimeInterface) && !($value instanceof IntlCalendar)) {
                 throw InvalidValueException::invalidValueType($value, ['integer', DateTimeInterface::class, IntlCalendar::class]);
             }

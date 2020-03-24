@@ -12,5 +12,5 @@ interface MessageParserInterface
      * @throws \Budgegeria\IntlFormat\Exception\InvalidTypeSpecifierException
      * @return MessageMetaData
      */
-    public function parseMessage(string $message, array $values) : MessageMetaData;
+    public function parseMessage(string $message, array $values): MessageMetaData;
 }

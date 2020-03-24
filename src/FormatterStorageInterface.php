@@ -11,5 +11,5 @@ interface FormatterStorageInterface
     /**
      * @param FormatterInterface $formatter
      */
-    public function addFormatter(FormatterInterface $formatter) : void;
+    public function addFormatter(FormatterInterface $formatter): void;
 }

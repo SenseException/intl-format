@@ -17,7 +17,7 @@ class IntlFormatIntegrationTest extends TestCase
     /**
      * Basic format test
      */
-    public function testFormat() : void
+    public function testFormat(): void
     {
         $message = 'Hello "%world", how are you';
 
@@ -45,7 +45,7 @@ class IntlFormatIntegrationTest extends TestCase
      * @param string $message
      * @param string $expected
      */
-    public function testEscapedFormat(string $message, string $expected) : void
+    public function testEscapedFormat(string $message, string $expected): void
     {
         /** @var FormatterInterface|MockObject $formatter */
         $formatter = $this->createMock(FormatterInterface::class);
@@ -66,7 +66,7 @@ class IntlFormatIntegrationTest extends TestCase
     /**
      * A test for argument swapping.
      */
-    public function testArgumentSwappingFormat() : void
+    public function testArgumentSwappingFormat(): void
     {
         $message = '%swap %swap %1$swap';
 
@@ -90,7 +90,7 @@ class IntlFormatIntegrationTest extends TestCase
     /**
      * A test for argument swapping.
      */
-    public function testArgumentSwappingOrder() : void
+    public function testArgumentSwappingOrder(): void
     {
         $message = '%3$swap %2$swap %1$swap';
 
@@ -114,7 +114,7 @@ class IntlFormatIntegrationTest extends TestCase
     /**
      * %date is an unknown type specifier in this test.
      */
-    public function testMissingTypeSpecifier() : void
+    public function testMissingTypeSpecifier(): void
     {
         $message = 'Hello %world, Today is %date';
 
@@ -139,7 +139,7 @@ class IntlFormatIntegrationTest extends TestCase
     /**
      * More type specifier than values.
      */
-    public function testInvalidValueTypeSpecifierCount() : void
+    public function testInvalidValueTypeSpecifierCount(): void
     {
         $this->expectException(InvalidTypeSpecifierException::class);
         $this->expectExceptionCode(10);
@@ -153,7 +153,7 @@ class IntlFormatIntegrationTest extends TestCase
     /**
      * Less type specifier than values.
      */
-    public function testEscapedInvalidTypeSpecifierCount() : void
+    public function testEscapedInvalidTypeSpecifierCount(): void
     {
         $this->expectException(InvalidTypeSpecifierException::class);
         $this->expectExceptionCode(20);
@@ -167,7 +167,7 @@ class IntlFormatIntegrationTest extends TestCase
     /**
      * There aren't enough values for %5$world.
      */
-    public function testWrongTypeSpecifierIndex() : void
+    public function testWrongTypeSpecifierIndex(): void
     {
         $this->expectException(InvalidTypeSpecifierException::class);
         $this->expectExceptionCode(10);
@@ -184,7 +184,7 @@ class IntlFormatIntegrationTest extends TestCase
     /**
      * %0$world is an invalid type specifier
      */
-    public function testInvalidTypeSpecifier() : void
+    public function testInvalidTypeSpecifier(): void
     {
         $this->expectException(InvalidTypeSpecifierException::class);
         $this->expectExceptionCode(30);
@@ -198,7 +198,7 @@ class IntlFormatIntegrationTest extends TestCase
         $intlFormat->format($message, 'island', new \DateTime());
     }
 
-    public function testAddFormatOverride() : void
+    public function testAddFormatOverride(): void
     {
         $message = 'Hello "%world", how are you';
 
@@ -225,7 +225,7 @@ class IntlFormatIntegrationTest extends TestCase
     /**
      * @return string[][]
      */
-    public function provideEscapedMessages() : array
+    public function provideEscapedMessages(): array
     {
         return [
             ['Hello %world, how %%are you', 'Hello island, how %are you'],

@@ -18,5 +18,5 @@ interface IntlFormatInterface extends FormatterStorageInterface
      * @throws InvalidTypeSpecifierException
      * @return string
      */
-    public function format(string $message, ...$values) : string;
+    public function format(string $message, ...$values): string;
 }
