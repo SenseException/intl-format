@@ -1,3 +1,14 @@
+# Upgrade to 2.1
+
+## Set minimum PHP requirement to 7.3
+
+You need to update your PHP version.
+
+## Fix time zone type specifiers
+
+timezone_id, timezone_name and timezone_short are introduced to replace the
+"timeseries" type specifiers.
+
 # Upgrade to 2.0
 
 ## New date type specifiers
