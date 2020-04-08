@@ -1,4 +1,4 @@
-# Intl-Format 2
+# Intl-Format
 A wrapper library for PHP to format and internationalize values in messages like sprintf
 
 [![Latest Stable Version](https://poser.pugx.org/senseexception/intl-format/v/stable)](https://packagist.org/packages/senseexception/intl-format)
