@@ -9,7 +9,7 @@ before_install:
   - composer self-update
 
 install:
-  - composer install --dev --prefer-source
+  - if [[ "$(phpenv version-name)" == "nightly" ]]; then composer update --ignore-platform-reqs; else composer install --dev --prefer-source; fi;
 
 script:
   - vendor/bin/phpunit
