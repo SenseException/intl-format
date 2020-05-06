@@ -8,6 +8,8 @@ namespace Budgegeria\IntlFormat\MessageParser;
  * The result of a parsed message.
  *
  * @internal
+ * @psalm-immutable
+ * @psalm-internal Budgegeria\IntlFormat\MessageParser
  */
 class MessageMetaData
 {
