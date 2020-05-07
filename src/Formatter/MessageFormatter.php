@@ -22,7 +22,7 @@ class MessageFormatter implements FormatterInterface
     /**
      * @var string[]
      */
-    private $messageFormats = [];
+    private $messageFormats;
 
     /**
      * @var Closure
@@ -46,8 +46,7 @@ class MessageFormatter implements FormatterInterface
      */
     public function formatValue(string $typeSpecifier, $value): string
     {
-        $valueTypeCheck = $this->valueTypeCheck;
-        $valueTypeCheck($value);
+        ($this->valueTypeCheck)($value);
 
         $formattedValue = Message::formatMessage($this->locale, $this->messageFormats[$typeSpecifier], [$value]);
         if (false === $formattedValue) {
