@@ -12,8 +12,4 @@
             <directory name="vendor" />
         </ignoreFiles>
     </projectFiles>
-
-    <issueHandlers>
-        <MissingClosureParamType errorLevel="info" />
-    </issueHandlers>
 </psalm>
