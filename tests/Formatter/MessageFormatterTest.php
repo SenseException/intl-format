@@ -276,6 +276,14 @@ class MessageFormatterTest extends TestCase
             'date_weekday_abbr_immutable' => ['Di.', 'date_weekday_abbr', $dateTimeImmutable],
             'date_weekday_abbr_calendar' => ['Di.', 'date_weekday_abbr', $calendar],
             'date_weekday_abbr_timestamp' => ['Di.', 'date_weekday_abbr', $dateTime->getTimestamp()],
+            'week_of_month' => ['1', 'week_of_month', $dateTime],
+            'week_of_month_immutable' => ['1', 'week_of_month', $dateTimeImmutable],
+            'week_of_month_calendar' => ['1', 'week_of_month', $calendar],
+            'week_of_month_timestamp' => ['1', 'week_of_month', $dateTime->getTimestamp()],
+            'week_of_year' => ['9', 'week_of_year', $dateTime],
+            'week_of_year_immutable' => ['9', 'week_of_year', $dateTimeImmutable],
+            'week_of_year_calendar' => ['9', 'week_of_year', $calendar],
+            'week_of_year_timestamp' => ['9', 'week_of_year', $dateTime->getTimestamp()],
         ];
     }
 
