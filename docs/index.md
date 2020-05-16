@@ -102,6 +102,8 @@ The type specifier `number` also allows fraction digits similar to sprintf by ad
 | quarter                      | integer, DateTime, DateTimeImmutable, IntlCalendar |
 | quarter_abbr                 | integer, DateTime, DateTimeImmutable, IntlCalendar |
 | quarter_name                 | integer, DateTime, DateTimeImmutable, IntlCalendar |
+| week_of_month                | integer, DateTime, DateTimeImmutable, IntlCalendar |
+| week_of_year                 | integer, DateTime, DateTimeImmutable, IntlCalendar |
 
 ```php
 $intlFormat = (new Budgegeria\IntlFormat\Factory())->createIntlFormat('en_US');
@@ -129,6 +131,10 @@ echo $intlFormat->format('%quarter_abbr', new DateTime());
 // Q1
 echo $intlFormat->format('%quarter_name', new DateTime());
 // 1. Quartal
+echo $intlFormat->format('%week_of_month', new DateTime('2016-03-01'));
+// 1
+echo $intlFormat->format('%week_of_year', new DateTime('2016-03-01'));
+// 9
 
 echo $intlFormat->format('%time_short', new DateTime());
 // 01:20
