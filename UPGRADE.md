@@ -9,6 +9,10 @@ You need to update your PHP version.
 timezone_id, timezone_name and timezone_short are introduced to replace the
 "timeseries" type specifiers.
 
+## Add week_of_year and week_of_month type specifier
+
+New type specifier to get the number of the week of a year and a month.
+
 # Upgrade to 2.0
 
 ## New date type specifiers
