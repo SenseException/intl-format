@@ -19,7 +19,7 @@ class MessageMetaData
      * Each element in this array contains either plain text or the type specifier in its pure specified format defined
      * by the MessageParser. Each element has an unique integer key that is referenced by $typeSpecifiers.
      *
-     * @var string[]
+     * @var array<int, string>
      */
     public $parsedMessage = [];
 
@@ -29,7 +29,7 @@ class MessageMetaData
      * This array only contains normalized type specifiers that are used in the Formatter classes. The key is an integer
      * value, that has the same value as its position in the $parsedMessage array.
      *
-     * @var string[]
+     * @var array<int, string>
      */
     public $typeSpecifiers = [];
 
@@ -39,14 +39,14 @@ class MessageMetaData
      * This list contains the values, that need to be formatted by the Formatter classes. The values are already swapped
      * and in the same order as the $typeSpecifiers representing it.
      *
-     * @var mixed[]
+     * @var array<int, mixed>
      */
     public $values = [];
 
     /**
-     * @param string[] $parsedMessage
-     * @param string[] $typeSpecifiers
-     * @param mixed[] $values
+     * @param array<int, string> $parsedMessage
+     * @param array<int, string> $typeSpecifiers
+     * @param array<int, mixed> $values
      */
     public function __construct(array $parsedMessage, array $typeSpecifiers, array $values)
     {
