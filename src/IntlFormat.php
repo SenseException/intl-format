@@ -24,7 +24,7 @@ final class IntlFormat implements IntlFormatInterface
     private $messageParser;
 
     /**
-     * @param FormatterInterface[] $formatters
+     * @param iterable<FormatterInterface> $formatters
      * @param MessageParserInterface $messageParser
      */
     public function __construct(iterable $formatters, MessageParserInterface $messageParser)
