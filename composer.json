@@ -20,7 +20,8 @@
     "infection/infection": "^0.16",
     "phpstan/phpstan": "^0.12",
     "phpstan/phpstan-phpunit": "^0.12",
-    "vimeo/psalm": "^3.6"
+    "vimeo/psalm": "^3.6",
+    "psalm/plugin-phpunit": "^0.10.1"
   },
   "autoload": {
     "psr-4": {
