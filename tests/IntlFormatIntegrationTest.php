@@ -21,7 +21,7 @@ class IntlFormatIntegrationTest extends TestCase
     {
         $message = 'Hello "%world", how are you';
 
-        /** @var FormatterInterface|MockObject $formatter */
+        /** @var FormatterInterface&MockObject $formatter */
         $formatter = $this->createMock(FormatterInterface::class);
         $formatter->expects(self::once())
             ->method('has')
@@ -47,7 +47,7 @@ class IntlFormatIntegrationTest extends TestCase
      */
     public function testEscapedFormat(string $message, string $expected): void
     {
-        /** @var FormatterInterface|MockObject $formatter */
+        /** @var FormatterInterface&MockObject $formatter */
         $formatter = $this->createMock(FormatterInterface::class);
         $formatter->expects(self::once())
             ->method('has')
@@ -70,7 +70,7 @@ class IntlFormatIntegrationTest extends TestCase
     {
         $message = '%swap %swap %1$swap';
 
-        /** @var FormatterInterface|MockObject $formatter */
+        /** @var FormatterInterface&MockObject $formatter */
         $formatter = $this->createMock(FormatterInterface::class);
         $formatter->expects(self::atLeastOnce())
             ->method('has')
@@ -94,7 +94,7 @@ class IntlFormatIntegrationTest extends TestCase
     {
         $message = '%3$swap %2$swap %1$swap';
 
-        /** @var FormatterInterface|MockObject $formatter */
+        /** @var FormatterInterface&MockObject $formatter */
         $formatter = $this->createMock(FormatterInterface::class);
         $formatter->expects(self::atLeastOnce())
             ->method('has')
@@ -118,7 +118,7 @@ class IntlFormatIntegrationTest extends TestCase
     {
         $message = 'Hello %world, Today is %date';
 
-        /** @var FormatterInterface|MockObject $formatter */
+        /** @var FormatterInterface&MockObject $formatter */
         $formatter = $this->createMock(FormatterInterface::class);
         $formatter->expects(self::atLeastOnce())
             ->method('has')
@@ -174,7 +174,7 @@ class IntlFormatIntegrationTest extends TestCase
 
         $message = 'Hello %5$world, Today is %date';
 
-        /** @var FormatterInterface|MockObject $formatter */
+        /** @var FormatterInterface&MockObject $formatter */
         $formatter = $this->createMock(FormatterInterface::class);
         $intlFormat = new IntlFormat([$formatter], new SprintfParser());
 
@@ -191,7 +191,7 @@ class IntlFormatIntegrationTest extends TestCase
 
         $message = 'Hello %0$world, Today is %date';
 
-        /** @var FormatterInterface|MockObject $formatter */
+        /** @var FormatterInterface&MockObject $formatter */
         $formatter = $this->createMock(FormatterInterface::class);
         $intlFormat = new IntlFormat([$formatter], new SprintfParser());
 
@@ -202,13 +202,13 @@ class IntlFormatIntegrationTest extends TestCase
     {
         $message = 'Hello "%world", how are you';
 
-        /** @var FormatterInterface|MockObject $formatter1 */
+        /** @var FormatterInterface&MockObject $formatter1 */
         $formatter1 = $this->createMock(FormatterInterface::class);
         $formatter1->method('has')
             ->willReturn(true);
         $formatter1->method('formatValue')
             ->willReturn('island');
-        /** @var FormatterInterface|MockObject $formatter2 */
+        /** @var FormatterInterface&MockObject $formatter2 */
         $formatter2 = $this->createMock(FormatterInterface::class);
         $formatter2->method('has')
             ->willReturn(true);
