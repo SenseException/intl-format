@@ -149,7 +149,7 @@ class MessageFormatterTest extends TestCase
     }
 
     /**
-     * @return string[]
+     * @return array<string, string>
      */
     private function getTypeSpecifier(): array
     {
@@ -180,7 +180,7 @@ class MessageFormatterTest extends TestCase
     }
 
     /**
-     * @return string[][]
+     * @return array<string, array<string>>
      */
     public function provideTypeSpecifier(): array
     {
@@ -211,7 +211,7 @@ class MessageFormatterTest extends TestCase
     }
 
     /**
-     * @return mixed[][]
+     * @return array<string, array{string, string, mixed}>
      */
     public function provideDate(): array
     {
@@ -288,7 +288,7 @@ class MessageFormatterTest extends TestCase
     }
 
     /**
-     * @return mixed[][]
+     * @return array<string, array{string, string, mixed}>
      */
     public function provideTime(): array
     {
@@ -321,7 +321,7 @@ class MessageFormatterTest extends TestCase
     }
 
     /**
-     * @return string[][]|int[][]
+     * @return array<string, array{string, int}>
      */
     public function provideOrdinal(): array
     {
@@ -334,7 +334,7 @@ class MessageFormatterTest extends TestCase
     }
 
     /**
-     * @return mixed[][]
+     * @return array<string, array<mixed>>
      */
     public function provideInvalidNumberValues(): array
     {
@@ -349,7 +349,7 @@ class MessageFormatterTest extends TestCase
     }
 
     /**
-     * @return mixed[][]
+     * @return array<string, array<mixed>>
      */
     public function provideInvalidDateValues(): array
     {

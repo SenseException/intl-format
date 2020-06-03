@@ -74,9 +74,9 @@ class ExceptionFormatterTest extends TestCase
     }
 
     /**
-     * @return array[]
+     * @return array<array{string, \Throwable, mixed}>
      */
-    public function provideExceptions()
+    public function provideExceptions(): array
     {
         $e = new \Exception('foo', 42);
         return [

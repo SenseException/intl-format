@@ -71,7 +71,7 @@ class TimeZoneFormatterTest extends TestCase
     }
 
     /**
-     * @return string[][]
+     * @return array<array<string>>
      */
     public function provideTypeSpecifier(): array
     {
@@ -86,7 +86,7 @@ class TimeZoneFormatterTest extends TestCase
     }
 
     /**
-     * @return mixed[][]
+     * @return array<string, array{string, string, mixed}>
      */
     public function provideTimeZones(): array
     {

@@ -57,7 +57,7 @@ class PrecisionNumberFormatterTest extends TestCase
     }
 
     /**
-     * @return string[][]|float[][]
+     * @return array<array{string, float, string}>
      */
     public function provideNumber(): array
     {
@@ -70,7 +70,7 @@ class PrecisionNumberFormatterTest extends TestCase
     }
 
     /**
-     * @return string[][]
+     * @return array<array<string>>
      */
     public function provideTypeSpecifier(): array
     {

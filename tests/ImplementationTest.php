@@ -14,7 +14,7 @@ class ImplementationTest extends TestCase
     /**
      * @dataProvider formattingWorksProvider
      *
-     * @param mixed[] $args
+     * @param array<int|string> $args
      */
     public function testFormattingWorks(string $expected, string $message, array $args): void
     {
@@ -28,7 +28,7 @@ class ImplementationTest extends TestCase
     }
 
     /**
-     * @return mixed[][]
+     * @return array<array{string, string, array<int|string>}>
      */
     public function formattingWorksProvider(): array
     {

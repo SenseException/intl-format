@@ -43,7 +43,7 @@ class SprintfFormatterTest extends TestCase
     }
 
     /**
-     * @return mixed[][]
+     * @return array<array{string, mixed, string}>
      */
     public function provideTypeSpecifier(): array
     {
