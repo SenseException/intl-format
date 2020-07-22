@@ -1,3 +1,9 @@
+# Upgrade to 2.2
+
+## Add date_year_short type specifier
+
+New type specifier to get the short year of a date.
+
 # Upgrade to 2.1
 
 ## Set minimum PHP requirement to 7.3

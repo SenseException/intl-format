@@ -113,6 +113,7 @@ class MessageFormatter implements FormatterInterface
             'time_long' => '{0,time,long}',
             'time_full' => '{0,time,full}',
             'date_year' => '{0,date,y}',
+            'date_year_short' => '{0,date,yy}',
             'date_month' => '{0,date,M}',
             'date_month_name' => '{0,date,MMMM}',
             'date_day' => '{0,date,d}',
