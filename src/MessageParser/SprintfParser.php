@@ -25,7 +25,7 @@ class SprintfParser implements MessageParserInterface
     {
         /** @var string[] $parsedMessage */
         $parsedMessage = preg_split(
-            '/(%[%]?(?:[0-9]+\$)?\.?[0-9]*[a-z0-9_]*)/i',
+            '/(%[%]?(?:[0-9]+\$)?[0-9]*\.?[0-9]*[a-z0-9_]*)/i',
             $message,
             -1,
             PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE

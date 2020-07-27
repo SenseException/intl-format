@@ -103,18 +103,6 @@ class SprintfParserTest extends TestCase
         self::assertSame(['Hello "', '%.', '.12world", how are you'], $parsed->parsedMessage, 'Wrong parsed message');
     }
 
-    public function testParseMessageWithInterchangedFractionDigits(): void
-    {
-        $message = 'Hello "%12.world", how are you';
-
-        $parser = new SprintfParser();
-        $parsed = $parser->parseMessage($message, ['island']);
-
-        self::assertSame([1 => '12'], $parsed->typeSpecifiers, 'Wrong type specifier');
-        self::assertSame(['island'], $parsed->values, 'Wrong values');
-        self::assertSame(['Hello "', '%12', '.world", how are you'], $parsed->parsedMessage, 'Wrong parsed message');
-    }
-
     /**
      * A test for argument swapping with fraction digits.
      */
@@ -129,6 +117,52 @@ class SprintfParserTest extends TestCase
         self::assertSame([0 => '.1swap', 2 => '.4swap', 4 => '.3swap'], $parsed->typeSpecifiers, 'wrong type specifier');
         self::assertSame(['value3', 'value2', 'value1'], $parsed->values, 'Wrong values');
         self::assertSame(['%3$.1swap', ' ', '%2$.4swap', ' ', '%1$.3swap'], $parsed->parsedMessage, 'Wrong parsed message');
+    }
+
+    /**
+     * Basic padding character test
+     */
+    public function testParseMessageWithPaddingCharacter(): void
+    {
+        $message = 'Hello "%2world", how are you';
+
+        $parser = new SprintfParser();
+        $parsed = $parser->parseMessage($message, ['island']);
+
+        self::assertSame([1 => '2world'], $parsed->typeSpecifiers, 'Wrong type specifier');
+        self::assertSame(['island'], $parsed->values, 'Wrong values');
+        self::assertSame(['Hello "', '%2world', '", how are you'], $parsed->parsedMessage, 'Wrong parsed message');
+    }
+
+    /**
+     * Basic padding character and fraction digit test
+     */
+    public function testParseMessageWithFractionDigitsAndPaddingCharacter(): void
+    {
+        $message = 'Hello "%12.22world", how are you';
+
+        $parser = new SprintfParser();
+        $parsed = $parser->parseMessage($message, ['island']);
+
+        self::assertSame([1 => '12.22world'], $parsed->typeSpecifiers, 'Wrong type specifier');
+        self::assertSame(['island'], $parsed->values, 'Wrong values');
+        self::assertSame(['Hello "', '%12.22world', '", how are you'], $parsed->parsedMessage, 'Wrong parsed message');
+    }
+
+    /**
+     * A test for argument swapping with fraction digits and padding character.
+     */
+    public function testArgumentSwappingOrderWithFractionDigitsAndPaddingCharacter(): void
+    {
+        $message = '%3$5.1swap %2$.4swap %1$11.3swap';
+
+        $parser = new SprintfParser();
+
+        $parsed = $parser->parseMessage($message, ['value1', 'value2', 'value3']);
+
+        self::assertSame([0 => '5.1swap', 2 => '.4swap', 4 => '11.3swap'], $parsed->typeSpecifiers, 'wrong type specifier');
+        self::assertSame(['value3', 'value2', 'value1'], $parsed->values, 'Wrong values');
+        self::assertSame(['%3$5.1swap', ' ', '%2$.4swap', ' ', '%1$11.3swap'], $parsed->parsedMessage, 'Wrong parsed message');
     }
 
     /**
@@ -151,12 +185,13 @@ class SprintfParserTest extends TestCase
      */
     public function testWrongTypeSpecifierIndex(): void
     {
-        $this->expectException(InvalidTypeSpecifierException::class);
-        $this->expectExceptionCode(10);
-
         $message = 'Hello %5$world, Today is %date';
 
         $parser = new SprintfParser();
+
+        $this->expectException(InvalidTypeSpecifierException::class);
+        $this->expectExceptionCode(10);
+
         $parser->parseMessage($message, ['island', new \DateTime()]);
     }
 }
