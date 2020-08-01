@@ -1,5 +1,11 @@
 # Upgrade to 2.2
 
+## Support of numeric padding characters
+
+Numeric padding characters are supported now to create type specifiers
+with a variable numeric number like "%5my_specifier" or in combination
+with fractional digits like "%5.2my_specifier".
+
 ## Add date_year_short type specifier
 
 New type specifier to get the short year of a date.
