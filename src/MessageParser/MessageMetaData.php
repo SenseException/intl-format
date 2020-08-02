@@ -9,7 +9,7 @@ namespace Budgegeria\IntlFormat\MessageParser;
  *
  * @internal
  * @psalm-immutable
- * @psalm-internal Budgegeria\IntlFormat\MessageParser
+ * @psalm-internal Budgegeria\IntlFormat
  */
 class MessageMetaData
 {
