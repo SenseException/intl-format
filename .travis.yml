@@ -12,9 +12,9 @@ install:
   - if [[ "$(phpenv version-name)" == "nightly" ]]; then composer update --ignore-platform-reqs; else composer install --dev --prefer-source; fi;
 
 script:
-  - vendor/bin/phpunit
   - vendor/bin/phpstan analyse
   - vendor/bin/psalm
+  - vendor/bin/phpunit
   - phpdbg -qrr vendor/bin/infection --min-msi=98 --no-progress --threads=5
 
 matrix:
