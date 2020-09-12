@@ -22,13 +22,16 @@ class PrecisionNumberFormatterTest extends TestCase
         self::assertTrue($messageFormatter->has($typeSpecifier));
     }
 
-    public function testHasIsFalse(): void
+    /**
+     * @dataProvider provideInvalidTypeSpecifier
+     *
+     * @param string $typeSpecifier
+     */
+    public function testHasIsFalse(string $typeSpecifier): void
     {
         $messageFormatter = new PrecisionNumberFormatter('de_DE');
 
-        self::assertFalse($messageFormatter->has('.number'));
-        self::assertFalse($messageFormatter->has('3number'));
-        self::assertFalse($messageFormatter->has('.3numbr'));
+        self::assertFalse($messageFormatter->has($typeSpecifier));
     }
 
     public function testFormatValueNotANumber(): void
@@ -66,6 +69,13 @@ class PrecisionNumberFormatterTest extends TestCase
             'thousand-separator' => ['.3number', 1001.2, '1.001,200'],
             'million-separator' => ['.3number', 1003001.2, '1.003.001,200'],
             'zero-comma' => ['.1number', 0.20001, '0,2'],
+            'double-digit-fraction' => ['.10number', 1, '1,0000000000'],
+            'prefix-comma-and-zero' => ['05.2number', 1.2, '01,20'],
+            'prefix-comma' => ['02.2number', 1.2, '1,20'],
+            'prefix' => ['03number', 1, '001'],
+            'prefix-space' => ['3number', 1, '  1'],
+            'prefix-space-double-digit' => ['10number', 1, '         1'],
+            'prefix-zero' => ['0number', 1, '1'],
         ];
     }
 
@@ -78,6 +88,22 @@ class PrecisionNumberFormatterTest extends TestCase
             ['.2number'],
             ['.0number'],
             ['.100number'],
+            ['03number'],
+            ['3number'],
+            ['05.3number'],
+        ];
+    }
+
+    /**
+     * @return array<array<string>>
+     */
+    public function provideInvalidTypeSpecifier(): array
+    {
+        return [
+            ['number'],
+            ['.number'],
+            ['3numbr'],
+            ['.3numbr'],
         ];
     }
 }
