@@ -1,5 +1,14 @@
 # Upgrade to 2.2
 
+## Support of 0 and space padding characters in `PrecisionNumberFormatter`
+
+`PrecisionNumberFormatter` now supports 0 and space padding characters:
+
+* 3number (spaces)
+* 03number (zeros)
+
+This can be combined with comma values (03.2number).
+
 ## Support of numeric padding characters
 
 Numeric padding characters are supported now to create type specifiers
