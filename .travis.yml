@@ -15,7 +15,7 @@ script:
   - vendor/bin/phpstan analyse
   - vendor/bin/psalm
   - vendor/bin/phpunit
-  - phpdbg -qrr vendor/bin/infection --min-msi=98 --no-progress --threads=5
+  - phpdbg -qrr vendor/bin/infection --min-msi=99 --no-progress --threads=5
 
 matrix:
   fast_finish: true
