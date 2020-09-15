@@ -49,8 +49,8 @@ class PrecisionNumberFormatter implements FormatterInterface
         $fractionalDigits = $matches[2];
 
         $formatter = new NumberFormatter($this->locale, NumberFormatter::DECIMAL);
-        $formatter->setAttribute(NumberFormatter::FRACTION_DIGITS, $fractionalDigits);
-        $formatter->setAttribute(NumberFormatter::FORMAT_WIDTH, $paddingDigits);
+        $formatter->setAttribute(NumberFormatter::FRACTION_DIGITS, (int) $fractionalDigits);
+        $formatter->setAttribute(NumberFormatter::FORMAT_WIDTH, (int) $paddingDigits);
         $formatter->setTextAttribute(NumberFormatter::PADDING_CHARACTER, $paddingChar);
 
         return $formatter->format($value);
