@@ -12,7 +12,7 @@
     }
   ],
   "require": {
-    "php": "^7.3",
+    "php": "^7.3 || ^8.0",
     "ext-intl": "*"
   },
   "require-dev": {
@@ -20,7 +20,7 @@
     "infection/infection": "^0.17",
     "phpstan/phpstan": "^0.12",
     "phpstan/phpstan-phpunit": "^0.12",
-    "vimeo/psalm": "^3.6",
+    "vimeo/psalm": "^3.14",
     "psalm/plugin-phpunit": "^0.10.1"
   },
   "autoload": {
