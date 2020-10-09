@@ -1,5 +1,9 @@
 # Upgrade to 2.2
 
+## Support for PHP 8
+
+Intl-Format is ready for PHP 8.
+
 ## Support of 0 and space padding characters in `PrecisionNumberFormatter`
 
 `PrecisionNumberFormatter` now supports 0 and space padding characters:
