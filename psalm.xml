@@ -8,30 +8,11 @@
 >
     <projectFiles>
         <directory name="src"/>
-<!--        <directory name="tests"/>-->
+        <directory name="tests"/>
         <ignoreFiles>
             <directory name="vendor"/>
         </ignoreFiles>
     </projectFiles>
-
-    <issueHandlers>
-        <InternalMethod>
-            <errorLevel type="suppress">
-                <referencedMethod name="PHPUnit\Framework\MockObject\Builder\InvocationMocker::method"/>
-                <referencedMethod name="PHPUnit\Framework\MockObject\Builder\InvocationMocker::with"/>
-                <referencedMethod name="PHPUnit\Framework\MockObject\Builder\InvocationMocker::willReturn"/>
-                <referencedMethod name="PHPUnit\Framework\MockObject\Builder\InvocationMocker::expects"/>
-                <referencedMethod name="PHPUnit\Framework\MockObject\Builder\InvocationMocker::willReturnMap"/>
-                <referencedMethod name="PHPUnit\Framework\MockObject\Builder\InvocationMocker::willReturnOnConsecutiveCalls"/>
-            </errorLevel>
-        </InternalMethod>
-
-        <InternalClass>
-            <errorLevel type="suppress">
-                <referencedClass name="Budgegeria\IntlFormat\MessageParser\MessageMetaData"/>
-            </errorLevel>
-        </InternalClass>
-    </issueHandlers>
 
     <plugins>
         <pluginClass class="Psalm\PhpUnitPlugin\Plugin"/>
