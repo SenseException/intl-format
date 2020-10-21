@@ -121,17 +121,36 @@ class SprintfParserTest extends TestCase
 
     /**
      * Basic padding character test
+     *
+     * @dataProvider provideSupportedPaddingCharacters
      */
-    public function testParseMessageWithPaddingCharacter(): void
+    public function testParseMessageWithPaddingCharacter(string $characters): void
     {
-        $message = 'Hello "%2world", how are you';
+        $message = 'Hello "%'.$characters.'world", how are you';
 
         $parser = new SprintfParser();
         $parsed = $parser->parseMessage($message, ['island']);
 
-        self::assertSame([1 => '2world'], $parsed->typeSpecifiers, 'Wrong type specifier');
+        self::assertSame([1 => $characters.'world'], $parsed->typeSpecifiers, 'Wrong type specifier');
         self::assertSame(['island'], $parsed->values, 'Wrong values');
-        self::assertSame(['Hello "', '%2world', '", how are you'], $parsed->parsedMessage, 'Wrong parsed message');
+        self::assertSame(
+            ['Hello "', '%'.$characters.'world', '", how are you'],
+            $parsed->parsedMessage,
+            'Wrong parsed message'
+        );
+    }
+
+    /**
+     * @return array<string, array<string>>
+     */
+    public function provideSupportedPaddingCharacters(): array
+    {
+        return [
+            'integers' => ['2'],
+            'hash'     => ['\'#2'],
+            'dash'     => ['\'-2'],
+            'plus'     => ['\'+2'],
+        ];
     }
 
     /**

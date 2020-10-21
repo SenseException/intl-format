@@ -25,12 +25,21 @@ class SprintfParser implements MessageParserInterface
     {
         /** @var string[] $parsedMessage */
         $parsedMessage = preg_split(
-            '/(%[%]?(?:[0-9]+\$)?[0-9]*\.?[0-9]*[a-z0-9_]*)/i',
+            '/(%[%]?(?# swapping:
+             )(?:[\d]+\$)?(?# fraction padding:
+             )[\d]*\.?\'?[\d#\-+]*(?# typespecifier:
+             )[a-z\d_]*)/i',
             $message,
             -1,
             PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE
         );
-        $typeSpecifiers = preg_grep('/(^%(?:[0-9]+\$)?\.?[0-9]*[a-z0-9_]+)/i', $parsedMessage);
+        $typeSpecifiers = preg_grep(
+            '/(^%(?# swapping:
+             )(?:[\d]+\$)?(?# fraction padding:
+             )\.?\'?[\d#\-+.]*(?# typespecifier:
+             )[a-z\d_]+)/i',
+            $parsedMessage
+        );
 
         // Change escaped % to regular %
         /** @var string[] $parsedMessage */
