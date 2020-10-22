@@ -13,6 +13,11 @@ Intl-Format is ready for PHP 8.
 
 This can be combined with comma values (03.2number).
 
+## Support of '(char) padding characters
+
+The only chars that are currently supported are `#`, `-`, `+`.
+An example would be "%'#2my_specifier".
+
 ## Support of numeric padding characters
 
 Numeric padding characters are supported now to create type specifiers
