@@ -32,7 +32,7 @@ jobs:
 
     - name: "Install dependencies"
       if: steps.composer-cache.outputs.cache-hit != 'true'
-      run: if [[ "${{ matrix.php-versions }}" == "8.0" ]]; then composer update --ignore-platform-reqs; else composer install --prefer-dist --no-progress --no-suggest; fi;
+      run: composer install --prefer-dist --no-progress --no-suggest
 
     - name: "Unit + Integration"
       run: vendor/bin/phpunit
