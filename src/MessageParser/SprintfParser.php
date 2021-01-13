@@ -33,6 +33,7 @@ class SprintfParser implements MessageParserInterface
             -1,
             PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE
         );
+        /** @var array<string> $typeSpecifiers */
         $typeSpecifiers = preg_grep(
             '/(^%(?# swapping:
              )(?:[\d]+\$)?(?# fraction padding:

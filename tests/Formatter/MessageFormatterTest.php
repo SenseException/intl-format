@@ -71,7 +71,7 @@ class MessageFormatterTest extends TestCase
     {
         $messageFormatter = MessageFormatter::createDateValueFormatter('de_DE');
 
-        self::assertSame($expected, $messageFormatter->formatValue($typeSpecifier, $value));
+        self::assertMatchesRegularExpression('#^'.$expected.'$#', $messageFormatter->formatValue($typeSpecifier, $value));
     }
 
     public function testFormatValueSpellout(): void
@@ -312,14 +312,14 @@ class MessageFormatterTest extends TestCase
             'time_medium' => ['01:20:50', 'time_medium', $dateTime],
             'time_medium_calendar' => ['01:20:50', 'time_medium', $calendar],
             'time_medium_timestamp' => ['01:20:50', 'time_medium', $dateTime->getTimestamp()],
-            'time_long_immutable' => ['01:20:50 GMT', 'time_long', $dateTimeImmutable],
-            'time_long' => ['01:20:50 GMT', 'time_long', $dateTime],
-            'time_long_calendar' => ['01:20:50 GMT', 'time_long', $calendar],
-            'time_long_timestamp' => ['01:20:50 GMT', 'time_long', $dateTime->getTimestamp()],
-            'time_full_immutable' => ['01:20:50 GMT', 'time_full', $dateTimeImmutable],
-            'time_full' => ['01:20:50 GMT', 'time_full', $dateTime],
-            'time_full_calendar' => ['01:20:50 GMT', 'time_full', $calendar],
-            'time_full_timestamp' => ['01:20:50 GMT', 'time_full', $dateTime->getTimestamp()],
+            'time_long_immutable' => ['01:20:50 (GMT|UTC)', 'time_long', $dateTimeImmutable],
+            'time_long' => ['01:20:50 (GMT|UTC)', 'time_long', $dateTime],
+            'time_long_calendar' => ['01:20:50 (GMT|UTC)', 'time_long', $calendar],
+            'time_long_timestamp' => ['01:20:50 (GMT|UTC)', 'time_long', $dateTime->getTimestamp()],
+            'time_full_immutable' => ['01:20:50 (GMT|Koordinierte Weltzeit)', 'time_full', $dateTimeImmutable],
+            'time_full' => ['01:20:50 (GMT|Koordinierte Weltzeit)', 'time_full', $dateTime],
+            'time_full_calendar' => ['01:20:50 (GMT|Koordinierte Weltzeit)', 'time_full', $calendar],
+            'time_full_timestamp' => ['01:20:50 (GMT|Koordinierte Weltzeit)', 'time_full', $dateTime->getTimestamp()],
         ];
     }
 
