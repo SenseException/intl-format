@@ -1,16 +1,13 @@
-name: Tests
+name: Coding Style
 
 on:
   - "push"
   - "pull_request"
 
 jobs:
-  tests:
+  analysis:
 
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        php-versions: ['7.3', '7.4', '8.0']
 
     steps:
     - uses: actions/checkout@v2
@@ -20,22 +17,18 @@ jobs:
       uses: actions/cache@v2
       with:
         path: "vendor"
-        key: ${{ runner.os }}-php-${{ matrix.php-versions }}-${{ hashFiles('**/composer.lock') }}
+        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
         restore-keys: |
           "${{ runner.os }}-php-"
-
     - name: "Setup PHP Action"
       uses: "shivammathur/setup-php@v2"
       with:
-        php-version: "${{ matrix.php-versions }}"
-        extensions: "intl, xdebug"
+        php-version: "7.4"
+        extensions: "intl"
 
     - name: "Install dependencies"
       if: steps.composer-cache.outputs.cache-hit != 'true'
       run: composer install --prefer-dist --no-progress --no-suggest
 
-    - name: "Unit + Integration"
-      run: vendor/bin/phpunit
-    
-    - name: "Mutation tests"
-      run: vendor/bin/infection --min-msi=98 --no-progress --threads=5
+    - name: "Code Sniffer"
+      run: vendor/bin/phpcs

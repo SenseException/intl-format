@@ -21,7 +21,8 @@
     "phpstan/phpstan": "^0.12",
     "phpstan/phpstan-phpunit": "^0.12",
     "vimeo/psalm": "^4.3",
-    "psalm/plugin-phpunit": "^0.15"
+    "psalm/plugin-phpunit": "^0.15",
+    "doctrine/coding-standard": "^8.2"
   },
   "autoload": {
     "psr-4": {
