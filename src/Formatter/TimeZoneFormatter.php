@@ -9,26 +9,22 @@ use DateTimeInterface;
 use DateTimeZone;
 use IntlCalendar;
 use IntlTimeZone;
+
 use function in_array;
 
 class TimeZoneFormatter implements FormatterInterface
 {
-    private const TYPE_SPECIFIER_ID = 'timeseries_id';
-    private const TYPE_SPECIFIER_LONG_NAME = 'timeseries_name';
+    private const TYPE_SPECIFIER_ID         = 'timeseries_id';
+    private const TYPE_SPECIFIER_LONG_NAME  = 'timeseries_name';
     private const TYPE_SPECIFIER_SHORT_NAME = 'timeseries_short';
 
-    private const TYPE_SPECIFIER_TZ_ID = 'timezone_id';
-    private const TYPE_SPECIFIER_TZ_LONG_NAME = 'timezone_name';
+    private const TYPE_SPECIFIER_TZ_ID         = 'timezone_id';
+    private const TYPE_SPECIFIER_TZ_LONG_NAME  = 'timezone_name';
     private const TYPE_SPECIFIER_TZ_SHORT_NAME = 'timezone_short';
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $locale;
 
-    /**
-     * @param string $locale
-     */
     public function __construct(string $locale)
     {
         $this->locale = $locale;
@@ -46,13 +42,13 @@ class TimeZoneFormatter implements FormatterInterface
             $value = $value->getTimezone();
         }
 
-        if (!($value instanceof IntlTimeZone) && !($value instanceof DateTimeZone)) {
+        if (! ($value instanceof IntlTimeZone) && ! ($value instanceof DateTimeZone)) {
             throw InvalidValueException::invalidValueType($value, [DateTimeInterface::class, DateTimeZone::class, IntlTimeZone::class]);
         }
 
         $intlCalendar->setTimeZone($value);
         $inDaylight = $intlCalendar->inDaylightTime();
-        $value = $intlCalendar->getTimeZone();
+        $value      = $intlCalendar->getTimeZone();
 
         $timeZoneMetaData = [
             self::TYPE_SPECIFIER_ID => $value->getID(),
@@ -66,9 +62,6 @@ class TimeZoneFormatter implements FormatterInterface
         return $timeZoneMetaData[$typeSpecifier];
     }
 
-    /**
-     * @inheritdoc
-     */
     public function has(string $typeSpecifier): bool
     {
         $typeSpecifiers = [
@@ -84,9 +77,6 @@ class TimeZoneFormatter implements FormatterInterface
         return in_array($typeSpecifier, $typeSpecifiers, true);
     }
 
-    /**
-     * @return IntlCalendar
-     */
     private function createIntlCalendar(): IntlCalendar
     {
         return IntlCalendar::createInstance(null, $this->locale);

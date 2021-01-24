@@ -5,22 +5,18 @@ declare(strict_types=1);
 namespace Budgegeria\IntlFormat\Formatter;
 
 use Budgegeria\IntlFormat\Exception\InvalidValueException;
+use Closure;
 use Locale;
 
 class LocaleFormatter implements FormatterInterface
 {
-    /**
-     * @var \Closure[]
-     */
+    /** @var Closure[] */
     private $formatFunctions;
 
-    /**
-     * @param string $locale
-     */
     public function __construct(string $locale)
     {
         $this->formatFunctions = [
-            'language' => static function(string $value) use ($locale): string {
+            'language' => static function (string $value) use ($locale): string {
                 $language = Locale::getDisplayLanguage($value, $locale);
 
                 if ($value === $language) {
@@ -29,10 +25,10 @@ class LocaleFormatter implements FormatterInterface
 
                 return $language;
             },
-            'region' => static function(string $value) use ($locale): string {
+            'region' => static function (string $value) use ($locale): string {
                 $region = Locale::getDisplayRegion($value, $locale);
 
-                if ('' === $region) {
+                if ($region === '') {
                     throw InvalidValueException::invalidLocale($value);
                 }
 
@@ -49,9 +45,6 @@ class LocaleFormatter implements FormatterInterface
         return $this->formatFunctions[$typeSpecifier]((string) $value);
     }
 
-    /**
-     * @inheritDoc
-     */
     public function has(string $typeSpecifier): bool
     {
         return isset($this->formatFunctions[$typeSpecifier]);

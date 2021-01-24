@@ -11,8 +11,9 @@ use function sprintf;
 class InvalidValueException extends IntlFormatException
 {
     /**
-     * @param mixed $value
+     * @param mixed    $value
      * @param string[] $allowedTypes
+     *
      * @return InvalidValueException
      */
     public static function invalidValueType($value, array $allowedTypes): self
@@ -25,7 +26,6 @@ class InvalidValueException extends IntlFormatException
     }
 
     /**
-     * @param string $locale
      * @return InvalidValueException
      */
     public static function invalidLocale(string $locale): self
@@ -35,6 +35,7 @@ class InvalidValueException extends IntlFormatException
 
     /**
      * @param mixed $value
+     *
      * @return InvalidValueException
      */
     public static function invalidReturnType($value): self

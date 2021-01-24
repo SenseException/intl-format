@@ -10,6 +10,7 @@ use Budgegeria\IntlFormat\Formatter\FormatterInterface;
 use Budgegeria\IntlFormat\IntlFormat;
 use Budgegeria\IntlFormat\MessageParser\MessageMetaData;
 use Budgegeria\IntlFormat\MessageParser\MessageParserInterface;
+use DateTime;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -100,14 +101,14 @@ class IntlFormatTest extends TestCase
             ->method('has')
             ->willReturnMap([
                 ['world', true],
-                ['date', false]
+                ['date', false],
             ]);
         $formatter->expects(self::once())
             ->method('formatValue')
             ->with('world', 'island')
             ->willReturn('island');
 
-        $dateTime = new \DateTime();
+        $dateTime = new DateTime();
 
         $parsed = new MessageMetaData(
             ['Hello ', '{{world}}', ', Today is ', '{{date}}'],

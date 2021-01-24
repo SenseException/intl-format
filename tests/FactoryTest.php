@@ -22,7 +22,7 @@ class FactoryTest extends TestCase
     public function testCreateIntlFormatIntegration(): void
     {
         $intlFormat = (new Factory())->createIntlFormat('en_US');
-        $date = new DateTime();
+        $date       = new DateTime();
         $date->setDate(2016, 3, 1);
         $date->setTime(5, 30);
         $date->setTimezone(new DateTimeZone('US/Arizona'));

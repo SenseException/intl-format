@@ -9,34 +9,27 @@ use Closure;
 use DateTimeInterface;
 use IntlCalendar;
 use MessageFormatter as Message;
-use function is_numeric;
+
 use function is_int;
+use function is_numeric;
 
 class MessageFormatter implements FormatterInterface
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $locale;
 
-    /**
-     * @var string[]
-     */
+    /** @var string[] */
     private $messageFormats;
 
-    /**
-     * @var Closure
-     */
+    /** @var Closure */
     private $valueTypeCheck;
 
     /**
-     * @param string $locale
      * @param string[] $messageFormats
-     * @param Closure $valueTypeCheck
      */
     public function __construct(string $locale, array $messageFormats, Closure $valueTypeCheck)
     {
-        $this->locale = $locale;
+        $this->locale         = $locale;
         $this->messageFormats = $messageFormats;
         $this->valueTypeCheck = $valueTypeCheck;
     }
@@ -49,29 +42,22 @@ class MessageFormatter implements FormatterInterface
         ($this->valueTypeCheck)($value);
 
         $formattedValue = Message::formatMessage($this->locale, $this->messageFormats[$typeSpecifier], [$value]);
-        if (false === $formattedValue) {
+        if ($formattedValue === false) {
             throw InvalidValueException::invalidReturnType($formattedValue);
         }
 
         return $formattedValue;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function has(string $typeSpecifier): bool
     {
         return isset($this->messageFormats[$typeSpecifier]);
     }
 
-    /**
-     * @param string $locale
-     * @return MessageFormatter
-     */
     public static function createNumberValueFormatter(string $locale): MessageFormatter
     {
-        $valueTypeCheck = /** @param mixed $value */static function($value): void {
-            if (!is_numeric($value)) {
+        $valueTypeCheck = /** @param mixed $value */static function ($value): void {
+            if (! is_numeric($value)) {
                 throw InvalidValueException::invalidValueType($value, ['integer', 'double']);
             }
         };
@@ -89,14 +75,10 @@ class MessageFormatter implements FormatterInterface
         return new self($locale, $numberTypeSpecifier, $valueTypeCheck);
     }
 
-    /**
-     * @param string $locale
-     * @return MessageFormatter
-     */
     public static function createDateValueFormatter(string $locale): MessageFormatter
     {
-        $valueTypeCheck = /** @param mixed $value */static function($value): void {
-            if (!is_int($value) && !($value instanceof DateTimeInterface) && !($value instanceof IntlCalendar)) {
+        $valueTypeCheck = /** @param mixed $value */static function ($value): void {
+            if (! is_int($value) && ! ($value instanceof DateTimeInterface) && ! ($value instanceof IntlCalendar)) {
                 throw InvalidValueException::invalidValueType($value, ['integer', DateTimeInterface::class, IntlCalendar::class]);
             }
         };

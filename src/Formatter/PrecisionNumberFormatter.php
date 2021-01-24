@@ -6,24 +6,18 @@ namespace Budgegeria\IntlFormat\Formatter;
 
 use Budgegeria\IntlFormat\Exception\InvalidValueException;
 use NumberFormatter;
+
 use function is_numeric;
 use function preg_match;
 
 class PrecisionNumberFormatter implements FormatterInterface
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private static $matchPattern = '/^([0-9]+)?\.?([0-9]*)number$/';
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $locale;
 
-    /**
-     * @param string $locale
-     */
     public function __construct(string $locale)
     {
         $this->locale = $locale;
@@ -34,13 +28,13 @@ class PrecisionNumberFormatter implements FormatterInterface
      */
     public function formatValue(string $typeSpecifier, $value): string
     {
-        if (!is_numeric($value)) {
+        if (! is_numeric($value)) {
             throw InvalidValueException::invalidValueType($value, ['integer', 'double']);
         }
 
         preg_match(self::$matchPattern, $typeSpecifier, $matches);
 
-        $paddingChar = ' ';
+        $paddingChar   = ' ';
         $paddingDigits = $matches[1];
         if (preg_match('/^0[0-9]+$/', $paddingDigits)) {
             $paddingChar = $paddingDigits[0];
@@ -56,12 +50,9 @@ class PrecisionNumberFormatter implements FormatterInterface
         return $formatter->format($value);
     }
 
-    /**
-     * @inheritDoc
-     */
     public function has(string $typeSpecifier): bool
     {
-        return 'number' !== $typeSpecifier && '.number' !== $typeSpecifier &&
-            1 === preg_match(self::$matchPattern, $typeSpecifier);
+        return $typeSpecifier !== 'number' && $typeSpecifier !== '.number' &&
+            preg_match(self::$matchPattern, $typeSpecifier) === 1;
     }
 }

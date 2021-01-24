@@ -4,32 +4,41 @@ declare(strict_types=1);
 
 namespace Budgegeria\IntlFormat\Tests\Formatter;
 
+use ArrayObject;
 use Budgegeria\IntlFormat\Exception\InvalidValueException;
 use Budgegeria\IntlFormat\Formatter\MessageFormatter;
 use DateTime;
 use DateTimeImmutable;
 use DateTimeInterface;
-use function sprintf;
+use DateTimeZone;
 use IntlCalendar;
 use PHPUnit\Framework\TestCase;
+
+use function array_merge;
+use function preg_replace;
+use function sprintf;
 
 class MessageFormatterTest extends TestCase
 {
     /**
      * @dataProvider provideTypeSpecifier
-     *
-     * @param string $typeSpecifier
      */
     public function testHas(string $typeSpecifier): void
     {
-        $messageFormatter = new MessageFormatter('de_DE', $this->getTypeSpecifier(), function () {});
+        $fn = static function (): void {
+        };
+
+        $messageFormatter = new MessageFormatter('de_DE', $this->getTypeSpecifier(), $fn);
 
         self::assertTrue($messageFormatter->has($typeSpecifier));
     }
 
     public function testHasIsFalse(): void
     {
-        $messageFormatter = new MessageFormatter('de_DE', $this->getTypeSpecifier(), function () {});
+        $fn = static function (): void {
+        };
+
+        $messageFormatter = new MessageFormatter('de_DE', $this->getTypeSpecifier(), $fn);
 
         self::assertFalse($messageFormatter->has('int'));
     }
@@ -47,11 +56,9 @@ class MessageFormatterTest extends TestCase
     }
 
     /**
-     * @dataProvider provideDate
+     * @param mixed $value
      *
-     * @param string $expected
-     * @param string $typeSpecifier
-     * @param mixed  $value
+     * @dataProvider provideDate
      */
     public function testFormatValueDate(string $expected, string $typeSpecifier, $value): void
     {
@@ -61,17 +68,15 @@ class MessageFormatterTest extends TestCase
     }
 
     /**
-     * @dataProvider provideTime
+     * @param mixed $value
      *
-     * @param string $expected
-     * @param string $typeSpecifier
-     * @param mixed  $value
+     * @dataProvider provideTime
      */
     public function testFormatValueTime(string $expected, string $typeSpecifier, $value): void
     {
         $messageFormatter = MessageFormatter::createDateValueFormatter('de_DE');
 
-        self::assertMatchesRegularExpression('#^'.$expected.'$#', $messageFormatter->formatValue($typeSpecifier, $value));
+        self::assertMatchesRegularExpression('#^' . $expected . '$#', $messageFormatter->formatValue($typeSpecifier, $value));
     }
 
     public function testFormatValueSpellout(): void
@@ -84,9 +89,6 @@ class MessageFormatterTest extends TestCase
 
     /**
      * @dataProvider provideOrdinal
-     *
-     * @param string $expected
-     * @param int    $number
      */
     public function testFormatValueOrdinal(string $expected, int $number): void
     {
@@ -103,9 +105,9 @@ class MessageFormatterTest extends TestCase
     }
 
     /**
-     * @dataProvider provideInvalidNumberValues
-     *
      * @param mixed $value
+     *
+     * @dataProvider provideInvalidNumberValues
      */
     public function testFormatValueNumberTypeCheck($value): void
     {
@@ -119,9 +121,9 @@ class MessageFormatterTest extends TestCase
     }
 
     /**
-     * @dataProvider provideInvalidDateValues
-     *
      * @param mixed $value
+     *
+     * @dataProvider provideInvalidDateValues
      */
     public function testFormatValueDateTypeCheck($value): void
     {
@@ -140,7 +142,10 @@ class MessageFormatterTest extends TestCase
 
     public function testFormatValueInvalidReturnType(): void
     {
-        $messageFormatter = new MessageFormatter('de_DE', ['a' => 'a'], function () {});
+        $fn = static function (): void {
+        };
+
+        $messageFormatter = new MessageFormatter('de_DE', ['a' => 'a'], $fn);
 
         $this->expectException(InvalidValueException::class);
         $this->expectExceptionCode(30);
@@ -215,9 +220,9 @@ class MessageFormatterTest extends TestCase
      */
     public function provideDate(): array
     {
-        $dateTime = new DateTime('2016-03-01');
+        $dateTime          = new DateTime('2016-03-01');
         $dateTimeImmutable = new DateTimeImmutable('2016-03-01');
-        $calendar = IntlCalendar::fromDateTime($dateTime);
+        $calendar          = IntlCalendar::fromDateTime($dateTime);
 
         return [
             'date' => ['01.03.2016', 'date', $dateTime],
@@ -295,9 +300,9 @@ class MessageFormatterTest extends TestCase
      */
     public function provideTime(): array
     {
-        $dateTime = new DateTime('2016-03-01 02:20:50', new \DateTimeZone('Europe/Berlin'));
-        $dateTimeImmutable = new DateTimeImmutable('2016-03-01 02:20:50', new \DateTimeZone('Europe/Berlin'));
-        $calendar = IntlCalendar::fromDateTime($dateTime);
+        $dateTime          = new DateTime('2016-03-01 02:20:50', new DateTimeZone('Europe/Berlin'));
+        $dateTimeImmutable = new DateTimeImmutable('2016-03-01 02:20:50', new DateTimeZone('Europe/Berlin'));
+        $calendar          = IntlCalendar::fromDateTime($dateTime);
 
         return [
             'time' => ['01:20:50', 'time', $dateTime],
@@ -341,13 +346,16 @@ class MessageFormatterTest extends TestCase
      */
     public function provideInvalidNumberValues(): array
     {
+        $fn = static function (): void {
+        };
+
         return [
             'string' => ['foo'],
-            'object' => [new \ArrayObject()],
+            'object' => [new ArrayObject()],
             'bool' => [true],
             'array' => [[1,2,3]],
             'null' => [null],
-            'closure' => [function () {}],
+            'closure' => [$fn],
         ];
     }
 

@@ -6,6 +6,7 @@ namespace Budgegeria\IntlFormat\Tests\MessageParser;
 
 use Budgegeria\IntlFormat\Exception\InvalidTypeSpecifierException;
 use Budgegeria\IntlFormat\MessageParser\SprintfParser;
+use DateTime;
 use PHPUnit\Framework\TestCase;
 
 class SprintfParserTest extends TestCase
@@ -37,7 +38,7 @@ class SprintfParserTest extends TestCase
 
         $parsed = $parser->parseMessage($message, ['value1', 'value2', 'value3', 'value4', 'value5', 'value6', 'value7', 'value8', 'value9', 'value10']);
 
-        $values = ['value10', 'value9', 'value8', 'value7', 'value6', 'value5', 'value4', 'value3', 'value2', 'value1'];
+        $values        = ['value10', 'value9', 'value8', 'value7', 'value6', 'value5', 'value4', 'value3', 'value2', 'value1'];
         $typeSpecifier = [0 => 'swap', 2 => 'swap', 4 => 'swap', 6 => 'swap', 8 => 'swap', 10 => 'swap', 12 => 'swap', 14 => 'swap', 16 => 'swap', 18 => 'swap'];
         $parsedMessage = ['%10$swap', ' ', '%9$swap', ' ', '%8$swap', ' ', '%7$swap', ' ', '%6$swap', ' ', '%5$swap', ' ', '%4$swap', ' ', '%3$swap', ' ', '%2$swap', ' ', '%1$swap'];
 
@@ -58,7 +59,7 @@ class SprintfParserTest extends TestCase
 
         $parser = new SprintfParser();
 
-        $parser->parseMessage($message, ['island', new \DateTime()]);
+        $parser->parseMessage($message, ['island', new DateTime()]);
     }
 
     /**
@@ -126,15 +127,15 @@ class SprintfParserTest extends TestCase
      */
     public function testParseMessageWithPaddingCharacter(string $characters): void
     {
-        $message = 'Hello "%'.$characters.'world", how are you';
+        $message = 'Hello "%' . $characters . 'world", how are you';
 
         $parser = new SprintfParser();
         $parsed = $parser->parseMessage($message, ['island']);
 
-        self::assertSame([1 => $characters.'world'], $parsed->typeSpecifiers, 'Wrong type specifier');
+        self::assertSame([1 => $characters . 'world'], $parsed->typeSpecifiers, 'Wrong type specifier');
         self::assertSame(['island'], $parsed->values, 'Wrong values');
         self::assertSame(
-            ['Hello "', '%'.$characters.'world', '", how are you'],
+            ['Hello "', '%' . $characters . 'world', '", how are you'],
             $parsed->parsedMessage,
             'Wrong parsed message'
         );
@@ -211,6 +212,6 @@ class SprintfParserTest extends TestCase
         $this->expectException(InvalidTypeSpecifierException::class);
         $this->expectExceptionCode(10);
 
-        $parser->parseMessage($message, ['island', new \DateTime()]);
+        $parser->parseMessage($message, ['island', new DateTime()]);
     }
 }

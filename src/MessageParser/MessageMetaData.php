@@ -8,6 +8,7 @@ namespace Budgegeria\IntlFormat\MessageParser;
  * The result of a parsed message.
  *
  * @internal
+ *
  * @psalm-immutable
  * @psalm-internal Budgegeria\IntlFormat
  */
@@ -46,12 +47,12 @@ class MessageMetaData
     /**
      * @param array<int, string> $parsedMessage
      * @param array<int, string> $typeSpecifiers
-     * @param array<int, mixed> $values
+     * @param array<int, mixed>  $values
      */
     public function __construct(array $parsedMessage, array $typeSpecifiers, array $values)
     {
-        $this->parsedMessage = $parsedMessage;
+        $this->parsedMessage  = $parsedMessage;
         $this->typeSpecifiers = $typeSpecifiers;
-        $this->values = $values;
+        $this->values         = $values;
     }
 }

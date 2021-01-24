@@ -10,16 +10,15 @@ use DateTime;
 use DateTimeImmutable;
 use DateTimeInterface;
 use DateTimeZone;
-use function sprintf;
 use IntlTimeZone;
 use PHPUnit\Framework\TestCase;
+
+use function sprintf;
 
 class TimeZoneFormatterTest extends TestCase
 {
     /**
      * @dataProvider provideTypeSpecifier
-     *
-     * @param string $typeSpecifier
      */
     public function testHas(string $typeSpecifier): void
     {
@@ -36,11 +35,9 @@ class TimeZoneFormatterTest extends TestCase
     }
 
     /**
-     * @dataProvider provideTimeZones
+     * @param mixed $value
      *
-     * @param string $expected
-     * @param string $typeSpecifier
-     * @param mixed  $value
+     * @dataProvider provideTimeZones
      */
     public function testFormatValue(string $expected, string $typeSpecifier, $value): void
     {
@@ -51,8 +48,6 @@ class TimeZoneFormatterTest extends TestCase
 
     /**
      * @dataProvider provideTypeSpecifier
-     *
-     * @param string $typeSpecifier
      */
     public function testFormatValueInvalidValue(string $typeSpecifier): void
     {
@@ -90,10 +85,10 @@ class TimeZoneFormatterTest extends TestCase
      */
     public function provideTimeZones(): array
     {
-        $datetime = new DateTime('2016-08-01', new DateTimeZone('US/Arizona'));
+        $datetime          = new DateTime('2016-08-01', new DateTimeZone('US/Arizona'));
         $datetimeImmutable = new DateTimeImmutable('2016-05-01', new DateTimeZone('US/Arizona'));
-        $timezone = $datetime->getTimezone();
-        $intlTimezone = IntlTimeZone::fromDateTimeZone($timezone);
+        $timezone          = $datetime->getTimezone();
+        $intlTimezone      = IntlTimeZone::fromDateTimeZone($timezone);
 
         return [
             'timeseries_id_ts' => ['US/Arizona', 'timeseries_id', $timezone],

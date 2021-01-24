@@ -17,9 +17,6 @@ class SprintfFormatter implements FormatterInterface
         return sprintf('%' . $typeSpecifier, $value);
     }
 
-    /**
-     * @inheritdoc
-     */
     public function has(string $typeSpecifier): bool
     {
         return (bool) preg_match('/[\+\-]?(\'?.)?(?:\-\-)?\d*(?:\.?\d*)[%bcdeEfFgGosuxX]/', $typeSpecifier);

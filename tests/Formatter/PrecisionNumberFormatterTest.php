@@ -12,8 +12,6 @@ class PrecisionNumberFormatterTest extends TestCase
 {
     /**
      * @dataProvider provideTypeSpecifier
-     *
-     * @param string $typeSpecifier
      */
     public function testHas(string $typeSpecifier): void
     {
@@ -24,8 +22,6 @@ class PrecisionNumberFormatterTest extends TestCase
 
     /**
      * @dataProvider provideInvalidTypeSpecifier
-     *
-     * @param string $typeSpecifier
      */
     public function testHasIsFalse(string $typeSpecifier): void
     {
@@ -47,10 +43,6 @@ class PrecisionNumberFormatterTest extends TestCase
 
     /**
      * @dataProvider provideNumber
-     *
-     * @param string $typeSpecifier
-     * @param float $number
-     * @param string $expects
      */
     public function testFormatValueNumber(string $typeSpecifier, float $number, string $expects): void
     {

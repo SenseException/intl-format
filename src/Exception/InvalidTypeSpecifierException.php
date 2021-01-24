@@ -9,7 +9,6 @@ use function sprintf;
 class InvalidTypeSpecifierException extends IntlFormatException
 {
     /**
-     * @param string $typeSpecifier
      * @return InvalidTypeSpecifierException
      */
     public static function unmatchedTypeSpecifier(string $typeSpecifier): self
@@ -34,8 +33,6 @@ class InvalidTypeSpecifierException extends IntlFormatException
     }
 
     /**
-     * @param int $valuesCount
-     * @param int $typeSpecifiersCount
      * @return InvalidTypeSpecifierException
      */
     public static function invalidTypeSpecifierCount(int $valuesCount, int $typeSpecifiersCount): self

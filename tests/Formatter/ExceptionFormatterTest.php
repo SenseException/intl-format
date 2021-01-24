@@ -6,14 +6,13 @@ namespace Budgegeria\IntlFormat\Tests\Formatter;
 
 use Budgegeria\IntlFormat\Exception\InvalidValueException;
 use Budgegeria\IntlFormat\Formatter\ExceptionFormatter;
+use Exception;
 use PHPUnit\Framework\TestCase;
 use Throwable;
 
 class ExceptionFormatterTest extends TestCase
 {
-    /**
-     * @var ExceptionFormatter
-     */
+    /** @var ExceptionFormatter */
     private $formatter;
 
     protected function setUp(): void
@@ -25,8 +24,6 @@ class ExceptionFormatterTest extends TestCase
 
     /**
      * @dataProvider provideTypeSpecifier
-     *
-     * @param string $typeSpecifier
      */
     public function testHas(string $typeSpecifier): void
     {
@@ -39,11 +36,9 @@ class ExceptionFormatterTest extends TestCase
     }
 
     /**
-     * @dataProvider provideExceptions
-     *
-     * @param string $typeSpecifier
-     * @param Throwable $value
      * @param mixed $expected
+     *
+     * @dataProvider provideExceptions
      */
     public function testFormatValue(string $typeSpecifier, Throwable $value, $expected): void
     {
@@ -53,7 +48,7 @@ class ExceptionFormatterTest extends TestCase
     public function testFormatValueInvalidValue(): void
     {
         $this->expectException(InvalidValueException::class);
-        $this->expectExceptionMessageMatches('/"'.Throwable::class.'"/');
+        $this->expectExceptionMessageMatches('/"' . Throwable::class . '"/');
         $this->expectExceptionCode(10);
 
         $this->formatter->formatValue('emessage', 1);
@@ -74,11 +69,12 @@ class ExceptionFormatterTest extends TestCase
     }
 
     /**
-     * @return array<array{string, \Throwable, mixed}>
+     * @return array<array{string, Throwable, mixed}>
      */
     public function provideExceptions(): array
     {
-        $e = new \Exception('foo', 42);
+        $e = new Exception('foo', 42);
+
         return [
             'emessage' => ['emessage', $e, $e->getMessage()],
             'ecode' => ['ecode', $e, (string) $e->getCode()],

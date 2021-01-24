@@ -11,8 +11,6 @@ class SprintfFormatterTest extends TestCase
 {
     /**
      * @dataProvider provideTypeSpecifier
-     *
-     * @param string $typeSpecifier
      */
     public function testHas(string $typeSpecifier): void
     {
@@ -22,11 +20,9 @@ class SprintfFormatterTest extends TestCase
     }
 
     /**
-     * @dataProvider provideTypeSpecifier
+     * @param mixed $value
      *
-     * @param string $typeSpecifier
-     * @param mixed  $value
-     * @param string $expected
+     * @dataProvider provideTypeSpecifier
      */
     public function testFormat(string $typeSpecifier, $value, string $expected): void
     {

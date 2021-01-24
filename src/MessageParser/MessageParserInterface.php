@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace Budgegeria\IntlFormat\MessageParser;
 
+use Budgegeria\IntlFormat\Exception\InvalidTypeSpecifierException;
+
 interface MessageParserInterface
 {
     /**
-     * @param string $message
      * @param mixed[] $values
-     * @throws \Budgegeria\IntlFormat\Exception\InvalidTypeSpecifierException
-     * @return MessageMetaData
+     *
+     * @throws InvalidTypeSpecifierException
      */
     public function parseMessage(string $message, array $values): MessageMetaData;
 }

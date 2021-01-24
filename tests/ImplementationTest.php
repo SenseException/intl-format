@@ -12,9 +12,9 @@ use PHPUnit\Framework\TestCase;
 class ImplementationTest extends TestCase
 {
     /**
-     * @dataProvider formattingWorksProvider
-     *
      * @param array<int|string> $args
+     *
+     * @dataProvider formattingWorksProvider
      */
     public function testFormattingWorks(string $expected, string $message, array $args): void
     {

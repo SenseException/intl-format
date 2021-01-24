@@ -51,8 +51,6 @@ class CurrencySymbolFormatterTest extends TestCase
 
     /**
      * @dataProvider provideLocales
-     *
-     * @param string $locale
      */
     public function testFormatValueWithLocaleKeywords(string $locale): void
     {

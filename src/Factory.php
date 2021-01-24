@@ -13,10 +13,6 @@ use Budgegeria\IntlFormat\MessageParser\SprintfParser;
 
 class Factory
 {
-    /**
-     * @param string $locale
-     * @return IntlFormatInterface
-     */
     public function createIntlFormat(string $locale): IntlFormatInterface
     {
         $formatter = [

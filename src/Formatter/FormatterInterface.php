@@ -14,9 +14,8 @@ interface FormatterInterface
      * Formats the given value by a formatting strategy that is
      * mapped by the type specifier.
      *
-     * @param string $typeSpecifier
      * @param mixed $value
-     * @return string
+     *
      * @throws InvalidValueException
      */
     public function formatValue(string $typeSpecifier, $value): string;
@@ -29,7 +28,6 @@ interface FormatterInterface
      * is able to handle the formatting using FormatterInterface::formatValue().
      *
      * @param string $typeSpecifier The type specifier without the prefix char.
-     * @return bool
      */
     public function has(string $typeSpecifier): bool;
 }

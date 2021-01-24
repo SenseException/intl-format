@@ -8,6 +8,7 @@ use Budgegeria\IntlFormat\Exception\InvalidTypeSpecifierException;
 use Budgegeria\IntlFormat\Formatter\FormatterInterface;
 use Budgegeria\IntlFormat\IntlFormat;
 use Budgegeria\IntlFormat\MessageParser\SprintfParser;
+use DateTime;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -41,9 +42,6 @@ class IntlFormatIntegrationTest extends TestCase
      * A test for %-escaped messages.
      *
      * @dataProvider provideEscapedMessages
-     *
-     * @param string $message
-     * @param string $expected
      */
     public function testEscapedFormat(string $message, string $expected): void
     {
@@ -124,7 +122,7 @@ class IntlFormatIntegrationTest extends TestCase
             ->method('has')
             ->willReturnMap([
                 ['world', true],
-                ['date', false]
+                ['date', false],
             ]);
         $formatter->expects(self::once())
             ->method('formatValue')
@@ -133,7 +131,7 @@ class IntlFormatIntegrationTest extends TestCase
 
         $intlFormat = new IntlFormat([$formatter], new SprintfParser());
 
-        self::assertSame('Hello island, Today is %date', $intlFormat->format($message, 'island', new \DateTime()));
+        self::assertSame('Hello island, Today is %date', $intlFormat->format($message, 'island', new DateTime()));
     }
 
     /**
@@ -175,10 +173,10 @@ class IntlFormatIntegrationTest extends TestCase
         $message = 'Hello %5$world, Today is %date';
 
         /** @var FormatterInterface&MockObject $formatter */
-        $formatter = $this->createMock(FormatterInterface::class);
+        $formatter  = $this->createMock(FormatterInterface::class);
         $intlFormat = new IntlFormat([$formatter], new SprintfParser());
 
-        $intlFormat->format($message, 'island', new \DateTime());
+        $intlFormat->format($message, 'island', new DateTime());
     }
 
     /**
@@ -192,10 +190,10 @@ class IntlFormatIntegrationTest extends TestCase
         $message = 'Hello %0$world, Today is %date';
 
         /** @var FormatterInterface&MockObject $formatter */
-        $formatter = $this->createMock(FormatterInterface::class);
+        $formatter  = $this->createMock(FormatterInterface::class);
         $intlFormat = new IntlFormat([$formatter], new SprintfParser());
 
-        $intlFormat->format($message, 'island', new \DateTime());
+        $intlFormat->format($message, 'island', new DateTime());
     }
 
     public function testAddFormatOverride(): void
