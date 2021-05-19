@@ -47,6 +47,7 @@ class PrecisionNumberFormatter implements FormatterInterface
         $formatter->setAttribute(NumberFormatter::FORMAT_WIDTH, (int) $paddingDigits);
         $formatter->setTextAttribute(NumberFormatter::PADDING_CHARACTER, $paddingChar);
 
+        /** @phpstan-var int|float $value */
         return $formatter->format($value);
     }
 
