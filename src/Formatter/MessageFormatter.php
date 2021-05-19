@@ -98,6 +98,7 @@ class MessageFormatter implements FormatterInterface
             'date_year_short' => '{0,date,yy}',
             'date_month' => '{0,date,M}',
             'date_month_name' => '{0,date,MMMM}',
+            'date_month_name_abbr' => '{0,date,MMM}',
             'date_day' => '{0,date,d}',
             'date_weekday' => '{0,date,EEEE}',
             'date_weekday_abbr' => '{0,date,EEEEEE}',

@@ -92,6 +92,7 @@ The type specifier `number` also allows fraction digits similar to sprintf by ad
 | date_weekday                 | integer, DateTime, DateTimeImmutable, IntlCalendar |
 | date_weekday_abbr            | integer, DateTime, DateTimeImmutable, IntlCalendar |
 | date_month_name              | integer, DateTime, DateTimeImmutable, IntlCalendar |
+| date_month_name_abbr         | integer, DateTime, DateTimeImmutable, IntlCalendar |
 | date_year                    | integer, DateTime, DateTimeImmutable, IntlCalendar |
 | date_month                   | integer, DateTime, DateTimeImmutable, IntlCalendar |
 | date_day                     | integer, DateTime, DateTimeImmutable, IntlCalendar |

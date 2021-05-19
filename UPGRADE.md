@@ -1,3 +1,9 @@
+# Upgrade to 2.3
+
+## Add date_month_name_abbr type specifier
+
+New type specifier to get the abbreviation of month name.
+
 # Upgrade to 2.2
 
 ## Support for PHP 8
