@@ -14,8 +14,11 @@ use function in_array;
 
 class TimeZoneFormatter implements FormatterInterface
 {
-    private const TYPE_SPECIFIER_ID         = 'timeseries_id';
-    private const TYPE_SPECIFIER_LONG_NAME  = 'timeseries_name';
+    /** @deprecated */
+    private const TYPE_SPECIFIER_ID = 'timeseries_id';
+    /** @deprecated */
+    private const TYPE_SPECIFIER_LONG_NAME = 'timeseries_name';
+    /** @deprecated */
     private const TYPE_SPECIFIER_SHORT_NAME = 'timeseries_short';
 
     private const TYPE_SPECIFIER_TZ_ID         = 'timezone_id';
