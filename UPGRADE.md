@@ -4,11 +4,16 @@
 
 New type specifier to get the abbreviation of month name.
 
+## `SprintfFormatter` and `ExceptionFormatter` became part of `Factory`
+
+The `Factory` creates an `IntlFormatter` instance with every formatter available in the project. 
+
 # Upgrade to 2.2
 
 ## Support for PHP 8
 
 Intl-Format is ready for PHP 8.
+
 
 ## Support of 0 and space padding characters in `PrecisionNumberFormatter`
 

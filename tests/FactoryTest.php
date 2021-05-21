@@ -8,6 +8,7 @@ use Budgegeria\IntlFormat\Factory;
 use Budgegeria\IntlFormat\IntlFormat;
 use DateTime;
 use DateTimeZone;
+use Exception;
 use PHPUnit\Framework\TestCase;
 
 class FactoryTest extends TestCase
@@ -35,5 +36,7 @@ class FactoryTest extends TestCase
         self::assertSame('The timezone id is US/Arizona.', $intlFormat->format('The timezone id is %timeseries_id.', $date));
         self::assertSame('I am from Italy.', $intlFormat->format('I am from %region.', 'it_IT'));
         self::assertSame('You have 10$.', $intlFormat->format('You have 10%currency_symbol.', ''));
+        self::assertSame('Error: "test"', $intlFormat->format('Error: "%emessage"', new Exception('test')));
+        self::assertSame('User Foo has 10 points', $intlFormat->format('User %s has %d points', 'Foo', 10));
     }
 }
