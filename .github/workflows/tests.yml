@@ -8,9 +8,18 @@ jobs:
   tests:
 
     runs-on: ubuntu-latest
+    continue-on-error: "${{ matrix.continue-on-error }}"
     strategy:
       matrix:
-        php-versions: ['7.3', '7.4', '8.0']
+        include:
+         - php-versions: "7.3"
+           continue-on-error: false
+         - php-versions: "7.4"
+           continue-on-error: false
+         - php-versions: "8.0"
+           continue-on-error: false
+         - php-versions: "8.1"
+           continue-on-error: true
 
     steps:
     - uses: actions/checkout@v2
@@ -20,7 +29,7 @@ jobs:
       uses: actions/cache@v2
       with:
         path: "vendor"
-        key: ${{ runner.os }}-php-${{ matrix.php-versions }}-${{ hashFiles('**/composer.lock') }}
+        key: ${{ runner.os }}-php-${{ matrix.php-versions }}-composer-${{ hashFiles('**/composer.lock') }}
         restore-keys: |
           "${{ runner.os }}-php-"
 
@@ -31,8 +40,12 @@ jobs:
         extensions: "intl, xdebug"
 
     - name: "Install dependencies"
-      if: steps.composer-cache.outputs.cache-hit != 'true'
+      if: steps.composer-cache.outputs.cache-hit != 'true' && matrix.php-versions != '8.1'
       run: composer install --prefer-dist --no-progress --no-suggest
+
+    - name: "Install dependencies 8.1"
+      if: steps.composer-cache.outputs.cache-hit != 'true' && matrix.php-versions == '8.1'
+      run: composer install --prefer-dist --no-progress --no-suggest --ignore-platform-reqs
 
     - name: "Unit + Integration"
       run: vendor/bin/phpunit
