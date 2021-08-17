@@ -1,5 +1,9 @@
 # Upgrade to 2.3
 
+## Set minimum PHP requirement to 7.4
+
+You need to update your PHP version.
+
 ## Add date_month_name_abbr type specifier
 
 New type specifier to get the abbreviation of month name.

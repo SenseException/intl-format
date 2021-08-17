@@ -8,18 +8,10 @@ jobs:
   tests:
 
     runs-on: ubuntu-latest
-    continue-on-error: "${{ matrix.continue-on-error }}"
+    continue-on-error: "${{ matrix.php-versions == '8.1' }}"
     strategy:
       matrix:
-        include:
-         - php-versions: "7.3"
-           continue-on-error: false
-         - php-versions: "7.4"
-           continue-on-error: false
-         - php-versions: "8.0"
-           continue-on-error: false
-         - php-versions: "8.1"
-           continue-on-error: true
+        php-versions: ['7.4', '8.0', '8.1']
 
     steps:
     - uses: actions/checkout@v2
