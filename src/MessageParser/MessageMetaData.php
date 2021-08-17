@@ -22,7 +22,7 @@ class MessageMetaData
      *
      * @var array<int, string>
      */
-    public $parsedMessage = [];
+    public array $parsedMessage = [];
 
     /**
      * The list of type specifiers of the parsed message.
@@ -32,7 +32,7 @@ class MessageMetaData
      *
      * @var array<int, string>
      */
-    public $typeSpecifiers = [];
+    public array $typeSpecifiers = [];
 
     /**
      * The list of values.
@@ -42,7 +42,7 @@ class MessageMetaData
      *
      * @var array<int, mixed>
      */
-    public $values = [];
+    public array $values = [];
 
     /**
      * @param array<int, string> $parsedMessage

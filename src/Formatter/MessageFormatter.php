@@ -15,14 +15,12 @@ use function is_numeric;
 
 class MessageFormatter implements FormatterInterface
 {
-    /** @var string */
-    private $locale;
+    private string $locale;
 
     /** @var string[] */
-    private $messageFormats;
+    private array $messageFormats;
 
-    /** @var Closure */
-    private $valueTypeCheck;
+    private Closure $valueTypeCheck;
 
     /**
      * @param string[] $messageFormats

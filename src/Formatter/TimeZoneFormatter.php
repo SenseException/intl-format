@@ -25,8 +25,7 @@ class TimeZoneFormatter implements FormatterInterface
     private const TYPE_SPECIFIER_TZ_LONG_NAME  = 'timezone_name';
     private const TYPE_SPECIFIER_TZ_SHORT_NAME = 'timezone_short';
 
-    /** @var string */
-    private $locale;
+    private string $locale;
 
     public function __construct(string $locale)
     {

@@ -12,8 +12,7 @@ use Throwable;
 
 class ExceptionFormatterTest extends TestCase
 {
-    /** @var ExceptionFormatter */
-    private $formatter;
+    private ExceptionFormatter $formatter;
 
     protected function setUp(): void
     {

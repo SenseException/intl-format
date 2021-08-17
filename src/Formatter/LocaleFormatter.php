@@ -11,7 +11,7 @@ use Locale;
 class LocaleFormatter implements FormatterInterface
 {
     /** @var Closure[] */
-    private $formatFunctions;
+    private array $formatFunctions;
 
     public function __construct(string $locale)
     {

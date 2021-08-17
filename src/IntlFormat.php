@@ -16,10 +16,9 @@ use function implode;
 final class IntlFormat implements IntlFormatInterface
 {
     /** @var FormatterInterface[] */
-    private $formatters = [];
+    private array $formatters = [];
 
-    /** @var MessageParserInterface */
-    private $messageParser;
+    private MessageParserInterface $messageParser;
 
     /**
      * @param iterable<FormatterInterface> $formatters

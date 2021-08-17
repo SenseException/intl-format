@@ -16,11 +16,10 @@ use function strpos;
 
 class CurrencySymbolFormatter implements FormatterInterface
 {
-    /** @var string */
-    private $locale;
+    private string $locale;
 
     /** @var string[] */
-    private $keywords = [];
+    private array $keywords = [];
 
     public function __construct(string $locale)
     {

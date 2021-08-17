@@ -12,11 +12,9 @@ use function preg_match;
 
 class PrecisionNumberFormatter implements FormatterInterface
 {
-    /** @var string */
-    private static $matchPattern = '/^([0-9]+)?\.?([0-9]*)number$/';
+    private static string $matchPattern = '/^([0-9]+)?\.?([0-9]*)number$/';
 
-    /** @var string */
-    private $locale;
+    private string $locale;
 
     public function __construct(string $locale)
     {

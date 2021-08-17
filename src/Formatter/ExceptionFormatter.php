@@ -11,7 +11,7 @@ use Throwable;
 class ExceptionFormatter implements FormatterInterface
 {
     /** @var Closure[] */
-    private $formatFunctions;
+    private array $formatFunctions;
 
     public function __construct()
     {
