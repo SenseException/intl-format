@@ -18,7 +18,7 @@ coding_style:
 build:
     environment:
         php:
-            version: 7.4
+            version: 8.0
     tests:
         override:
             -
@@ -34,4 +34,4 @@ build:
                     - php-scrutinizer-run
             environment:
                 php:
-                    version: 7.4
+                    version: 8.0
