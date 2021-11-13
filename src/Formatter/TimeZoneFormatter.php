@@ -14,13 +14,6 @@ use function in_array;
 
 class TimeZoneFormatter implements FormatterInterface
 {
-    /** @deprecated */
-    private const TYPE_SPECIFIER_ID = 'timeseries_id';
-    /** @deprecated */
-    private const TYPE_SPECIFIER_LONG_NAME = 'timeseries_name';
-    /** @deprecated */
-    private const TYPE_SPECIFIER_SHORT_NAME = 'timeseries_short';
-
     private const TYPE_SPECIFIER_TZ_ID         = 'timezone_id';
     private const TYPE_SPECIFIER_TZ_LONG_NAME  = 'timezone_name';
     private const TYPE_SPECIFIER_TZ_SHORT_NAME = 'timezone_short';
@@ -53,9 +46,6 @@ class TimeZoneFormatter implements FormatterInterface
         $value      = $intlCalendar->getTimeZone();
 
         $timeZoneMetaData = [
-            self::TYPE_SPECIFIER_ID => $value->getID(),
-            self::TYPE_SPECIFIER_LONG_NAME => $value->getDisplayName($inDaylight, IntlTimeZone::DISPLAY_LONG, $this->locale),
-            self::TYPE_SPECIFIER_SHORT_NAME => $value->getDisplayName($inDaylight, IntlTimeZone::DISPLAY_SHORT, $this->locale),
             self::TYPE_SPECIFIER_TZ_ID => $value->getID(),
             self::TYPE_SPECIFIER_TZ_LONG_NAME => $value->getDisplayName($inDaylight, IntlTimeZone::DISPLAY_LONG, $this->locale),
             self::TYPE_SPECIFIER_TZ_SHORT_NAME => $value->getDisplayName($inDaylight, IntlTimeZone::DISPLAY_SHORT, $this->locale),
@@ -67,13 +57,9 @@ class TimeZoneFormatter implements FormatterInterface
     public function has(string $typeSpecifier): bool
     {
         $typeSpecifiers = [
-            self::TYPE_SPECIFIER_ID,
-            self::TYPE_SPECIFIER_LONG_NAME,
-            self::TYPE_SPECIFIER_SHORT_NAME,
             self::TYPE_SPECIFIER_TZ_ID,
             self::TYPE_SPECIFIER_TZ_LONG_NAME,
             self::TYPE_SPECIFIER_TZ_SHORT_NAME,
-
         ];
 
         return in_array($typeSpecifier, $typeSpecifiers, true);

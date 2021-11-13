@@ -71,9 +71,6 @@ class TimeZoneFormatterTest extends TestCase
     public function provideTypeSpecifier(): array
     {
         return [
-            'timeseries_id' => ['timeseries_id'],
-            'timeseries_name' => ['timeseries_name'],
-            'timeseries_short' => ['timeseries_short'],
             'timezone_id' => ['timezone_id'],
             'timezone_name' => ['timezone_name'],
             'timezone_short' => ['timezone_short'],
@@ -91,25 +88,6 @@ class TimeZoneFormatterTest extends TestCase
         $intlTimezone      = IntlTimeZone::fromDateTimeZone($timezone);
 
         return [
-            'timeseries_id_ts' => ['US/Arizona', 'timeseries_id', $timezone],
-            'timeseries_id_dt' => ['US/Arizona', 'timeseries_id', $datetime],
-            'timeseries_id_dti' => ['US/Arizona', 'timeseries_id', $datetimeImmutable],
-            'timeseries_id_its' => ['US/Arizona', 'timeseries_id', $intlTimezone],
-
-            'timeseries_name_ts' => ['Mountain Standard Time', 'timeseries_name', $timezone],
-            'timeseries_name_dt' => ['Mountain Standard Time', 'timeseries_name', $datetime],
-            'timeseries_name_dti' => ['Mountain Standard Time', 'timeseries_name', $datetimeImmutable],
-            'timeseries_name_its' => ['Mountain Standard Time', 'timeseries_name', $intlTimezone],
-
-            'timeseries_short_ts' => ['MST', 'timeseries_short', $timezone],
-            'timeseries_short_dt' => ['MST', 'timeseries_short', $datetime],
-            'timeseries_short_dti' => ['MST', 'timeseries_short', $datetimeImmutable],
-            'timeseries_short_its' => ['MST', 'timeseries_short', $intlTimezone],
-
-            'timeseries_name_dst_start' => ['Central European Summer Time', 'timeseries_name', new DateTime('2016-03-27 02:00:00', new DateTimeZone('Europe/Berlin'))],
-            'timeseries_name_dst_end' => ['Central European Summer Time', 'timeseries_name', new DateTime('2016-10-30 01:59:59', new DateTimeZone('Europe/Berlin'))],
-            'timeseries_name_after_dst' => ['Central European Standard Time', 'timeseries_name', new DateTime('2016-10-30 02:59:59', new DateTimeZone('Europe/Berlin'))],
-
             'timezone_id_ts' => ['US/Arizona', 'timezone_id', $timezone],
             'timezone_id_dt' => ['US/Arizona', 'timezone_id', $datetime],
             'timezone_id_dti' => ['US/Arizona', 'timezone_id', $datetimeImmutable],
