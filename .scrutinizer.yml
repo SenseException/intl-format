@@ -19,6 +19,8 @@ build:
     environment:
         php:
             version: 8.0
+            ini:
+                "xdebug.mode": 'coverage'
     tests:
         override:
             -
@@ -35,3 +37,5 @@ build:
             environment:
                 php:
                     version: 8.0
+                    ini:
+                        "xdebug.mode": 'coverage'
