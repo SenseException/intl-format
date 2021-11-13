@@ -5,12 +5,11 @@ declare(strict_types=1);
 namespace Budgegeria\IntlFormat\Formatter;
 
 use Budgegeria\IntlFormat\Exception\InvalidValueException;
-use Closure;
 use Locale;
 
 class LocaleFormatter implements FormatterInterface
 {
-    /** @var Closure[] */
+    /** @phpstan-var array<callable(string $value): string> */
     private array $formatFunctions;
 
     public function __construct(string $locale)
