@@ -12,6 +12,7 @@ use function explode;
 use function implode;
 use function is_int;
 use function is_string;
+use function str_contains;
 use function strpos;
 
 class CurrencySymbolFormatter implements FormatterInterface
@@ -23,7 +24,7 @@ class CurrencySymbolFormatter implements FormatterInterface
 
     public function __construct(string $locale)
     {
-        if (strpos($locale, '@') !== false) {
+        if (str_contains($locale, '@')) {
             $localeParts = explode('@', $locale);
             $keywords    = explode(';', $localeParts[1]);
 
@@ -38,10 +39,7 @@ class CurrencySymbolFormatter implements FormatterInterface
         $this->locale = $locale;
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function formatValue(string $typeSpecifier, $value): string
+    public function formatValue(string $typeSpecifier, mixed $value): string
     {
         if (! is_string($value)) {
             throw InvalidValueException::invalidValueType($value, ['string']);

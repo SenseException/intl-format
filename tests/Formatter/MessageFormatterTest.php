@@ -56,11 +56,9 @@ class MessageFormatterTest extends TestCase
     }
 
     /**
-     * @param mixed $value
-     *
      * @dataProvider provideDate
      */
-    public function testFormatValueDate(string $expected, string $typeSpecifier, $value): void
+    public function testFormatValueDate(string $expected, string $typeSpecifier, mixed $value): void
     {
         $messageFormatter = MessageFormatter::createDateValueFormatter('de_DE');
 
@@ -68,11 +66,9 @@ class MessageFormatterTest extends TestCase
     }
 
     /**
-     * @param mixed $value
-     *
      * @dataProvider provideTime
      */
-    public function testFormatValueTime(string $expected, string $typeSpecifier, $value): void
+    public function testFormatValueTime(string $expected, string $typeSpecifier, mixed $value): void
     {
         $messageFormatter = MessageFormatter::createDateValueFormatter('de_DE');
 
@@ -105,11 +101,9 @@ class MessageFormatterTest extends TestCase
     }
 
     /**
-     * @param mixed $value
-     *
      * @dataProvider provideInvalidNumberValues
      */
-    public function testFormatValueNumberTypeCheck($value): void
+    public function testFormatValueNumberTypeCheck(mixed $value): void
     {
         $messageFormatter = MessageFormatter::createNumberValueFormatter('en_US');
 
@@ -121,11 +115,9 @@ class MessageFormatterTest extends TestCase
     }
 
     /**
-     * @param mixed $value
-     *
      * @dataProvider provideInvalidDateValues
      */
-    public function testFormatValueDateTypeCheck($value): void
+    public function testFormatValueDateTypeCheck(mixed $value): void
     {
         $messageFormatter = MessageFormatter::createDateValueFormatter('en_US');
 

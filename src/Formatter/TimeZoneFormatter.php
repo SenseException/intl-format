@@ -18,17 +18,11 @@ class TimeZoneFormatter implements FormatterInterface
     private const TYPE_SPECIFIER_TZ_LONG_NAME  = 'timezone_name';
     private const TYPE_SPECIFIER_TZ_SHORT_NAME = 'timezone_short';
 
-    private string $locale;
-
-    public function __construct(string $locale)
+    public function __construct(private string $locale)
     {
-        $this->locale = $locale;
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function formatValue(string $typeSpecifier, $value): string
+    public function formatValue(string $typeSpecifier, mixed $value): string
     {
         $intlCalendar = $this->createIntlCalendar();
 

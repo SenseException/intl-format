@@ -35,11 +35,9 @@ class TimeZoneFormatterTest extends TestCase
     }
 
     /**
-     * @param mixed $value
-     *
      * @dataProvider provideTimeZones
      */
-    public function testFormatValue(string $expected, string $typeSpecifier, $value): void
+    public function testFormatValue(string $expected, string $typeSpecifier, mixed $value): void
     {
         $formatter = new TimeZoneFormatter('en_US');
 

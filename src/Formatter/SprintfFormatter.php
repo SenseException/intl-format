@@ -14,10 +14,7 @@ use function sprintf;
 
 class SprintfFormatter implements FormatterInterface
 {
-    /**
-     * @inheritdoc
-     */
-    public function formatValue(string $typeSpecifier, $value): string
+    public function formatValue(string $typeSpecifier, mixed $value): string
     {
         if (! (is_string($value) || is_int($value) || is_float($value))) {
             throw InvalidValueException::invalidValueType($value, ['float', 'int', 'string']);

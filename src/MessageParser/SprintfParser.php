@@ -60,9 +60,9 @@ class SprintfParser implements MessageParserInterface
      * @param string[] $typeSpecifiers
      * @param mixed[]  $values
      *
-     * @throws InvalidTypeSpecifierException
-     *
      * @phpstan-return list<mixed>
+     *
+     * @throws InvalidTypeSpecifierException
      */
     private function swapArguments(array $typeSpecifiers, array $values): array
     {

@@ -34,10 +34,7 @@ class ExceptionFormatter implements FormatterInterface
         ];
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function formatValue(string $typeSpecifier, $value): string
+    public function formatValue(string $typeSpecifier, mixed $value): string
     {
         if (! $value instanceof Throwable) {
             throw InvalidValueException::invalidValueType($value, [Throwable::class]);

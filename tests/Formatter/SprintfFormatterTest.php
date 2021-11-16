@@ -20,11 +20,9 @@ class SprintfFormatterTest extends TestCase
     }
 
     /**
-     * @param mixed $value
-     *
      * @dataProvider provideTypeSpecifier
      */
-    public function testFormat(string $typeSpecifier, $value, string $expected): void
+    public function testFormat(string $typeSpecifier, mixed $value, string $expected): void
     {
         $formatter = new SprintfFormatter();
 

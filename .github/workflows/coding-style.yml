@@ -17,9 +17,9 @@ jobs:
       uses: actions/cache@v2
       with:
         path: "vendor"
-        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+        key: ${{ runner.os }}-php8-${{ hashFiles('**/composer.lock') }}
         restore-keys: |
-          "${{ runner.os }}-php-"
+          "${{ runner.os }}-php8-"
     - name: "Setup PHP Action"
       uses: "shivammathur/setup-php@v2"
       with:

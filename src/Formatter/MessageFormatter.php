@@ -15,27 +15,14 @@ use function is_numeric;
 
 class MessageFormatter implements FormatterInterface
 {
-    private string $locale;
-
-    /** @var string[] */
-    private array $messageFormats;
-
-    private Closure $valueTypeCheck;
-
     /**
      * @param string[] $messageFormats
      */
-    public function __construct(string $locale, array $messageFormats, Closure $valueTypeCheck)
+    public function __construct(private string $locale, private array $messageFormats, private Closure $valueTypeCheck)
     {
-        $this->locale         = $locale;
-        $this->messageFormats = $messageFormats;
-        $this->valueTypeCheck = $valueTypeCheck;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function formatValue(string $typeSpecifier, $value): string
+    public function formatValue(string $typeSpecifier, mixed $value): string
     {
         ($this->valueTypeCheck)($value);
 

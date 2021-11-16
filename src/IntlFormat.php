@@ -18,14 +18,11 @@ final class IntlFormat implements IntlFormatInterface
     /** @var FormatterInterface[] */
     private array $formatters = [];
 
-    private MessageParserInterface $messageParser;
-
     /**
      * @param iterable<FormatterInterface> $formatters
      */
-    public function __construct(iterable $formatters, MessageParserInterface $messageParser)
+    public function __construct(iterable $formatters, private MessageParserInterface $messageParser)
     {
-        $this->messageParser = $messageParser;
         foreach ($formatters as $formatter) {
             $this->addFormatter($formatter);
         }

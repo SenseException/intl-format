@@ -35,11 +35,9 @@ class ExceptionFormatterTest extends TestCase
     }
 
     /**
-     * @param mixed $expected
-     *
      * @dataProvider provideExceptions
      */
-    public function testFormatValue(string $typeSpecifier, Throwable $value, $expected): void
+    public function testFormatValue(string $typeSpecifier, Throwable $value, mixed $expected): void
     {
         self::assertSame($expected, $this->formatter->formatValue($typeSpecifier, $value));
     }

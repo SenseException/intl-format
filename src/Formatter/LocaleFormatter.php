@@ -36,10 +36,7 @@ class LocaleFormatter implements FormatterInterface
         ];
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function formatValue(string $typeSpecifier, $value): string
+    public function formatValue(string $typeSpecifier, mixed $value): string
     {
         return $this->formatFunctions[$typeSpecifier]((string) $value);
     }

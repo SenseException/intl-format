@@ -14,17 +14,11 @@ class PrecisionNumberFormatter implements FormatterInterface
 {
     private static string $matchPattern = '/^([0-9]+)?\.?([0-9]*)number$/';
 
-    private string $locale;
-
-    public function __construct(string $locale)
+    public function __construct(private string $locale)
     {
-        $this->locale = $locale;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function formatValue(string $typeSpecifier, $value): string
+    public function formatValue(string $typeSpecifier, mixed $value): string
     {
         if (! is_numeric($value)) {
             throw InvalidValueException::invalidValueType($value, ['integer', 'double']);
