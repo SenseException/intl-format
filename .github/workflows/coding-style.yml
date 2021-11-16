@@ -12,23 +12,16 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: "Cache Composer packages"
-      id: "composer-cache"
-      uses: actions/cache@v2
-      with:
-        path: "vendor"
-        key: ${{ runner.os }}-php8-${{ hashFiles('**/composer.lock') }}
-        restore-keys: |
-          "${{ runner.os }}-php8-"
     - name: "Setup PHP Action"
       uses: "shivammathur/setup-php@v2"
       with:
         php-version: "8.0"
         extensions: "intl"
 
-    - name: "Install dependencies"
-      if: steps.composer-cache.outputs.cache-hit != 'true'
-      run: composer install --prefer-dist --no-progress --no-suggest
+    - name: "Install dependencies with Composer"
+      uses: "ramsey/composer-install@v1"
+      with:
+        composer-options: "--prefer-dist --no-progress --no-suggest"
 
     - name: "Code Sniffer"
       run: vendor/bin/phpcs
