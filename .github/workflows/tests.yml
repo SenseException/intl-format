@@ -8,10 +8,10 @@ jobs:
   tests:
 
     runs-on: ubuntu-latest
-    continue-on-error: "${{ matrix.php-versions == '8.1' }}"
+    continue-on-error: "${{ matrix.php-versions == '8.2' }}"
     strategy:
       matrix:
-        php-versions: ['8.0', '8.1']
+        php-versions: ['8.0', '8.1', '8.2']
 
     steps:
     - uses: actions/checkout@v2
@@ -32,11 +32,11 @@ jobs:
         extensions: "intl, xdebug"
 
     - name: "Install dependencies"
-      if: steps.composer-cache.outputs.cache-hit != 'true' && matrix.php-versions != '8.1'
+      if: steps.composer-cache.outputs.cache-hit != 'true' && matrix.php-versions != '8.2'
       run: composer install --prefer-dist --no-progress --no-suggest
 
     - name: "Install dependencies 8.1"
-      if: steps.composer-cache.outputs.cache-hit != 'true' && matrix.php-versions == '8.1'
+      if: steps.composer-cache.outputs.cache-hit != 'true' && matrix.php-versions == '8.2'
       run: composer install --prefer-dist --no-progress --no-suggest --ignore-platform-reqs
 
     - name: "Unit + Integration"
