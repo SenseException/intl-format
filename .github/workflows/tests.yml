@@ -38,4 +38,4 @@ jobs:
       run: vendor/bin/phpunit
     
     - name: "Mutation tests"
-      run: vendor/bin/infection --min-msi=97 --no-progress --threads=5
+      run: vendor/bin/infection --min-msi=98 --no-progress --threads=5
