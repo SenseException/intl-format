@@ -16,7 +16,7 @@
     "ext-intl": "*"
   },
   "require-dev": {
-    "infection/infection": "^0.18",
+    "infection/infection": "^0.26",
     "doctrine/coding-standard": "^9.0",
     "phpunit/phpunit": "^9.5",
     "phpstan/phpstan": "^1.1",
