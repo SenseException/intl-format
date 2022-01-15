@@ -93,7 +93,7 @@ class IntlFormatTest extends TestCase
      */
     public function testMissingTypeSpecifier(): void
     {
-        $message = 'Hello {{world}}, Today is {{date}}';
+        $message = 'Today is {{date}}. Hello {{world}}';
 
         /** @var FormatterInterface&MockObject $formatter */
         $formatter = $this->createMock(FormatterInterface::class);
@@ -111,21 +111,21 @@ class IntlFormatTest extends TestCase
         $dateTime = new DateTime();
 
         $parsed = new MessageMetaData(
-            ['Hello ', '{{world}}', ', Today is ', '{{date}}'],
-            [1 => 'world', 3 => 'date'],
-            ['island', $dateTime]
+            ['Today is ', '{{date}}.', ' Hello ', '{{world}}'],
+            [1 => 'date', 3 => 'world'],
+            [$dateTime, 'island']
         );
 
         /** @var MessageParserInterface&MockObject $parser */
         $parser = $this->createMock(MessageParserInterface::class);
         $parser->expects(self::once())
             ->method('parseMessage')
-            ->with($message, ['island', $dateTime])
+            ->with($message, [$dateTime, 'island'])
             ->willReturn($parsed);
 
         $intlFormat = new IntlFormat([$formatter], $parser);
 
-        self::assertSame('Hello island, Today is {{date}}', $intlFormat->format($message, 'island', $dateTime));
+        self::assertSame('Today is {{date}}. Hello island', $intlFormat->format($message, $dateTime, 'island'));
     }
 
     /**

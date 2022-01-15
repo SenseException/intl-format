@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Budgegeria\IntlFormat\Tests\Formatter;
 
+use Budgegeria\IntlFormat\Exception\InvalidValueException;
 use Budgegeria\IntlFormat\Formatter\SprintfFormatter;
+use EmptyIterator;
 use PHPUnit\Framework\TestCase;
 
 class SprintfFormatterTest extends TestCase
@@ -34,6 +36,15 @@ class SprintfFormatterTest extends TestCase
         $formatter = new SprintfFormatter();
 
         self::assertFalse($formatter->has('int'));
+    }
+
+    public function testFormatWithInvalidValue(): void
+    {
+        $formatter = new SprintfFormatter();
+
+        $this->expectExceptionMessage('Invalid type "object" of value. Allowed types: "float, int, string".');
+        $this->expectException(InvalidValueException::class);
+        $formatter->formatValue('%s', new EmptyIterator());
     }
 
     /**
