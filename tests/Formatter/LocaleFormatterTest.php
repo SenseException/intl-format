@@ -51,6 +51,7 @@ class LocaleFormatterTest extends TestCase
     public function testFormatValueException(string $typeSpecifier): void
     {
         $this->expectException(InvalidValueException::class);
+        $this->expectExceptionCode(20);
         $localeFormatter = new LocaleFormatter('de_DE');
 
         $localeFormatter->formatValue($typeSpecifier, 'foobarbaz');

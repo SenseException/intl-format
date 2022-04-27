@@ -43,6 +43,7 @@ class SprintfFormatterTest extends TestCase
         $formatter = new SprintfFormatter();
 
         $this->expectExceptionMessage('Invalid type "object" of value. Allowed types: "float, int, string".');
+        $this->expectExceptionCode(10);
         $this->expectException(InvalidValueException::class);
         $formatter->formatValue('%s', new EmptyIterator());
     }
