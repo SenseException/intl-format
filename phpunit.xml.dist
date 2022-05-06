@@ -2,20 +2,13 @@
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd"
         bootstrap="./vendor/autoload.php"
-        backupGlobals="false"
         verbose="true"
-        convertErrorsToExceptions="true"
-        convertNoticesToExceptions="true"
-        convertWarningsToExceptions="true"
-        stopOnFailure="false"
-        processIsolation="false"
-        executionOrder="random"
-        resolveDependencies="true">
+        executionOrder="random">
     <testsuite name="classes">
-        <directory suffix="Test.php">tests</directory>
+        <directory>tests</directory>
     </testsuite>
 
-    <coverage includeUncoveredFiles="true">
+    <coverage>
       <include>
         <directory suffix=".php">src</directory>
       </include>
