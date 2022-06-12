@@ -40,7 +40,7 @@ class PrecisionNumberFormatter implements FormatterInterface
         $formatter->setTextAttribute(NumberFormatter::PADDING_CHARACTER, $paddingChar);
 
         /** @phpstan-var int|float $value */
-        return $formatter->format($value);
+        return (string) $formatter->format($value);
     }
 
     public function has(string $typeSpecifier): bool
