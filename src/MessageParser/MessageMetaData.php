@@ -25,6 +25,8 @@ class MessageMetaData
          *
          * Each element in this array contains either plain text or the type specifier in its pure specified format defined
          * by the MessageParser. Each element has an unique integer key that is referenced by $typeSpecifiers.
+         *
+         * @readonly
          */
         public array $parsedMessage,
         /**
@@ -32,6 +34,8 @@ class MessageMetaData
          *
          * This array only contains normalized type specifiers that are used in the Formatter classes. The key is an integer
          * value, that has the same value as its position in the $parsedMessage array.
+         *
+         * @readonly
          */
         public array $typeSpecifiers,
         /**
@@ -39,6 +43,8 @@ class MessageMetaData
          *
          * This list contains the values, that need to be formatted by the Formatter classes. The values are already swapped
          * and in the same order as the $typeSpecifiers representing it.
+         *
+         * @readonly
          */
         public array $values
     ) {
