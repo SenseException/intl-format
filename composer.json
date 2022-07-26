@@ -19,9 +19,9 @@
     "infection/infection": "^0.26",
     "doctrine/coding-standard": "^9.0",
     "phpunit/phpunit": "^9.5",
-    "phpstan/phpstan": "^1.6",
+    "phpstan/phpstan": "^1.8",
     "phpstan/phpstan-phpunit": "^1.1",
-    "vimeo/psalm": "^4.22",
+    "vimeo/psalm": "^4.24",
     "psalm/plugin-phpunit": "^0.16"
   },
   "autoload": {
@@ -35,5 +35,11 @@
       "Budgegeria\\IntlFormat\\Tests\\": "tests/"
     }
   },
-  "prefer-stable": true
+  "prefer-stable": true,
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true,
+      "infection/extension-installer": true
+    }
+  }
 }
