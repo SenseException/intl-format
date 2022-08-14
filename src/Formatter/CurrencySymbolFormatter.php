@@ -29,9 +29,7 @@ class CurrencySymbolFormatter implements FormatterInterface
             $keywords    = explode(';', $localeParts[1]);
 
             $this->locale   = $localeParts[0];
-            $this->keywords = array_filter($keywords, static function (string $value) {
-                return ! is_int(strpos($value, 'currency='));
-            });
+            $this->keywords = array_filter($keywords, static fn (string $value) => ! is_int(strpos($value, 'currency=')));
 
             return;
         }

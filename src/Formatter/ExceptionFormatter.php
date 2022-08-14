@@ -16,21 +16,11 @@ class ExceptionFormatter implements FormatterInterface
     public function __construct()
     {
         $this->formatFunctions = [
-            'emessage' => static function (Throwable $throwable): string {
-                return $throwable->getMessage();
-            },
-            'ecode' => static function (Throwable $throwable): string {
-                return (string) $throwable->getCode();
-            },
-            'efile' => static function (Throwable $throwable): string {
-                return $throwable->getFile();
-            },
-            'eline' => static function (Throwable $throwable): string {
-                return (string) $throwable->getLine();
-            },
-            'etrace' => static function (Throwable $throwable): string {
-                return $throwable->getTraceAsString();
-            },
+            'emessage' => static fn (Throwable $throwable): string => $throwable->getMessage(),
+            'ecode' => static fn (Throwable $throwable): string => (string) $throwable->getCode(),
+            'efile' => static fn (Throwable $throwable): string => $throwable->getFile(),
+            'eline' => static fn (Throwable $throwable): string => (string) $throwable->getLine(),
+            'etrace' => static fn (Throwable $throwable): string => $throwable->getTraceAsString(),
         ];
     }
 
