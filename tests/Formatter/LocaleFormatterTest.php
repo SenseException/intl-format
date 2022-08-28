@@ -25,9 +25,7 @@ class LocaleFormatterTest extends TestCase
         self::assertFalse($localeFormatter->has('foo'));
     }
 
-    /**
-     * @dataProvider provideLanguages
-     */
+    /** @dataProvider provideLanguages */
     public function testFormatValueLanguage(string $expected, string $locale): void
     {
         $localeFormatter = new LocaleFormatter('de_DE');
@@ -35,9 +33,7 @@ class LocaleFormatterTest extends TestCase
         self::assertSame($expected, $localeFormatter->formatValue('language', $locale));
     }
 
-    /**
-     * @dataProvider provideRegions
-     */
+    /** @dataProvider provideRegions */
     public function testFormatValueRegion(string $expected, string $locale): void
     {
         $localeFormatter = new LocaleFormatter('de_DE');
@@ -45,9 +41,7 @@ class LocaleFormatterTest extends TestCase
         self::assertSame($expected, $localeFormatter->formatValue('region', $locale));
     }
 
-    /**
-     * @dataProvider provideTypeSpecifier
-     */
+    /** @dataProvider provideTypeSpecifier */
     public function testFormatValueException(string $typeSpecifier): void
     {
         $this->expectException(InvalidValueException::class);
@@ -57,9 +51,7 @@ class LocaleFormatterTest extends TestCase
         $localeFormatter->formatValue($typeSpecifier, 'foobarbaz');
     }
 
-    /**
-     * @return string[][]
-     */
+    /** @return string[][] */
     public function provideLanguages(): array
     {
         return [
@@ -74,9 +66,7 @@ class LocaleFormatterTest extends TestCase
         ];
     }
 
-    /**
-     * @return string[][]
-     */
+    /** @return string[][] */
     public function provideRegions(): array
     {
         return [
@@ -88,9 +78,7 @@ class LocaleFormatterTest extends TestCase
         ];
     }
 
-    /**
-     * @return string[][]
-     */
+    /** @return string[][] */
     public function provideTypeSpecifier(): array
     {
         return [

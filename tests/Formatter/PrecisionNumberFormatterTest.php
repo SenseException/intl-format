@@ -10,9 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 class PrecisionNumberFormatterTest extends TestCase
 {
-    /**
-     * @dataProvider provideTypeSpecifier
-     */
+    /** @dataProvider provideTypeSpecifier */
     public function testHas(string $typeSpecifier): void
     {
         $messageFormatter = new PrecisionNumberFormatter('de_DE');
@@ -20,9 +18,7 @@ class PrecisionNumberFormatterTest extends TestCase
         self::assertTrue($messageFormatter->has($typeSpecifier));
     }
 
-    /**
-     * @dataProvider provideInvalidTypeSpecifier
-     */
+    /** @dataProvider provideInvalidTypeSpecifier */
     public function testHasIsFalse(string $typeSpecifier): void
     {
         $messageFormatter = new PrecisionNumberFormatter('de_DE');
@@ -41,9 +37,7 @@ class PrecisionNumberFormatterTest extends TestCase
         $messageFormatter->formatValue('.2number', 'notANumber');
     }
 
-    /**
-     * @dataProvider provideNumber
-     */
+    /** @dataProvider provideNumber */
     public function testFormatValueNumber(string $typeSpecifier, float $number, string $expects): void
     {
         $messageFormatter = new PrecisionNumberFormatter('de_DE');
@@ -51,9 +45,7 @@ class PrecisionNumberFormatterTest extends TestCase
         self::assertSame($expects, $messageFormatter->formatValue($typeSpecifier, $number));
     }
 
-    /**
-     * @return array<array{string, float, string}>
-     */
+    /** @return array<array{string, float, string}> */
     public function provideNumber(): array
     {
         return [
@@ -71,9 +63,7 @@ class PrecisionNumberFormatterTest extends TestCase
         ];
     }
 
-    /**
-     * @return array<array<string>>
-     */
+    /** @return array<array<string>> */
     public function provideTypeSpecifier(): array
     {
         return [
@@ -86,9 +76,7 @@ class PrecisionNumberFormatterTest extends TestCase
         ];
     }
 
-    /**
-     * @return array<array<string>>
-     */
+    /** @return array<array<string>> */
     public function provideInvalidTypeSpecifier(): array
     {
         return [

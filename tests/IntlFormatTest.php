@@ -37,7 +37,7 @@ class IntlFormatTest extends TestCase
         $parsed = new MessageMetaData(
             ['Hello "', '{{world}}', '", how are you'],
             [1 => 'world'],
-            ['island']
+            ['island'],
         );
 
         /** @var MessageParserInterface&MockObject $parser */
@@ -73,7 +73,7 @@ class IntlFormatTest extends TestCase
         $parsed = new MessageMetaData(
             ['Hello "', '{{world}}', '", how are you'],
             [1 => 'world'],
-            ['island']
+            ['island'],
         );
 
         /** @var MessageParserInterface&MockObject $parser */
@@ -113,7 +113,7 @@ class IntlFormatTest extends TestCase
         $parsed = new MessageMetaData(
             ['Today is ', '{{date}}.', ' Hello ', '{{world}}'],
             [1 => 'date', 3 => 'world'],
-            [$dateTime, 'island']
+            [$dateTime, 'island'],
         );
 
         /** @var MessageParserInterface&MockObject $parser */
@@ -141,7 +141,7 @@ class IntlFormatTest extends TestCase
         $parsed = new MessageMetaData(
             ['Hello ', '{{world}}', ', Today is ', '{{date}}'],
             [1 => 'world', 3 => 'date'],
-            ['island']
+            ['island'],
         );
 
         /** @var MessageParserInterface&MockObject $parser */
@@ -168,7 +168,7 @@ class IntlFormatTest extends TestCase
         $parsed = new MessageMetaData(
             ['Hello ', '%world'],
             [],
-            ['island']
+            ['island'],
         );
 
         /** @var MessageParserInterface&MockObject $parser */

@@ -137,13 +137,11 @@ class SprintfParserTest extends TestCase
         self::assertSame(
             ['Hello "', '%' . $characters . 'world', '", how are you'],
             $parsed->parsedMessage,
-            'Wrong parsed message'
+            'Wrong parsed message',
         );
     }
 
-    /**
-     * @return array<string, array<string>>
-     */
+    /** @return array<string, array<string>> */
     public function provideSupportedPaddingCharacters(): array
     {
         return [

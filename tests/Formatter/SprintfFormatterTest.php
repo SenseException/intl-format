@@ -11,9 +11,7 @@ use PHPUnit\Framework\TestCase;
 
 class SprintfFormatterTest extends TestCase
 {
-    /**
-     * @dataProvider provideTypeSpecifier
-     */
+    /** @dataProvider provideTypeSpecifier */
     public function testHas(string $typeSpecifier): void
     {
         $formatter = new SprintfFormatter();
@@ -21,9 +19,7 @@ class SprintfFormatterTest extends TestCase
         self::assertTrue($formatter->has($typeSpecifier));
     }
 
-    /**
-     * @dataProvider provideTypeSpecifier
-     */
+    /** @dataProvider provideTypeSpecifier */
     public function testFormat(string $typeSpecifier, mixed $value, string $expected): void
     {
         $formatter = new SprintfFormatter();
@@ -48,9 +44,7 @@ class SprintfFormatterTest extends TestCase
         $formatter->formatValue('%s', new EmptyIterator());
     }
 
-    /**
-     * @return array<array{string, mixed, string}>
-     */
+    /** @return array<array{string, mixed, string}> */
     public function provideTypeSpecifier(): array
     {
         return [

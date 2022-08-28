@@ -10,15 +10,13 @@ use function sprintf;
 
 class InvalidValueException extends IntlFormatException
 {
-    /**
-     * @param string[] $allowedTypes
-     */
+    /** @param string[] $allowedTypes */
     public static function invalidValueType(mixed $value, array $allowedTypes): self
     {
         return new self(sprintf(
             'Invalid type "%s" of value. Allowed types: "%s".',
             gettype($value),
-            implode(', ', $allowedTypes)
+            implode(', ', $allowedTypes),
         ), 10);
     }
 

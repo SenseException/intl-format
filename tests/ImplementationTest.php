@@ -27,9 +27,7 @@ class ImplementationTest extends TestCase
         self::assertSame($expected, $intlFormat->format($message, ...$args));
     }
 
-    /**
-     * @return array<array{string, string, array<int|string>}>
-     */
+    /** @return array<array{string, string, array<int|string>}> */
     public function formattingWorksProvider(): array
     {
         return [

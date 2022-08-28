@@ -220,9 +220,7 @@ class IntlFormatIntegrationTest extends TestCase
         self::assertSame('Hello "city", how are you', $intlFormat->format($message, 'city'));
     }
 
-    /**
-     * @return string[][]
-     */
+    /** @return string[][] */
     public function provideEscapedMessages(): array
     {
         return [

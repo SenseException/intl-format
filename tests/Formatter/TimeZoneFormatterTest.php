@@ -17,9 +17,7 @@ use function sprintf;
 
 class TimeZoneFormatterTest extends TestCase
 {
-    /**
-     * @dataProvider provideTypeSpecifier
-     */
+    /** @dataProvider provideTypeSpecifier */
     public function testHas(string $typeSpecifier): void
     {
         $formatter = new TimeZoneFormatter('en_US');
@@ -34,9 +32,7 @@ class TimeZoneFormatterTest extends TestCase
         self::assertFalse($messageFormatter->has('int'));
     }
 
-    /**
-     * @dataProvider provideTimeZones
-     */
+    /** @dataProvider provideTimeZones */
     public function testFormatValue(string $expected, string $typeSpecifier, mixed $value): void
     {
         $formatter = new TimeZoneFormatter('en_US');
@@ -44,9 +40,7 @@ class TimeZoneFormatterTest extends TestCase
         self::assertSame($expected, $formatter->formatValue($typeSpecifier, $value));
     }
 
-    /**
-     * @dataProvider provideTypeSpecifier
-     */
+    /** @dataProvider provideTypeSpecifier */
     public function testFormatValueInvalidValue(string $typeSpecifier): void
     {
         $this->expectException(InvalidValueException::class);
@@ -54,7 +48,7 @@ class TimeZoneFormatterTest extends TestCase
             '/"%s, %s, %s"/',
             DateTimeInterface::class,
             DateTimeZone::class,
-            IntlTimeZone::class
+            IntlTimeZone::class,
         ));
         $this->expectExceptionCode(10);
 
@@ -63,9 +57,7 @@ class TimeZoneFormatterTest extends TestCase
         $formatter->formatValue($typeSpecifier, 'UTC');
     }
 
-    /**
-     * @return array<array<string>>
-     */
+    /** @return array<array<string>> */
     public function provideTypeSpecifier(): array
     {
         return [
@@ -75,9 +67,7 @@ class TimeZoneFormatterTest extends TestCase
         ];
     }
 
-    /**
-     * @return array<string, array{string, string, mixed}>
-     */
+    /** @return array<string, array{string, string, mixed}> */
     public function provideTimeZones(): array
     {
         $datetime          = new DateTime('2016-08-01', new DateTimeZone('US/Arizona'));

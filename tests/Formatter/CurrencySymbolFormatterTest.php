@@ -49,9 +49,7 @@ class CurrencySymbolFormatterTest extends TestCase
         $formatter->formatValue('currency_symbol', null);
     }
 
-    /**
-     * @dataProvider provideLocales
-     */
+    /** @dataProvider provideLocales */
     public function testFormatValueWithLocaleKeywords(string $locale): void
     {
         $formatter = new CurrencySymbolFormatter($locale);
@@ -60,9 +58,7 @@ class CurrencySymbolFormatterTest extends TestCase
         self::assertSame('€', $formatter->formatValue('currency_symbol', ''));
     }
 
-    /**
-     * @return string[][]
-     */
+    /** @return string[][] */
     public function provideLocales(): array
     {
         return [

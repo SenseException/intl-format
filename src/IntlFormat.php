@@ -18,9 +18,7 @@ final class IntlFormat implements IntlFormatInterface
     /** @var FormatterInterface[] */
     private array $formatters = [];
 
-    /**
-     * @param iterable<FormatterInterface> $formatters
-     */
+    /** @param iterable<FormatterInterface> $formatters */
     public function __construct(iterable $formatters, private MessageParserInterface $messageParser)
     {
         foreach ($formatters as $formatter) {
@@ -28,9 +26,7 @@ final class IntlFormat implements IntlFormatInterface
         }
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     public function format(string $message, ...$values): string
     {
         $messageMetaData = $this->messageParser->parseMessage($message, $values);
@@ -65,7 +61,7 @@ final class IntlFormat implements IntlFormatInterface
         $this->formatters[] = $formatter;
     }
 
-    private function findFormatter(string $typeSpecifier): ?FormatterInterface
+    private function findFormatter(string $typeSpecifier): FormatterInterface|null
     {
         $formatters = array_reverse($this->formatters);
         foreach ($formatters as $formatter) {

@@ -28,7 +28,7 @@ class InvalidTypeSpecifierException extends IntlFormatException
         return new self(sprintf(
             'Value count of "%d" doesn\'t match type specifier count of "%d"',
             $valuesCount,
-            $typeSpecifiersCount
+            $typeSpecifiersCount,
         ), 40);
     }
 }

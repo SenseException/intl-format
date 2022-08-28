@@ -17,12 +17,10 @@ use function strpos;
 
 class CurrencySymbolFormatter implements FormatterInterface
 {
-    private string $locale;
-
     /** @var string[] */
     private array $keywords = [];
 
-    public function __construct(string $locale)
+    public function __construct(private string $locale)
     {
         if (str_contains($locale, '@')) {
             $localeParts = explode('@', $locale);
@@ -33,8 +31,6 @@ class CurrencySymbolFormatter implements FormatterInterface
 
             return;
         }
-
-        $this->locale = $locale;
     }
 
     public function formatValue(string $typeSpecifier, mixed $value): string

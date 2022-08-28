@@ -21,9 +21,7 @@ class ExceptionFormatterTest extends TestCase
         $this->formatter = new ExceptionFormatter();
     }
 
-    /**
-     * @dataProvider provideTypeSpecifier
-     */
+    /** @dataProvider provideTypeSpecifier */
     public function testHas(string $typeSpecifier): void
     {
         self::assertTrue($this->formatter->has($typeSpecifier));
@@ -34,9 +32,7 @@ class ExceptionFormatterTest extends TestCase
         self::assertFalse($this->formatter->has('foo'));
     }
 
-    /**
-     * @dataProvider provideExceptions
-     */
+    /** @dataProvider provideExceptions */
     public function testFormatValue(string $typeSpecifier, Throwable $value, mixed $expected): void
     {
         self::assertSame($expected, $this->formatter->formatValue($typeSpecifier, $value));
@@ -51,9 +47,7 @@ class ExceptionFormatterTest extends TestCase
         $this->formatter->formatValue('emessage', 1);
     }
 
-    /**
-     * @return string[][]
-     */
+    /** @return string[][] */
     public function provideTypeSpecifier(): array
     {
         return [
@@ -65,9 +59,7 @@ class ExceptionFormatterTest extends TestCase
         ];
     }
 
-    /**
-     * @return array<array{string, Throwable, mixed}>
-     */
+    /** @return array<array{string, Throwable, mixed}> */
     public function provideExceptions(): array
     {
         $e = new Exception('foo', 42);

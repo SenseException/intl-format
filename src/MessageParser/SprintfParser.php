@@ -32,7 +32,7 @@ class SprintfParser implements MessageParserInterface
              )[a-z\d_]*)/i',
             $message,
             -1,
-            PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE
+            PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE,
         );
         /** @var array<string> $typeSpecifiers */
         $typeSpecifiers = preg_grep(
@@ -40,7 +40,7 @@ class SprintfParser implements MessageParserInterface
              )(?:[\d]+\$)?(?# fraction padding:
              )\.?\'?[\d#\-+.]*(?# typespecifier:
              )[a-z\d_]+)/i',
-            $parsedMessage
+            $parsedMessage,
         );
 
         // Change escaped % to regular %

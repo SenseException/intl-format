@@ -46,7 +46,7 @@ class MessageMetaData
          *
          * @readonly
          */
-        public array $values
+        public array $values,
     ) {
     }
 }

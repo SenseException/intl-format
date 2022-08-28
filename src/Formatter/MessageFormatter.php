@@ -15,9 +15,7 @@ use function is_numeric;
 
 class MessageFormatter implements FormatterInterface
 {
-    /**
-     * @param string[] $messageFormats
-     */
+    /** @param string[] $messageFormats */
     public function __construct(private string $locale, private array $messageFormats, private Closure $valueTypeCheck)
     {
     }
