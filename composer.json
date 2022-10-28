@@ -20,9 +20,9 @@
     "doctrine/coding-standard": "^10.0",
     "phpunit/phpunit": "^9.5",
     "phpstan/phpstan": "^1.8",
-    "phpstan/phpstan-phpunit": "^1.1",
-    "vimeo/psalm": "^4.24",
-    "psalm/plugin-phpunit": "^0.16"
+    "phpstan/phpstan-phpunit": "^1.2",
+    "vimeo/psalm": "^4.29",
+    "psalm/plugin-phpunit": "^0.17"
   },
   "autoload": {
     "psr-4": {
