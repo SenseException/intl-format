@@ -26,8 +26,7 @@ final class IntlFormat implements IntlFormatInterface
         }
     }
 
-    /** @inheritDoc */
-    public function format(string $message, ...$values): string
+    public function format(string $message, mixed ...$values): string
     {
         $messageMetaData = $this->messageParser->parseMessage($message, $values);
         $typeSpecifiers  = $messageMetaData->typeSpecifiers;
