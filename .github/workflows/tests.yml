@@ -8,10 +8,10 @@ jobs:
   tests:
 
     runs-on: ubuntu-latest
-    continue-on-error: "${{ matrix.php-versions == '8.2' }}"
+    continue-on-error: "${{ matrix.php-versions == '8.3' }}"
     strategy:
       matrix:
-        php-versions: ['8.0', '8.1', '8.2']
+        php-versions: ['8.0', '8.1', '8.2', '8.3']
 
     steps:
     - uses: actions/checkout@v2
@@ -24,13 +24,13 @@ jobs:
 
     - name: "Install dependencies"
       uses: "ramsey/composer-install@v1"
-      if: matrix.php-versions != '8.2'
+      if: matrix.php-versions != '8.3'
       with:
         composer-options: "--prefer-dist --no-progress --no-suggest"
 
     - name: "Install dependencies 8.2"
       uses: "ramsey/composer-install@v1"
-      if: matrix.php-versions == '8.2'
+      if: matrix.php-versions == '8.3'
       with:
         composer-options: "--prefer-dist --no-progress --no-suggest --ignore-platform-reqs"
 
