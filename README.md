@@ -5,8 +5,6 @@ A wrapper library for PHP to format and internationalize values in messages like
 [![PHP from Packagist](https://img.shields.io/packagist/php-v/senseexception/intl-format.svg)](https://packagist.org/packages/senseexception/intl-format)
 [![Tests](https://github.com/SenseException/intl-format/workflows/Tests/badge.svg)](https://github.com/SenseException/intl-format/actions?query=workflow%3ATests)
 [![Static Analysis](https://github.com/SenseException/intl-format/workflows/Static%20Analysis/badge.svg)](https://github.com/SenseException/intl-format/actions?query=workflow%3A%22Static+Analysis%22)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/SenseException/intl-format/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/SenseException/intl-format/?branch=master)
-[![Code Coverage](https://scrutinizer-ci.com/g/SenseException/intl-format/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/SenseException/intl-format/?branch=master)
 [![License](https://poser.pugx.org/senseexception/intl-format/license)](https://packagist.org/packages/senseexception/intl-format)
 
 ### Why using this library?
