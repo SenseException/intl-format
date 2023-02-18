@@ -17,12 +17,6 @@
     </projectFiles>
 
     <issueHandlers>
-        <UnnecessaryVarAnnotation>
-            <errorLevel type="suppress">
-                <file name="src/MessageParser/SprintfParser.php" />
-            </errorLevel>
-        </UnnecessaryVarAnnotation>
-
         <MixedAssignment>
             <errorLevel type="suppress">
                 <file name="src/IntlFormat.php" />
