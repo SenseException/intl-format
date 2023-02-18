@@ -42,6 +42,7 @@ final class IntlFormat implements IntlFormatInterface
         }
 
         foreach ($typeSpecifiers as $key => $typeSpecifier) {
+            /** @var mixed $value */
             $value = array_shift($values);
 
             $formatter = $this->findFormatter($typeSpecifier);

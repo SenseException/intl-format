@@ -19,7 +19,6 @@
     <issueHandlers>
         <MixedAssignment>
             <errorLevel type="suppress">
-                <file name="src/IntlFormat.php" />
                 <file name="src/MessageParser/SprintfParser.php" />
             </errorLevel>
         </MixedAssignment>
