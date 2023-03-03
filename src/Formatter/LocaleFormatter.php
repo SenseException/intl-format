@@ -7,6 +7,8 @@ namespace Budgegeria\IntlFormat\Formatter;
 use Budgegeria\IntlFormat\Exception\InvalidValueException;
 use Locale;
 
+use function is_string;
+
 class LocaleFormatter implements FormatterInterface
 {
     /** @phpstan-var array<callable(string $value): string> */
@@ -38,7 +40,11 @@ class LocaleFormatter implements FormatterInterface
 
     public function formatValue(string $typeSpecifier, mixed $value): string
     {
-        return $this->formatFunctions[$typeSpecifier]((string) $value);
+        if (! is_string($value)) {
+            throw InvalidValueException::invalidValueType($value, ['string']);
+        }
+
+        return $this->formatFunctions[$typeSpecifier]($value);
     }
 
     public function has(string $typeSpecifier): bool

@@ -42,13 +42,22 @@ class LocaleFormatterTest extends TestCase
     }
 
     /** @dataProvider provideTypeSpecifier */
-    public function testFormatValueException(string $typeSpecifier): void
+    public function testInvalidFormatValue(string $typeSpecifier): void
     {
         $this->expectException(InvalidValueException::class);
         $this->expectExceptionCode(20);
         $localeFormatter = new LocaleFormatter('de_DE');
 
         $localeFormatter->formatValue($typeSpecifier, 'foobarbaz');
+    }
+
+    public function testInvalidTypeInFormatValue(): void
+    {
+        $this->expectException(InvalidValueException::class);
+        $this->expectExceptionCode(10);
+        $localeFormatter = new LocaleFormatter('de_DE');
+
+        $localeFormatter->formatValue('region', 42);
     }
 
     /** @return string[][] */
