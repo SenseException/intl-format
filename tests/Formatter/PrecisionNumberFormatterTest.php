@@ -60,6 +60,20 @@ class PrecisionNumberFormatterTest extends TestCase
             'prefix-space' => ['3number', 1, '  1'],
             'prefix-space-double-digit' => ['10number', 1, '         1'],
             'prefix-zero' => ['0number', 1, '1'],
+            'prefix-comma-no-round' => ['02.2number', 1.225, '1,22'],
+
+            'comma-round' => ['.2number_halfway_up', 1.2, '1,20'],
+            'thousand-separator-round' => ['.3number_halfway_up', 1001.2, '1.001,200'],
+            'million-separator-round' => ['.3number_halfway_up', 1003001.2, '1.003.001,200'],
+            'zero-comma-round' => ['.1number_halfway_up', 0.20001, '0,2'],
+            'double-digit-fraction-round' => ['.10number_halfway_up', 1, '1,0000000000'],
+            'prefix-comma-and-zero-round' => ['05.2number_halfway_up', 1.2, '01,20'],
+            'prefix-comma-round' => ['02.2number_halfway_up', 1.2, '1,20'],
+            'prefix-round' => ['03number_halfway_up', 1, '001'],
+            'prefix-space-round' => ['3number_halfway_up', 1, '  1'],
+            'prefix-space-double-digit-round' => ['10number_halfway_up', 1, '         1'],
+            'prefix-zero-round' => ['0number_halfway_up', 1, '1'],
+            'prefix-comma-round-up' => ['02.2number_halfway_up', 1.225, '1,23'],
         ];
     }
 
@@ -73,6 +87,13 @@ class PrecisionNumberFormatterTest extends TestCase
             ['03number'],
             ['3number'],
             ['05.3number'],
+
+            ['.2number_halfway_up'],
+            ['.0number_halfway_up'],
+            ['.100number_halfway_up'],
+            ['03number_halfway_up'],
+            ['3number_halfway_up'],
+            ['05.3number_halfway_up'],
         ];
     }
 

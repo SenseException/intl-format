@@ -7,12 +7,14 @@ namespace Budgegeria\IntlFormat\Formatter;
 use Budgegeria\IntlFormat\Exception\InvalidValueException;
 use NumberFormatter;
 
-use function is_numeric;
+use function is_float;
+use function is_int;
 use function preg_match;
+use function str_ends_with;
 
 class PrecisionNumberFormatter implements FormatterInterface
 {
-    private static string $matchPattern = '/^([0-9]+)?\.?([0-9]*)number$/';
+    private static string $matchPattern = '/^([0-9]+)?\.?([0-9]*)number/';
 
     public function __construct(private string $locale)
     {
@@ -20,7 +22,7 @@ class PrecisionNumberFormatter implements FormatterInterface
 
     public function formatValue(string $typeSpecifier, mixed $value): string
     {
-        if (! is_numeric($value)) {
+        if (! is_int($value) && ! is_float($value)) {
             throw InvalidValueException::invalidValueType($value, ['integer', 'double']);
         }
 
@@ -39,13 +41,24 @@ class PrecisionNumberFormatter implements FormatterInterface
         $formatter->setAttribute(NumberFormatter::FORMAT_WIDTH, (int) $paddingDigits);
         $formatter->setTextAttribute(NumberFormatter::PADDING_CHARACTER, $paddingChar);
 
-        /** @phpstan-var int|float $value */
+        $roundMode = $this->determineRoundMode($typeSpecifier);
+        $formatter->setAttribute(NumberFormatter::ROUNDING_MODE, $roundMode);
+
         return (string) $formatter->format($value);
     }
 
     public function has(string $typeSpecifier): bool
     {
-        return $typeSpecifier !== 'number' && $typeSpecifier !== '.number' &&
-            preg_match(self::$matchPattern, $typeSpecifier) === 1;
+        return ($typeSpecifier !== 'number' && $typeSpecifier !== '.number' &&
+            preg_match(self::$matchPattern, $typeSpecifier) === 1) &&
+            (str_ends_with($typeSpecifier, 'number') || str_ends_with($typeSpecifier, 'number_halfway_up'));
+    }
+
+    private function determineRoundMode(string $typeSpecifier): int
+    {
+        return match (true) {
+            str_ends_with($typeSpecifier, 'number_halfway_up') => NumberFormatter::ROUND_HALFUP,
+            default => NumberFormatter::ROUND_HALFEVEN,
+        };
     }
 }
