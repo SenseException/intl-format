@@ -10,6 +10,7 @@ use DateTimeZone;
 use IntlCalendar;
 use IntlTimeZone;
 
+use function assert;
 use function in_array;
 
 class TimeZoneFormatter implements FormatterInterface
@@ -24,7 +25,9 @@ class TimeZoneFormatter implements FormatterInterface
 
     public function formatValue(string $typeSpecifier, mixed $value): string
     {
-        $intlCalendar = $this->createIntlCalendar();
+        $intlCalendar = IntlCalendar::createInstance(null, $this->locale);
+
+        assert($intlCalendar instanceof IntlCalendar);
 
         if ($value instanceof DateTimeInterface) {
             $intlCalendar->setTime($value->getTimestamp() * 1000);
@@ -57,10 +60,5 @@ class TimeZoneFormatter implements FormatterInterface
         ];
 
         return in_array($typeSpecifier, $typeSpecifiers, true);
-    }
-
-    private function createIntlCalendar(): IntlCalendar
-    {
-        return IntlCalendar::createInstance(null, $this->locale);
     }
 }
