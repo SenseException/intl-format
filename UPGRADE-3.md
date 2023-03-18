@@ -1,3 +1,17 @@
+# Upgrade to 3.1
+
+## Add new type specifiers
+
+`PrecisionNumberFormatter` supports new type specifiers
+
+`*number_halfway_up`
+`*number_up`
+
+``` php
+intlFormat->format('Today\'s number is %02.2number_halfway_up', 1.225); // '1,23'
+intlFormat->format('Today\'s number is %02.2number_up', 1.221); // '1,23'
+```
+
 # Upgrade to 3.0
 
 ## Drop support of PHP 7
@@ -12,13 +26,3 @@ You need to update your PHP version.
 
 * Added `mixed` type in `\Budgegeria\IntlFormat\IntlFormatInterface::format()`
 * Added `mixed` type in `\Budgegeria\IntlFormat\Formatter\FormatterInterface::formatValue()`
-
-# Upgrade to 3.1
-
-## Add halfway up rounding to `PrecisionNumberFormatter`
-
-`PrecisionNumberFormatter` supports a new `*number_halfway_up` type specifier
-
-``` php
-intlFormat->format('Today\'s number is %02.2number_halfway_up', 1.225); // '1,23'
-```

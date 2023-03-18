@@ -51,13 +51,15 @@ class PrecisionNumberFormatter implements FormatterInterface
     {
         return ($typeSpecifier !== 'number' && $typeSpecifier !== '.number' &&
             preg_match(self::$matchPattern, $typeSpecifier) === 1) &&
-            (str_ends_with($typeSpecifier, 'number') || str_ends_with($typeSpecifier, 'number_halfway_up'));
+            (str_ends_with($typeSpecifier, 'number') || str_ends_with($typeSpecifier, 'number_up') ||
+                str_ends_with($typeSpecifier, 'number_halfway_up'));
     }
 
     private function determineRoundMode(string $typeSpecifier): int
     {
         return match (true) {
             str_ends_with($typeSpecifier, 'number_halfway_up') => NumberFormatter::ROUND_HALFUP,
+            str_ends_with($typeSpecifier, 'number_up') => NumberFormatter::ROUND_UP,
             default => NumberFormatter::ROUND_HALFEVEN,
         };
     }
