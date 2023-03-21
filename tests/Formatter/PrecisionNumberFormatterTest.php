@@ -77,6 +77,10 @@ class PrecisionNumberFormatterTest extends TestCase
 
             'prefix-comma-round-always-up' => ['02.2number_up', 1.221, '1,23'],
             'prefix-comma-round-no-up-on-zero' => ['02.2number_up', 1.220, '1,22'],
+            'prefix-comma-up' => ['number_up', 1.190, '2'],
+
+            'prefix-comma-round-always-down' => ['02.2number_down', 1.229, '1,22'],
+            'prefix-comma-down' => ['number_down', 1.929, '1'],
         ];
     }
 
@@ -104,6 +108,13 @@ class PrecisionNumberFormatterTest extends TestCase
             ['03number_up'],
             ['3number_up'],
             ['05.3number_up'],
+
+            ['.2number_down'],
+            ['.0number_down'],
+            ['.100number_down'],
+            ['03number_down'],
+            ['3number_down'],
+            ['05.3number_down'],
         ];
     }
 
