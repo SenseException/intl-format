@@ -75,12 +75,12 @@ class PrecisionNumberFormatterTest extends TestCase
             'prefix-zero-round' => ['0number_halfway_up', 1, '1'],
             'prefix-comma-round-up' => ['02.2number_halfway_up', 1.225, '1,23'],
 
-            'prefix-comma-round-always-up' => ['02.2number_up', 1.221, '1,23'],
-            'prefix-comma-round-no-up-on-zero' => ['02.2number_up', 1.220, '1,22'],
-            'prefix-comma-up' => ['number_up', 1.190, '2'],
+            'prefix-comma-round-always-up' => ['02.2number_ceil', 1.221, '1,23'],
+            'prefix-comma-round-no-up-on-zero' => ['02.2number_ceil', 1.220, '1,22'],
+            'prefix-comma-up' => ['number_ceil', 1.190, '2'],
 
-            'prefix-comma-round-always-down' => ['02.2number_down', 1.229, '1,22'],
-            'prefix-comma-down' => ['number_down', 1.929, '1'],
+            'prefix-comma-round-always-down' => ['02.2number_floor', 1.229, '1,22'],
+            'prefix-comma-down' => ['number_floor', 1.929, '1'],
         ];
     }
 
@@ -102,19 +102,19 @@ class PrecisionNumberFormatterTest extends TestCase
             ['3number_halfway_up'],
             ['05.3number_halfway_up'],
 
-            ['.2number_up'],
-            ['.0number_up'],
-            ['.100number_up'],
-            ['03number_up'],
-            ['3number_up'],
-            ['05.3number_up'],
+            ['.2number_ceil'],
+            ['.0number_ceil'],
+            ['.100number_ceil'],
+            ['03number_ceil'],
+            ['3number_ceil'],
+            ['05.3number_ceil'],
 
-            ['.2number_down'],
-            ['.0number_down'],
-            ['.100number_down'],
-            ['03number_down'],
-            ['3number_down'],
-            ['05.3number_down'],
+            ['.2number_floor'],
+            ['.0number_floor'],
+            ['.100number_floor'],
+            ['03number_floor'],
+            ['3number_floor'],
+            ['05.3number_floor'],
         ];
     }
 
