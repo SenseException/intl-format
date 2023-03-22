@@ -62,6 +62,8 @@ class PrecisionNumberFormatterTest extends TestCase
             'prefix-zero' => ['0number', 1, '1'],
             'prefix-comma-no-round' => ['02.2number', 1.225, '1,22'],
 
+            'prefix-comma-halfway-down' => ['02.2number_halfway_down', 1.225, '1,22'],
+
             'comma-round' => ['.2number_halfway_up', 1.2, '1,20'],
             'thousand-separator-round' => ['.3number_halfway_up', 1001.2, '1.001,200'],
             'million-separator-round' => ['.3number_halfway_up', 1003001.2, '1.003.001,200'],
@@ -94,6 +96,13 @@ class PrecisionNumberFormatterTest extends TestCase
             ['03number'],
             ['3number'],
             ['05.3number'],
+
+            ['.2number_halfway_down'],
+            ['.0number_halfway_down'],
+            ['.100number_halfway_down'],
+            ['03number_halfway_down'],
+            ['3number_halfway_down'],
+            ['05.3number_halfway_down'],
 
             ['.2number_halfway_up'],
             ['.0number_halfway_up'],
