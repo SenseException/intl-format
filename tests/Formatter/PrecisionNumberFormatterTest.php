@@ -78,10 +78,12 @@ class PrecisionNumberFormatterTest extends TestCase
             'prefix-comma-round-up' => ['02.2number_halfway_up', 1.225, '1,23'],
 
             'prefix-comma-round-always-up' => ['02.2number_ceil', 1.221, '1,23'],
+            'prefix-comma-round-negative-up' => ['02.2number_ceil', -1.221, '-1,22'],
             'prefix-comma-round-no-up-on-zero' => ['02.2number_ceil', 1.220, '1,22'],
             'prefix-comma-up' => ['number_ceil', 1.190, '2'],
 
             'prefix-comma-round-always-down' => ['02.2number_floor', 1.229, '1,22'],
+            'prefix-comma-round-negative-down' => ['02.2number_floor', -1.229, '-1,23'],
             'prefix-comma-down' => ['number_floor', 1.929, '1'],
         ];
     }

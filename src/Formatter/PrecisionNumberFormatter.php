@@ -61,8 +61,8 @@ class PrecisionNumberFormatter implements FormatterInterface
         return match (true) {
             str_ends_with($typeSpecifier, 'number_halfway_up') => NumberFormatter::ROUND_HALFUP,
             str_ends_with($typeSpecifier, 'number_halfway_down') => NumberFormatter::ROUND_HALFDOWN,
-            str_ends_with($typeSpecifier, 'number_ceil') => NumberFormatter::ROUND_UP,
-            str_ends_with($typeSpecifier, 'number_floor') => NumberFormatter::ROUND_DOWN,
+            str_ends_with($typeSpecifier, 'number_ceil') => NumberFormatter::ROUND_CEILING,
+            str_ends_with($typeSpecifier, 'number_floor') => NumberFormatter::ROUND_FLOOR,
             default => NumberFormatter::ROUND_HALFEVEN,
         };
     }
