@@ -85,6 +85,9 @@ class PrecisionNumberFormatterTest extends TestCase
             'prefix-comma-round-always-down' => ['02.2number_floor', 1.229, '1,22'],
             'prefix-comma-round-negative-down' => ['02.2number_floor', -1.229, '-1,23'],
             'prefix-comma-down' => ['number_floor', 1.929, '1'],
+
+            'prefix-comma-halfeven' => ['02.2number_halfeven', 1.225, '1,22'],
+            'prefix-comma-halfeven-odd' => ['02.2number_halfeven', 1.235, '1,24'],
         ];
     }
 
@@ -126,6 +129,13 @@ class PrecisionNumberFormatterTest extends TestCase
             ['03number_floor'],
             ['3number_floor'],
             ['05.3number_floor'],
+
+            ['.2number_halfeven'],
+            ['.0number_halfeven'],
+            ['.100number_halfeven'],
+            ['03number_halfeven'],
+            ['3number_halfeven'],
+            ['05.3number_halfeven'],
         ];
     }
 

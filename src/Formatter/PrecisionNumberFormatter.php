@@ -53,7 +53,7 @@ class PrecisionNumberFormatter implements FormatterInterface
             preg_match(self::$matchPattern, $typeSpecifier) === 1) &&
             (str_ends_with($typeSpecifier, 'number') || str_ends_with($typeSpecifier, 'number_ceil') ||
                 str_ends_with($typeSpecifier, 'number_halfway_up') || str_ends_with($typeSpecifier, 'number_floor') ||
-                str_ends_with($typeSpecifier, 'number_halfway_down'));
+                str_ends_with($typeSpecifier, 'number_halfway_down') || str_ends_with($typeSpecifier, 'number_halfeven'));
     }
 
     private function determineRoundMode(string $typeSpecifier): int
@@ -63,6 +63,7 @@ class PrecisionNumberFormatter implements FormatterInterface
             str_ends_with($typeSpecifier, 'number_halfway_down') => NumberFormatter::ROUND_HALFDOWN,
             str_ends_with($typeSpecifier, 'number_ceil') => NumberFormatter::ROUND_CEILING,
             str_ends_with($typeSpecifier, 'number_floor') => NumberFormatter::ROUND_FLOOR,
+            str_ends_with($typeSpecifier, 'number_halfeven') => NumberFormatter::ROUND_HALFEVEN,
             default => NumberFormatter::ROUND_HALFEVEN,
         };
     }
