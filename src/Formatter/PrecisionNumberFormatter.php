@@ -7,6 +7,7 @@ namespace Budgegeria\IntlFormat\Formatter;
 use Budgegeria\IntlFormat\Exception\InvalidValueException;
 use NumberFormatter;
 
+use function in_array;
 use function is_float;
 use function is_int;
 use function preg_match;
@@ -14,7 +15,7 @@ use function str_ends_with;
 
 class PrecisionNumberFormatter implements FormatterInterface
 {
-    private static string $matchPattern = '/^([0-9]+)?\.?([0-9]*)number/';
+    private static string $matchPattern = '/^([\d]+)?\.?([\d]*)(number[\w_]*)/';
 
     public function __construct(private string $locale)
     {
@@ -49,11 +50,22 @@ class PrecisionNumberFormatter implements FormatterInterface
 
     public function has(string $typeSpecifier): bool
     {
-        return ($typeSpecifier !== 'number' && $typeSpecifier !== '.number' &&
-            preg_match(self::$matchPattern, $typeSpecifier) === 1) &&
-            (str_ends_with($typeSpecifier, 'number') || str_ends_with($typeSpecifier, 'number_ceil') ||
-                str_ends_with($typeSpecifier, 'number_halfway_up') || str_ends_with($typeSpecifier, 'number_floor') ||
-                str_ends_with($typeSpecifier, 'number_halfway_down') || str_ends_with($typeSpecifier, 'number_halfeven'));
+        $suffixes = [
+            'number',
+            'number_ceil',
+            'number_halfway_up',
+            'number_floor',
+            'number_halfway_down',
+            'number_halfeven',
+        ];
+
+        if ($typeSpecifier === 'number' || $typeSpecifier === '.number') {
+            return false;
+        }
+
+        $patternFound = preg_match(self::$matchPattern, $typeSpecifier, $matches) === 1;
+
+        return $patternFound && in_array($matches[3] ?? '', $suffixes, true);
     }
 
     private function determineRoundMode(string $typeSpecifier): int
