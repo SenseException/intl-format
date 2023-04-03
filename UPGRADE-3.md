@@ -1,3 +1,9 @@
+# Upgrade to 3.2
+
+## Drop support of PHP 8.0
+
+You need to update your PHP version.
+
 # Upgrade to 3.1
 
 ## Add new type specifiers
