@@ -232,7 +232,7 @@ class IntlFormatIntegrationTest extends TestCase
     }
 
     /** @return string[][] */
-    public function provideEscapedMessages(): array
+    public static function provideEscapedMessages(): array
     {
         return [
             ['Hello %world, how %%are you', 'Hello island, how %are you'],

@@ -61,7 +61,7 @@ class LocaleFormatterTest extends TestCase
     }
 
     /** @return string[][] */
-    public function provideLanguages(): array
+    public static function provideLanguages(): array
     {
         return [
             ['Italienisch', 'it_IT'],
@@ -76,7 +76,7 @@ class LocaleFormatterTest extends TestCase
     }
 
     /** @return string[][] */
-    public function provideRegions(): array
+    public static function provideRegions(): array
     {
         return [
             ['Italien', 'it_IT'],
@@ -88,7 +88,7 @@ class LocaleFormatterTest extends TestCase
     }
 
     /** @return string[][] */
-    public function provideTypeSpecifier(): array
+    public static function provideTypeSpecifier(): array
     {
         return [
             ['region'],

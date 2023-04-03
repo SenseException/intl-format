@@ -134,7 +134,7 @@ class MessageFormatterTest extends TestCase
     }
 
     /** @return array<string, string> */
-    private function getTypeSpecifier(): array
+    private static function getTypeSpecifier(): array
     {
         return [
             'number' => 'number',
@@ -164,7 +164,7 @@ class MessageFormatterTest extends TestCase
     }
 
     /** @return array<string, array<string>> */
-    public function provideTypeSpecifier(): array
+    public static function provideTypeSpecifier(): array
     {
         return [
             'number' => ['number'],
@@ -194,7 +194,7 @@ class MessageFormatterTest extends TestCase
     }
 
     /** @return array<string, array{string, string, mixed}> */
-    public function provideDate(): array
+    public static function provideDate(): array
     {
         $dateTime          = new DateTime('2016-03-01');
         $dateTimeImmutable = new DateTimeImmutable('2016-03-01');
@@ -276,7 +276,7 @@ class MessageFormatterTest extends TestCase
     }
 
     /** @return array<string, array{string, string, mixed}> */
-    public function provideTime(): array
+    public static function provideTime(): array
     {
         $dateTime          = new DateTime('2016-03-01 02:20:50', new DateTimeZone('Europe/Berlin'));
         $dateTimeImmutable = new DateTimeImmutable('2016-03-01 02:20:50', new DateTimeZone('Europe/Berlin'));
@@ -307,7 +307,7 @@ class MessageFormatterTest extends TestCase
     }
 
     /** @return array<string, array{string, int}> */
-    public function provideOrdinal(): array
+    public static function provideOrdinal(): array
     {
         return [
             'first' => ['1st', 1],
@@ -318,7 +318,7 @@ class MessageFormatterTest extends TestCase
     }
 
     /** @return array<string, array<mixed>> */
-    public function provideInvalidNumberValues(): array
+    public static function provideInvalidNumberValues(): array
     {
         $fn = static function (): void {
         };
@@ -334,12 +334,12 @@ class MessageFormatterTest extends TestCase
     }
 
     /** @return array<string, array<mixed>> */
-    public function provideInvalidDateValues(): array
+    public static function provideInvalidDateValues(): array
     {
         $invalidDateValues = [
             'float' => [100.1],
         ];
 
-        return array_merge($invalidDateValues, $this->provideInvalidNumberValues());
+        return array_merge($invalidDateValues, self::provideInvalidNumberValues());
     }
 }

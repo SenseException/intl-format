@@ -59,7 +59,7 @@ class CurrencySymbolFormatterTest extends TestCase
     }
 
     /** @return string[][] */
-    public function provideLocales(): array
+    public static function provideLocales(): array
     {
         return [
             ['fr_FR@currency=USD;collation=phonebook'],

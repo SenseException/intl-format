@@ -58,7 +58,7 @@ class TimeZoneFormatterTest extends TestCase
     }
 
     /** @return array<array<string>> */
-    public function provideTypeSpecifier(): array
+    public static function provideTypeSpecifier(): array
     {
         return [
             'timezone_id' => ['timezone_id'],
@@ -68,7 +68,7 @@ class TimeZoneFormatterTest extends TestCase
     }
 
     /** @return array<string, array{string, string, mixed}> */
-    public function provideTimeZones(): array
+    public static function provideTimeZones(): array
     {
         $datetime          = new DateTime('2016-08-01', new DateTimeZone('US/Arizona'));
         $datetimeImmutable = new DateTimeImmutable('2016-05-01', new DateTimeZone('US/Arizona'));

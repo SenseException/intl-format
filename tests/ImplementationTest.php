@@ -28,7 +28,7 @@ class ImplementationTest extends TestCase
     }
 
     /** @return array<array{string, string, array<int|string>}> */
-    public function formattingWorksProvider(): array
+    public static function formattingWorksProvider(): array
     {
         return [
             ['there are 12 monkeys on the 002 trees', 'there are %d %s on the %03d trees', [12, 'monkeys', 2]],

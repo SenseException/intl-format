@@ -46,7 +46,7 @@ class PrecisionNumberFormatterTest extends TestCase
     }
 
     /** @return array<array{string, float, string}> */
-    public function provideNumber(): array
+    public static function provideNumber(): array
     {
         return [
             'comma' => ['.2number', 1.2, '1,20'],
@@ -92,7 +92,7 @@ class PrecisionNumberFormatterTest extends TestCase
     }
 
     /** @return array<array<string>> */
-    public function provideTypeSpecifier(): array
+    public static function provideTypeSpecifier(): array
     {
         return [
             ['.2number'],
@@ -140,7 +140,7 @@ class PrecisionNumberFormatterTest extends TestCase
     }
 
     /** @return array<array<string>> */
-    public function provideInvalidTypeSpecifier(): array
+    public static function provideInvalidTypeSpecifier(): array
     {
         return [
             ['number'],

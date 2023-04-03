@@ -142,7 +142,7 @@ class SprintfParserTest extends TestCase
     }
 
     /** @return array<string, array<string>> */
-    public function provideSupportedPaddingCharacters(): array
+    public static function provideSupportedPaddingCharacters(): array
     {
         return [
             'integers' => ['2'],

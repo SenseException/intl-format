@@ -45,7 +45,7 @@ class SprintfFormatterTest extends TestCase
     }
 
     /** @return array<array{string, mixed, string}> */
-    public function provideTypeSpecifier(): array
+    public static function provideTypeSpecifier(): array
     {
         return [
             ['b', 11, '1011'],

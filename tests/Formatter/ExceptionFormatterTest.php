@@ -48,7 +48,7 @@ class ExceptionFormatterTest extends TestCase
     }
 
     /** @return string[][] */
-    public function provideTypeSpecifier(): array
+    public static function provideTypeSpecifier(): array
     {
         return [
             'emessage' => ['emessage'],
@@ -60,7 +60,7 @@ class ExceptionFormatterTest extends TestCase
     }
 
     /** @return array<array{string, Throwable, mixed}> */
-    public function provideExceptions(): array
+    public static function provideExceptions(): array
     {
         $e = new Exception('foo', 42);
 
