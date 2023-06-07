@@ -26,13 +26,13 @@ jobs:
       uses: "ramsey/composer-install@v2"
       if: matrix.php-versions != '8.3'
       with:
-        composer-options: "--prefer-dist --no-progress --no-suggest"
+        composer-options: "--prefer-dist --no-progress"
 
     - name: "Install dependencies 8.3"
       uses: "ramsey/composer-install@v2"
       if: matrix.php-versions == '8.3'
       with:
-        composer-options: "--prefer-dist --no-progress --no-suggest --ignore-platform-reqs"
+        composer-options: "--prefer-dist --no-progress --ignore-platform-reqs"
 
     - name: "Unit + Integration"
       run: vendor/bin/phpunit
