@@ -1,4 +1,4 @@
-name: Tests
+name: "Tests"
 
 on:
   - "push"
@@ -7,14 +7,23 @@ on:
 jobs:
   tests:
 
-    runs-on: ubuntu-latest
-    continue-on-error: "${{ matrix.php-versions == '8.3' }}"
+    runs-on: "ubuntu-latest"
+    continue-on-error: "${{ matrix.continue-on-error }}"
     strategy:
       matrix:
-        php-versions: ['8.1', '8.2', '8.3']
+        include:
+          - php-versions: "8.1"
+            composer-option: ""
+            continue-on-error: false
+          - php-versions: "8.2"
+            composer-option: ""
+            continue-on-error: false
+          - php-versions: "8.3"
+            composer-option: "--ignore-platform-reqs"
+            continue-on-error: true
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: "actions/checkout@v3"
 
     - name: "Setup PHP Action"
       uses: "shivammathur/setup-php@v2"
@@ -22,20 +31,13 @@ jobs:
         php-version: "${{ matrix.php-versions }}"
         extensions: "intl, xdebug"
 
-    - name: "Install dependencies"
+    - name: "Install dependencies with Composer"
       uses: "ramsey/composer-install@v2"
-      if: matrix.php-versions != '8.3'
       with:
-        composer-options: "--prefer-dist --no-progress"
-
-    - name: "Install dependencies 8.3"
-      uses: "ramsey/composer-install@v2"
-      if: matrix.php-versions == '8.3'
-      with:
-        composer-options: "--prefer-dist --no-progress --ignore-platform-reqs"
+        composer-options: "--prefer-dist --no-progress ${{ matrix.composer-option }}"
 
     - name: "Unit + Integration"
-      run: vendor/bin/phpunit
-    
+      run: "vendor/bin/phpunit"
+
     - name: "Mutation tests"
-      run: vendor/bin/infection --min-msi=94 --no-progress --threads=5
+      run: "vendor/bin/infection --min-msi=94 --no-progress --threads=5"
