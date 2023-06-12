@@ -7,9 +7,11 @@ namespace Budgegeria\IntlFormat\Formatter;
 use Budgegeria\IntlFormat\Exception\InvalidValueException;
 use NumberFormatter;
 
+use function assert;
 use function in_array;
 use function is_float;
 use function is_int;
+use function is_string;
 use function preg_match;
 use function str_ends_with;
 
@@ -31,7 +33,7 @@ class PrecisionNumberFormatter implements FormatterInterface
 
         $paddingChar   = ' ';
         $paddingDigits = $matches[1];
-        if (preg_match('/^0[0-9]+$/', $paddingDigits)) {
+        if (preg_match('/0[0-9]+/', $paddingDigits)) {
             $paddingChar = $paddingDigits[0];
         }
 
@@ -45,7 +47,11 @@ class PrecisionNumberFormatter implements FormatterInterface
         $roundMode = $this->determineRoundMode($typeSpecifier);
         $formatter->setAttribute(NumberFormatter::ROUNDING_MODE, $roundMode);
 
-        return (string) $formatter->format($value);
+        $formattedValue = $formatter->format($value);
+
+        assert(is_string($formattedValue));
+
+        return $formattedValue;
     }
 
     public function has(string $typeSpecifier): bool

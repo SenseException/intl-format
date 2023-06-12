@@ -20,16 +20,6 @@
                 "*"
             ]
         },
-        "TrueValue": {
-            "ignore": [
-                "Budgegeria\\IntlFormat\\Formatter\\TimeZoneFormatter::has"
-            ]
-        },
-        "CastString": {
-            "ignore": [
-                "*"
-            ]
-        },
         "CastInt": {
             "ignore": [
                 "*"

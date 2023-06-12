@@ -11,7 +11,6 @@ use IntlCalendar;
 use IntlTimeZone;
 
 use function assert;
-use function in_array;
 
 class TimeZoneFormatter implements FormatterInterface
 {
@@ -53,12 +52,8 @@ class TimeZoneFormatter implements FormatterInterface
 
     public function has(string $typeSpecifier): bool
     {
-        $typeSpecifiers = [
-            self::TYPE_SPECIFIER_TZ_ID,
-            self::TYPE_SPECIFIER_TZ_LONG_NAME,
-            self::TYPE_SPECIFIER_TZ_SHORT_NAME,
-        ];
-
-        return in_array($typeSpecifier, $typeSpecifiers, true);
+        return $typeSpecifier === self::TYPE_SPECIFIER_TZ_ID ||
+            $typeSpecifier === self::TYPE_SPECIFIER_TZ_LONG_NAME ||
+            $typeSpecifier === self::TYPE_SPECIFIER_TZ_SHORT_NAME;
     }
 }

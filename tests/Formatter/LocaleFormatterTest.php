@@ -55,6 +55,7 @@ class LocaleFormatterTest extends TestCase
     {
         $this->expectException(InvalidValueException::class);
         $this->expectExceptionCode(10);
+        $this->expectExceptionMessage('Invalid type "integer" of value. Allowed types: "string".');
         $localeFormatter = new LocaleFormatter('de_DE');
 
         $localeFormatter->formatValue('region', 42);

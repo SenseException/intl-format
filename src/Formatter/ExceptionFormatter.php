@@ -5,12 +5,14 @@ declare(strict_types=1);
 namespace Budgegeria\IntlFormat\Formatter;
 
 use Budgegeria\IntlFormat\Exception\InvalidValueException;
-use Closure;
 use Throwable;
 
 class ExceptionFormatter implements FormatterInterface
 {
-    /** @var Closure[] */
+    /**
+     * @phpstan-var array<string, callable(Throwable):string>
+     * @var callable[]
+     */
     private array $formatFunctions;
 
     public function __construct()
@@ -30,7 +32,7 @@ class ExceptionFormatter implements FormatterInterface
             throw InvalidValueException::invalidValueType($value, [Throwable::class]);
         }
 
-        return (string) $this->formatFunctions[$typeSpecifier]($value);
+        return $this->formatFunctions[$typeSpecifier]($value);
     }
 
     public function has(string $typeSpecifier): bool

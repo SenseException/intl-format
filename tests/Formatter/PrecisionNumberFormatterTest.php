@@ -144,6 +144,7 @@ class PrecisionNumberFormatterTest extends TestCase
     {
         return [
             ['number'],
+            ['number_specifier'],
             ['.number'],
             ['3numbr'],
             ['.3numbr'],
