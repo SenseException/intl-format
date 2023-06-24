@@ -11,6 +11,7 @@ use function assert;
 use function in_array;
 use function is_float;
 use function is_int;
+use function is_numeric;
 use function is_string;
 use function preg_match;
 use function str_ends_with;
@@ -33,7 +34,7 @@ class PrecisionNumberFormatter implements FormatterInterface
 
         $paddingChar   = ' ';
         $paddingDigits = $matches[1];
-        if (preg_match('/0[0-9]+/', $paddingDigits)) {
+        if (is_numeric($paddingDigits) && preg_match('/0[0-9]+/', $paddingDigits)) {
             $paddingChar = $paddingDigits[0];
         }
 
@@ -81,7 +82,6 @@ class PrecisionNumberFormatter implements FormatterInterface
             str_ends_with($typeSpecifier, 'number_halfway_down') => NumberFormatter::ROUND_HALFDOWN,
             str_ends_with($typeSpecifier, 'number_ceil') => NumberFormatter::ROUND_CEILING,
             str_ends_with($typeSpecifier, 'number_floor') => NumberFormatter::ROUND_FLOOR,
-            str_ends_with($typeSpecifier, 'number_halfeven') => NumberFormatter::ROUND_HALFEVEN,
             default => NumberFormatter::ROUND_HALFEVEN,
         };
     }

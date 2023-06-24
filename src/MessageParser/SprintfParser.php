@@ -73,7 +73,7 @@ class SprintfParser implements MessageParserInterface
             $matches = [];
 
             $index = $key;
-            if (preg_match('/^%([0-9]+)\$/', $typeSpecifier, $matches) === 1) {
+            if (preg_match('/%([0-9]+)\$/', $typeSpecifier, $matches) === 1) {
                 if ($matches[1] === '0') {
                     throw InvalidTypeSpecifierException::invalidTypeSpecifier($typeSpecifier);
                 }
