@@ -63,6 +63,7 @@ class PrecisionNumberFormatterTest extends TestCase
             'prefix-comma-no-round' => ['02.2number', 1.225, '1,22'],
 
             'prefix-comma-halfway-down' => ['02.2number_halfway_down', 1.225, '1,22'],
+            'prefix-comma-halfway-down-odd' => ['02.2number_halfway_down', 1.235, '1,23'],
 
             'comma-round' => ['.2number_halfway_up', 1.2, '1,20'],
             'thousand-separator-round' => ['.3number_halfway_up', 1001.2, '1.001,200'],
