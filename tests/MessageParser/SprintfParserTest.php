@@ -212,4 +212,19 @@ class SprintfParserTest extends TestCase
 
         $parser->parseMessage($message, ['island', new DateTime()]);
     }
+
+    /**
+     * Be sure that numbers can be used in type specifiers.
+     */
+    public function testAllowNumbersInTypeSpecifier(): void
+    {
+        $message = 'Hello "%1typespecifier1", how are you';
+
+        $parser = new SprintfParser();
+        $parsed = $parser->parseMessage($message, ['world']);
+
+        self::assertSame([1 => '1typespecifier1'], $parsed->typeSpecifiers, 'Wrong type specifier');
+        self::assertSame(['world'], $parsed->values, 'Wrong values');
+        self::assertSame(['Hello "', '%1typespecifier1', '", how are you'], $parsed->parsedMessage, 'Wrong parsed message');
+    }
 }
