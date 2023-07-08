@@ -26,7 +26,7 @@ class TimeZoneFormatter implements FormatterInterface
     {
         $intlCalendar = IntlCalendar::createInstance(null, $this->locale);
 
-        assert($intlCalendar instanceof IntlCalendar);
+        assert($intlCalendar !== null);
 
         if ($value instanceof DateTimeInterface) {
             $intlCalendar->setTime($value->getTimestamp() * 1000);
