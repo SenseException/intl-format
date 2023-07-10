@@ -10,9 +10,15 @@
     },
     "mutators": {
         "@default": true,
+        "@regex": true,
+        "NotIdentical": {
+            "ignoreSourceCodeByRegex": [
+                "assert\\(.*"
+            ]
+        },
         "CastInt": {
-            "ignore": [
-                "*"
+            "ignoreSourceCodeByRegex": [
+                "\\$index = \\(int\\) \\$matches\\[1\\] - 1;$"
             ]
         }
     }
