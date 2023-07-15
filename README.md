@@ -25,6 +25,10 @@ echo $intlFormat->format('Today\'s number is %number', 1000.3);
 
 It is also easy extensible with your own custom formats.
 
+## Documentation
+
+Read more about this library in the [documentation](http://senseexception.github.io/intl-format).
+
 ## Does it affect [GDPR](https://www.eugdpr.org/) somehow?
 
 Intl-Format itself uses the given data (e.g. timezone, locale) only for formatting purposes with the help of the
@@ -37,7 +41,3 @@ You can install this with [Composer](https://getcomposer.org/).
 ```
 composer require senseexception/intl-format
 ```
-
-## Documentation
-
-Read more about this library in the [documentation](http://senseexception.github.io/intl-format).
