@@ -18,10 +18,10 @@
   "require-dev": {
     "infection/infection": "^0.26",
     "doctrine/coding-standard": "^12.0",
-    "phpunit/phpunit": "^10.0",
+    "phpunit/phpunit": "^10.2",
     "phpstan/phpstan": "^1.10",
     "phpstan/phpstan-phpunit": "^1.3",
-    "vimeo/psalm": "^5.9",
+    "vimeo/psalm": "^5.13",
     "psalm/plugin-phpunit": "^0.18.4"
   },
   "autoload": {
