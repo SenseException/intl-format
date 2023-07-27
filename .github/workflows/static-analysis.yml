@@ -1,4 +1,4 @@
-name: Static Analysis
+name: "Static Analysis"
 
 on:
   - "push"
@@ -7,10 +7,10 @@ on:
 jobs:
   analysis:
 
-    runs-on: ubuntu-latest
+    runs-on: "ubuntu-latest"
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: "actions/checkout@v2"
 
     - name: "Setup PHP Action"
       uses: "shivammathur/setup-php@v2"
@@ -24,8 +24,8 @@ jobs:
         composer-options: "--prefer-dist --no-progress"
 
     - name: "PHPStan"
-      run: vendor/bin/phpstan analyse
+      run: "vendor/bin/phpstan analyse"
 
     - name: "Psalm"
-      run: vendor/bin/psalm
+      run: "vendor/bin/psalm --no-cache"
 
