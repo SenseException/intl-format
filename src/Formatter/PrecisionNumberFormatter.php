@@ -18,7 +18,7 @@ use function str_ends_with;
 
 class PrecisionNumberFormatter implements FormatterInterface
 {
-    private static string $matchPattern = '/^([\d]+)?\.?([\d]*)(number[\w_]*)/';
+    private const MATCH_PATTERN = '/^([\d]+)?\.?([\d]*)(number[\w_]*)/';
 
     public function __construct(private string $locale)
     {
@@ -30,7 +30,7 @@ class PrecisionNumberFormatter implements FormatterInterface
             throw InvalidValueException::invalidValueType($value, ['integer', 'double']);
         }
 
-        preg_match(self::$matchPattern, $typeSpecifier, $matches);
+        preg_match(self::MATCH_PATTERN, $typeSpecifier, $matches);
 
         $paddingChar   = ' ';
         $paddingDigits = $matches[1];
@@ -70,7 +70,7 @@ class PrecisionNumberFormatter implements FormatterInterface
             return false;
         }
 
-        $patternFound = preg_match(self::$matchPattern, $typeSpecifier, $matches) === 1;
+        $patternFound = preg_match(self::MATCH_PATTERN, $typeSpecifier, $matches) === 1;
 
         return $patternFound && in_array($matches[3] ?? '', $suffixes, true);
     }
