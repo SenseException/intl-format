@@ -55,12 +55,10 @@ Here are some lists of predefined type specifiers and their formats, that are al
 
 ## Additional formatters
 
-These formatters are optional and can be loaded after IntlFormat was created.
+These formatters aren't related to intl.
 
-| formatter          | description                                            |
-|--------------------|--------------------------------------------------------|
-| SprintfFormatter   | Provides the known sprintf type specifier              |
-| ExceptionFormatter | Allows to format messages, code and more of Throwables |
+* [Exception](exception.md)
+* [Sprintf](sprintf.md)
 
 ## Create your custom formatter
 
