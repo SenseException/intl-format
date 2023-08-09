@@ -82,7 +82,7 @@ class IntlFormatIntegrationTest extends TestCase
         $formatter->expects(self::atLeastOnce())
             ->method('formatValue')
             ->with('swap', Assert::anything())
-            ->willReturnOnConsecutiveCalls('value1', 'value2', 'value1');
+            ->willReturnArgument(1);
 
         $intlFormat = new IntlFormat([$formatter], new SprintfParser());
 
@@ -107,7 +107,7 @@ class IntlFormatIntegrationTest extends TestCase
         $formatter->expects(self::atLeastOnce())
             ->method('formatValue')
             ->with('swap', Assert::anything())
-            ->willReturnOnConsecutiveCalls('value3', 'value2', 'value1');
+            ->willReturnArgument(1);
 
         $intlFormat = new IntlFormat([$formatter], new SprintfParser());
 
