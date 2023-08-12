@@ -11,10 +11,7 @@ use Budgegeria\IntlFormat\IntlFormat;
 use Budgegeria\IntlFormat\MessageParser\MessageMetaData;
 use Budgegeria\IntlFormat\MessageParser\MessageParserInterface;
 use DateTime;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-
-use function assert;
 
 class IntlFormatTest extends TestCase
 {
@@ -26,8 +23,6 @@ class IntlFormatTest extends TestCase
         $message = 'Hello "{{world}}", how are you';
 
         $formatter = $this->createMock(FormatterInterface::class);
-        assert($formatter instanceof FormatterInterface);
-        assert($formatter instanceof MockObject);
         $formatter->expects(self::once())
             ->method('has')
             ->with('world')
@@ -44,8 +39,6 @@ class IntlFormatTest extends TestCase
         );
 
         $parser = $this->createMock(MessageParserInterface::class);
-        assert($parser instanceof MessageParserInterface);
-        assert($parser instanceof MockObject);
         $parser->expects(self::once())
             ->method('parseMessage')
             ->with($message, ['island'])
@@ -64,8 +57,6 @@ class IntlFormatTest extends TestCase
         $message = 'Hello "{{world}}", how are you';
 
         $formatter = $this->createMock(FormatterInterface::class);
-        assert($formatter instanceof FormatterInterface);
-        assert($formatter instanceof MockObject);
         $formatter->expects(self::once())
             ->method('has')
             ->with('world')
@@ -82,8 +73,6 @@ class IntlFormatTest extends TestCase
         );
 
         $parser = $this->createMock(MessageParserInterface::class);
-        assert($parser instanceof MessageParserInterface);
-        assert($parser instanceof MockObject);
         $parser->expects(self::once())
             ->method('parseMessage')
             ->with($message, ['island'])
@@ -102,8 +91,6 @@ class IntlFormatTest extends TestCase
         $message = 'Today is {{date}}. Hello {{world}}';
 
         $formatter = $this->createMock(FormatterInterface::class);
-        assert($formatter instanceof FormatterInterface);
-        assert($formatter instanceof MockObject);
         $formatter->expects(self::atLeastOnce())
             ->method('has')
             ->willReturnMap([
@@ -124,8 +111,6 @@ class IntlFormatTest extends TestCase
         );
 
         $parser = $this->createMock(MessageParserInterface::class);
-        assert($parser instanceof MessageParserInterface);
-        assert($parser instanceof MockObject);
         $parser->expects(self::once())
             ->method('parseMessage')
             ->with($message, [$dateTime, 'island'])
@@ -153,8 +138,6 @@ class IntlFormatTest extends TestCase
         );
 
         $parser = $this->createMock(MessageParserInterface::class);
-        assert($parser instanceof MessageParserInterface);
-        assert($parser instanceof MockObject);
         $parser->expects(self::once())
             ->method('parseMessage')
             ->with($message, ['island'])
@@ -181,8 +164,6 @@ class IntlFormatTest extends TestCase
         );
 
         $parser = $this->createMock(MessageParserInterface::class);
-        assert($parser instanceof MessageParserInterface);
-        assert($parser instanceof MockObject);
         $parser->expects(self::once())
             ->method('parseMessage')
             ->with($message, ['island'])

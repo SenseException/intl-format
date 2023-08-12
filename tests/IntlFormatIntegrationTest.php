@@ -10,10 +10,7 @@ use Budgegeria\IntlFormat\IntlFormat;
 use Budgegeria\IntlFormat\MessageParser\SprintfParser;
 use DateTime;
 use PHPUnit\Framework\Assert;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-
-use function assert;
 
 class IntlFormatIntegrationTest extends TestCase
 {
@@ -25,8 +22,6 @@ class IntlFormatIntegrationTest extends TestCase
         $message = 'Hello "%world", how are you';
 
         $formatter = $this->createMock(FormatterInterface::class);
-        assert($formatter instanceof FormatterInterface);
-        assert($formatter instanceof MockObject);
         $formatter->expects(self::once())
             ->method('has')
             ->with('world')
@@ -49,8 +44,6 @@ class IntlFormatIntegrationTest extends TestCase
     public function testEscapedFormat(string $message, string $expected): void
     {
         $formatter = $this->createMock(FormatterInterface::class);
-        assert($formatter instanceof FormatterInterface);
-        assert($formatter instanceof MockObject);
         $formatter->expects(self::once())
             ->method('has')
             ->with('world')
@@ -73,8 +66,6 @@ class IntlFormatIntegrationTest extends TestCase
         $message = '%swap %swap %1$swap';
 
         $formatter = $this->createMock(FormatterInterface::class);
-        assert($formatter instanceof FormatterInterface);
-        assert($formatter instanceof MockObject);
         $formatter->expects(self::atLeastOnce())
             ->method('has')
             ->with('swap')
@@ -98,8 +89,6 @@ class IntlFormatIntegrationTest extends TestCase
         $message = '%3$swap %2$swap %1$swap';
 
         $formatter = $this->createMock(FormatterInterface::class);
-        assert($formatter instanceof FormatterInterface);
-        assert($formatter instanceof MockObject);
         $formatter->expects(self::atLeastOnce())
             ->method('has')
             ->with('swap')
@@ -123,8 +112,6 @@ class IntlFormatIntegrationTest extends TestCase
         $message = 'Hello %world, Today is %date';
 
         $formatter = $this->createMock(FormatterInterface::class);
-        assert($formatter instanceof FormatterInterface);
-        assert($formatter instanceof MockObject);
         $formatter->expects(self::atLeastOnce())
             ->method('has')
             ->willReturnMap([
@@ -179,9 +166,7 @@ class IntlFormatIntegrationTest extends TestCase
 
         $message = 'Hello %5$world, Today is %date';
 
-        $formatter = $this->createMock(FormatterInterface::class);
-        assert($formatter instanceof FormatterInterface);
-        assert($formatter instanceof MockObject);
+        $formatter  = $this->createMock(FormatterInterface::class);
         $intlFormat = new IntlFormat([$formatter], new SprintfParser());
 
         $intlFormat->format($message, 'island', new DateTime());
@@ -197,9 +182,7 @@ class IntlFormatIntegrationTest extends TestCase
 
         $message = 'Hello %0$world, Today is %date';
 
-        $formatter = $this->createMock(FormatterInterface::class);
-        assert($formatter instanceof FormatterInterface);
-        assert($formatter instanceof MockObject);
+        $formatter  = $this->createMock(FormatterInterface::class);
         $intlFormat = new IntlFormat([$formatter], new SprintfParser());
 
         $intlFormat->format($message, 'island', new DateTime());
@@ -210,15 +193,11 @@ class IntlFormatIntegrationTest extends TestCase
         $message = 'Hello "%world", how are you';
 
         $formatter1 = $this->createMock(FormatterInterface::class);
-        assert($formatter1 instanceof FormatterInterface);
-        assert($formatter1 instanceof MockObject);
         $formatter1->method('has')
             ->willReturn(true);
         $formatter1->method('formatValue')
             ->willReturn('island');
         $formatter2 = $this->createMock(FormatterInterface::class);
-        assert($formatter2 instanceof FormatterInterface);
-        assert($formatter2 instanceof MockObject);
         $formatter2->method('has')
             ->willReturn(true);
         $formatter2->method('formatValue')
