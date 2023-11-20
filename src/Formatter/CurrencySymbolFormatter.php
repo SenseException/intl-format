@@ -10,10 +10,8 @@ use NumberFormatter;
 use function array_filter;
 use function explode;
 use function implode;
-use function is_int;
 use function is_string;
 use function str_contains;
-use function strpos;
 
 class CurrencySymbolFormatter implements FormatterInterface
 {
@@ -22,15 +20,15 @@ class CurrencySymbolFormatter implements FormatterInterface
 
     public function __construct(private string $locale)
     {
-        if (str_contains($locale, '@')) {
-            $localeParts = explode('@', $locale);
-            $keywords    = explode(';', $localeParts[1]);
-
-            $this->locale   = $localeParts[0];
-            $this->keywords = array_filter($keywords, static fn (string $value) => ! is_int(strpos($value, 'currency=')));
-
+        if (! str_contains($locale, '@')) {
             return;
         }
+
+        $localeParts = explode('@', $locale);
+        $keywords    = explode(';', $localeParts[1]);
+
+        $this->locale   = $localeParts[0];
+        $this->keywords = array_filter($keywords, static fn (string $value) => ! str_contains($value, 'currency='));
     }
 
     public function formatValue(string $typeSpecifier, mixed $value): string
