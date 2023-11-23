@@ -14,27 +14,11 @@ class LocaleFormatter implements FormatterInterface
     /** @phpstan-var array<callable(string $value): string> */
     private array $formatFunctions;
 
-    public function __construct(string $locale)
+    public function __construct(private string $locale)
     {
         $this->formatFunctions = [
-            'language' => static function (string $value) use ($locale): string {
-                $language = Locale::getDisplayLanguage($value, $locale);
-
-                if ($value === $language) {
-                    throw InvalidValueException::invalidLocale($value);
-                }
-
-                return $language;
-            },
-            'region' => static function (string $value) use ($locale): string {
-                $region = Locale::getDisplayRegion($value, $locale);
-
-                if ($region === '') {
-                    throw InvalidValueException::invalidLocale($value);
-                }
-
-                return $region;
-            },
+            'language' => $this->formatLanguage(...),
+            'region' => $this->formatRegion(...),
         ];
     }
 
@@ -50,5 +34,27 @@ class LocaleFormatter implements FormatterInterface
     public function has(string $typeSpecifier): bool
     {
         return isset($this->formatFunctions[$typeSpecifier]);
+    }
+
+    private function formatLanguage(string $value): string
+    {
+        $language = Locale::getDisplayLanguage($value, $this->locale);
+
+        if ($value === $language) {
+            throw InvalidValueException::invalidLocale($value);
+        }
+
+        return $language;
+    }
+
+    private function formatRegion(string $value): string
+    {
+        $region = Locale::getDisplayRegion($value, $this->locale);
+
+        if ($region === '') {
+            throw InvalidValueException::invalidLocale($value);
+        }
+
+        return $region;
     }
 }
