@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Budgegeria\IntlFormat\Tests\Exception;
 
-use Budgegeria\IntlFormat\Exception\IntlFormatException;
 use Budgegeria\IntlFormat\Exception\InvalidTypeSpecifierException;
 use PHPUnit\Framework\TestCase;
 
@@ -44,10 +43,5 @@ class InvalidTypeSpecifierExceptionTest extends TestCase
         $this->expectExceptionMessage('Value count of "1" doesn\'t match type specifier count of "2"');
 
         throw InvalidTypeSpecifierException::invalidTypeSpecifierCount(1, 2);
-    }
-
-    public function testParentClass(): void
-    {
-        self::assertInstanceOf(IntlFormatException::class, new InvalidTypeSpecifierException());
     }
 }

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Budgegeria\IntlFormat\Tests\Exception;
 
-use Budgegeria\IntlFormat\Exception\IntlFormatException;
 use Budgegeria\IntlFormat\Exception\InvalidValueException;
 use PHPUnit\Framework\TestCase;
 
@@ -35,10 +34,5 @@ class InvalidValueExceptionTest extends TestCase
         $this->expectExceptionMessage('Unexpected return type "integer"');
 
         throw InvalidValueException::invalidReturnType(1);
-    }
-
-    public function testParentClass(): void
-    {
-        self::assertInstanceOf(IntlFormatException::class, new InvalidValueException());
     }
 }

@@ -26,7 +26,7 @@ class MessageFormatterTest extends TestCase
         $fn = static function (): void {
         };
 
-        $messageFormatter = new MessageFormatter('de_DE', $this->getTypeSpecifier(), $fn);
+        $messageFormatter = new MessageFormatter('de_DE', self::getTypeSpecifier(), $fn);
 
         self::assertTrue($messageFormatter->has($typeSpecifier));
     }
@@ -36,7 +36,7 @@ class MessageFormatterTest extends TestCase
         $fn = static function (): void {
         };
 
-        $messageFormatter = new MessageFormatter('de_DE', $this->getTypeSpecifier(), $fn);
+        $messageFormatter = new MessageFormatter('de_DE', self::getTypeSpecifier(), $fn);
 
         self::assertFalse($messageFormatter->has('int'));
     }

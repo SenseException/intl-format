@@ -34,7 +34,7 @@ class PrecisionNumberFormatter implements FormatterInterface
 
         $paddingChar   = ' ';
         $paddingDigits = $matches[1];
-        if (is_numeric($paddingDigits) && preg_match('/0[0-9]+/', $paddingDigits)) {
+        if (is_numeric($paddingDigits) && preg_match('/0[0-9]+/', $paddingDigits) !== false) {
             $paddingChar = $paddingDigits[0];
         }
 

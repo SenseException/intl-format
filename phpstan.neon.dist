@@ -3,5 +3,7 @@ parameters:
     paths:
         - "%currentWorkingDirectory%/src/"
         - "%currentWorkingDirectory%/tests/"
+    treatPhpDocTypesAsCertain: false
 includes:
     - vendor/phpstan/phpstan-phpunit/extension.neon
+    - vendor/phpstan/phpstan-strict-rules/rules.neon
