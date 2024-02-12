@@ -1,6 +1,6 @@
 # Upgrade to 3.2
 
-## Drop support of PHP 8.0
+## Drop support of PHP 8.0 and 8.1
 
 You need to update your PHP version.
 
