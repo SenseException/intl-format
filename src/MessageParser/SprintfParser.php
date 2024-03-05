@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Budgegeria\IntlFormat\MessageParser;
 
 use Budgegeria\IntlFormat\Exception\InvalidTypeSpecifierException;
+use Override;
 
 use function array_values;
 use function preg_grep;
@@ -22,6 +23,7 @@ class SprintfParser implements MessageParserInterface
      *
      * @throws InvalidTypeSpecifierException
      */
+    #[Override]
     public function parseMessage(string $message, array $values): MessageMetaData
     {
         /** @var string[] $parsedMessage */

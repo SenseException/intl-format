@@ -6,6 +6,7 @@ namespace Budgegeria\IntlFormat\Formatter;
 
 use Budgegeria\IntlFormat\Exception\InvalidValueException;
 use NumberFormatter;
+use Override;
 
 use function assert;
 use function in_array;
@@ -24,6 +25,7 @@ class PrecisionNumberFormatter implements FormatterInterface
     {
     }
 
+    #[Override]
     public function formatValue(string $typeSpecifier, mixed $value): string
     {
         if (! is_int($value) && ! is_float($value)) {
@@ -55,6 +57,7 @@ class PrecisionNumberFormatter implements FormatterInterface
         return $formattedValue;
     }
 
+    #[Override]
     public function has(string $typeSpecifier): bool
     {
         $suffixes = [

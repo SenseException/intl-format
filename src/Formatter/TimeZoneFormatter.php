@@ -9,6 +9,7 @@ use DateTimeInterface;
 use DateTimeZone;
 use IntlCalendar;
 use IntlTimeZone;
+use Override;
 
 use function assert;
 
@@ -22,6 +23,7 @@ class TimeZoneFormatter implements FormatterInterface
     {
     }
 
+    #[Override]
     public function formatValue(string $typeSpecifier, mixed $value): string
     {
         $intlCalendar = IntlCalendar::createInstance(null, $this->locale);
@@ -50,6 +52,7 @@ class TimeZoneFormatter implements FormatterInterface
         return $timeZoneMetaData[$typeSpecifier];
     }
 
+    #[Override]
     public function has(string $typeSpecifier): bool
     {
         return $typeSpecifier === self::TYPE_SPECIFIER_TZ_ID ||

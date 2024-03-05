@@ -6,6 +6,7 @@ namespace Budgegeria\IntlFormat\Formatter;
 
 use Budgegeria\IntlFormat\Exception\InvalidValueException;
 use Locale;
+use Override;
 
 use function is_string;
 
@@ -22,6 +23,7 @@ class LocaleFormatter implements FormatterInterface
         ];
     }
 
+    #[Override]
     public function formatValue(string $typeSpecifier, mixed $value): string
     {
         if (! is_string($value)) {
@@ -31,6 +33,7 @@ class LocaleFormatter implements FormatterInterface
         return $this->formatFunctions[$typeSpecifier]($value);
     }
 
+    #[Override]
     public function has(string $typeSpecifier): bool
     {
         return isset($this->formatFunctions[$typeSpecifier]);

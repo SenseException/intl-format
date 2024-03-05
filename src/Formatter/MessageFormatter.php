@@ -9,6 +9,7 @@ use Closure;
 use DateTimeInterface;
 use IntlCalendar;
 use MessageFormatter as Message;
+use Override;
 
 use function is_int;
 use function is_numeric;
@@ -20,6 +21,7 @@ class MessageFormatter implements FormatterInterface
     {
     }
 
+    #[Override]
     public function formatValue(string $typeSpecifier, mixed $value): string
     {
         ($this->valueTypeCheck)($value);
@@ -32,6 +34,7 @@ class MessageFormatter implements FormatterInterface
         return $formattedValue;
     }
 
+    #[Override]
     public function has(string $typeSpecifier): bool
     {
         return isset($this->messageFormats[$typeSpecifier]);

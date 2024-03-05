@@ -7,6 +7,7 @@ namespace Budgegeria\IntlFormat;
 use Budgegeria\IntlFormat\Exception\InvalidTypeSpecifierException;
 use Budgegeria\IntlFormat\Formatter\FormatterInterface;
 use Budgegeria\IntlFormat\MessageParser\MessageParserInterface;
+use Override;
 
 use function array_reverse;
 use function array_shift;
@@ -26,6 +27,7 @@ final class IntlFormat implements IntlFormatInterface
         }
     }
 
+    #[Override]
     public function format(string $message, mixed ...$values): string
     {
         $messageMetaData = $this->messageParser->parseMessage($message, $values);
@@ -56,6 +58,7 @@ final class IntlFormat implements IntlFormatInterface
         return implode('', $parsedMessage);
     }
 
+    #[Override]
     public function addFormatter(FormatterInterface $formatter): void
     {
         $this->formatters[] = $formatter;

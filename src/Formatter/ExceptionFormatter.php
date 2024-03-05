@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Budgegeria\IntlFormat\Formatter;
 
 use Budgegeria\IntlFormat\Exception\InvalidValueException;
+use Override;
 use Throwable;
 
 class ExceptionFormatter implements FormatterInterface
@@ -26,6 +27,7 @@ class ExceptionFormatter implements FormatterInterface
         ];
     }
 
+    #[Override]
     public function formatValue(string $typeSpecifier, mixed $value): string
     {
         if (! $value instanceof Throwable) {
@@ -35,6 +37,7 @@ class ExceptionFormatter implements FormatterInterface
         return $this->formatFunctions[$typeSpecifier]($value);
     }
 
+    #[Override]
     public function has(string $typeSpecifier): bool
     {
         return isset($this->formatFunctions[$typeSpecifier]);

@@ -6,6 +6,7 @@ namespace Budgegeria\IntlFormat\Formatter;
 
 use Budgegeria\IntlFormat\Exception\InvalidValueException;
 use NumberFormatter;
+use Override;
 
 use function array_filter;
 use function explode;
@@ -31,6 +32,7 @@ class CurrencySymbolFormatter implements FormatterInterface
         $this->keywords = array_filter($keywords, static fn (string $value) => ! str_contains($value, 'currency='));
     }
 
+    #[Override]
     public function formatValue(string $typeSpecifier, mixed $value): string
     {
         if (! is_string($value)) {
@@ -41,6 +43,7 @@ class CurrencySymbolFormatter implements FormatterInterface
             ->getSymbol(NumberFormatter::CURRENCY_SYMBOL);
     }
 
+    #[Override]
     public function has(string $typeSpecifier): bool
     {
         return $typeSpecifier === 'currency_symbol';
