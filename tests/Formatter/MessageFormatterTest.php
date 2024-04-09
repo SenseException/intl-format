@@ -160,6 +160,7 @@ class MessageFormatterTest extends TestCase
             'spellout' => 'spellout',
             'ordinal' => 'ordinal',
             'duration' => 'duration',
+            'datetime' => 'datetime',
         ];
     }
 
@@ -190,6 +191,7 @@ class MessageFormatterTest extends TestCase
             'spellout' => ['spellout'],
             'ordinal' => ['ordinal'],
             'duration' => ['duration'],
+            'datetime' => ['datetime'],
         ];
     }
 
@@ -303,6 +305,9 @@ class MessageFormatterTest extends TestCase
             'time_full' => ['01:20:50 (GMT|Koordinierte Weltzeit)', 'time_full', $dateTime],
             'time_full_calendar' => ['01:20:50 (GMT|Koordinierte Weltzeit)', 'time_full', $calendar],
             'time_full_timestamp' => ['01:20:50 (GMT|Koordinierte Weltzeit)', 'time_full', $dateTime->getTimestamp()],
+            'datetime_immutable' => ['2016-03-01 01:20:50', 'datetime', $dateTimeImmutable],
+            'datetime_calendar' => ['2016-03-01 01:20:50', 'datetime', $calendar],
+            'datetime_timestamp' => ['2016-03-01 01:20:50', 'datetime', $dateTime->getTimestamp()],
         ];
     }
 
