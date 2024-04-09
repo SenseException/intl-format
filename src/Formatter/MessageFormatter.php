@@ -93,6 +93,7 @@ class MessageFormatter implements FormatterInterface
             'quarter_name' => '{0,date,QQQQ}',
             'week_of_month' => '{0,date,W}',
             'week_of_year' => '{0,date,w}',
+            'datetime' => '{0,date,y-MM-dd} {0,time,hh:mm:ss}',
         ];
 
         return new self($locale, $dateTypeSpecifier, $valueTypeCheck);
