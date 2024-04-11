@@ -24,6 +24,7 @@
 | quarter_name                 | integer, DateTime, DateTimeImmutable, IntlCalendar |
 | week_of_month                | integer, DateTime, DateTimeImmutable, IntlCalendar |
 | week_of_year                 | integer, DateTime, DateTimeImmutable, IntlCalendar |
+| datetime                     | integer, DateTime, DateTimeImmutable, IntlCalendar |
 
 ```php
 $intlFormat = (new Budgegeria\IntlFormat\Factory())->createIntlFormat('en_US');
@@ -55,6 +56,8 @@ echo $intlFormat->format('%week_of_month', new DateTime('2016-03-01'));
 // 1
 echo $intlFormat->format('%week_of_year', new DateTime('2016-03-01'));
 // 9
+echo $intlFormat->format('%datetime', new DateTime('2016-03-01'));
+// 2016-03-01 00:00:00
 
 echo $intlFormat->format('%time_short', new DateTime());
 // 01:20
