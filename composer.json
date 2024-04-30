@@ -34,7 +34,8 @@
   "autoload-dev": {
     "psr-4": {
       "Budgegeria\\IntlFormat\\Tests\\": "tests/"
-    }
+    },
+    "files": ["src/intl-format.php"]
   },
   "prefer-stable": true,
   "config": {
