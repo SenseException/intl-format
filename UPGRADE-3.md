@@ -4,6 +4,11 @@
 
 You need to update your PHP version.
 
+## Add `Budgegeria\IntlFormat\sprintf` function
+
+An implementation of a sprintf function that uses intl-format was added. It
+uses the default locale of the system.
+
 # Upgrade to 3.1
 
 ## Add new type specifiers
