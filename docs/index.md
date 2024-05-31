@@ -43,6 +43,20 @@ Exceptions.
 
 You can catch every Exception of Intl-Format by using `Budgegeria\IntlFormat\Exception\IntlFormatException`.
 
+### sprintf function
+
+A custom implementation of the function `sprintf` can be used to format values to php's default locale:
+
+```php
+
+// If en_US is the default locale of php
+
+$date = new DateTime();
+
+echo Budgegeria\IntlFormat\sprintf('Today is %date_short', $date);
+// "Today is 3/1/16"
+```
+
 ## Predefined formats
 
 Here are some lists of predefined type specifiers and their formats, that are already usable in Intl-Format.
