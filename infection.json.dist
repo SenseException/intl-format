@@ -20,6 +20,11 @@
             "ignoreSourceCodeByRegex": [
                 "\\$index = \\(int\\) \\$matches\\[1\\] - 1;$"
             ]
+        },
+        "TrueValue": {
+            "ignoreSourceCodeByRegex": [
+                "return match \\(true\\) \\{"
+            ]
         }
     }
 }
