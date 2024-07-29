@@ -1,6 +1,6 @@
 {
   "name": "senseexception/intl-format",
-  "description": "A wrapper library for PHP intl messages in sprintf style",
+  "description": "A wrapper library for PHP to format and internationalize values in messages like sprintf ",
   "minimum-stability": "stable",
   "type": "library",
   "license": "MIT",
