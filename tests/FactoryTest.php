@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Budgegeria\IntlFormat\Tests;
 
 use Budgegeria\IntlFormat\Factory;
+use Budgegeria\IntlFormat\Formatter\FormatterInterface;
 use Budgegeria\IntlFormat\IntlFormat;
+use Budgegeria\IntlFormat\IntlFormatInterface;
 use DateTime;
 use DateTimeZone;
 use Exception;
@@ -26,7 +28,26 @@ class FactoryTest extends TestCase
     public function testCreateIntlFormatIntegration(): void
     {
         $intlFormat = (new Factory())->createIntlFormat('en_US');
-        $date       = new DateTime();
+
+        $this->assertFormats($intlFormat);
+    }
+
+    public function testCreateIntlFormatWithAdditionalFormatter(): void
+    {
+        $formatter  = $this->createMock(FormatterInterface::class);
+        $intlFormat = (new Factory())->createIntlFormat('en_US', [$formatter]);
+
+        $this->assertFormats($intlFormat);
+
+        $formatter->expects(self::once())->method('has')->willReturn(true);
+        $formatter->expects(self::once())->method('formatValue')->willReturn('foo');
+
+        self::assertSame('First there was foo', $intlFormat->format('First there was %foo', 'foo'));
+    }
+
+    private function assertFormats(IntlFormatInterface $intlFormat): void
+    {
+        $date = new DateTime();
         $date->setDate(2016, 3, 1);
         $date->setTime(5, 30);
         $date->setTimezone(new DateTimeZone('US/Arizona'));
