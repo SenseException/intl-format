@@ -1,3 +1,15 @@
+# Upgrade to 3.3
+
+## `Budgegeria\IntlFormat\Factory::createIntlFormat()` allows additional formatter instances
+
+You can add your custom formatter during object creation with the factory
+
+``` php
+use Budgegeria\IntlFormat\Factory;
+
+$intlFormatter = (new Factory())->createIntlFormat('en_US', [new MyCustomFormatter()]);
+```
+
 # Upgrade to 3.2
 
 ## Drop support of PHP 8.0 and 8.1
