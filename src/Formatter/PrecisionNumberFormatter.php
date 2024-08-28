@@ -9,6 +9,7 @@ use NumberFormatter;
 use Override;
 
 use function assert;
+use function count;
 use function in_array;
 use function is_float;
 use function is_int;
@@ -33,6 +34,8 @@ class PrecisionNumberFormatter implements FormatterInterface
         }
 
         preg_match(self::MATCH_PATTERN, $typeSpecifier, $matches);
+
+        assert(count($matches) > 1);
 
         $paddingChar   = ' ';
         $paddingDigits = $matches[1];
