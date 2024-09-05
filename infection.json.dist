@@ -16,6 +16,16 @@
                 "assert\\(.*"
             ]
         },
+        "GreaterThan": {
+            "ignoreSourceCodeByRegex": [
+                "assert\\(.*"
+            ]
+        },
+        "GreaterThanNegotiation": {
+            "ignoreSourceCodeByRegex": [
+                "assert\\(.*"
+            ]
+        },
         "CastInt": {
             "ignoreSourceCodeByRegex": [
                 "\\$index = \\(int\\) \\$matches\\[1\\] - 1;$"
