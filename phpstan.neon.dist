@@ -6,3 +6,4 @@ parameters:
     treatPhpDocTypesAsCertain: false
 includes:
     - vendor/phpstan/phpstan-strict-rules/rules.neon
+    - phar://phpstan.phar/conf/bleedingEdge.neon
