@@ -26,7 +26,7 @@ class SprintfParser implements MessageParserInterface
     #[Override]
     public function parseMessage(string $message, array $values): MessageMetaData
     {
-        /** @var string[] $parsedMessage */
+        /** @var list<string> $parsedMessage */
         $parsedMessage = preg_split(
             '/(%[%]?(?# swapping:
              )(?:[\d]+\$)?(?# fraction padding:
