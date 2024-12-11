@@ -20,6 +20,9 @@ jobs:
           - php-versions: "8.4"
             composer-option: "--ignore-platform-reqs"
             continue-on-error: true
+          - php-versions: "8.5"
+            composer-option: "--ignore-platform-reqs"
+            continue-on-error: true
 
     steps:
     - uses: "actions/checkout@v4"
