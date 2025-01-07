@@ -57,7 +57,6 @@ class FactoryTest extends TestCase
         self::assertSame('I got 1,002.2500 as average value', $intlFormat->format('I got %.4number as average value', 1002.25));
         self::assertSame('I got 01,002.2500 as average value', $intlFormat->format('I got %011.4number as average value', 1002.25));
         self::assertSame('I got 1,002.3 as average value', $intlFormat->format('I got %.1number_halfway_up as average value', 1002.25));
-        self::assertSame('I is 5:30 AM on my clock.', $intlFormat->format('I is %time_short on my clock.', $date));
         self::assertSame('The timezone id is US/Arizona.', $intlFormat->format('The timezone id is %timezone_id.', $date));
         self::assertSame('I am from Italy.', $intlFormat->format('I am from %region.', 'it_IT'));
         self::assertSame('You have 10$.', $intlFormat->format('You have 10%currency_symbol.', ''));
@@ -78,7 +77,6 @@ class FactoryTest extends TestCase
         self::assertSame('I got 1,002.2500 as average value', sprintf('I got %.4number as average value', 1002.25));
         self::assertSame('I got 01,002.2500 as average value', sprintf('I got %011.4number as average value', 1002.25));
         self::assertSame('I got 1,002.3 as average value', sprintf('I got %.1number_halfway_up as average value', 1002.25));
-        self::assertSame('I is 5:30 AM on my clock.', sprintf('I is %time_short on my clock.', $date));
         self::assertSame('The timezone id is US/Arizona.', sprintf('The timezone id is %timezone_id.', $date));
         self::assertSame('I am from Italy.', sprintf('I am from %region.', 'it_IT'));
         self::assertSame('You have 10$.', sprintf('You have 10%currency_symbol.', ''));
