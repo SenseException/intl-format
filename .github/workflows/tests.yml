@@ -18,7 +18,7 @@ jobs:
           - php-versions: "8.3"
             continue-on-error: false
           - php-versions: "8.4"
-            composer-option: "--ignore-platform-reqs"
+            composer-option: ""
             continue-on-error: true
           - php-versions: "8.5"
             composer-option: "--ignore-platform-reqs"
