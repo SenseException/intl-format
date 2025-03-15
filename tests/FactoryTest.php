@@ -45,6 +45,26 @@ class FactoryTest extends TestCase
         self::assertSame('First there was foo', $intlFormat->format('First there was %foo', 'foo'));
     }
 
+    public function testCreateIntlFormatWithAdditionalOverridingFormatter(): void
+    {
+        $formatter  = new class implements FormatterInterface {
+            public function formatValue(string $typeSpecifier, mixed $value): string
+            {
+                return 'foo';
+            }
+
+            public function has(string $typeSpecifier): bool
+            {
+                return $typeSpecifier === 'date';
+            }
+        };
+        $intlFormat = (new Factory())->createIntlFormat('en_US', [$formatter]);
+
+        $this->assertFormats($intlFormat);
+
+        self::assertSame('First there was foo', $intlFormat->format('First there was %date', 'foo'));
+    }
+
     private function assertFormats(IntlFormatInterface $intlFormat): void
     {
         $date = new DateTime();
