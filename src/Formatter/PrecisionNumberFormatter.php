@@ -35,7 +35,7 @@ class PrecisionNumberFormatter implements FormatterInterface
 
         preg_match(self::MATCH_PATTERN, $typeSpecifier, $matches);
 
-        assert(count($matches) > 1);
+        assert(count($matches) > 2);
 
         $paddingChar   = ' ';
         $paddingDigits = $matches[1];
