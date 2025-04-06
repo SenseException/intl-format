@@ -16,10 +16,10 @@
     "ext-intl": "*"
   },
   "require-dev": {
-    "infection/infection": "^0.27.0",
+    "infection/infection": "^0.29.14",
     "doctrine/coding-standard": "^13.0",
-    "phpunit/phpunit": "^10.5",
-    "phpstan/phpstan": "^2.0",
+    "phpunit/phpunit": "^11.5",
+    "phpstan/phpstan": "^2.1",
     "phpstan/phpstan-strict-rules": "^2.0",
     "phpstan/phpstan-deprecation-rules": "^2.0"
   },
