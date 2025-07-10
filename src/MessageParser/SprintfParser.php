@@ -8,6 +8,8 @@ use Budgegeria\IntlFormat\Exception\InvalidTypeSpecifierException;
 use Override;
 
 use function array_values;
+use function assert;
+use function is_array;
 use function preg_grep;
 use function preg_match;
 use function preg_replace;
@@ -26,7 +28,6 @@ class SprintfParser implements MessageParserInterface
     #[Override]
     public function parseMessage(string $message, array $values): MessageMetaData
     {
-        /** @var list<string> $parsedMessage */
         $parsedMessage = preg_split(
             '/(%[%]?(?# swapping:
              )(?:[\d]+\$)?(?# fraction padding:
@@ -36,6 +37,7 @@ class SprintfParser implements MessageParserInterface
             -1,
             PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE,
         );
+        assert(is_array($parsedMessage));
         /** @var list<string> $typeSpecifiers */
         $typeSpecifiers = preg_grep(
             '/(^%(?# swapping:
@@ -44,6 +46,7 @@ class SprintfParser implements MessageParserInterface
              )[a-z\d_]+)/i',
             $parsedMessage,
         );
+        assert(is_array($typeSpecifiers));
 
         // Change escaped % to regular %
         /** @var string[] $parsedMessage */
