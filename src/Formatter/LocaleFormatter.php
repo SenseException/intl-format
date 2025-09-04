@@ -43,7 +43,7 @@ class LocaleFormatter implements FormatterInterface
     {
         $language = Locale::getDisplayLanguage($value, $this->locale);
 
-        if ($value === $language) {
+        if ($value === $language || $language === false) {
             throw InvalidValueException::invalidLocale($value);
         }
 
@@ -54,7 +54,7 @@ class LocaleFormatter implements FormatterInterface
     {
         $region = Locale::getDisplayRegion($value, $this->locale);
 
-        if ($region === '') {
+        if ($region === '' || $region === false) {
             throw InvalidValueException::invalidLocale($value);
         }
 

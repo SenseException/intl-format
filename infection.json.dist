@@ -35,6 +35,12 @@
             "ignoreSourceCodeByRegex": [
                 "return match \\(true\\) \\{"
             ]
+        },
+        "FalseValue": {
+            "ignoreSourceCodeByRegex": [
+                "if \\(\\$value === \\$language \\|\\| \\$language === false\\) \\{",
+                "if \\(\\$region === '' \\|\\| \\$region === false\\) \\{",
+            ]
         }
     }
 }
