@@ -49,7 +49,7 @@ class SprintfParser implements MessageParserInterface
         assert(is_array($typeSpecifiers));
 
         // Change escaped % to regular %
-        /** @var string[] $parsedMessage */
+        /** @phpstan-var list<non-empty-string> $parsedMessage */
         $parsedMessage = preg_replace('/^%%/', '%', $parsedMessage);
 
         $values = $this->swapArguments($typeSpecifiers, $values);
