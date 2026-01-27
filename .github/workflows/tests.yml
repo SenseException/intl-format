@@ -12,15 +12,15 @@ jobs:
     strategy:
       matrix:
         include:
-          - php-versions: "8.2"
-            composer-option: ""
-            continue-on-error: false
           - php-versions: "8.3"
             continue-on-error: false
           - php-versions: "8.4"
             composer-option: ""
             continue-on-error: true
           - php-versions: "8.5"
+            composer-option: ""
+            continue-on-error: true
+          - php-versions: "8.6"
             composer-option: "--ignore-platform-reqs"
             continue-on-error: true
 
