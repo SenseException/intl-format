@@ -10,6 +10,10 @@ use Budgegeria\IntlFormat\Factory;
 $intlFormatter = (new Factory())->createIntlFormat('en_US', [new MyCustomFormatter()]);
 ```
 
+## Drop support of PHP 8.2
+
+You need to update your PHP version.
+
 # Upgrade to 3.2
 
 ## Drop support of PHP 8.0 and 8.1
