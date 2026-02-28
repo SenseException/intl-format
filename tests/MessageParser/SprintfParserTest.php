@@ -7,6 +7,7 @@ namespace Budgegeria\IntlFormat\Tests\MessageParser;
 use Budgegeria\IntlFormat\Exception\InvalidTypeSpecifierException;
 use Budgegeria\IntlFormat\MessageParser\SprintfParser;
 use DateTime;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class SprintfParserTest extends TestCase
@@ -122,9 +123,8 @@ class SprintfParserTest extends TestCase
 
     /**
      * Basic padding character test
-     *
-     * @dataProvider provideSupportedPaddingCharacters
      */
+    #[DataProvider('provideSupportedPaddingCharacters')]
     public function testParseMessageWithPaddingCharacter(string $characters): void
     {
         $message = 'Hello "%' . $characters . 'world", how are you';

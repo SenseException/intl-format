@@ -7,15 +7,13 @@ namespace Budgegeria\IntlFormat\Tests;
 use Budgegeria\IntlFormat\Formatter\SprintfFormatter;
 use Budgegeria\IntlFormat\IntlFormat;
 use Budgegeria\IntlFormat\MessageParser\SprintfParser;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class ImplementationTest extends TestCase
 {
-    /**
-     * @param array<int|string> $args
-     *
-     * @dataProvider formattingWorksProvider
-     */
+    /** @param array<int|string> $args */
+    #[DataProvider('formattingWorksProvider')]
     public function testFormattingWorks(string $expected, string $message, array $args): void
     {
         $formatter = [

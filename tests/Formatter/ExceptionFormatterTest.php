@@ -7,6 +7,7 @@ namespace Budgegeria\IntlFormat\Tests\Formatter;
 use Budgegeria\IntlFormat\Exception\InvalidValueException;
 use Budgegeria\IntlFormat\Formatter\ExceptionFormatter;
 use Exception;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Throwable;
 
@@ -21,7 +22,7 @@ class ExceptionFormatterTest extends TestCase
         $this->formatter = new ExceptionFormatter();
     }
 
-    /** @dataProvider provideTypeSpecifier */
+    #[DataProvider('provideTypeSpecifier')]
     public function testHas(string $typeSpecifier): void
     {
         self::assertTrue($this->formatter->has($typeSpecifier));
@@ -32,7 +33,7 @@ class ExceptionFormatterTest extends TestCase
         self::assertFalse($this->formatter->has('foo'));
     }
 
-    /** @dataProvider provideExceptions */
+    #[DataProvider('provideExceptions')]
     public function testFormatValue(string $typeSpecifier, Throwable $value, mixed $expected): void
     {
         self::assertSame($expected, $this->formatter->formatValue($typeSpecifier, $value));

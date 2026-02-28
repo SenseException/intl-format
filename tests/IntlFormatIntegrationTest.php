@@ -10,6 +10,7 @@ use Budgegeria\IntlFormat\IntlFormat;
 use Budgegeria\IntlFormat\MessageParser\SprintfParser;
 use DateTime;
 use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class IntlFormatIntegrationTest extends TestCase
@@ -38,9 +39,8 @@ class IntlFormatIntegrationTest extends TestCase
 
     /**
      * A test for %-escaped messages.
-     *
-     * @dataProvider provideEscapedMessages
      */
+    #[DataProvider('provideEscapedMessages')]
     public function testEscapedFormat(string $message, string $expected): void
     {
         $formatter = $this->createMock(FormatterInterface::class);

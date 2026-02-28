@@ -6,6 +6,7 @@ namespace Budgegeria\IntlFormat\Tests\Formatter;
 
 use Budgegeria\IntlFormat\Exception\InvalidValueException;
 use Budgegeria\IntlFormat\Formatter\CurrencySymbolFormatter;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class CurrencySymbolFormatterTest extends TestCase
@@ -49,7 +50,7 @@ class CurrencySymbolFormatterTest extends TestCase
         $formatter->formatValue('currency_symbol', null);
     }
 
-    /** @dataProvider provideLocales */
+    #[DataProvider('provideLocales')]
     public function testFormatValueWithLocaleKeywords(string $locale): void
     {
         $formatter = new CurrencySymbolFormatter($locale);

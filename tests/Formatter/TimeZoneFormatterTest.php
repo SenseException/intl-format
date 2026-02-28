@@ -11,13 +11,14 @@ use DateTimeImmutable;
 use DateTimeInterface;
 use DateTimeZone;
 use IntlTimeZone;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 use function sprintf;
 
 class TimeZoneFormatterTest extends TestCase
 {
-    /** @dataProvider provideTypeSpecifier */
+    #[DataProvider('provideTypeSpecifier')]
     public function testHas(string $typeSpecifier): void
     {
         $formatter = new TimeZoneFormatter('en_US');
@@ -32,7 +33,7 @@ class TimeZoneFormatterTest extends TestCase
         self::assertFalse($messageFormatter->has('int'));
     }
 
-    /** @dataProvider provideTimeZones */
+    #[DataProvider('provideTimeZones')]
     public function testFormatValue(string $expected, string $typeSpecifier, mixed $value): void
     {
         $formatter = new TimeZoneFormatter('en_US');
@@ -40,7 +41,7 @@ class TimeZoneFormatterTest extends TestCase
         self::assertSame($expected, $formatter->formatValue($typeSpecifier, $value));
     }
 
-    /** @dataProvider provideTypeSpecifier */
+    #[DataProvider('provideTypeSpecifier')]
     public function testFormatValueInvalidValue(string $typeSpecifier): void
     {
         $this->expectException(InvalidValueException::class);

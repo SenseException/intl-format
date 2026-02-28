@@ -12,6 +12,7 @@ use DateTimeImmutable;
 use DateTimeInterface;
 use DateTimeZone;
 use IntlCalendar;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 use function array_merge;
@@ -20,7 +21,7 @@ use function sprintf;
 
 class MessageFormatterTest extends TestCase
 {
-    /** @dataProvider provideTypeSpecifier */
+    #[DataProvider('provideTypeSpecifier')]
     public function testHas(string $typeSpecifier): void
     {
         $fn = static function (): void {
@@ -53,7 +54,7 @@ class MessageFormatterTest extends TestCase
         self::assertSame('1.000,10€', preg_replace('/[^0-9,\.€]/u', '', $messageFormatter->formatValue('currency', 1000.1)));
     }
 
-    /** @dataProvider provideDate */
+    #[DataProvider('provideDate')]
     public function testFormatValueDate(string $expected, string $typeSpecifier, mixed $value): void
     {
         $messageFormatter = MessageFormatter::createDateValueFormatter('de_DE');
@@ -61,7 +62,7 @@ class MessageFormatterTest extends TestCase
         self::assertSame($expected, $messageFormatter->formatValue($typeSpecifier, $value));
     }
 
-    /** @dataProvider provideTime */
+    #[DataProvider('provideTime')]
     public function testFormatValueTime(string $expected, string $typeSpecifier, mixed $value): void
     {
         $messageFormatter = MessageFormatter::createDateValueFormatter('de_DE');
@@ -77,7 +78,7 @@ class MessageFormatterTest extends TestCase
         self::assertSame('ein­tausend Komma eins', $messageFormatter->formatValue('spellout', 1000.1));
     }
 
-    /** @dataProvider provideOrdinal */
+    #[DataProvider('provideOrdinal')]
     public function testFormatValueOrdinal(string $expected, int $number): void
     {
         $messageFormatter = MessageFormatter::createNumberValueFormatter('en_US');
@@ -92,7 +93,7 @@ class MessageFormatterTest extends TestCase
         self::assertSame('1:01', $messageFormatter->formatValue('duration', 61));
     }
 
-    /** @dataProvider provideInvalidNumberValues */
+    #[DataProvider('provideInvalidNumberValues')]
     public function testFormatValueNumberTypeCheck(mixed $value): void
     {
         $messageFormatter = MessageFormatter::createNumberValueFormatter('en_US');
@@ -104,7 +105,7 @@ class MessageFormatterTest extends TestCase
         $messageFormatter->formatValue('integer', $value);
     }
 
-    /** @dataProvider provideInvalidDateValues */
+    #[DataProvider('provideInvalidDateValues')]
     public function testFormatValueDateTypeCheck(mixed $value): void
     {
         $messageFormatter = MessageFormatter::createDateValueFormatter('en_US');

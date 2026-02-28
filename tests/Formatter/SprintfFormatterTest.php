@@ -7,11 +7,13 @@ namespace Budgegeria\IntlFormat\Tests\Formatter;
 use Budgegeria\IntlFormat\Exception\InvalidValueException;
 use Budgegeria\IntlFormat\Formatter\SprintfFormatter;
 use EmptyIterator;
+use Generator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class SprintfFormatterTest extends TestCase
 {
-    /** @dataProvider provideTypeSpecifier */
+    #[DataProvider('provideTypeSpecifier')]
     public function testHas(string $typeSpecifier): void
     {
         $formatter = new SprintfFormatter();
@@ -19,7 +21,7 @@ class SprintfFormatterTest extends TestCase
         self::assertTrue($formatter->has($typeSpecifier));
     }
 
-    /** @dataProvider provideTypeSpecifier */
+    #[DataProvider('provideTypeSpecifierAndValues')]
     public function testFormat(string $typeSpecifier, mixed $value, string $expected): void
     {
         $formatter = new SprintfFormatter();
@@ -45,7 +47,7 @@ class SprintfFormatterTest extends TestCase
     }
 
     /** @return array<array{string, mixed, string}> */
-    public static function provideTypeSpecifier(): array
+    public static function provideTypeSpecifierAndValues(): array
     {
         return [
             ['b', 11, '1011'],
@@ -68,5 +70,13 @@ class SprintfFormatterTest extends TestCase
             ['x', 123, '7b'],
             ['X', 123, '7B'],
         ];
+    }
+
+    /** @return Generator<string[]> */
+    public static function provideTypeSpecifier(): Generator
+    {
+        foreach (self::provideTypeSpecifierAndValues() as [0 => $typeSpecifier]) {
+            yield [$typeSpecifier];
+        }
     }
 }

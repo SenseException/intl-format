@@ -6,6 +6,7 @@ namespace Budgegeria\IntlFormat\Tests\Formatter;
 
 use Budgegeria\IntlFormat\Exception\InvalidValueException;
 use Budgegeria\IntlFormat\Formatter\LocaleFormatter;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class LocaleFormatterTest extends TestCase
@@ -25,7 +26,7 @@ class LocaleFormatterTest extends TestCase
         self::assertFalse($localeFormatter->has('foo'));
     }
 
-    /** @dataProvider provideLanguages */
+    #[DataProvider('provideLanguages')]
     public function testFormatValueLanguage(string $expected, string $locale): void
     {
         $localeFormatter = new LocaleFormatter('de_DE');
@@ -33,7 +34,7 @@ class LocaleFormatterTest extends TestCase
         self::assertSame($expected, $localeFormatter->formatValue('language', $locale));
     }
 
-    /** @dataProvider provideRegions */
+    #[DataProvider('provideRegions')]
     public function testFormatValueRegion(string $expected, string $locale): void
     {
         $localeFormatter = new LocaleFormatter('de_DE');
@@ -41,7 +42,7 @@ class LocaleFormatterTest extends TestCase
         self::assertSame($expected, $localeFormatter->formatValue('region', $locale));
     }
 
-    /** @dataProvider provideTypeSpecifier */
+    #[DataProvider('provideTypeSpecifier')]
     public function testInvalidFormatValue(string $typeSpecifier): void
     {
         $this->expectException(InvalidValueException::class);

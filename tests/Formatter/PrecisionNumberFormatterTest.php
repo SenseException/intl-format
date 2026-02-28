@@ -6,11 +6,12 @@ namespace Budgegeria\IntlFormat\Tests\Formatter;
 
 use Budgegeria\IntlFormat\Exception\InvalidValueException;
 use Budgegeria\IntlFormat\Formatter\PrecisionNumberFormatter;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class PrecisionNumberFormatterTest extends TestCase
 {
-    /** @dataProvider provideTypeSpecifier */
+    #[DataProvider('provideTypeSpecifier')]
     public function testHas(string $typeSpecifier): void
     {
         $messageFormatter = new PrecisionNumberFormatter('de_DE');
@@ -18,7 +19,7 @@ class PrecisionNumberFormatterTest extends TestCase
         self::assertTrue($messageFormatter->has($typeSpecifier));
     }
 
-    /** @dataProvider provideInvalidTypeSpecifier */
+    #[DataProvider('provideInvalidTypeSpecifier')]
     public function testHasIsFalse(string $typeSpecifier): void
     {
         $messageFormatter = new PrecisionNumberFormatter('de_DE');
@@ -37,7 +38,7 @@ class PrecisionNumberFormatterTest extends TestCase
         $messageFormatter->formatValue('.2number', 'notANumber');
     }
 
-    /** @dataProvider provideNumber */
+    #[DataProvider('provideNumber')]
     public function testFormatValueNumber(string $typeSpecifier, float $number, string $expects): void
     {
         $messageFormatter = new PrecisionNumberFormatter('de_DE');
