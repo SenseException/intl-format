@@ -166,7 +166,7 @@ class IntlFormatIntegrationTest extends TestCase
 
         $message = 'Hello %5$world, Today is %date';
 
-        $formatter  = $this->createStub(FormatterInterface::class);
+        $formatter  = self::createStub(FormatterInterface::class);
         $intlFormat = new IntlFormat([$formatter], new SprintfParser());
 
         $intlFormat->format($message, 'island', new DateTime());
@@ -182,7 +182,7 @@ class IntlFormatIntegrationTest extends TestCase
 
         $message = 'Hello %0$world, Today is %date';
 
-        $formatter  = $this->createStub(FormatterInterface::class);
+        $formatter  = self::createStub(FormatterInterface::class);
         $intlFormat = new IntlFormat([$formatter], new SprintfParser());
 
         $intlFormat->format($message, 'island', new DateTime());
@@ -192,12 +192,12 @@ class IntlFormatIntegrationTest extends TestCase
     {
         $message = 'Hello "%world", how are you';
 
-        $formatter1 = $this->createStub(FormatterInterface::class);
+        $formatter1 = self::createStub(FormatterInterface::class);
         $formatter1->method('has')
             ->willReturn(true);
         $formatter1->method('formatValue')
             ->willReturn('island');
-        $formatter2 = $this->createStub(FormatterInterface::class);
+        $formatter2 = self::createStub(FormatterInterface::class);
         $formatter2->method('has')
             ->willReturn(true);
         $formatter2->method('formatValue')
