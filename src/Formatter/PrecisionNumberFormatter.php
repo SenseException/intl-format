@@ -20,7 +20,7 @@ use function str_ends_with;
 
 class PrecisionNumberFormatter implements FormatterInterface
 {
-    private const MATCH_PATTERN = '/^([\d]+)?\.?([\d]*)(number[\w_]*)/';
+    private const string MATCH_PATTERN = '/^([\d]+)?\.?([\d]*)(number[\w_]*)/';
 
     public function __construct(private string $locale)
     {

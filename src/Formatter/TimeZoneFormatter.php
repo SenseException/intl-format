@@ -15,9 +15,9 @@ use function assert;
 
 class TimeZoneFormatter implements FormatterInterface
 {
-    private const TYPE_SPECIFIER_TZ_ID         = 'timezone_id';
-    private const TYPE_SPECIFIER_TZ_LONG_NAME  = 'timezone_name';
-    private const TYPE_SPECIFIER_TZ_SHORT_NAME = 'timezone_short';
+    private const string TYPE_SPECIFIER_TZ_ID         = 'timezone_id';
+    private const string TYPE_SPECIFIER_TZ_LONG_NAME  = 'timezone_name';
+    private const string TYPE_SPECIFIER_TZ_SHORT_NAME = 'timezone_short';
 
     public function __construct(private string $locale)
     {

@@ -5,7 +5,7 @@
     <arg name="colors"/>
     <arg value="nps"/>
 
-    <config name="php_version" value="80200"/>
+    <config name="php_version" value="80300"/>
 
     <file>src</file>
     <file>tests</file>

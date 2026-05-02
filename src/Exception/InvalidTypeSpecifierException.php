@@ -8,10 +8,10 @@ use function sprintf;
 
 class InvalidTypeSpecifierException extends IntlFormatException
 {
-    private const CODE_UNMATCHED_TYPESPECIFIER     = 10;
-    private const CODE_NO_TYPESPECIFIER            = 20;
-    private const CODE_INVALID_TYPESPECIFIER       = 30;
-    private const CODE_INVALID_TYPESPECIFIER_COUNT = 40;
+    private const int CODE_UNMATCHED_TYPESPECIFIER     = 10;
+    private const int CODE_NO_TYPESPECIFIER            = 20;
+    private const int CODE_INVALID_TYPESPECIFIER       = 30;
+    private const int CODE_INVALID_TYPESPECIFIER_COUNT = 40;
 
     public static function unmatchedTypeSpecifier(string $typeSpecifier): self
     {

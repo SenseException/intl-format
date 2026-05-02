@@ -10,9 +10,9 @@ use function sprintf;
 
 class InvalidValueException extends IntlFormatException
 {
-    private const CODE_INVALID_VALUETYPE  = 10;
-    private const CODE_INVALID_LOCALE     = 20;
-    private const CODE_INVALID_RETURNTYPE = 30;
+    private const int CODE_INVALID_VALUETYPE  = 10;
+    private const int CODE_INVALID_LOCALE     = 20;
+    private const int CODE_INVALID_RETURNTYPE = 30;
 
     /** @param string[] $allowedTypes */
     public static function invalidValueType(mixed $value, array $allowedTypes): self
