@@ -19,7 +19,7 @@
     "infection/infection": "^0.32",
     "doctrine/coding-standard": "^14.0",
     "phpunit/phpunit": "^12.5",
-    "phpstan/phpstan": "^2.1",
+    "phpstan/phpstan": "^2.2",
     "phpstan/phpstan-strict-rules": "^2.0",
     "phpstan/phpstan-deprecation-rules": "^2.0"
   },
