@@ -15,7 +15,7 @@ jobs:
     - name: "Setup PHP Action"
       uses: "shivammathur/setup-php@v2"
       with:
-        php-version: "8.5"
+        php-version: "8.6"
         extensions: "intl"
 
     - name: "Install dependencies with Composer"
